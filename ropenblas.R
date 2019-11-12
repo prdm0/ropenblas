@@ -43,16 +43,6 @@ ropenblas <- function(x = "0.3.7"){
   
   glue("cd {acess_dir} && sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
     system(input = readline("Enter your ROOT password: "))
-  
-  
-  # commands <- c(
-  #   paste0("tar -zxvf ", x, ".tar.gz"),
-  #   "cd OpenBLAS*",
-  #   "make -j $(nproc)",
-  #   "sudo -kS make install PREFIX=/opt/OpenBLAS"
-  # )
-  
-  #sapply(X = commands, FUN = system, input = readline("Enter your ROOT password: "))
     
 }
 
