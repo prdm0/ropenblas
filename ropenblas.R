@@ -20,6 +20,13 @@ download_openblas <- function(x){
   diretory_tmp
 }
 
+download_r <- function(x){
+  diretory_tmp <- tempdir(check = FALSE)
+  url <- glue("https://cloud.r-project.org/src/base/R-{substr(x, 1, 1)}/R-{x}.tar.gz")
+  download.file(url = url, destfile = glue("{diretory_tmp}/R-{x}.tar.gz")) 
+  diretory_tmp
+}
+
 ropenblas <- function(x = "0.3.7"){
   
   if (Sys.info()[[1]] != "Linux")
