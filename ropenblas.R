@@ -1,5 +1,6 @@
 library(glue)
 library(magrittr)
+library(stringr)
 
 v_bash <- c("cd opt", "sudo -kS pacman -Syy")
 
@@ -25,6 +26,11 @@ download_r <- function(x){
   url <- glue("https://cloud.r-project.org/src/base/R-{substr(x, 1, 1)}/R-{x}.tar.gz")
   download.file(url = url, destfile = glue("{diretory_tmp}/R-{x}.tar.gz")) 
   diretory_tmp
+}
+
+dir_blas <- function(){
+  libblas <- unlist(strsplit(sessionInfo()$BLAS, split = "/"))
+  nameblas <- 
 }
 
 ropenblas <- function(x = "0.3.7"){
