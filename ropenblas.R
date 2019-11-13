@@ -8,7 +8,9 @@ exist_opt <- function(...){
 }
 
 mkdir_opt <- function(){
-  system(command = "sudo -kS mkdir opt/", input = readline("Enter your ROOT password: "))
+  system(
+    command = "sudo -kS mkdir opt/",
+    input = readline("Enter your ROOT OS password (creating /opt directory): "))
 }
 
 download_openblas <- function(x){
