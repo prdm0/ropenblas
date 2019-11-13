@@ -29,8 +29,10 @@ download_r <- function(x){
 }
 
 dir_blas <- function(){
-  libblas <- unlist(strsplit(sessionInfo()$BLAS, split = "/"))
-  nameblas <- 
+  file_blas <- sessionInfo()$BLAS %>% strsplit(split = "/") %>% 
+    unlist %>% tail(n = 1)
+  
+  
 }
 
 ropenblas <- function(x = "0.3.7"){
