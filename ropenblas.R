@@ -8,11 +8,12 @@ exist_opt <- function(...){
 
 mkdir_opt <- function(){
   
-  if (!exist_opt()) stop("The /opt directory already exists. Nothing to do!")
+  if (exist_opt()) stop("The /opt directory already exists. Nothing to do!")
   
   system(
     command = "sudo -kS mkdir opt/",
-    input = readline("Enter your ROOT OS password (creating /opt directory): "))
+    input = readline("Enter your ROOT OS password (creating /opt directory): ")
+  )
 }
 
 download_openblas <- function(x){
@@ -57,7 +58,7 @@ ropenblas <- function(x = "0.3.7"){
   
   diretory_tmp <- download_openblas(x)
   
-  glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz") %>% untar
+  glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz") %>% untar(exdir = glue("{diretory_tmp}"))
   
   acess_dir <- glue("{diretory_tmp}/OpenBLAS-{x}")
   
