@@ -32,7 +32,7 @@ dir_blas <- function(){
   
   path_blas <- head(sessionInfo()$BLAS %>% strsplit(split = "/") %>% 
                       unlist, -1) %>%
-    paste(collapse = "/")
+    paste(collapse = "/") %>% paste0("/")
   
   list(file_blas = file_blas, path_blas = path_blas)
 }
