@@ -2,8 +2,6 @@ library(glue)
 library(magrittr)
 library(stringr)
 
-v_bash <- c("cd opt", "sudo -kS pacman -Syy")
-
 exist_opt <- function(...){
   ifelse(system(command = "cd /opt", ...) == 0L, TRUE, FALSE)
 }
@@ -32,7 +30,11 @@ dir_blas <- function(){
   file_blas <- sessionInfo()$BLAS %>% strsplit(split = "/") %>% 
     unlist %>% tail(n = 1)
   
+  path_blas <- head(sessionInfo()$BLAS %>% strsplit(split = "/") %>% 
+                      unlist, -1) %>%
+    paste(collapse = "/")
   
+  list(file_blas = file_blas, path_blas = path_blas)
 }
 
 ropenblas <- function(x = "0.3.7"){
