@@ -1,6 +1,7 @@
 library(glue)
 library(magrittr)
 library(stringr)
+library(getPass)
 
 exist_opt <- function(...){
   ifelse(system(command = "cd /opt", ...) == 0L, TRUE, FALSE)
@@ -12,7 +13,7 @@ mkdir_opt <- function(){
   
   system(
     command = "sudo -kS mkdir opt/",
-    input = readline("Enter your ROOT OS password (creating /opt directory): ")
+    input = getPass::getPass("Enter your ROOT OS password (creating /opt directory): ")
   )
 }
 
@@ -65,7 +66,7 @@ ropenblas <- function(x = "0.3.7"){
   glue("cd {acess_dir} && make -j $(nproc)") %>% system
   
   glue("cd {acess_dir} && sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
-    system(input = readline("Enter your ROOT password: "))
+    system(input = getPass::getPass("Enter your ROOT password: "))
     
 }
 
