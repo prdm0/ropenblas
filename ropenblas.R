@@ -73,6 +73,13 @@ ropenblas <- function(x = "0.3.7"){
   glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
     system(input = getPass::getPass("Enter your ROOT OS password (creating /opt directory): "))
   
+  file_blas <- dir_blas()$path_blas
+
+  setwd(dir_blas()$path_blas)
   
+  glue("sudo -kS mv {dir_blas()$file_blas} {dir_blas()$file_blas}.keep") %>% 
+    system(input = getPass::getPass("Enter your ROOT OS password: "))
   
+  glue("sudo -sK ln -s /opt/OpenBLAS/lib/libopenblas.so {file_blas}") %>% 
+    system(input = getPass::getPass("Enter your ROOT OS password: "))
 }
