@@ -7,6 +7,9 @@ exist_opt <- function(...){
 }
 
 mkdir_opt <- function(){
+  
+  if (!exist_opt()) stop("The /opt directory already exists. Nothing to do!")
+  
   system(
     command = "sudo -kS mkdir opt/",
     input = readline("Enter your ROOT OS password (creating /opt directory): "))
