@@ -5,7 +5,6 @@ library(magrittr)
 library(stringr)
 library(getPass)
 
-
 exist_opt <- function(...){
   ifelse(system(command = "cd /opt", ...) == 0L, TRUE, FALSE)
 }
@@ -64,7 +63,7 @@ ropenblas <- function(x = "0.3.7"){
   
   glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz") %>% untar(exdir = glue("{diretory_tmp}"))
   
-  acess_dir <- glue("{diretory_tmp}/OpenBLAS-{x}")
+  acess_dir <- glue("{diretory_tmp}/OpenBLAS-{x}") 
   
   glue("cd {acess_dir} && make -j $(nproc)") %>% system
 
@@ -73,13 +72,10 @@ ropenblas <- function(x = "0.3.7"){
   glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
     system(input = getPass::getPass("Enter your ROOT OS password (creating /opt directory): "))
   
-  file_blas <- dir_blas()$path_blas
-
-  setwd(dir_blas()$path_blas)
+  setwd(dir_blas()$path)
   
-  glue("sudo -kS mv {dir_blas()$file_blas} {dir_blas()$file_blas}.keep") %>% 
+  glue("sudo -kS ln -sf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
     system(input = getPass::getPass("Enter your ROOT OS password: "))
   
-  glue("sudo -sK ln -s /opt/OpenBLAS/lib/libopenblas.so {file_blas}") %>% 
-    system(input = getPass::getPass("Enter your ROOT OS password: "))
+  if (rstudioapi::isAvailable()) .rs.restartR()
 }
