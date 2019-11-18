@@ -78,4 +78,6 @@ ropenblas <- function(x = "0.3.7"){
     system(input = getPass::getPass("Enter your ROOT OS password: "))
   
   if (rstudioapi::isAvailable()) .rs.restartR()
+  
+  unlink(diretory_tmp)
 }
