@@ -4,6 +4,7 @@ library(glue)
 library(magrittr)
 library(stringr)
 library(getPass)
+library(roxygen2)
 
 exist_opt <- function(...){
   ifelse(system(command = "cd /opt", ...) == 0L, TRUE, FALSE)
