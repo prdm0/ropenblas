@@ -7,7 +7,7 @@ You can also specify older versions of the [**OpenBLAS**](https://www.openblas.n
 
 Considering using the [**OpenBLAS**](https://www.openblas.net/) library rather than the [**BLAS**](http://www.netlib.org/blas/) may bring extra optimizations for your code and improved computational performance for your simulations, since [**OpenBLAS**](https://www.openblas.net/) is an optimized implementation of the library [**BLAS**](http://www.netlib.org/blas/).
 
-Some of the reasons why it is convenient to link R language to the use of [**BLAS**](http://www.netlib.org/blas/) optimized alternatives can be found [**here**](https://csantill.github.io/RPerformanceWBLAS/). Several other [** benchmarks**](https://en.wikipedia.org/wiki/Benchmarking) that point to improved computing performance by considering the library [**OpenBLAS**](https://www.openblas.net/) can be found on the internet.
+Some of the reasons why it is convenient to link R language to the use of [**BLAS**](http://www.netlib.org/blas/) optimized alternatives can be found [**here**](https://csantill.github.io/RPerformanceWBLAS/). Several other [**benchmarks**](https://en.wikipedia.org/wiki/Benchmarking) that point to improved computing performance by considering the library [**OpenBLAS**](https://www.openblas.net/) can be found on the internet.
 
 ## Installation
 
@@ -19,7 +19,7 @@ devtools::install_github(repo = "prdm0/ropenblas")
 
 ## Use
 
-Installing, compiling, and linking the [**OpenBLAS**] (https://www.openblas.net/) version **0.3.7** library to the [**R**](https://www.r-project.org/) language:
+Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.7** library to the [**R**](https://www.r-project.org/) language:
 
 ```
 library(ropenblas)
