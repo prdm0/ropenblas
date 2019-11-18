@@ -79,5 +79,5 @@ ropenblas <- function(x = "0.3.7"){
   
   if (rstudioapi::isAvailable()) .rs.restartR()
   
-  unlink(diretory_tmp)
+  diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
 }
