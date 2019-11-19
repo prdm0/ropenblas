@@ -59,13 +59,14 @@ dir_blas <- function(){
 #' @importFrom magrittr "%>%" 
 #' @importFrom rstudioapi isAvailable restartSession
 #' @importFrom utils download.file head sessionInfo tail untar
+#' @importFrom stringr str_detect
 #' @examples 
 #' # ropenblas()
 #' @export
 ropenblas <- function(x = "0.3.7"){
   
-  if (grep("libopenblas", dir_blas()$file_blas) == 1L && grep(x, dir_blas()$file_blas) == 1L) 
-    stop(glue("You are already using version {x} of the OpenBLAS library."))
+  if (str_detect(dir_blas()$file_blas, "libopenblas") && str_detect(dir_blas()$file_blas, x)) 
+    stop(glue("You are already using version {x} of the OpenBLAS library. Nothing to do."))
   
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Unix-Like systems.")
