@@ -100,6 +100,7 @@ ropenblas <- function(x = "0.3.7"){
     repeat{
       key_true <- glue("sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
         system(input = getPass::getPass("Enter your ROOT OS password: "))
+      cat("\n")
       if (key_true == 0L) break
     }
   }
