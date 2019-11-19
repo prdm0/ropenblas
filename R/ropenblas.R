@@ -86,13 +86,19 @@ ropenblas <- function(x = "0.3.7"){
 
   setwd(glue({acess_dir}))
   
-  glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
-    system(input = getPass::getPass("Enter your ROOT OS password (creating /opt directory): "))
+  repeat{
+    key_true <- glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
+      system(input = getPass::getPass("Enter your ROOT OS password (creating /opt directory): "))
+    if (key_true == 0L) break
+  }
   
   setwd(dir_blas()$path)
   
-  glue("sudo -kS ln -sf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
+  repeat{
+    key_true <- glue("sudo -kS ln -sf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
     system(input = getPass::getPass("Enter your ROOT OS password: "))
+    if (key_true == 0L) break
+  }
   
   if (rstudioapi::isAvailable()) rstudioapi::restartSession()
   
