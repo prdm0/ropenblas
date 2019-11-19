@@ -10,6 +10,8 @@ Authors@R:
 Maintainer: Pedro Rafael D. Marinho <pedro.rafael.marinho@gmail.com>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
+URL: (GitHub Project) https://github.com/prdm0/ropenblas
+BugReports: https://github.com/prdm0/ropenblas/issues
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
