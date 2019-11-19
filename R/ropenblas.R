@@ -1,11 +1,3 @@
-rm(list=ls(all=TRUE))
-
-library(glue)
-library(magrittr)
-library(stringr)
-library(getPass)
-library(roxygen2)
-
 exist_opt <- function(...){
   ifelse(system(command = "cd /opt", ...) == 0L, TRUE, FALSE)
 }
@@ -45,6 +37,30 @@ dir_blas <- function(){
   list(file_blas = file_blas, path_blas = path_blas)
 }
 
+#' @title Download, compile and configure R to use the OpenBLAS library
+#' @author Pedro Rafael D. Marinho
+#' @description Link R with an optimized version of the BLAS library (OpenBLAS).
+#' @details The \code{ropenblas()} function will only work on Linux/Unix systems. When calling the \code{ropenblas()}
+#' function on Windows, no settings will be made. Only a warning message will be issued informing you that the
+#' configuration can only be performed on Unix-like systems.
+#'
+#' The function will automatically download the latest version of the OpenBLAS library. However, it is possible to
+#' inform olds versions to the single argument of \code{ropenblas()}. The \code{ropenblas()} function downloads, 
+#' compiles and link R to use of the OpenBLAS library. Everything is done very simply, just loading the library and
+#' invok the function \code{ropenblas()}.
+#'  
+#' Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved
+#' computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS.
+#'  
+#' @param x OpenBLAS library version to be considered. By default, \code{x = 0.3.7}.
+#' @importFrom glue glue
+#' @importFrom getPass getPass
+#' @importFrom magrittr "%>%" 
+#' @importFrom rstudioapi isAvailable restartSession
+#' @importFrom utils download.file head sessionInfo tail untar
+#' @examples 
+#' # ropenblas()
+#' @export
 ropenblas <- function(x = "0.3.7"){
   
   if (Sys.info()[[1]] != "Linux")
@@ -78,7 +94,7 @@ ropenblas <- function(x = "0.3.7"){
   glue("sudo -kS ln -sf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
     system(input = getPass::getPass("Enter your ROOT OS password: "))
   
-  if (rstudioapi::isAvailable()) .rs.restartR()
+  if (rstudioapi::isAvailable()) rstudioapi::restartSession()
   
   diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
 }

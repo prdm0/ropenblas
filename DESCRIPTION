@@ -1,11 +1,21 @@
 Package: ropenblas
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Download, compile and configure R to use the OpenBLAS library
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: 
+    person(given = "Pedro Rafael",
+           family = "D. Marinho",
+           role = c("aut", "cre"),
+           email = "pedro.rafael.marinho@gmail.com")
+Maintainer: Pedro Rafael D. Marinho <pedro.rafael.marinho@gmail.com>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+    glue,
+    magrittr,
+    getPass,
+    rstudioapi,
+RoxygenNote: 6.1.1
