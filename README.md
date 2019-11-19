@@ -1,5 +1,7 @@
 # ropenblas package
 
+<img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="220" width="220">
+
 **ropenblas** is a package designed to facilitate the linking of the library [**OpenBLAS**](https://www.openblas.net/) with the language [**R**](https://www.r-project.org/). The package, which works only for Linux /Unix systems, will automatically download the latest source code from the [**OpenBLAS**](https://www.openblas.net/) library and compile the code. The package will automatically bind the language [**R**](https://www.r-project.org/) to use the [**OpenBLAS**](https://www.openblas.net/) library. Everything will be done automatically regardless of the Linux distribution you are using.
 
 You can also specify older versions of the [**OpenBLAS**](https://www.openblas.net/) library. Automatically, if no version is specified, the **ropenblas** package will consider the latest version of the library [**OpenBLAS**](https://www.openblas.net/).
