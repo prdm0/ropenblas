@@ -65,9 +65,6 @@ dir_blas <- function(){
 #' @export
 ropenblas <- function(x = "0.3.7"){
   
-  if (str_detect(dir_blas()$file_blas, "libopenblas")) 
-    stop(glue("You are already using version {x} of the OpenBLAS library. Nothing to do.")) 
-  
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Unix-Like systems.")
   
