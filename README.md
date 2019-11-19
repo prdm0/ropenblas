@@ -16,7 +16,7 @@ Some of the reasons why it is convenient to link R language to the use of [**BLA
 Installing the **ropenblas** library is easy and will require you to have installed the **devtools** package. This will allow you to install the **ropenblas** package directly from GitHub. To install, after installing the **devtools** package, do:
 
 ```
-devtools::install_github(repo = "prdm0/ropenblas")
+devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)
 ```
 
 ## Use
