@@ -77,15 +77,21 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ropenblas-package" class="anchor"></a>ropenblas package</h1></div>
 <p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="270" align="right"></p>
-<p><strong>ropenblas</strong> is a package designed to facilitate the linking of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with the language <a href="https://www.r-project.org/"><strong>R</strong></a>. The package, which works only for Linux /Unix systems, will automatically download the latest source code from the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and compile the code. The package will automatically bind the language <a href="https://www.r-project.org/"><strong>R</strong></a> to use the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Everything will be done automatically regardless of the Linux distribution you are using.</p>
+<p><strong>ropenblas</strong> is a package designed to facilitate the linking of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with the language <a href="https://www.r-project.org/"><strong>R</strong></a>. The package, which works only for Linux/Unix systems, will automatically download the latest source code from the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and compile the code. The package will automatically bind the language <a href="https://www.r-project.org/"><strong>R</strong></a> to use the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Everything will be done automatically regardless of the Linux distribution you are using.</p>
 <p>You can also specify older versions of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Automatically, if no version is specified, the <strong>ropenblas</strong> package will consider the latest version of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a>.</p>
 <p>Considering using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library rather than the <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> may bring extra optimizations for your code and improved computational performance for your simulations, since <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> is an optimized implementation of the library <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a>.</p>
 <p>Some of the reasons why it is convenient to link R language to the use of <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> optimized alternatives can be found <a href="https://csantill.github.io/RPerformanceWBLAS/"><strong>here</strong></a>. Several other <a href="https://en.wikipedia.org/wiki/Benchmarking"><strong>benchmarks</strong></a> that point to improved computing performance by considering the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> can be found on the internet.</p>
+<div id="dependences" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dependences" class="anchor"></a>Dependences</h2>
+<p>You must install the following dependencies on your operating system (Linux):</p>
+<p>1 - <strong>make</strong> <br> 2 - <strong>gcc</strong> <br> 3 - <strong>gcc-fortran</strong></p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Installing the <strong>ropenblas</strong> library is easy and will require you to have installed the <strong>devtools</strong> package. This will allow you to install the <strong>ropenblas</strong> package directly from GitHub. To install, after installing the <strong>devtools</strong> package, do:</p>
-<pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github(repo = "prdm0/ropenblas")</a></code></pre>
+<pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)</a></code></pre>
 </div>
 <div id="use" class="section level2">
 <h2 class="hasAnchor">

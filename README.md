@@ -11,6 +11,14 @@ Considering using the [**OpenBLAS**](https://www.openblas.net/) library rather t
 
 Some of the reasons why it is convenient to link R language to the use of [**BLAS**](http://www.netlib.org/blas/) optimized alternatives can be found [**here**](https://csantill.github.io/RPerformanceWBLAS/). Several other [**benchmarks**](https://en.wikipedia.org/wiki/Benchmarking) that point to improved computing performance by considering the library [**OpenBLAS**](https://www.openblas.net/) can be found on the internet.
 
+## Dependences
+
+You must install the following dependencies on your operating system (Linux):
+
+  1 - **make** <br/>
+  2 - **gcc** <br/>
+  3 - **gcc-fortran** 
+
 ## Installation
 
 Installing the **ropenblas** library is easy and will require you to have installed the **devtools** package. This will allow you to install the **ropenblas** package directly from GitHub. To install, after installing the **devtools** package, do:

@@ -54,6 +54,7 @@ dir_blas <- function(){
 #' @note You do not have to in every section of R make use of the \code{ropenblas()} function. Once the function is used, R 
 #' will always consider using the OpenBLAS library in future sections.
 #' @param x OpenBLAS library version to be considered. By default, \code{x = 0.3.7}.
+#' @details You must install the following dependencies on your operating system (Linux): make,  gcc and gcc-fortran. 
 #' @importFrom glue glue
 #' @importFrom getPass getPass
 #' @importFrom magrittr "%>%" 

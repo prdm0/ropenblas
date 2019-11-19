@@ -24,6 +24,8 @@ invok the function \code{ropenblas()}.
  
 Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved
 computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS.
+
+You must install the following dependencies on your operating system (Linux): make,  gcc and gcc-fortran.
 }
 \note{
 You do not have to in every section of R make use of the \code{ropenblas()} function. Once the function is used, R 
