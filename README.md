@@ -11,7 +11,7 @@ Considering using the [**OpenBLAS**](https://www.openblas.net/) library rather t
 
 Some of the reasons why it is convenient to link R language to the use of [**BLAS**](http://www.netlib.org/blas/) optimized alternatives can be found [**here**](https://csantill.github.io/RPerformanceWBLAS/). Several other [**benchmarks**](https://en.wikipedia.org/wiki/Benchmarking) that point to improved computing performance by considering the library [**OpenBLAS**](https://www.openblas.net/) can be found on the internet.
 
-## Dependences
+## Dependencies
 
 You must install the following dependencies on your operating system (Linux):
 
