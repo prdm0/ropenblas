@@ -144,6 +144,10 @@ compiles and link R to use of the OpenBLAS library. Everything is done very simp
 invok the function <code>ropenblas()</code>.</p> 
 <p>Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved
 computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>You do not have to in every section of R make use of the <code>ropenblas()</code> function. Once the function is used, R 
+will always consider using the OpenBLAS library in future sections.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># ropenblas()
@@ -154,6 +158,7 @@ computational performance for your simulations, since OpenBLAS is an optimized i
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a href="#note">Note</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -51,7 +51,8 @@ dir_blas <- function(){
 #'  
 #' Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved
 #' computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS.
-#'  
+#' @note You do not have to in every section of R make use of the \code{ropenblas()} function. Once the function is used, R 
+#' will always consider using the OpenBLAS library in future sections.
 #' @param x OpenBLAS library version to be considered. By default, \code{x = 0.3.7}.
 #' @importFrom glue glue
 #' @importFrom getPass getPass
