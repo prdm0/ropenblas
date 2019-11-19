@@ -19,4 +19,5 @@ Imports:
     magrittr,
     getPass,
     rstudioapi,
+    stringr,
 RoxygenNote: 7.0.0
