@@ -17,8 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Download, compile and configure R to use the OpenBLAS library">
-<meta property="og:description" content="More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.">
+<meta property="og:description" content="ropenblas is a package designed to facilitate the linking of the library OpenBLAS with the language R. The package, which works only for Linux /Unix systems, will automatically download the latest source code from the OpenBLAS library and compile the code. The package will automatically bind the language R to use the OpenBLAS library. Everything will be done automatically regardless of the Linux distribution you are using.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -55,7 +54,14 @@
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/prdm0/ropenblas">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -70,6 +76,7 @@
 <div id="ropenblas-package" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ropenblas-package" class="anchor"></a>ropenblas package</h1></div>
+<p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="220" width="220"></p>
 <p><strong>ropenblas</strong> is a package designed to facilitate the linking of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with the language <a href="https://www.r-project.org/"><strong>R</strong></a>. The package, which works only for Linux /Unix systems, will automatically download the latest source code from the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and compile the code. The package will automatically bind the language <a href="https://www.r-project.org/"><strong>R</strong></a> to use the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Everything will be done automatically regardless of the Linux distribution you are using.</p>
 <p>You can also specify older versions of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Automatically, if no version is specified, the <strong>ropenblas</strong> package will consider the latest version of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a>.</p>
 <p>Considering using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library rather than the <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> may bring extra optimizations for your code and improved computational performance for your simulations, since <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> is an optimized implementation of the library <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a>.</p>
@@ -91,7 +98,16 @@ ropenblas(x = "0.3.7")</a></code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/prdm0/ropenblas">https://​github.com/​prdm0/​ropenblas</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/prdm0/ropenblas/issues">https://​github.com/​prdm0/​ropenblas/​issues</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>

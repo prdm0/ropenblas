@@ -8,8 +8,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "pedro.rafael.marinho@gmail.com")
 Maintainer: Pedro Rafael D. Marinho <pedro.rafael.marinho@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: ropenblas is a package designed to facilitate the linking of the library OpenBLAS with the language R. The package, which works only for Linux /Unix systems, will automatically download the latest source code from the OpenBLAS library and compile the code. The package will automatically bind the language R to use the OpenBLAS library. Everything will be done automatically regardless of the Linux distribution you are using.
 URL: (GitHub Project) https://github.com/prdm0/ropenblas
 BugReports: https://github.com/prdm0/ropenblas/issues
 License: GPL-3
@@ -20,4 +19,4 @@ Imports:
     magrittr,
     getPass,
     rstudioapi,
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
