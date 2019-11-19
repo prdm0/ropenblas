@@ -64,6 +64,9 @@ dir_blas <- function(){
 #' @export
 ropenblas <- function(x = "0.3.7"){
   
+  if (grep("libopenblas", dir_blas()$file_blas) == 1L && grep(x, dir_blas()$file_blas) == 1L) 
+    stop(glue("You are already using version {x} of the OpenBLAS library."))
+  
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Unix-Like systems.")
   
@@ -96,7 +99,7 @@ ropenblas <- function(x = "0.3.7"){
   setwd(dir_blas()$path)
   
   repeat{
-    key_true <- glue("sudo -kS ln -sf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
+    key_true <- glue("sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
     system(input = getPass::getPass("Enter your ROOT OS password: "))
     if (key_true == 0L) break
   }
