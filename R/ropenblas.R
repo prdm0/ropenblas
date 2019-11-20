@@ -86,7 +86,7 @@ ropenblas <- function(x = "0.3.7"){
     
     answer <- readline(prompt = "Do you still want to compile and link again (yes/no)?: ")
     
-    if (answer == "no" || answer == "n") stop("Procedure interrupted.")
+    if (answer == "no" || answer == "n") stop("Ok. Procedure interrupted.")
     if (!(answer %in% c("y", "no", "yes", "no"))) stop("Invalid option. Procedure interrupted.")
     
   }
