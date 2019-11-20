@@ -80,7 +80,7 @@ ropenblas <- function(x = "0.3.7"){
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Unix-Like systems.\n")
   
-  if (str_detect(dir_blas()$file, "0.3.7")){
+  if (str_detect(dir_blas()$file, x)){
     
     cat(glue("The R language is already linked to the {x} version of the OpenBLAS library."))
     cat("\n")
