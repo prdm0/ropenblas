@@ -1,5 +1,9 @@
 exist_opt <- function(...){
-  ifelse(system(command = "cd /opt", ...) == 0L, TRUE, FALSE)
+  ifelse(
+    system(command = "cd /opt", ...) == 0L,
+    TRUE,
+    FALSE
+  )
 }
 
 mkdir_opt <- function(){
@@ -10,6 +14,7 @@ mkdir_opt <- function(){
     command = "sudo -kS mkdir opt/",
     input = getPass::getPass("Enter your ROOT OS password (creating /opt directory): ")
   )
+  
 }
 
 download_openblas <- function(x){
@@ -35,6 +40,12 @@ dir_blas <- function(){
     paste(collapse = "/") %>% paste0("/")
   
   list(file_blas = file_blas, path_blas = path_blas)
+}
+
+exist <- function(x = "gcc"){
+  nsystem <- function(...) tryCatch(system(...), error = function(e) FALSE)
+  result <- glue("{x} --version") %>% nsystem(intern = TRUE) 
+  ifelse(length(result) == 1L, FALSE, TRUE)
 }
 
 #' @title Download, compile and configure R to use the OpenBLAS library
@@ -71,11 +82,14 @@ ropenblas <- function(x = "0.3.7"){
   
   cat("You must install the following dependencies on your operating system (Linux):
 
-      1 - make 
-      2 - gcc
-      3 - gcc-fortran 
+      1 - make: GNU make utility to maintain groups of programs; 
+      2 - gcc: The GNU Compiler Collection - C and C++ frontends;
+      3 - gcc-fortran: The GNU Compiler Collection - Fortran frontends. 
       
       ")
+  
+  if(!exist()) stop("gcc not installed. Install gcc on your operating system.")
+  if(!exist("make")) stop("make not installed. Install make on your operating system.") 
   
   if (!exist_opt()) mkdir_opt()
   
@@ -101,7 +115,7 @@ ropenblas <- function(x = "0.3.7"){
     repeat{
       key_true <- glue("sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
         system(input = getPass::getPass("Enter your ROOT OS password: "))
-      cat("\n")
+      cat("\n\n")
       if (key_true == 0L) break
     }
   }
