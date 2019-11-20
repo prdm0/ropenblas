@@ -13,9 +13,9 @@ ropenblas(x = "0.3.7")
 Link R with an optimized version of the BLAS library (OpenBLAS).
 }
 \details{
-The \code{ropenblas()} function will only work on Linux/Unix systems. When calling the \code{ropenblas()}
+The \code{ropenblas()} function will only work on Linux systems. When calling the \code{ropenblas()}
 function on Windows, no settings will be made. Only a warning message will be issued informing you that the
-configuration can only be performed on Unix-like systems.
+configuration can only be performed on Linux systems.
 
 The function will automatically download the latest version of the OpenBLAS library. However, it is possible to
 inform olds versions to the single argument of \code{ropenblas()}. The \code{ropenblas()} function downloads, 
