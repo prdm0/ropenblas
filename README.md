@@ -17,7 +17,7 @@ You must install the following dependencies on your operating system (Linux):
 
   1 - **make**: GNU make utility to maintain groups of programs; <br/>
   2 - **gcc**: The GNU Compiler Collection - C and C++ frontends; <br/>
-  3 - **gcc-fortran**: The GNU Compiler Collection - Fortran frontends;
+  3 - **gcc-fortran**: The GNU Compiler Collection - Fortran frontends.
 
 ## Installation
 
