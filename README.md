@@ -15,9 +15,11 @@ Some of the reasons why it is convenient to link [**R**](https://www.r-project.o
 
 You must install the following dependencies on your operating system (Linux):
 
-  1 - **make**: GNU make utility to maintain groups of programs; <br/>
-  2 - **gcc**: The GNU Compiler Collection - C and C++ frontends; <br/>
-  3 - **gcc-fortran**: The GNU Compiler Collection - Fortran frontends.
+   1 - **make**: GNU make utility to maintain groups of programs; <br/>
+   
+   2 - **gcc**: The GNU Compiler Collection - C and C++ frontends; <br/>
+   
+   3 - **gcc-fortran**: The GNU Compiler Collection - Fortran frontends.
 
 ## Installation
 
@@ -40,4 +42,26 @@ ropenblas(x = "0.3.7")
 
    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections.
 
-   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7. 
+   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7. These are the values that will be passed to `x` in` ropenblas (x) `. 
+  
+## Details
+
+Your linux operating system may already be configured to use the [**OpenBLAS**](https://www.openblas.net/) library. Therefore, most likely [**R**](https://www.r-project.org/) will already be linked to this library. To find out if the [**R**](https://www.r-project.org/) language is using the [**OpenBLAS**](https://www.openblas.net/) library, at [**R**](https://www.r-project.org/), do:
+
+```
+extSoftVersion()["BLAS"]
+```
+
+If [**R**](https://www.r-project.org/) is using the [**OpenBLAS**](https://www.openblas.net/) library, something like `/any_directory/libopenblas.so` should be returned. Therefore, there should be the name **openblas** in the **s**hared **o**bject returned (file extension **.so**).
+
+If the `ropenblas()` function can identify that the [**R**](https://www.r-project.org/) language is using the version of [**OpenBLAS**](https://www.openblas.net/) you wish to configure, a warning message will be returned asking if you really would like to proceed with the configuration again.
+
+## Advantages
+
+Some advantages of using the **ropenblas** library:
+
+   - Everything is done within the [**R**](https://www.r-project.org/) language;
+   
+   - The procedure will be the same for any linux distribution;
+   
+   - You will not need to know linux well. In some distributions it may not be as simple for a less experienced user to compile the [**OpenBLAS**](https://www.openblas.net/) library and link with [**R**](https://www.r-project.org/).
