@@ -142,6 +142,8 @@ ropenblas <- function(x = "0.3.7"){
   
   #diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
   
+  cat("Done!\n")
+  
   .refresh_terminal <-  function() { system("R"); q("no") }
                                              
   if (rstudioapi::isAvailable()){
@@ -150,7 +152,5 @@ ropenblas <- function(x = "0.3.7"){
     .refresh_terminal()
   }
   
-  cat("Done!\n")
-      
 }
 
