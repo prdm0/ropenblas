@@ -131,8 +131,9 @@ ropenblas <- function(x = "0.3.7"){
       if (key_true == 0L) break
     }
   }
-
-  if (rstudioapi::isAvailable()) rstudioapi::restartSession()
+  
+  .restart <- function() system("R")
+  ifelse (rstudioapi::isAvailable(), rstudioapi::restartSession(), .restart())
   
   diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
 }
