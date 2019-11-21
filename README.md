@@ -42,7 +42,7 @@ ropenblas(x = "0.3.7")
 
    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections.
 
-   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7. These are the values that will be passed to `x` in` ropenblas (x) `. 
+   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7. These are the values that will be passed to `x` in `ropenblas(x)`. 
   
 ## Details
 
@@ -63,5 +63,7 @@ Some advantages of using the [**ropenblas**](https://prdm0.github.io/ropenblas/)
    - Everything is done within the [**R**](https://www.r-project.org/) language;
    
    - The procedure will be the same for any linux distribution;
+   
+   - [**OpenBLAS**](https://www.openblas.net/) will be compiled and you choose which build version to link to [**R**](https://www.r-project.org/);
    
    - You will not need to know linux well. In some distributions it may not be as simple for a less experienced user to compile the [**OpenBLAS**](https://www.openblas.net/) library and link with [**R**](https://www.r-project.org/).
