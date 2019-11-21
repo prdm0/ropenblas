@@ -132,7 +132,7 @@ ropenblas <- function(x = "0.3.7"){
     }
   }
   
-  diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
+  #diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
   
   .refresh_terminal <-  function() { system("R"); q("no") }
                                              
