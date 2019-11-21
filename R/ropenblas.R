@@ -149,5 +149,5 @@ ropenblas <- function(x = "0.3.7"){
     .refresh_terminal()
   }
       
-  diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
+  #diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
 }
