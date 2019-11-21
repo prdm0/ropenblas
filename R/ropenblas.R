@@ -134,17 +134,17 @@ ropenblas <- function(x = "0.3.7"){
   
   .refresh_terminal <-  function() { system("R"); q("no") }
   
-  .refresh_rstudio <- function(...)
-    tryCatch(
-      rstudioapi::restartSession(...),
-      error = function(e)
-        "Done",
-      warning = function(w)
-        "Done"
-    )
+  # .refresh_rstudio <- function(...)
+  #   tryCatch(
+  #     rstudioapi::restartSession(...),
+  #     error = function(e)
+  #       "Done",
+  #     warning = function(w)
+  #       "Done"
+  #   )
                                              
   if (rstudioapi::isAvailable()){
-    .refresh_rstudio()
+    tmp <- .rs.restartR()
   } else {
     .refresh_terminal()
   }
