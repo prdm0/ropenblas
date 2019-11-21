@@ -132,12 +132,12 @@ ropenblas <- function(x = "0.3.7"){
     }
   }
   
-  .refresh_terminal <-  function() { system("R"); q("no") }
-  
   diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
+  
+  .refresh_terminal <-  function() { system("R"); q("no") }
                                              
   if (rstudioapi::isAvailable()){
-    tmp <- rstudioapi::restartSession()
+    tmp <- .rs.restartR()
   } else {
     .refresh_terminal()
   }
