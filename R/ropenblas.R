@@ -132,7 +132,9 @@ ropenblas <- function(x = "0.3.7"){
     }
   }
   
-  if (rstudioapi::isAvailable()) rstudioapi::restartSession()
+  makeActiveBinding(".refresh", function() { system("R"); q("no") }, .GlobalEnv)
+  
+  ifelse (rstudioapi::isAvailable(), rstudioapi::restartSession(), .refresh())
   
   diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
 }
