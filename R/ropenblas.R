@@ -134,20 +134,12 @@ ropenblas <- function(x = "0.3.7"){
   
   .refresh_terminal <-  function() { system("R"); q("no") }
   
-  # .refresh_rstudio <- function(...)
-  #   tryCatch(
-  #     rstudioapi::restartSession(...),
-  #     error = function(e)
-  #       "Done",
-  #     warning = function(w)
-  #       "Done"
-  #   )
+  diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
                                              
   if (rstudioapi::isAvailable()){
-    tmp <- .rs.restartR()
+    tmp <- rstudioapi::restartSession()
   } else {
     .refresh_terminal()
   }
       
-  #diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
 }
