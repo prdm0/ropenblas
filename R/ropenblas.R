@@ -119,7 +119,8 @@ ropenblas <- function(x = "0.3.7"){
   key_true <- 1L
   while (attempt <= 3L && key_true != 0L){
     key_true <- glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
-      system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")))
+      system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")),
+             ignore.stderr = TRUE)
     if (key_true != 0L && attempt == 3L) 
       stop("Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
     attempt <- attempt + 1L
@@ -132,7 +133,8 @@ ropenblas <- function(x = "0.3.7"){
     key_true <- 1L
     while (attempt <= 3L && key_true != 0L){
       key_true <- glue("sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
-        system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")))
+        system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")),
+               ignore.stderr = TRUE)
       cat("\n\n")
       if (key_true != 0L && attempt == 3L) 
         stop("Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
@@ -144,7 +146,7 @@ ropenblas <- function(x = "0.3.7"){
   
   cat("Done!\n")
   
-  .refresh_terminal <-  function() { system("R"); q("no") }
+  .refresh_terminal <- function() { system("R"); q("no") }
                                              
   if (rstudioapi::isAvailable()){
     tmp <- .rs.restartR()
