@@ -100,7 +100,7 @@ ropenblas <- function(x = "0.3.7"){
       
       ")
   
-  if(!exist()) stop("gcc not installed. Install gcc on your operating system.")
+  if(!exist()) stop("gcc not installed. Install gcc (C/C++ and Fortran) on your operating system.")
   if(!exist("make")) stop("make not installed. Install make on your operating system.") 
   
   if (!exist_opt()) mkdir_opt()
@@ -134,12 +134,20 @@ ropenblas <- function(x = "0.3.7"){
   
   .refresh <-  function() { system("R"); q("no") }
   
+  .refresh_rstudio <- function(...)
+    tryCatch(
+      rstudioapi::restartSession(...),
+      error = function(e)
+        "Done",
+      warning = function(w)
+        "Done"
+    )
+                                             
   if (rstudioapi::isAvailable()){
-    rstudioapi::restartSession()
+    .refresh_rstudio()
   } else {
     .refresh()
   }
       
-  
   diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
 }
