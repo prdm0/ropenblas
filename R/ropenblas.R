@@ -92,13 +92,13 @@ ropenblas <- function(x = "0.3.7"){
     
   }
   
-  cat("You must install the following dependencies on your operating system (Linux):
+  cat("You must be the system administrator. You must install the following dependencies on your operating system (Linux):
 
       1 - make: GNU make utility to maintain groups of programs; 
       2 - gcc: The GNU Compiler Collection - C and C++ frontends;
       3 - gcc-fortran: The GNU Compiler Collection - Fortran frontends. 
       
-      ")
+  ")
   
   if(!exist()) stop("gcc not installed. Install gcc (C/C++ and Fortran) on your operating system.")
   if(!exist("make")) stop("make not installed. Install make on your operating system.") 
@@ -141,5 +141,7 @@ ropenblas <- function(x = "0.3.7"){
   } else {
     .refresh_terminal()
   }
+  
+  cat("Done!\n")
       
 }
