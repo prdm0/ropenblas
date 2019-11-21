@@ -115,20 +115,28 @@ ropenblas <- function(x = "0.3.7"){
 
   setwd(glue({acess_dir}))
   
-  repeat{
+  attempt <- 1L
+  key_true <- 1L
+  while (attempt <= 3L && key_true != 0L){
     key_true <- glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
-      system(input = getPass::getPass("Enter your ROOT OS password: "))
-    if (key_true == 0L) break
+      system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")))
+    if (key_true != 0L && attempt == 3L) 
+      stop("Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
+    attempt <- attempt + 1L
   }
   
   setwd(dir_blas()$path)
   
   if (!str_detect(dir_blas()$file_blas, "libopenblas")){
-    repeat{
+    attempt <- 1L
+    key_true <- 1L
+    while (attempt <= 3L && key_true != 0L){
       key_true <- glue("sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
-        system(input = getPass::getPass("Enter your ROOT OS password: "))
+        system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")))
       cat("\n\n")
-      if (key_true == 0L) break
+      if (key_true != 0L && attempt == 3L) 
+        stop("Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
+      attempt <- attempt + 1L
     }
   }
   
@@ -145,3 +153,4 @@ ropenblas <- function(x = "0.3.7"){
   cat("Done!\n")
       
 }
+
