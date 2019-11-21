@@ -77,20 +77,22 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ropenblas-package" class="anchor"></a>ropenblas package</h1></div>
 <p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right"></p>
-<p><strong>ropenblas</strong> is a package designed to facilitate the linking of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with the language <a href="https://www.r-project.org/"><strong>R</strong></a>. The package, which works only for Linux systems, will automatically download the latest source code from the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and compile the code. The package will automatically bind the language <a href="https://www.r-project.org/"><strong>R</strong></a> to use the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Everything will be done automatically regardless of the Linux distribution you are using.</p>
-<p>You can also specify older versions of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Automatically, if no version is specified, the <strong>ropenblas</strong> package will consider the latest version of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a>.</p>
+<p><a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> is a package designed to facilitate the linking of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with the language <a href="https://www.r-project.org/"><strong>R</strong></a>. The package, which works only for Linux systems, will automatically download the latest source code from the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and compile the code. The package will automatically bind the language <a href="https://www.r-project.org/"><strong>R</strong></a> to use the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Everything will be done automatically regardless of the Linux distribution you are using.</p>
+<p>You can also specify older versions of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Automatically, if no version is specified, the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package will consider the latest version of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a>.</p>
 <p>Considering using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library rather than the <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> may bring extra optimizations for your code and improved computational performance for your simulations, since <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> is an optimized implementation of the library <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a>.</p>
 <p>Some of the reasons why it is convenient to link <a href="https://www.r-project.org/"><strong>R</strong></a> language to the use of <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> optimized alternatives can be found <a href="https://csantill.github.io/RPerformanceWBLAS/"><strong>here</strong></a>. Several other <a href="https://en.wikipedia.org/wiki/Benchmarking"><strong>benchmarks</strong></a> that point to improved computing performance by considering the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> can be found on the internet.</p>
 <div id="dependencies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dependencies" class="anchor"></a>Dependencies</h2>
 <p>You must install the following dependencies on your operating system (Linux):</p>
-<p>1 - <strong>make</strong>: GNU make utility to maintain groups of programs; <br> 2 - <strong>gcc</strong>: The GNU Compiler Collection - C and C++ frontends; <br> 3 - <strong>gcc-fortran</strong>: The GNU Compiler Collection - Fortran frontends.</p>
+<p>1 - <strong>make</strong>: GNU make utility to maintain groups of programs; <br></p>
+<p>2 - <strong>gcc</strong>: The GNU Compiler Collection - C and C++ frontends; <br></p>
+<p>3 - <strong>gcc-fortran</strong>: The GNU Compiler Collection - Fortran frontends.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>Installing the <strong>ropenblas</strong> library is easy and will require you to have installed the <strong>devtools</strong> package. This will allow you to install the <strong>ropenblas</strong> package directly from GitHub. To install, after installing the <strong>devtools</strong> package, do:</p>
+<p>Installing the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> library is easy and will require you to have installed the <strong>devtools</strong> package. This will allow you to install the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package directly from GitHub. To install, after installing the <strong>devtools</strong> package, do:</p>
 <pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)</a></code></pre>
 </div>
 <div id="use" class="section level2">
@@ -102,7 +104,25 @@ ropenblas(x = "0.3.7")</a></code></pre>
 <p><strong>Notes</strong>:</p>
 <ul>
 <li><p>You do not have to in every section of <a href="https://www.r-project.org/"><strong>R</strong></a> make use of the <code><a href="reference/ropenblas.html">ropenblas()</a></code> function. Once the function is used, <a href="https://www.r-project.org/"><strong>R</strong></a> will always consider using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library in future sections.</p></li>
-<li><p><a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7.</p></li>
+<li><p><a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7. These are the values that will be passed to <code>x</code> in<code><a href="reference/ropenblas.html">ropenblas (x)</a></code>.</p></li>
+</ul>
+</div>
+<div id="details" class="section level2">
+<h2 class="hasAnchor">
+<a href="#details" class="anchor"></a>Details</h2>
+<p>Your linux operating system may already be configured to use the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Therefore, most likely <a href="https://www.r-project.org/"><strong>R</strong></a> will already be linked to this library. To find out if the <a href="https://www.r-project.org/"><strong>R</strong></a> language is using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library, at <a href="https://www.r-project.org/"><strong>R</strong></a>, do:</p>
+<pre><code>extSoftVersion()["BLAS"]</code></pre>
+<p>If <a href="https://www.r-project.org/"><strong>R</strong></a> is using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library, something like <code>/any_directory/libopenblas.so</code> should be returned. Therefore, there should be the name <strong>openblas</strong> in the <strong>s</strong>hared <strong>o</strong>bject returned (file extension <strong>.so</strong>).</p>
+<p>If the <code><a href="reference/ropenblas.html">ropenblas()</a></code> function can identify that the <a href="https://www.r-project.org/"><strong>R</strong></a> language is using the version of <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> you wish to configure, a warning message will be returned asking if you really would like to proceed with the configuration again.</p>
+</div>
+<div id="advantages" class="section level2">
+<h2 class="hasAnchor">
+<a href="#advantages" class="anchor"></a>Advantages</h2>
+<p>Some advantages of using the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> library:</p>
+<ul>
+<li><p>Everything is done within the <a href="https://www.r-project.org/"><strong>R</strong></a> language;</p></li>
+<li><p>The procedure will be the same for any linux distribution;</p></li>
+<li><p>You will not need to know linux well. In some distributions it may not be as simple for a less experienced user to compile the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and link with <a href="https://www.r-project.org/"><strong>R</strong></a>.</p></li>
 </ul>
 </div>
 </div>
