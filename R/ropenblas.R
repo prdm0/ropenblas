@@ -132,7 +132,7 @@ ropenblas <- function(x = "0.3.7"){
     }
   }
   
-  .refresh <-  function() { system("R"); q("no") }
+  .refresh_terminal <-  function() { system("R"); q("no") }
   
   .refresh_rstudio <- function(...)
     tryCatch(
@@ -146,7 +146,7 @@ ropenblas <- function(x = "0.3.7"){
   if (rstudioapi::isAvailable()){
     .refresh_rstudio()
   } else {
-    .refresh()
+    .refresh_terminal()
   }
       
   diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
