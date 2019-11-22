@@ -1,6 +1,6 @@
 Package: ropenblas
 Type: Package
-Title: Download, compile and configure R to use the OpenBLAS library
+Title: DOWNLOAD, COMPILE AND CONFIGURE R TO USE THE OPENBLAS LIBRARY
 Version: 0.1.0
 Authors@R: 
     person(given = "Pedro Rafael",
@@ -8,7 +8,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "pedro.rafael.marinho@gmail.com")
 Maintainer: Pedro Rafael D. Marinho <pedro.rafael.marinho@gmail.com>
-Description: ropenblas is a package designed to facilitate the linking of the library OpenBLAS with the language R. The package, which works only for Linux /Unix systems, will automatically download the latest source code from the OpenBLAS library and compile the code. The package will automatically bind the language R to use the OpenBLAS library. Everything will be done automatically regardless of the Linux distribution you are using.
+Description: This package designed to facilitate the linking of the library OpenBLAS with the language R. The package, which works only for Linux systems, will automatically download the latest source code from the OpenBLAS library and compile the code. The package will automatically bind the language R to use the OpenBLAS library. Everything will be done automatically regardless of the Linux distribution you are using.
 URL: (GitHub Project) https://github.com/prdm0/ropenblas
 BugReports: https://github.com/prdm0/ropenblas/issues
 License: GPL-3
