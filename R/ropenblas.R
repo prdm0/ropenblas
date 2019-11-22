@@ -149,7 +149,7 @@ ropenblas <- function(x = "0.3.7"){
   .refresh_terminal <- function() { system("R"); q("no") }
                                              
   if (rstudioapi::isAvailable()){
-    tmp <- .rs.restartR()
+    tmp <- rstudioapi::restartSession() # .rs.restartR()
   } else {
     .refresh_terminal()
   }
