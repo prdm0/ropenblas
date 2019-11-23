@@ -2,7 +2,7 @@
 % Please edit documentation in R/ropenblas.R
 \name{ropenblas}
 \alias{ropenblas}
-\title{Download, compile and configure R to use the OpenBLAS library}
+\title{Download, Compile and Link OpenBLAS Library with R}
 \usage{
 ropenblas(x = "0.3.7")
 }

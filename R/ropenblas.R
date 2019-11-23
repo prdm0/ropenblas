@@ -48,7 +48,7 @@ exist <- function(x = "gcc"){
   ifelse(length(result) == 1L, FALSE, TRUE)
 }
 
-#' @title Download, compile and configure R to use the OpenBLAS library
+#' @title Download, Compile and Link OpenBLAS Library with R
 #' @author Pedro Rafael D. Marinho
 #' @description Link R with an optimized version of the BLAS library (OpenBLAS).
 #' @details The \code{ropenblas()} function will only work on Linux systems. When calling the \code{ropenblas()}
