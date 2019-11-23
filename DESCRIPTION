@@ -1,6 +1,6 @@
 Package: ropenblas
 Type: Package
-Title: DOWNLOAD, COMPILE AND CONFIGURE R TO USE THE OPENBLAS LIBRARY
+Title: Download, Compile and Link OpenBLAS Library with R
 Version: 0.1.0
 Authors@R: 
     person(given = "Pedro Rafael",
