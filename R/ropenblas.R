@@ -33,10 +33,10 @@ download_r <- function(x){
 
 dir_blas <- function(){
   file_blas <- sessionInfo()$BLAS %>% strsplit(split = "/") %>% 
-    unlist %>% tail(n = 1)
+    unlist %>% tail(n = 1L)
   
   path_blas <- head(sessionInfo()$BLAS %>% strsplit(split = "/") %>% 
-                      unlist, -1) %>%
+                      unlist, -1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   list(file_blas = file_blas, path_blas = path_blas)
