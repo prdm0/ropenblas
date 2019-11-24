@@ -18,14 +18,14 @@ mkdir_opt <- function(){
 }
 
 download_openblas <- function(x){
-  diretory_tmp <- tempdir(check = FALSE)
+  diretory_tmp <- tempdir()
   url <- glue("https://github.com/xianyi/OpenBLAS/archive/v{x}.tar.gz")
   download.file(url = url, destfile = glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz")) 
   diretory_tmp
 }
 
 download_r <- function(x){
-  diretory_tmp <- tempdir(check = FALSE)
+  diretory_tmp <- tempdir()
   url <- glue("https://cloud.r-project.org/src/base/R-{substr(x, 1, 1)}/R-{x}.tar.gz")
   download.file(url = url, destfile = glue("{diretory_tmp}/R-{x}.tar.gz")) 
   diretory_tmp
