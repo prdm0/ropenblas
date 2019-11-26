@@ -1,14 +1,12 @@
-exist_opt <- function(...){
-  ifelse(
-    system(command = "cd /opt", ...) == 0L,
-    TRUE,
-    FALSE
-  )
+exist_opt <- function(...) {
+  ifelse(system(command = "cd /opt", ...) == 0L,
+         TRUE,
+         FALSE)
 }
 
-mkdir_opt <- function(){
-  
-  if (exist_opt()) stop("The /opt directory already exists. Nothing to do!")
+mkdir_opt <- function() {
+  if (exist_opt())
+    stop("The /opt directory already exists. Nothing to do!")
   
   system(
     command = "sudo -kS mkdir opt/",
@@ -17,10 +15,12 @@ mkdir_opt <- function(){
   
 }
 
-download_openblas <- function(x){
+download_openblas <- function(x) {
   diretory_tmp <- tempdir()
-  url <- glue("https://github.com/xianyi/OpenBLAS/archive/v{x}.tar.gz")
-  download.file(url = url, destfile = glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz")) 
+  url <-
+    glue("https://github.com/xianyi/OpenBLAS/archive/v{x}.tar.gz")
+  download.file(url = url,
+                destfile = glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz"))
   diretory_tmp
 }
 
@@ -42,9 +42,15 @@ dir_blas <- function(){
   list(file_blas = file_blas, path_blas = path_blas)
 }
 
-exist <- function(x = "gcc"){
-  nsystem <- function(...) tryCatch(system(...), error = function(e) FALSE)
-  result <- glue("{x} --version") %>% nsystem(intern = TRUE) 
+exist <- function(x = "gcc") {
+  nsystem <-
+    function(...)
+      tryCatch(
+        system(...),
+        error = function(e)
+          FALSE
+      )
+  result <- glue("{x} --version") %>% nsystem(intern = TRUE)
   ifelse(length(result) == 1L, FALSE, TRUE)
 }
 
@@ -117,27 +123,38 @@ ropenblas <- function(x = "0.3.7"){
   
   attempt <- 1L
   key_true <- 1L
-  while (attempt <= 3L && key_true != 0L){
-    key_true <- glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
-      system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")),
-             ignore.stderr = TRUE)
-    if (key_true != 0L && attempt == 3L) 
-      stop("Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
+  while (attempt <= 3L && key_true != 0L) {
+    key_true <- glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>%
+      system(input = getPass::getPass(glue(
+        "Enter your ROOT OS password (attempt {attempt} of 3): "
+      )),
+      ignore.stderr = TRUE)
+    if (key_true != 0L && attempt == 3L)
+      stop(
+        "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
+      )
     attempt <- attempt + 1L
   }
   
   setwd(dir_blas()$path)
   
-  if (!str_detect(dir_blas()$file_blas, "libopenblas")){
+  if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     attempt <- 1L
     key_true <- 1L
-    while (attempt <= 3L && key_true != 0L){
-      key_true <- glue("sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
-        system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")),
-               ignore.stderr = TRUE)
+    while (attempt <= 3L && key_true != 0L) {
+      key_true <-
+        glue(
+          "sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+        ) %>%
+        system(input = getPass::getPass(glue(
+          "Enter your ROOT OS password (attempt {attempt} of 3): "
+        )),
+        ignore.stderr = TRUE)
       cat("\n\n")
-      if (key_true != 0L && attempt == 3L) 
-        stop("Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
+      if (key_true != 0L && attempt == 3L)
+        stop(
+          "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
+        )
       attempt <- attempt + 1L
     }
   }
@@ -148,7 +165,7 @@ ropenblas <- function(x = "0.3.7"){
   
   .refresh_terminal <- function() { system("R"); q("no") }
                                              
-  if (rstudioapi::isAvailable()){
+  if (rstudioapi::isAvailable()) {
     tmp <- rstudioapi::restartSession() # .rs.restartR()
   } else {
     .refresh_terminal()
