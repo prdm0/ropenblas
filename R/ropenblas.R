@@ -16,13 +16,54 @@ mkdir_opt <- function() {
 }
 
 download_openblas <- function(x) {
-  diretory_tmp <- tempdir()
-  url <-
-    glue("https://github.com/xianyi/OpenBLAS/archive/v{x}.tar.gz")
-  download.file(url = url,
-                destfile = glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz"))
-  diretory_tmp
+  
+  if (file_exists("/tmp/openblas")) file_delete("/tmp/openblas")
+  
+  path_openblas <- dir_create(path = "/tmp/openblas")
+  
+  repo_openblas <-
+    clone("https://github.com/xianyi/OpenBLAS.git", path_openblas)
+  
+  if (glue("v{x}") < names(tail(tags(repo_openblas), 1L))) {
+    list(
+      new = TRUE,
+      version = names(tail(tags(repo_openblas), 1L)),
+      path_openblas = path_openblas,
+      repo_openblas = repo_openblas,
+      exist_x = TRUE
+    )
+  } else if (glue("v{x}") > names(tail(tags(repo_openblas), 1L))) {
+    list(
+      new = FALSE,
+      version = names(tail(tags(repo_openblas), 1L)),
+      path_openblas = path_openblas,
+      repo_openblas = repo_openblas,
+      exist_x = FALSE
+    )
+  } else {
+    list(
+      new = FALSE,
+      version = names(tail(tags(repo_openblas), 1L)),
+      path_openblas = path_openblas,
+      repo_openblas = repo_openblas,
+      exist_x = TRUE
+    )
+  }
 }
+
+# download_openblas <- function(x) {
+#   
+#   check_openblas <- newversion_openblas(x)
+#   
+#   check_openblas$path_openblas
+# 
+#   # diretory_tmp <- tempdir()
+#   # url <-
+#   #   glue("https://github.com/xianyi/OpenBLAS/archive/v{x}.tar.gz")
+#   # download.file(url = url,
+#   #               destfile = glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz"))
+#   # diretory_tmp
+# }
 
 download_r <- function(x){
   diretory_tmp <- tempdir()
@@ -53,6 +94,12 @@ exist <- function(x = "gcc") {
   result <- glue("{x} --version") %>% nsystem(intern = TRUE)
   ifelse(length(result) == 1L, FALSE, TRUE)
 }
+
+validate_answer <- function(x) {
+  if (!(x %in% c("y", "no", "yes", "no")))
+    stop("Invalid option. Procedure interrupted.")
+}
+
 
 #' @title Download, Compile and Link OpenBLAS Library with \R
 #' @author Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})
@@ -96,7 +143,8 @@ exist <- function(x = "gcc") {
 #' @importFrom magrittr "%>%" 
 #' @importFrom rstudioapi isAvailable restartSession
 #' @importFrom utils download.file head sessionInfo tail untar
-#' @importFrom stringr str_detect
+#' @importFrom stringr str_detec
+#' @importFrom git2r clone
 #' @examples 
 #' # ropenblas()
 #' @export
@@ -105,7 +153,7 @@ ropenblas <- function(x = "0.3.7"){
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
-  if (str_detect(dir_blas()$file, x)){
+  if (str_detect(dir_blas()$file, x)) {
     
     cat(glue("The R language is already linked to the {x} version of the OpenBLAS library."))
     cat("\n")
@@ -130,15 +178,47 @@ ropenblas <- function(x = "0.3.7"){
   
   if (!exist_opt()) mkdir_opt()
   
-  diretory_tmp <- download_openblas(x)
+  download <- download_openblas(x)
+  repo <- download$repo_openblas
   
-  glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz") %>% untar(exdir = glue("{diretory_tmp}"))
+  diretory_tmp <- download$path_openblas
   
-  acess_dir <- glue("{diretory_tmp}/OpenBLAS-{x}") 
-  
-  glue("cd {acess_dir} && make -j $(nproc)") %>% system
+  if (download$exist_x) {
+    if (!download$new) {
+      checkout(repo, download$version)
+    } else {
+      answer <-
+        glue("Version {download$version} is newer. Do you want to install? (yes/no): ") %>% 
+          readline %>%
+          tolower
+      
+      validate_answer(answer)
+      
+      if (answer %in% c("y", "yes")) {
+        checkout(repo, download$version)
+      } else {
+        checkout(repo, glue("v{x}"))
+      }
+    }
+  } else {
+    answer <-
+      glue("Version {download$version} is newer. Do you want to install? (yes/no): ") %>% 
+        readline %>% 
+        tolower
 
-  setwd(glue({acess_dir}))
+    validate_answer(answer)
+    
+    if (answer == "no" || answer == "n") {
+      stop("Ok. Procedure interrupted.")
+    } else {
+      checkout(repo, download$version)
+    }
+    
+  }
+
+  glue("cd {diretory_tmp} && make -j $(nproc)") %>% system
+
+  glue({diretory_tmp}) %>% setwd
   
   attempt <- 1L
   key_true <- 1L
@@ -177,8 +257,6 @@ ropenblas <- function(x = "0.3.7"){
       attempt <- attempt + 1L
     }
   }
-  
-  #diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
   
   cat("Done!\n")
   
