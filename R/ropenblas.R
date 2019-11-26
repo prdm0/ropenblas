@@ -48,24 +48,24 @@ exist <- function(x = "gcc"){
   ifelse(length(result) == 1L, FALSE, TRUE)
 }
 
-#' @title Download, Compile and Link OpenBLAS Library with R
+#' @title Download, Compile and Link OpenBLAS Library with \R
 #' @author Pedro Rafael D. Marinho
-#' @description Link R with an optimized version of the BLAS library (OpenBLAS).
+#' @description Link \R with an optimized version of the \href{http://www.netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
 #' @details The \code{ropenblas()} function will only work on Linux systems. When calling the \code{ropenblas()}
 #' function on Windows, no settings will be made. Only a warning message will be issued informing you that the
 #' configuration can only be performed on Linux systems.
 #'
-#' The function will automatically download the latest version of the OpenBLAS library. However, it is possible to
+#' The function will automatically download the latest version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. However, it is possible to
 #' inform olds versions to the single argument of \code{ropenblas()}. The \code{ropenblas()} function downloads, 
-#' compiles and link R to use of the OpenBLAS library. Everything is done very simply, just loading the library and
+#' compiles and link \R to use of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Everything is done very simply, just loading the library and
 #' invok the function \code{ropenblas()}.
 #'  
-#' Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved
-#' computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS.
-#' @note You do not have to in every section of R make use of the \code{ropenblas()} function. Once the function is used, R 
-#' will always consider using the OpenBLAS library in future sections.
-#' @param x OpenBLAS library version to be considered. By default, \code{x = 0.3.7}.
-#' @details You must install the following dependencies on your operating system (Linux): make,  gcc and gcc-fortran. 
+#' Considering using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library rather than the \href{http://www.netlib.org/blas/}{\strong{BLAS}} may bring extra optimizations for your code and improved
+#' computational performance for your simulations, since \href{https://www.openblas.net/}{\strong{OpenBLAS}} is an optimized implementation of the library \href{http://www.netlib.org/blas/}{\strong{BLAS}}.
+#' @note You do not have to in every section of \R make use of the \code{ropenblas()} function. Once the function is used, \R 
+#' will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sections.
+#' @param x \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = 0.3.7}.
+#' @details You must install the following dependencies on your operating system (Linux): \strong{make},  \strong{gcc} and \strong{gcc-fortran}. 
 #' @importFrom glue glue
 #' @importFrom getPass getPass
 #' @importFrom magrittr "%>%" 
