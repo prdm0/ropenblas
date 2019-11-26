@@ -1,14 +1,12 @@
-exist_opt <- function(...){
-  ifelse(
-    system(command = "cd /opt", ...) == 0L,
-    TRUE,
-    FALSE
-  )
+exist_opt <- function(...) {
+  ifelse(system(command = "cd /opt", ...) == 0L,
+         TRUE,
+         FALSE)
 }
 
-mkdir_opt <- function(){
-  
-  if (exist_opt()) stop("The /opt directory already exists. Nothing to do!")
+mkdir_opt <- function() {
+  if (exist_opt())
+    stop("The /opt directory already exists. Nothing to do!")
   
   system(
     command = "sudo -kS mkdir opt/",
@@ -17,11 +15,44 @@ mkdir_opt <- function(){
   
 }
 
-download_openblas <- function(x){
-  diretory_tmp <- tempdir()
-  url <- glue("https://github.com/xianyi/OpenBLAS/archive/v{x}.tar.gz")
-  download.file(url = url, destfile = glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz")) 
-  diretory_tmp
+download_openblas <- function(x = NULL) {
+  
+  if (file_exists("/tmp/openblas")) file_delete("/tmp/openblas")
+  
+  path_openblas <- dir_create(path = "/tmp/openblas")
+
+  repo_openblas <-
+    clone("https://github.com/xianyi/OpenBLAS.git", path_openblas)
+  
+  last_version <- names(tail(tags(repo_openblas), 1L))
+  
+  if (is.null(x)) x <- last_version
+  
+  if (glue("v{x}") < names(tail(tags(repo_openblas), 1L))) {
+    list(
+      new = TRUE,
+      version = names(tail(tags(repo_openblas), 1L)),
+      path_openblas = path_openblas,
+      repo_openblas = repo_openblas,
+      exist_x = TRUE
+    )
+  } else if (glue("v{x}") > names(tail(tags(repo_openblas), 1L))) {
+    list(
+      new = FALSE,
+      version = names(tail(tags(repo_openblas), 1L)),
+      path_openblas = path_openblas,
+      repo_openblas = repo_openblas,
+      exist_x = FALSE
+    )
+  } else {
+    list(
+      new = FALSE,
+      version = names(tail(tags(repo_openblas), 1L)),
+      path_openblas = path_openblas,
+      repo_openblas = repo_openblas,
+      exist_x = TRUE
+    )
+  }
 }
 
 download_r <- function(x){
@@ -42,36 +73,69 @@ dir_blas <- function(){
   list(file_blas = file_blas, path_blas = path_blas)
 }
 
-exist <- function(x = "gcc"){
-  nsystem <- function(...) tryCatch(system(...), error = function(e) FALSE)
-  result <- glue("{x} --version") %>% nsystem(intern = TRUE) 
+exist <- function(x = "gcc") {
+  nsystem <-
+    function(...)
+      tryCatch(
+        system(...),
+        error = function(e)
+          FALSE
+      )
+  result <- glue("{x} --version") %>% nsystem(intern = TRUE)
   ifelse(length(result) == 1L, FALSE, TRUE)
 }
 
-#' @title Download, Compile and Link OpenBLAS Library with R
-#' @author Pedro Rafael D. Marinho
-#' @description Link R with an optimized version of the BLAS library (OpenBLAS).
+validate_answer <- function(x) {
+  if (!(x %in% c("y", "no", "yes", "no")))
+    stop("Invalid option. Procedure interrupted.")
+}
+
+
+#' @title Download, Compile and Link OpenBLAS Library with \R
+#' @author Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})
+#' @description Link \R with an optimized version of the \href{http://www.netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
 #' @details The \code{ropenblas()} function will only work on Linux systems. When calling the \code{ropenblas()}
 #' function on Windows, no settings will be made. Only a warning message will be issued informing you that the
 #' configuration can only be performed on Linux systems.
 #'
-#' The function will automatically download the latest version of the OpenBLAS library. However, it is possible to
+#' The function will automatically download the latest version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. However, it is possible to
 #' inform olds versions to the single argument of \code{ropenblas()}. The \code{ropenblas()} function downloads, 
-#' compiles and link R to use of the OpenBLAS library. Everything is done very simply, just loading the library and
+#' compiles and link \R to use of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Everything is done very simply, just loading the library and
 #' invok the function \code{ropenblas()}.
 #'  
-#' Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved
-#' computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS.
-#' @note You do not have to in every section of R make use of the \code{ropenblas()} function. Once the function is used, R 
-#' will always consider using the OpenBLAS library in future sections.
-#' @param x OpenBLAS library version to be considered. By default, \code{x = 0.3.7}.
-#' @details You must install the following dependencies on your operating system (Linux): make,  gcc and gcc-fortran. 
+#' Considering using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library rather than the \href{http://www.netlib.org/blas/}{\strong{BLAS}} may bring extra optimizations for your code and improved
+#' computational performance for your simulations, since \href{https://www.openblas.net/}{\strong{OpenBLAS}} is an optimized implementation of the library \href{http://www.netlib.org/blas/}{\strong{BLAS}}.
+#' @note You do not have to in every section of \R make use of the \code{ropenblas()} function. Once the function is used, \R 
+#' will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sections.
+#' @param x \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = 0.3.7}.
+#' @details You must install the following dependencies on your operating system (Linux):
+#' \enumerate{
+#'    \item \strong{make};
+#'    \item \strong{gcc}; 
+#'    \item \strong{gcc-fortran}. 
+#' } 
+#' Your linux operating system may already be configured to use the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Therefore, most likely \R will already be linked to this library. To find out if the \R language is using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library,
+#'  at \R, do:
+#'  
+#' \code{extSoftVersion()["BLAS"]}
+#' 
+#' If \R is using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library, something like \code{/any_directory/libopenblas.so} should be returned. Therefore, there should be the name openblas in the \strong{s}hared \strong{o}bject returned (file extension \strong{.so}).
+#' 
+#' If the \code{ropenblas()} function can identify that the \R language is using the version of \href{https://www.openblas.net/}{\strong{OpenBLAS}} you wish to configure, a warning message will be returned asking if you really would like to proceed with the
+#'  configuration again.
+#' 
+#' The \code{ropenblas()} function will download the desired version of the library \href{https://www.openblas.net/}{\strong{OpenBLAS}}, compile and install the library in the \code{/opt} directory of your operational system. If the directory does not exist, it will
+#'  be created so that the installation can be completed. Subsequently, files from the version of \href{http://www.netlib.org/blas/}{\strong{BLAS}} used in \R will be symbolically linked to the shared object files of the library version \href{https://www.openblas.net/}{\strong{OpenBLAS}} compiled and installed in \code{/opt}.
+#' 
+#' You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system.
 #' @importFrom glue glue
 #' @importFrom getPass getPass
 #' @importFrom magrittr "%>%" 
 #' @importFrom rstudioapi isAvailable restartSession
-#' @importFrom utils download.file head sessionInfo tail untar
+#' @importFrom utils download.file head sessionInfo tail
 #' @importFrom stringr str_detect
+#' @importFrom git2r clone checkout tags
+#' @importFrom fs file_exists file_delete dir_create
 #' @examples 
 #' # ropenblas()
 #' @export
@@ -80,7 +144,7 @@ ropenblas <- function(x = "0.3.7"){
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
-  if (str_detect(dir_blas()$file, x)){
+  if (str_detect(dir_blas()$file, x)) {
     
     cat(glue("The R language is already linked to the {x} version of the OpenBLAS library."))
     cat("\n")
@@ -88,7 +152,8 @@ ropenblas <- function(x = "0.3.7"){
     answer <- readline(prompt = "Do you still want to compile and link again (yes/no)?: ") %>% tolower
     
     if (answer == "no" || answer == "n") stop("Ok. Procedure interrupted.")
-    if (!(answer %in% c("y", "no", "yes", "no"))) stop("Invalid option. Procedure interrupted.")
+    
+    validate_answer(answer)
     
   }
   
@@ -105,50 +170,91 @@ ropenblas <- function(x = "0.3.7"){
   
   if (!exist_opt()) mkdir_opt()
   
-  diretory_tmp <- download_openblas(x)
+  download <- download_openblas(x)
+  repo <- download$repo_openblas
   
-  glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz") %>% untar(exdir = glue("{diretory_tmp}"))
+  diretory_tmp <- download$path_openblas
   
-  acess_dir <- glue("{diretory_tmp}/OpenBLAS-{x}") 
-  
-  glue("cd {acess_dir} && make -j $(nproc)") %>% system
+  if (download$exist_x) {
+    if (!download$new) {
+      checkout(repo, download$version)
+    } else {
+      answer <-
+        glue("Version {substr(download$version, 2, nchar(download$version))} is newer. Do you want to install? (yes/no): ") %>% 
+          readline %>%
+          tolower
+      
+      validate_answer(answer)
+      
+      if (answer %in% c("y", "yes")) {
+        checkout(repo, download$version)
+      } else {
+        checkout(repo, glue("v{x}"))
+      }
+    }
+  } else {
+    answer <-
+      glue("Version {substr(download$version, 2, nchar(download$version))} is newer. Do you want to install? (yes/no): ") %>% 
+        readline %>% 
+        tolower
 
-  setwd(glue({acess_dir}))
+    validate_answer(answer)
+    
+    if (answer == "no" || answer == "n") {
+      stop("Ok. Procedure interrupted.")
+    } else {
+      checkout(repo, download$version)
+    }
+    
+  }
+
+  glue("cd {diretory_tmp} && make -j $(nproc)") %>% system
+
+  glue({diretory_tmp}) %>% setwd
   
   attempt <- 1L
   key_true <- 1L
-  while (attempt <= 3L && key_true != 0L){
-    key_true <- glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
-      system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")),
-             ignore.stderr = TRUE)
-    if (key_true != 0L && attempt == 3L) 
-      stop("Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
+  while (attempt <= 3L && key_true != 0L) {
+    key_true <- glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>%
+      system(input = getPass::getPass(glue(
+        "Enter your ROOT OS password (attempt {attempt} of 3): "
+      )),
+      ignore.stderr = TRUE)
+    if (key_true != 0L && attempt == 3L)
+      stop(
+        "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
+      )
     attempt <- attempt + 1L
   }
   
   setwd(dir_blas()$path)
   
-  if (!str_detect(dir_blas()$file_blas, "libopenblas")){
+  if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     attempt <- 1L
     key_true <- 1L
-    while (attempt <= 3L && key_true != 0L){
-      key_true <- glue("sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}") %>% 
-        system(input = getPass::getPass(glue("Enter your ROOT OS password (attempt {attempt} of 3): ")),
-               ignore.stderr = TRUE)
+    while (attempt <= 3L && key_true != 0L) {
+      key_true <-
+        glue(
+          "sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+        ) %>%
+        system(input = getPass::getPass(glue(
+          "Enter your ROOT OS password (attempt {attempt} of 3): "
+        )),
+        ignore.stderr = TRUE)
       cat("\n\n")
-      if (key_true != 0L && attempt == 3L) 
-        stop("Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
+      if (key_true != 0L && attempt == 3L)
+        stop(
+          "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
+        )
       attempt <- attempt + 1L
     }
   }
-  
-  #diretory_tmp %>% unlink(recursive = TRUE, force = TRUE)
   
   cat("Done!\n")
   
   .refresh_terminal <- function() { system("R"); q("no") }
                                              
-  if (rstudioapi::isAvailable()){
+  if (rstudioapi::isAvailable()) {
     tmp <- rstudioapi::restartSession() # .rs.restartR()
   } else {
     .refresh_terminal()
