@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download, Compile and Link OpenBLAS Library with R — ropenblas • ropenblas</title>
+<title>Download, Compile and Link OpenBLAS Library with <span style="R">R</span> — ropenblas • ropenblas</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,7 @@
 
 
 
-<meta property="og:title" content="Download, Compile and Link OpenBLAS Library with R — ropenblas" />
+<meta property="og:title" content="Download, Compile and Link OpenBLAS Library with <span style="R">R</span> — ropenblas" />
 <meta property="og:description" content="Link R with an optimized version of the BLAS library (OpenBLAS)." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ropenblas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -113,13 +113,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download, Compile and Link OpenBLAS Library with R</h1>
+    <h1>Download, Compile and Link OpenBLAS Library with <span style="R">R</span></h1>
     <small class="dont-index">Source: <a href='https://github.com/prdm0/ropenblas/blob/master/R/ropenblas.R'><code>R/ropenblas.R</code></a></small>
     <div class="hidden name"><code>ropenblas.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Link R with an optimized version of the BLAS library (OpenBLAS).</p>
+    <p>Link <span style="R">R</span> with an optimized version of the <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a> library (<a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>ropenblas</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"0.3.7"</span>)</pre>
@@ -129,7 +129,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>OpenBLAS library version to be considered. By default, <code>x = 0.3.7</code>.</p></td>
+      <td><p><a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library version to be considered. By default, <code>x = 0.3.7</code>.</p></td>
     </tr>
     </table>
 
@@ -138,17 +138,29 @@
     <p>The <code>ropenblas()</code> function will only work on Linux systems. When calling the <code>ropenblas()</code>
 function on Windows, no settings will be made. Only a warning message will be issued informing you that the
 configuration can only be performed on Linux systems.</p>
-<p>The function will automatically download the latest version of the OpenBLAS library. However, it is possible to
+<p>The function will automatically download the latest version of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library. However, it is possible to
 inform olds versions to the single argument of <code>ropenblas()</code>. The <code>ropenblas()</code> function downloads, 
-compiles and link R to use of the OpenBLAS library. Everything is done very simply, just loading the library and
+compiles and link <span style="R">R</span> to use of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library. Everything is done very simply, just loading the library and
 invok the function <code>ropenblas()</code>.</p> 
-<p>Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved
-computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS.</p>
-<p>You must install the following dependencies on your operating system (Linux): make,  gcc and gcc-fortran.</p>
+<p>Considering using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library rather than the <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a> may bring extra optimizations for your code and improved
+computational performance for your simulations, since <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> is an optimized implementation of the library <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a>.</p>
+<p>You must install the following dependencies on your operating system (Linux):</p><ol>
+<li><p><strong>make</strong>;</p></li>
+<li><p><strong>gcc</strong>;</p></li>
+<li><p><strong>gcc-fortran</strong>.</p></li>
+</ol><p>Your linux operating system may already be configured to use the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library. Therefore, most likely <span style="R">R</span> will already be linked to this library. To find out if the <span style="R">R</span> language is using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library,
+ at <span style="R">R</span>, do:</p> 
+<p><code>extSoftVersion()["BLAS"]</code></p>
+<p>If <span style="R">R</span> is using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library, something like <code>/any_directory/libopenblas.so</code> should be returned. Therefore, there should be the name openblas in the <strong>s</strong>hared <strong>o</strong>bject returned (file extension <strong>.so</strong>).</p>
+<p>If the <code>ropenblas()</code> function can identify that the <span style="R">R</span> language is using the version of <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> you wish to configure, a warning message will be returned asking if you really would like to proceed with the
+ configuration again.</p>
+<p>The <code>ropenblas()</code> function will download the desired version of the library <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a>, compile and install the library in the <code>/opt</code> directory of your operational system. If the directory does not exist, it will
+ be created so that the installation can be completed. Subsequently, files from the version of <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a> used in <span style="R">R</span> will be symbolically linked to the shared object files of the library version <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> compiled and installed in <code>/opt</code>.</p>
+<p>You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>You do not have to in every section of R make use of the <code>ropenblas()</code> function. Once the function is used, R 
-will always consider using the OpenBLAS library in future sections.</p>
+    <p>You do not have to in every section of <span style="R">R</span> make use of the <code>ropenblas()</code> function. Once the function is used, <span style="R">R</span> 
+will always consider using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library in future sections.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># ropenblas()
@@ -164,7 +176,7 @@ will always consider using the OpenBLAS library in future sections.</p>
     </ul>
 
     <h2>Author</h2>
-    <p>Pedro Rafael D. Marinho</p>
+    <p>Pedro Rafael D. Marinho (e-mail: <a href='mailto:pedro.rafael.marinho@gmail.com'>pedro.rafael.marinho@gmail.com</a>)</p>
   </div>
 </div>
 

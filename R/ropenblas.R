@@ -15,14 +15,18 @@ mkdir_opt <- function() {
   
 }
 
-download_openblas <- function(x) {
+download_openblas <- function(x = NULL) {
   
   if (file_exists("/tmp/openblas")) file_delete("/tmp/openblas")
   
   path_openblas <- dir_create(path = "/tmp/openblas")
-  
+
   repo_openblas <-
     clone("https://github.com/xianyi/OpenBLAS.git", path_openblas)
+  
+  last_version <- names(tail(tags(repo_openblas), 1L))
+  
+  if (is.null(x)) x <- last_version
   
   if (glue("v{x}") < names(tail(tags(repo_openblas), 1L))) {
     list(
@@ -50,20 +54,6 @@ download_openblas <- function(x) {
     )
   }
 }
-
-# download_openblas <- function(x) {
-#   
-#   check_openblas <- newversion_openblas(x)
-#   
-#   check_openblas$path_openblas
-# 
-#   # diretory_tmp <- tempdir()
-#   # url <-
-#   #   glue("https://github.com/xianyi/OpenBLAS/archive/v{x}.tar.gz")
-#   # download.file(url = url,
-#   #               destfile = glue("{diretory_tmp}/OpenBLAS-{x}.tar.gz"))
-#   # diretory_tmp
-# }
 
 download_r <- function(x){
   diretory_tmp <- tempdir()
@@ -142,9 +132,10 @@ validate_answer <- function(x) {
 #' @importFrom getPass getPass
 #' @importFrom magrittr "%>%" 
 #' @importFrom rstudioapi isAvailable restartSession
-#' @importFrom utils download.file head sessionInfo tail untar
-#' @importFrom stringr str_detec
-#' @importFrom git2r clone
+#' @importFrom utils download.file head sessionInfo tail
+#' @importFrom stringr str_detect
+#' @importFrom git2r clone checkout tags
+#' @importFrom fs file_exists file_delete dir_create
 #' @examples 
 #' # ropenblas()
 #' @export
@@ -161,7 +152,8 @@ ropenblas <- function(x = "0.3.7"){
     answer <- readline(prompt = "Do you still want to compile and link again (yes/no)?: ") %>% tolower
     
     if (answer == "no" || answer == "n") stop("Ok. Procedure interrupted.")
-    if (!(answer %in% c("y", "no", "yes", "no"))) stop("Invalid option. Procedure interrupted.")
+    
+    validate_answer(answer)
     
   }
   
@@ -188,7 +180,7 @@ ropenblas <- function(x = "0.3.7"){
       checkout(repo, download$version)
     } else {
       answer <-
-        glue("Version {download$version} is newer. Do you want to install? (yes/no): ") %>% 
+        glue("Version {substr(download$version, 2, nchar(download$version))} is newer. Do you want to install? (yes/no): ") %>% 
           readline %>%
           tolower
       
@@ -202,7 +194,7 @@ ropenblas <- function(x = "0.3.7"){
     }
   } else {
     answer <-
-      glue("Version {download$version} is newer. Do you want to install? (yes/no): ") %>% 
+      glue("Version {substr(download$version, 2, nchar(download$version))} is newer. Do you want to install? (yes/no): ") %>% 
         readline %>% 
         tolower
 

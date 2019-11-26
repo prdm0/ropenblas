@@ -20,4 +20,6 @@ Imports:
     getPass,
     rstudioapi,
     stringr,
+    git2r,
+    fs,
 RoxygenNote: 7.0.0
