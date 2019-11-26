@@ -8,7 +8,7 @@
 
 * The `ropenblas()` function documentation describes the details of changes that are made to the system.
 
-* Using the **git2r** package to get project content **xianyi/OpenBLAS **;
+* Using the **git2r** package to get project content **xianyi/OpenBLAS**;
 
 * The **fs** package for directory manipulation is now considered.
 
