@@ -142,9 +142,9 @@
 function on Windows, no settings will be made. Only a warning message will be issued informing you that the
 configuration can only be performed on Linux systems.</p>
 <p>The function will automatically download the latest version of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library. However, it is possible to
-inform olds versions to the single argument of <code>ropenblas()</code>. The <code>ropenblas()</code> function downloads, 
+inform olds versions to the single argument of <code>ropenblas()</code>. The <code>ropenblas()</code> function downloads,
 compiles and link <span style="R">R</span> to use of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library. Everything is done very simply, just loading the library and
-invok the function <code>ropenblas()</code>.</p> 
+invok the function <code>ropenblas()</code>.</p>
 <p>Considering using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library rather than the <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a> may bring extra optimizations for your code and improved
 computational performance for your simulations, since <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> is an optimized implementation of the library <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a>.</p>
 <p>You must install the following dependencies on your operating system (Linux):</p><ol>
@@ -152,17 +152,17 @@ computational performance for your simulations, since <a href='https://www.openb
 <li><p><strong>gcc</strong>;</p></li>
 <li><p><strong>gcc-fortran</strong>.</p></li>
 </ol><p>Your linux operating system may already be configured to use the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library. Therefore, most likely <span style="R">R</span> will already be linked to this library. To find out if the <span style="R">R</span> language is using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library,
- at <span style="R">R</span>, do:</p> 
+ at <span style="R">R</span>, do:</p>
 <p><code>extSoftVersion()["BLAS"]</code></p>
 <p>If <span style="R">R</span> is using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library, something like <code>/any_directory/libopenblas.so</code> should be returned. Therefore, there should be the name openblas in the <strong>s</strong>hared <strong>o</strong>bject returned (file extension <strong>.so</strong>).</p>
 <p>If the <code>ropenblas()</code> function can identify that the <span style="R">R</span> language is using the version of <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> you wish to configure, a warning message will be returned asking if you really would like to proceed with the
  configuration again.</p>
 <p>The <code>ropenblas()</code> function will download the desired version of the library <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a>, compile and install the library in the <code>/opt</code> directory of your operational system. If the directory does not exist, it will
  be created so that the installation can be completed. Subsequently, files from the version of <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a> used in <span style="R">R</span> will be symbolically linked to the shared object files of the library version <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> compiled and installed in <code>/opt</code>.</p>
-<p>You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system.</p>
+<p>You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system. Other details you may also find <a href='https://prdm0.github.io/ropenblas/index.html'><strong>here</strong></a>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>You do not have to in every section of <span style="R">R</span> make use of the <code>ropenblas()</code> function. Once the function is used, <span style="R">R</span> 
+    <p>You do not have to in every section of <span style="R">R</span> make use of the <code>ropenblas()</code> function. Once the function is used, <span style="R">R</span>
 will always consider using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library in future sections.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
