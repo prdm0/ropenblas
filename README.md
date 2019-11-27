@@ -72,7 +72,7 @@ Some advantages of using the [**ropenblas**](https://prdm0.github.io/ropenblas/)
 
    - If your GNU/Linux distribution does not have updated versions of [**OpenBLAS**](https://www.openblas.net/), it matters little. The ropenblas package fetches the latest stable release of the [**OpenBLAS**](https://www.openblas.net/) library development account on GitHub;
 
-   - You do not need to know Linux well. In some distributions, it may not be so simple for a less experienced user to compile and link the library to the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https: //www.r-project.org/) language;
+   - You do not need to know Linux well. In some distributions, it may not be so simple for a less experienced user to compile and link the library to the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https://www.r-project.org/) language;
 
    - It is much easier to direct a person to link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) saying "run `ropenblas()` within [**R**](https://www.r-project.org/)" than asking that person to verify that an unoptimized version of [**BLAS**](http://www.netlib.org/blas/) installed on the system. Then you have to guide the removal of the unoptimized version of [**BLAS**](http://www.netlib.org/blas/) and guide it to the installation of the library [**OpenBLAS**](https://www.openblas.net/) through the most diverse procedures depending on the GNU/Linux distribution used;
 
