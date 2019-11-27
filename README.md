@@ -65,9 +65,15 @@ You must be the operating system administrator to use this library. Therefore, d
 Some advantages of using the [**ropenblas**](https://prdm0.github.io/ropenblas/) library:
 
    - Everything is done within the [**R**](https://www.r-project.org/) language;
-   
-   - The procedure will be the same for any linux distribution;
-   
-   - [**OpenBLAS**](https://www.openblas.net/) will be compiled and you choose which build version to link to [**R**](https://www.r-project.org/);
-   
-   - You will not need to know linux well. In some distributions it may not be as simple for a less experienced user to compile the [**OpenBLAS**](https://www.openblas.net/) library and link with [**R**](https://www.r-project.org/).
+
+   - The procedure will be the same for any Linux distribution;
+
+   - The [**OpenBLAS**](https://www.openblas.net/) library will be compiled and you will choose which build version to bind to [**R**](https://www.r-project.org/), regardless of your Linux distribution;
+
+   - If your GNU/Linux distribution does not have updated versions of [**OpenBLAS**](https://www.openblas.net/), it matters little. The ropenblas package fetches the latest stable release of the [**OpenBLAS**](https://www.openblas.net/) library development account GitHub;
+
+   - You do not need to know Linux well. In some distributions, it may not be as simple for a less experienced user to compile the [**OpenBLAS**](https://www.openblas.net/) library and link with [**R**](https://www.r-project.org/);
+
+   - It is much easier to direct a person to link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) and say "run ropenblas() within [**R**](https://www.r-project.org/)" than to have them check for any unoptimized [**BLAS**](http://www.netlib.org/blas/) versions in the system and ask for come remove and then be installing the [**OpenBLAS**](https://www.openblas.net/) library by the most diverse procedures, depending on the GNU/Linux distribution used;
+
+   - As stated earlier, the procedure works for any Linux. This includes on Android. If you ROOT your smartphone and have [**R**](https://www.r-project.org/) installed via Termux with the necessary dependencies, you will be able to compile and link [**OpenBLAS**](https://www.openblas.net/) [**R**](https://www.r-project.org/). via ropenblas.

@@ -126,9 +126,12 @@ ropenblas(x = "0.3.7")</a></code></pre>
 <p>Some advantages of using the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> library:</p>
 <ul>
 <li><p>Everything is done within the <a href="https://www.r-project.org/"><strong>R</strong></a> language;</p></li>
-<li><p>The procedure will be the same for any linux distribution;</p></li>
-<li><p><a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> will be compiled and you choose which build version to link to <a href="https://www.r-project.org/"><strong>R</strong></a>;</p></li>
-<li><p>You will not need to know linux well. In some distributions it may not be as simple for a less experienced user to compile the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and link with <a href="https://www.r-project.org/"><strong>R</strong></a>.</p></li>
+<li><p>The procedure will be the same for any Linux distribution;</p></li>
+<li><p>The <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library will be compiled and you will choose which build version to bind to <a href="https://www.r-project.org/"><strong>R</strong></a>, regardless of your Linux distribution;</p></li>
+<li><p>If your GNU/Linux distribution does not have updated versions of <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a>, it matters little. The ropenblas package fetches the latest stable release of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library development account GitHub;</p></li>
+<li><p>You do not need to know Linux well. In some distributions, it may not be as simple for a less experienced user to compile the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and link with <a href="https://www.r-project.org/"><strong>R</strong></a>;</p></li>
+<li><p>It is much easier to direct a person to link <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with <a href="https://www.r-project.org/"><strong>R</strong></a> and say “run ropenblas() within <a href="https://www.r-project.org/"><strong>R</strong></a>” than to have them check for any unoptimized <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> versions in the system and ask for come remove and then be installing the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library by the most diverse procedures, depending on the GNU/Linux distribution used;</p></li>
+<li><p>As stated earlier, the procedure works for any Linux. This includes on Android. If you ROOT your smartphone and have <a href="https://www.r-project.org/"><strong>R</strong></a> installed via Termux with the necessary dependencies, you will be able to compile and link <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> <a href="https://www.r-project.org/"><strong>R</strong></a>. via ropenblas.</p></li>
 </ul>
 </div>
 </div>
