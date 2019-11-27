@@ -201,7 +201,7 @@ ropenblas <- function(x = "0.3.7") {
     } else {
       answer <-
         glue(
-          "Version {substr(download$version, 2, nchar(download$version))} is newer. Do you want to install? (yes/no): "
+          "Version {substr(download$version, 2, nchar(download$version))} is the newer. Do you want to install? (yes/no): "
         ) %>%
         readline %>%
         tolower
