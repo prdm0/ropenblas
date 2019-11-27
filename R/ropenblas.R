@@ -102,6 +102,11 @@ modern_openblas <- function(x) {
   x > version_sistem
 }
 
+check_ping <- function(){
+  check <- "ping -c3 google.com" %>% 
+    system(ignore.stderr = TRUE)
+  if (check == 1L) stop("Check your internet connection.")
+}
 
 #' @title Download, Compile and Link OpenBLAS Library with \R
 #' @author Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})
@@ -154,6 +159,8 @@ modern_openblas <- function(x) {
 ropenblas <- function(x = "0.3.7") {
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
+  
+  check_ping()
   
   if (!modern_openblas(x)) {
     cat(glue(
