@@ -102,10 +102,20 @@ modern_openblas <- function(x) {
   x > version_sistem
 }
 
-check_ping <- function(){
-  check <- "ping -c3 google.com" %>% 
-    system(ignore.stderr = TRUE)
-  if (check == 1L) stop("Check your internet connection.")
+check_ping <- function() {
+  nsystem <-
+    function(...)
+      tryCatch(
+        system(...),
+        error = function(e)
+          cat("You apparently have no internet connection."),
+        warning = function(w)
+          cat("You apparently have no internet connection.")
+      )
+  check <- "ping -c3 google.com" %>%
+    nsystem(ignore.stderr = F, intern = TRUE)
+  
+  if (length(check) == 1L) stop("You apparently have no internet connection.")
 }
 
 #' @title Download, Compile and Link OpenBLAS Library with \R
