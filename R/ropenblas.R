@@ -102,20 +102,20 @@ modern_openblas <- function(x) {
   x > version_sistem
 }
 
-check_ping <- function() {
+connection <- function() {
   nsystem <-
     function(...)
       tryCatch(
         system(...),
         error = function(e)
-          cat("You apparently have no internet connection."),
+          cat("You apparently have no internet connection.\n"),
         warning = function(w)
-          cat("You apparently have no internet connection.")
+          cat("You apparently have no internet connection.\n")
       )
   check <- "ping -c3 google.com" %>%
     nsystem(ignore.stderr = F, intern = TRUE)
   
-  if (length(check) == 1L) stop("You apparently have no internet connection.")
+  ifelse (!is.numeric(check) && !is.null(check), TRUE, FALSE)
 }
 
 #' @title Download, Compile and Link OpenBLAS Library with \R
@@ -170,7 +170,7 @@ ropenblas <- function(x = "0.3.7") {
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
-  check_ping()
+  if (!connection()) stop("You apparently have no internet connection\n")
   
   if (!modern_openblas(x)) {
     cat(glue(
