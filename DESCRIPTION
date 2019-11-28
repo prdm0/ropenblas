@@ -1,6 +1,6 @@
 Package: ropenblas
 Type: Package
-Title: Download, Compile and Link OpenBLAS Library with R
+Title: Download, Compile and Link 'OpenBLAS' Library with R
 Version: 0.1.0
 Authors@R: 
     person(given = "Pedro Rafael",
@@ -8,9 +8,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "pedro.rafael.marinho@gmail.com")
 Maintainer: Pedro Rafael D. Marinho <pedro.rafael.marinho@gmail.com>
-Description: This package designed to facilitate the linking of the library OpenBLAS with the language R. The package, which works only for Linux systems, will automatically download the latest source code from the OpenBLAS library and compile the code. The package will automatically bind the language R to use the OpenBLAS library. Everything will be done automatically regardless of the Linux distribution you are using.
+Description: The 'ropenblas' package (<https://prdm0.github.io/ropenblas/>) is useful for users of any 'GNU/Linux' distribution. It will be possible to download, compile and link the 'OpenBLAS' library (<https://www.openblas.net/>) with the \R language, always by the same procedure, regardless of the 'GNU/Linux' distribution used. With the 'ropenblas' package it is possible to download, compile and link the latest version of the 'OpenBLAS' library (<https://www.openblas.net/>) even the repositories of the 'GNU/Linux' distribution used do not include the latest versions of 'OpenBLAS' (<https://www.openblas.net/>). If of interest, older versions of the 'OpenBLAS' library (<https://www.openblas.net/>) may be considered. Linking \R with an optimized version of 'BLAS' (<http://www.netlib.org/blas/>) may improve the computational performance of \R code. The 'OpenBLAS' library (<https://www.openblas.net/>) is an optimized implementation of 'BLAS' (<http://www.netlib.org/blas/>) that can be easily linked to \R with the 'ropenblas' package.    
 URL: (GitHub Project) https://github.com/prdm0/ropenblas
 BugReports: https://github.com/prdm0/ropenblas/issues
+SystemRequirements: make, gcc compiler suite (C and Fortran)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

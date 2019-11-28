@@ -1,6 +1,6 @@
 # ropenblas 0.1.0
 
-* Maintenance release.
+* Maintenance release;
 
 * General documentation improvements;
 
