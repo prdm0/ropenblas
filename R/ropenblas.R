@@ -134,7 +134,7 @@ connection <- function() {
 #' computational performance for your simulations, since \href{https://www.openblas.net/}{\strong{OpenBLAS}} is an optimized implementation of the library \href{http://www.netlib.org/blas/}{\strong{BLAS}}.
 #' @note You do not have to in every section of \R make use of the \code{ropenblas()} function. Once the function is used, \R
 #' will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sections.
-#' @param x \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = 0.3.7}.
+#' @param x \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = NULL}.
 #' @details You must install the following dependencies on your operating system (Linux):
 #' \enumerate{
 #'    \item \strong{make};
@@ -166,20 +166,26 @@ connection <- function() {
 #' @examples
 #' # ropenblas()
 #' @export
-ropenblas <- function(x = "0.3.7") {
+ropenblas <- function(x = NULL) {
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
-  if (!connection()) stop("You apparently have no internet connection\n")
+  if (!connection())
+    stop("You apparently have no internet connection\n")
   
-  if (!modern_openblas(x)) {
-    cat(glue(
-      "R is already linked to an OpenBLAS version greater than or equal to {x}."
-    ))
+  download <- download_openblas(x)
+  repo <- download$repo_openblas
+  diretory_tmp <- download$path_openblas
+  
+  if (!modern_openblas(x) && !is.null(x)) {
     cat("\n")
     
     answer <-
-      readline(prompt = "Do you still want to compile and link again (yes/no)?: ") %>% tolower
+      readline(
+        prompt = glue(
+          "Newer version of OpenBLAS is already used (version {substr(download$version, 2, 6)}). Do you want to proceed? (yes/no)?: "
+        )
+      ) %>% tolower
     
     if (answer == "no" ||
         answer == "n")
@@ -187,10 +193,30 @@ ropenblas <- function(x = "0.3.7") {
     
     validate_answer(answer)
     
+    checkout(repo, glue("v{x}"))
+    
+  } else if (is.null(x)) {
+    answer <-
+      glue(
+        "Newer version of OpenBLAS is already installed ({substr(download$version, 2L, nchar(download$version))}). Do you want to proceed? (yes/no): "
+      ) %>%
+      readline %>%
+      tolower
+    
+    validate_answer(answer)
+    
+    if (answer == "no" || answer == "n") {
+      stop("Ok. Procedure interrupted.")
+    }
+    
+    checkout(repo, download$version)
+    
+  } else {
+    checkout(repo, download$version)
   }
   
   cat(
-    "You must be the system administrator. You must install the following dependencies on your operating system (Linux):
+    "\n\nYou must be the system administrator. You must install the following dependencies on your operating system (Linux):
 
       1 - make: GNU make utility to maintain groups of programs;
       2 - gcc: The GNU Compiler Collection - C and C++ frontends;
@@ -206,48 +232,6 @@ ropenblas <- function(x = "0.3.7") {
   
   if (!exist_opt())
     mkdir_opt()
-  
-  download <- download_openblas(x)
-  repo <- download$repo_openblas
-  
-  diretory_tmp <- download$path_openblas
-  
-  if (download$exist_x) {
-    if (!download$new) {
-      checkout(repo, download$version)
-    } else {
-      answer <-
-        glue(
-          "Version {substr(download$version, 2, nchar(download$version))} is the newer. Do you want to install? (yes/no): "
-        ) %>%
-        readline %>%
-        tolower
-      
-      validate_answer(answer)
-      
-      if (answer %in% c("y", "yes")) {
-        checkout(repo, download$version)
-      } else {
-        checkout(repo, glue("v{x}"))
-      }
-    }
-  } else {
-    answer <-
-      glue(
-        "Version {substr(download$version, 2, nchar(download$version))} is newer. Do you want to install? (yes/no): "
-      ) %>%
-      readline %>%
-      tolower
-    
-    validate_answer(answer)
-    
-    if (answer == "no" || answer == "n") {
-      stop("Ok. Procedure interrupted.")
-    } else {
-      checkout(repo, download$version)
-    }
-    
-  }
   
   glue("cd {diretory_tmp} && make -j $(nproc)") %>% system
   
