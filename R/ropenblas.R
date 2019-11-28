@@ -74,7 +74,21 @@ dir_blas <- function() {
            unlist,-1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
-  list(file_blas = file_blas, path_blas = path_blas)
+  if (str_detect(file_blas, "openblas")) {
+    use_openblas <- TRUE
+    version_openblas <-
+      str_extract(file_blas, pattern = "[0-9]+.[0-9]+.[0-9]")
+  } else {
+    use_openblas <- FALSE
+    version_openblas <- NA
+  }
+  
+  list(
+    file_blas = file_blas,
+    path_blas = path_blas,
+    version_openblas = version_openblas,
+    use_openblas = use_openblas
+  )
 }
 
 exist <- function(x = "gcc") {
@@ -160,7 +174,7 @@ connection <- function() {
 #' @importFrom magrittr "%>%"
 #' @importFrom rstudioapi isAvailable restartSession
 #' @importFrom utils download.file head sessionInfo tail
-#' @importFrom stringr str_detect
+#' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
 #' @examples
@@ -177,42 +191,89 @@ ropenblas <- function(x = NULL) {
   repo <- download$repo_openblas
   diretory_tmp <- download$path_openblas
   
-  if (!modern_openblas(x) && !is.null(x)) {
-    cat("\n")
-    
-    answer <-
-      readline(
-        prompt = glue(
-          "Newer version of OpenBLAS is already used (version {substr(download$version, 2, 6)}). Do you want to proceed? (yes/no)?: "
-        )
-      ) %>% tolower
-    
-    if (answer == "no" ||
-        answer == "n")
-      stop("Ok. Procedure interrupted.")
-    
-    validate_answer(answer)
-    
-    checkout(repo, glue("v{x}"))
-    
-  } else if (is.null(x)) {
-    answer <-
+  if (!is.null(x) && glue("v{x}") > download$version)
+    stop(
       glue(
-        "Newer version of OpenBLAS is already installed ({substr(download$version, 2L, nchar(download$version))}). Do you want to proceed? (yes/no): "
-      ) %>%
-      readline %>%
-      tolower
-    
-    validate_answer(answer)
-    
-    if (answer == "no" || answer == "n") {
-      stop("Ok. Procedure interrupted.")
+        "Version {x} does not exist. The latest version of OpenBLAS is {substr(download$version, 2L, nchar(download$version))}."
+      )
+    )
+  
+  
+  if (!is.null(x)) {
+    if (dir_blas()$use_openblas) {
+      if (glue("v{dir_blas()$version_openblas}") < download$version) {
+        cat("\n")
+        if (glue("v{x}") != download$version) {
+          answer <-
+            readline(
+              prompt = glue(
+                "The latest version of OpenBLAS is {substr(download$version, 2L, nchar(download$version))}. Do you want to install this version? (yes/no): "
+              )
+            ) %>% tolower
+          
+          validate_answer(answer)
+          
+        } else {
+          answer <- "y"
+        }
+        
+        if (answer %in% c("y", "yes")) {
+          checkout(repo, download$version)
+        } else {
+          checkout(repo, glue("v{x}"))
+        }
+      } else {
+        if (glue("v{dir_blas()$version_openblas}") == download$version) {
+          answer <-
+            readline(
+              prompt = glue(
+                "The latest version of OpenBLAS is already in use. Do you want to compile and link again? (yes/no): "
+              )
+            ) %>% tolower
+          
+          validate_answer(answer)
+          
+          if (answer %in% c("y", "yes")) {
+            checkout(repo, download$version)
+          } else {
+            stop("Ok. Procedure interrupted.")
+          }
+        } else {
+          stop(
+            glue(
+              "There is no OpenBLAS version {x}. The latest version is {download$version}"
+            )
+          )
+        }
+      }
+    } else {
+      checkout(repo, download$version)
+    }
+  } else {
+    if (dir_blas()$use_openblas) {
+      if (glue("v{dir_blas()$version}") < download$version) {
+        checkout(repo, download$version)
+      } else {
+        answer <-
+          readline(
+            prompt = glue(
+              "The latest version of OpenBLAS is already in use. Do you want to compile and link again? (yes/no): "
+            )
+          ) %>% tolower
+        
+        validate_answer(answer)
+        
+        if (answer %in% c("n", "no")) {
+          stop("Ok. Procedure interrupted.")
+        } else {
+          checkout(repo, download$version)
+        }
+        
+      }
+    } else {
+      checkout(repo, download$version)
     }
     
-    checkout(repo, download$version)
-    
-  } else {
-    checkout(repo, download$version)
   }
   
   cat(

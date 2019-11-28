@@ -4,10 +4,10 @@
 \alias{ropenblas}
 \title{Download, Compile and Link OpenBLAS Library with \R}
 \usage{
-ropenblas(x = "0.3.7")
+ropenblas(x = NULL)
 }
 \arguments{
-\item{x}{\href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = 0.3.7}.}
+\item{x}{\href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = NULL}.}
 }
 \description{
 Link \R with an optimized version of the \href{http://www.netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
