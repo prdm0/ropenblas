@@ -77,7 +77,7 @@ dir_blas <- function() {
   if (str_detect(file_blas, "openblas")) {
     use_openblas <- TRUE
     version_openblas <-
-      str_extract(file_blas, pattern = "[0-9]+.[0-9]+.[0-9]")
+      str_extract(file_blas, pattern = "[0-9]+.[0-9]+.[0-9]+")
   } else {
     use_openblas <- FALSE
     version_openblas <- NA
@@ -241,13 +241,29 @@ ropenblas <- function(x = NULL) {
         } else {
           stop(
             glue(
-              "There is no OpenBLAS version {x}. The latest version is {download$version}"
+              "There is no OpenBLAS version {x}. The latest version is {substr(download$version, 2L, nchar(download$version))}."
             )
           )
         }
       }
     } else {
-      checkout(repo, download$version)
+      if (glue("v{x}") < download$version) {
+        answer <-
+          readline(
+            prompt = glue("The latest version is {substr(download$version, 2L, nchar(download$version))}. Want to consider the latest version? (yes/no): "))
+        
+        validate_answer(answer)
+        
+        if (answer %in% c("y", "yes")) {
+          checkout(repo, download$version)
+        } else {
+          checkout(repo, glue("v{x}"))
+        }
+        
+      } else {
+        checkout(repo, glue("v{x}"))
+      }
+      
     }
   } else {
     if (dir_blas()$use_openblas) {
