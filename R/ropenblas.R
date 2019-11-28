@@ -178,7 +178,7 @@ connection <- function() {
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
 #' @examples
-#' # ropenblas()
+#' \donttest{ropenblas()}
 #' @export
 ropenblas <- function(x = NULL) {
   if (Sys.info()[[1]] != "Linux")
