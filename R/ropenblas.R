@@ -236,7 +236,7 @@ ropenblas <- function(x = NULL) {
           if (answer %in% c("y", "yes")) {
             checkout(repo, download$version)
           } else {
-            stop("Ok. Procedure interrupted.")
+            return(warning("Ok, procedure interrupted!"))
           }
         } else {
           stop(
@@ -280,7 +280,7 @@ ropenblas <- function(x = NULL) {
         validate_answer(answer)
         
         if (answer %in% c("n", "no")) {
-          stop("Ok. Procedure interrupted.")
+          return(warning("Ok, procedure interrupted!"))
         } else {
           checkout(repo, download$version)
         }
