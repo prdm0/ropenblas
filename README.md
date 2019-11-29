@@ -1,4 +1,4 @@
-# ropenblas package
+# ropenblas: Download, Compile and Link OpenBLAS Library with R
 
 <img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right" />
 
