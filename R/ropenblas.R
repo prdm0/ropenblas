@@ -57,12 +57,19 @@ download_openblas <- function(x = NULL) {
 }
 
 download_r <- function(x) {
-  diretory_tmp <- tempdir()
+  if (file_exists("/tmp/r"))
+    file_delete("/tmp/r")
+  
+  path_r <- dir_create(path = "/tmp/r")
+  
   url <-
     glue("https://cloud.r-project.org/src/base/R-{substr(x, 1, 1)}/R-{x}.tar.gz")
   download.file(url = url,
-                destfile = glue("{diretory_tmp}/R-{x}.tar.gz"))
-  diretory_tmp
+                destfile = glue("{path_r}/R-{x}.tar.gz"))
+  
+  glue("{path_r}/R-{x}.tar.gz") %>% untar(exdir = glue("{path_r}"))
+
+  glue("{path_r}/R-{x}")
 }
 
 dir_blas <- function() {
