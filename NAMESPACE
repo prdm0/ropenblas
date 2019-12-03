@@ -2,6 +2,7 @@
 
 export(rcompiler)
 export(ropenblas)
+importFrom(RCurl,getURL)
 importFrom(fs,dir_create)
 importFrom(fs,file_delete)
 importFrom(fs,file_exists)

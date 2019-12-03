@@ -56,22 +56,6 @@ download_openblas <- function(x = NULL) {
   }
 }
 
-download_r <- function(x) {
-  if (file_exists("/tmp/r"))
-    file_delete("/tmp/r")
-  
-  path_r <- dir_create(path = "/tmp/r")
-  
-  url <-
-    glue("https://cloud.r-project.org/src/base/R-{substr(x, 1, 1)}/R-{x}.tar.gz")
-  download.file(url = url,
-                destfile = glue("{path_r}/R-{x}.tar.gz"))
-  
-  glue("{path_r}/R-{x}.tar.gz") %>% untar(exdir = glue("{path_r}"))
-  
-  glue("{path_r}/R-{x}")
-}
-
 dir_blas <- function() {
   file_blas <- sessionInfo()$BLAS %>% strsplit(split = "/") %>%
     unlist %>% tail(n = 1L)
@@ -375,10 +359,36 @@ ropenblas <- function(x = NULL) {
   
 }
 
+last_version_r <- function(major = 3L) {
+  vec_versions <-
+    stringr::str_extract_all(getURL(glue(
+      "https://cloud.r-project.org/src/base/R-{major}/"
+    )),
+    "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist
+  vec_versions[length(vec_versions)]
+}
+
+download_r <- function(x) {
+  if (file_exists("/tmp/r"))
+    file_delete("/tmp/r")
+  
+  path_r <- dir_create(path = "/tmp/r")
+  
+  url <-
+    glue("https://cloud.r-project.org/src/base/R-{substr(x, 1, 1)}/R-{x}.tar.gz")
+  download.file(url = url,
+                destfile = glue("{path_r}/R-{x}.tar.gz"))
+  
+  glue("{path_r}/R-{x}.tar.gz") %>% untar(exdir = glue("{path_r}"))
+  
+  glue("{path_r}/R-{x}")
+}
+
 #' @title Compile a version of \R on GNU/Linux systems
 #' @description This function is responsible for compiling a version of the R language.
+#' @importFrom RCurl getURL
 #' @export
-rcompiler <- function(x, version_openblas = NULL) {
+rcompiler <- function(x = NULL, version_openblas = NULL) {
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
@@ -391,7 +401,7 @@ rcompiler <- function(x, version_openblas = NULL) {
     )
   if (!exist("make"))
     stop("GNU Make not installed. Install GNU Make on your operating system.")
-  
+
   path_r <- download_r(x)
   
   if (dir_blas()$use_openblas) {
@@ -432,15 +442,7 @@ rcompiler <- function(x, version_openblas = NULL) {
   
   cat("Done!\n")
   
-  .refresh_terminal <- function() {
-    system("R")
-    q("no")
-  }
-  
-  if (rstudioapi::isAvailable()) {
-    tmp <- rstudioapi::restartSession() # .rs.restartR()
-  } else {
-    .refresh_terminal()
-  }
+  system("R")
+  q("no")
   
 }
