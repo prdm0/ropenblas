@@ -68,7 +68,7 @@ download_r <- function(x) {
                 destfile = glue("{path_r}/R-{x}.tar.gz"))
   
   glue("{path_r}/R-{x}.tar.gz") %>% untar(exdir = glue("{path_r}"))
-
+  
   glue("{path_r}/R-{x}")
 }
 
@@ -78,7 +78,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist,-1L) %>%
+           unlist, -1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -139,22 +139,22 @@ connection <- function() {
   ifelse (!is.numeric(check) && !is.null(check), TRUE, FALSE)
 }
 
-loop_key <- function(x, attempt = 3L, sudo = TRUE) {
-  attempt <- 1L
-  key_true <- 1L
-  
+loop_root <- function(x, attempt = 3L, sudo = TRUE) {
   if (sudo) {
-    while (attempt <= attempt && key_true != 0L) {
+    i <- 1L
+    key_true <- 1L
+    
+    while (i <= attempt && key_true != 0L) {
       key_true <- glue("sudo -kS {x}") %>%
         system(input = getPass::getPass(
-          glue("Enter your ROOT OS password (attempt {attempt} of 3): ")
+          glue("Enter your ROOT OS password (attempt {i} of {attempt}): ")
         ),
         ignore.stderr = TRUE)
-      if (key_true != 0L && attempt == attempt)
+      if (key_true != 0L && attempt == i)
         stop(
           "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
         )
-      attempt <- attempt + 1L
+      i <- i + 1L
     }
   } else {
     glue("{x}") %>% system
@@ -279,7 +279,10 @@ ropenblas <- function(x = NULL) {
       if (glue("v{x}") < download$version) {
         answer <-
           readline(
-            prompt = glue("The latest version is {substr(download$version, 2L, nchar(download$version))}. Want to consider the latest version? (yes/no): "))
+            prompt = glue(
+              "The latest version is {substr(download$version, 2L, nchar(download$version))}. Want to consider the latest version? (yes/no): "
+            )
+          )
         
         validate_answer(answer)
         
@@ -325,14 +328,14 @@ ropenblas <- function(x = NULL) {
     "\n\nYou must be the system administrator. You must install the following dependencies on your operating system (Linux):
 
       1 - make: GNU make utility to maintain groups of programs;
-      2 - gcc: The GNU Compiler Collection - C and C++ frontends;
+      2 - gcc: The GNU Compiler Collection - C frontends;
       3 - gcc-fortran: The GNU Compiler Collection - Fortran frontends.
 
   "
   )
   
   if (!exist())
-    stop("gcc not installed. Install gcc (C/C++ and Fortran) on your operating system.")
+    stop("gcc not installed. Install gcc (C and Fortran) on your operating system.")
   if (!exist("make"))
     stop("make not installed. Install make on your operating system.")
   
@@ -345,42 +348,15 @@ ropenblas <- function(x = NULL) {
     diretory_tmp
   }) %>% setwd
   
-  attempt <- 1L
-  key_true <- 1L
-  while (attempt <= 3L && key_true != 0L) {
-    key_true <- glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>%
-      system(input = getPass::getPass(glue(
-        "Enter your ROOT OS password (attempt {attempt} of 3): "
-      )),
-      ignore.stderr = TRUE)
-    if (key_true != 0L && attempt == 3L)
-      stop(
-        "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
-      )
-    attempt <- attempt + 1L
-  }
+  glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>% 
+    loop_root
   
   setwd(dir_blas()$path)
   
   if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
-    attempt <- 1L
-    key_true <- 1L
-    while (attempt <= 3L && key_true != 0L) {
-      key_true <-
-        glue(
-          "sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-        ) %>%
-        system(input = getPass::getPass(
-          glue("Enter your ROOT OS password (attempt {attempt} of 3): ")
-        ),
-        ignore.stderr = TRUE)
-      cat("\n\n")
-      if (key_true != 0L && attempt == 3L)
-        stop(
-          "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
-        )
-      attempt <- attempt + 1L
-    }
+    glue(
+      "sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+    ) %>% loop_root
   }
   
   cat("Done!\n")
@@ -400,7 +376,6 @@ ropenblas <- function(x = NULL) {
 
 
 rcompiler <- function(x, version_openblas = NULL) {
-  
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
@@ -413,11 +388,13 @@ rcompiler <- function(x, version_openblas = NULL) {
     stop("make not installed. Install make on your operating system.")
   
   path_r <- download_r("3.6.1")
- 
+  
   if (dir_blas()$use_openblas) {
     setwd(path_r)
     glue("export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/") %>% system
-    glue("cd {path_r} && ./configure --prefix=/opt/R/{x} --enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas -L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\"") %>% 
+    glue(
+      "cd {path_r} && ./configure --prefix=/opt/R/{x} --enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas -L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\""
+    ) %>%
       system
     
     glue("make -j $(nproc)") %>% system
@@ -426,9 +403,9 @@ rcompiler <- function(x, version_openblas = NULL) {
     key_true <- 1L
     while (attempt <= 3L && key_true != 0L) {
       key_true <- glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
-        system(input = getPass::getPass(glue(
-          "Enter your ROOT OS password (attempt {attempt} of 3): "
-        )),
+        system(input = getPass::getPass(
+          glue("Enter your ROOT OS password (attempt {attempt} of 3): ")
+        ),
         ignore.stderr = TRUE)
       if (key_true != 0L && attempt == 3L)
         stop(
@@ -440,7 +417,9 @@ rcompiler <- function(x, version_openblas = NULL) {
     setwd(path_r)
     ropenblas(x = version_openblas)
     glue("export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/") %>% system
-    glue("cd {path_r} && ./configure --prefix=/opt/R/{x} --enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas -L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\"") %>% 
+    glue(
+      "cd {path_r} && ./configure --prefix=/opt/R/{x} --enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas -L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\""
+    ) %>%
       system
     
     glue("make -j $(nproc)") %>% system
@@ -449,9 +428,9 @@ rcompiler <- function(x, version_openblas = NULL) {
     key_true <- 1L
     while (attempt <= 3L && key_true != 0L) {
       key_true <- glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
-        system(input = getPass::getPass(glue(
-          "Enter your ROOT OS password (attempt {attempt} of 3): "
-        )),
+        system(input = getPass::getPass(
+          glue("Enter your ROOT OS password (attempt {attempt} of 3): ")
+        ),
         ignore.stderr = TRUE)
       if (key_true != 0L && attempt == 3L)
         stop(
@@ -464,7 +443,8 @@ rcompiler <- function(x, version_openblas = NULL) {
   attempt <- 1L
   key_true <- 1L
   while (attempt <= 3L && key_true != 0L) {
-    key_true <- glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
+    key_true <-
+      glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
       system(input = getPass::getPass(glue(
         "Enter your ROOT OS password (attempt {attempt} of 3): "
       )),
@@ -475,7 +455,7 @@ rcompiler <- function(x, version_openblas = NULL) {
       )
     attempt <- attempt + 1L
   }
-
+  
   cat("Done!\n")
   
   .refresh_terminal <- function() {
