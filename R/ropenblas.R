@@ -62,7 +62,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist, -1L) %>%
+           unlist,-1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -359,9 +359,16 @@ ropenblas <- function(x = NULL) {
   
 }
 
+#' @title Given the higher version, the function will return the latest stable version of the \R language.
+#' @param major Major release number of R language (eg. 1L, 2L, 3L, ...).
+#' @importFrom stringr str_extract_all
+#' @importFrom glue glue
+#' @importFrom RCurl getURL
+#' @importFrom magrittr "%>%"
+#' @export
 last_version_r <- function(major = 3L) {
   vec_versions <-
-    stringr::str_extract_all(getURL(glue(
+    stringr::str_extract_all(RCurl::getURL(glue(
       "https://cloud.r-project.org/src/base/R-{major}/"
     )),
     "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist
@@ -388,7 +395,8 @@ download_r <- function(x) {
 #' @description This function is responsible for compiling a version of the R language.
 #' @importFrom RCurl getURL
 #' @export
-rcompiler <- function(x = NULL, version_openblas = NULL) {
+rcompiler <- function(x = NULL,
+                      version_openblas = NULL) {
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
@@ -401,7 +409,7 @@ rcompiler <- function(x = NULL, version_openblas = NULL) {
     )
   if (!exist("make"))
     stop("GNU Make not installed. Install GNU Make on your operating system.")
-
+  
   path_r <- download_r(x)
   
   if (dir_blas()$use_openblas) {
@@ -409,7 +417,9 @@ rcompiler <- function(x = NULL, version_openblas = NULL) {
     glue("export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/") %>%
       system
     glue(
-      "cd {path_r} && ./configure --prefix=/opt/R/{x} --enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas -L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\""
+      "cd {path_r} && ./configure --prefix=/opt/R/{x} ",
+      "--enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas ",
+      "-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\""
     ) %>%
       system
     
@@ -425,7 +435,9 @@ rcompiler <- function(x = NULL, version_openblas = NULL) {
     glue("export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/") %>%
       system
     glue(
-      "cd {path_r} && ./configure --prefix=/opt/R/{x} --enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas -L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\""
+      "cd {path_r} && ./configure --prefix=/opt/R/{x} ",
+      "--enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas ",
+      "-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\""
     ) %>%
       system
     

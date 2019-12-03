@@ -4,7 +4,7 @@
 \alias{rcompiler}
 \title{Compile a version of \R on GNU/Linux systems}
 \usage{
-rcompiler(x, version_openblas = NULL)
+rcompiler(x = NULL, version_openblas = NULL)
 }
 \description{
 This function is responsible for compiling a version of the R language.
