@@ -29,6 +29,12 @@ Installing the [**ropenblas**](https://prdm0.github.io/ropenblas/) library is ea
 devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)
 ```
 
+or
+
+```
+install.packages("ropenblas")
+```
+
 ## Use
 
 Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.7** library to the [**R**](https://www.r-project.org/) language:
