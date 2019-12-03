@@ -410,6 +410,11 @@ rcompiler <- function(x = NULL,
   if (!exist("make"))
     stop("GNU Make not installed. Install GNU Make on your operating system.")
   
+  
+  if (is.null(x))
+    x <- last_version_r() %>%
+      substr(3L, nchar(last_version_r()))
+  
   path_r <- download_r(x)
   
   if (dir_blas()$use_openblas) {
@@ -453,8 +458,6 @@ rcompiler <- function(x = NULL,
     loop_root
   
   cat("Done!\n")
-  
-  system("R")
-  q("no")
+  cat(glue("In the next section of R, version {x} will be considered!"))
   
 }
