@@ -143,7 +143,6 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
   if (sudo) {
     i <- 1L
     key_true <- 1L
-    
     while (i <= attempt && key_true != 0L) {
       key_true <- glue("sudo -kS {x}") %>%
         system(input = getPass::getPass(
@@ -327,17 +326,17 @@ ropenblas <- function(x = NULL) {
   cat(
     "\n\nYou must be the system administrator. You must install the following dependencies on your operating system (Linux):
 
-      1 - make: GNU make utility to maintain groups of programs;
-      2 - gcc: The GNU Compiler Collection - C frontends;
-      3 - gcc-fortran: The GNU Compiler Collection - Fortran frontends.
+      1 - Make: GNU Make utility to maintain groups of programs;
+      2 - GNU GCC: The GNU Compiler Collection - C frontends;
+      3 - GNU GCC Fortran: The GNU Compiler Collection - Fortran frontends.
 
   "
   )
   
   if (!exist())
-    stop("gcc not installed. Install gcc (C and Fortran) on your operating system.")
+    stop("GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system.")
   if (!exist("make"))
-    stop("make not installed. Install make on your operating system.")
+    stop("GNU Make not installed. Install GNU Make on your operating system.")
   
   if (!exist_opt())
     mkdir_opt()
@@ -374,7 +373,6 @@ ropenblas <- function(x = NULL) {
   
 }
 
-
 rcompiler <- function(x, version_openblas = NULL) {
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
@@ -383,11 +381,11 @@ rcompiler <- function(x, version_openblas = NULL) {
     stop("You apparently have no internet connection\n")
   
   if (!exist())
-    stop("gcc not installed. Install gcc (C/C++ and Fortran) on your operating system.")
+    stop("GNU GCC Compiler not installed. Install GNU GCC Compiler (C and Fortran) on your operating system.")
   if (!exist("make"))
-    stop("make not installed. Install make on your operating system.")
+    stop("GNU Make not installed. Install GNU Make on your operating system.")
   
-  path_r <- download_r("3.6.1")
+  path_r <- download_r(x)
   
   if (dir_blas()$use_openblas) {
     setwd(path_r)
