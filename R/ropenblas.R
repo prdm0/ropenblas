@@ -189,6 +189,7 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
+#' @seealso [rcompiler()], [last_version_r()]
 #' @examples
 #' \donttest{ropenblas()}
 #' @export
@@ -365,6 +366,7 @@ ropenblas <- function(x = NULL) {
 #' @importFrom glue glue
 #' @importFrom RCurl getURL
 #' @importFrom magrittr "%>%"
+#' @seealso [ropenblas()], [rcompiler()]
 #' @export
 last_version_r <- function(major = 3L) {
   vec_versions <-
@@ -372,7 +374,7 @@ last_version_r <- function(major = 3L) {
       "https://cloud.r-project.org/src/base/R-{major}/"
     )),
     "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist
-  vec_versions[length(vec_versions)]
+  list(last_version = vec_versions[length(vec_versions)], versions = vec_versions)
 }
 
 download_r <- function(x) {
