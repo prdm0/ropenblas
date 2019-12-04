@@ -13,7 +13,9 @@ will consider the major release number.}
 \description{
 Given the higher version, the function will return the latest stable version of the \R language.
 }
+\examples{
+\donttest{last_version_r()}
+}
 \seealso{
 [ropenblas()], [rcompiler()]
-\donttest{last_version_r()}
 }

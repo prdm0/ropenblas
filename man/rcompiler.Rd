@@ -10,11 +10,14 @@ rcompiler(x = NULL, version_openblas = NULL)
 \item{x}{Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
 language. For example, \code{x = "3.6.2"} will compile and link \strong{R-3.6.2} version  as the major version on your system.}
 
-\item{version_openblas}{'OpenBLAS' library version that will be linked to the \R code that will be compiled. By default, if
-\code{version_openblas = NULL}, the latest stable version of the 'OpenBLAS' library will be linked.}
+\item{version_openblas}{\href{https://www.openblas.net/}{\strong{OpenBLAS}} library version that will be linked to the \R code that will be compiled. By default, if
+\code{version_openblas = NULL}, the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library will be linked.}
 }
 \description{
 This function is responsible for compiling a version of the \R language.
+}
+\examples{
+\donttest{rcompiler()}
 }
 \seealso{
 [ropenblas()], [last_version_r()]
