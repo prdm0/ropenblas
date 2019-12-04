@@ -16,6 +16,21 @@ language. For example, \code{x = "3.6.2"} will compile and link \strong{R-3.6.2}
 \description{
 This function is responsible for compiling a version of the \R language.
 }
+\details{
+The \code{rcompiler()} function will compile the \R language and make the \strong{R} and \strong{Rscript} binaries available 
+in the \code{/usr/bin} directory. Therefore, the version compiled by \code{rcompiler()} will be available to all users of the Linux system.
+The \code{rcompiler()} function will work on any GNU/Linux distribution, as long as your distribution has the following dependencies:
+\enumerate{
+   \item \strong{GNU Make};
+   \item \strong{GNU GCC Compiler (C and Fortran)}.
+}
+\strong{Note}: If the above dependencies are not installed, the function will automatically identify.
+In the \code{/opt/R} directory subdirectories will be created with the compiled version numbering of \R. For example, when running
+\code{rcompiler(x = "version_r")}, at the end of the language compilation process, the \code{/opt/R/version_r} directory will be created.
+The function will link the \strong{R} and \strong{Rscript} binaries from the current section of \R to the respective newly compiled
+binaries found in \code{/opt/R/version_r/lib64/R/bin}, where, for example, \code{version_r} could be some version of \R like \code{"3.6.2"}
+or any other version. If \code{version_r = NULL}, the latest stable version of \R will be compiled.
+}
 \examples{
 \donttest{rcompiler()}
 }

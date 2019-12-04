@@ -122,17 +122,53 @@
     </div>
 
     <div class="ref-description">
-    <p>This function is responsible for compiling a version of the R language.</p>
+    <p>This function is responsible for compiling a version of the <span style="R">R</span> language.</p>
     </div>
 
     <pre class="usage"><span class='fu'>rcompiler</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>version_openblas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Version of <span style="R">R</span> you want to compile. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <span style="R">R</span>
+language. For example, <code>x = "3.6.2"</code> will compile and link <strong>R-3.6.2</strong> version  as the major version on your system.</p></td>
+    </tr>
+    <tr>
+      <th>version_openblas</th>
+      <td><p><a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library version that will be linked to the <span style="R">R</span> code that will be compiled. By default, if
+<code>version_openblas = NULL</code>, the latest stable version of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library will be linked.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>The <code>rcompiler()</code> function will compile the <span style="R">R</span> language and make the <strong>R</strong> and <strong>Rscript</strong> binaries available 
+in the <code>/usr/bin</code> directory. Therefore, the version compiled by <code>rcompiler()</code> will be available to all users of the Linux system.
+The <code>rcompiler()</code> function will work on any GNU/Linux distribution, as long as your distribution has the following dependencies:</p><ol>
+<li><p><strong>GNU Make</strong>;</p></li>
+<li><p><strong>GNU GCC Compiler (C and Fortran)</strong>.</p></li>
+</ol><p><strong>Note</strong>: If the above dependencies are not installed, the function will automatically identify.
+In the <code>/opt/R</code> directory subdirectories will be created with the compiled version numbering of <span style="R">R</span>. For example, when running
+<code>rcompiler(x = "version_r")</code>, at the end of the language compilation process, the <code>/opt/R/version_r</code> directory will be created.
+The function will link the <strong>R</strong> and <strong>Rscript</strong> binaries from the current section of <span style="R">R</span> to the respective newly compiled
+binaries found in <code>/opt/R/version_r/lib64/R/bin</code>, where, for example, <code>version_r</code> could be some version of <span style="R">R</span> like <code>"3.6.2"</code>
+or any other version. If <code>version_r = NULL</code>, the latest stable version of <span style="R">R</span> will be compiled.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>[ropenblas()], [last_version_r()]</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>rcompiler</span>()</div><div class='output co'>#&gt; This version of R has already been compiled and is found in /opt/R/3.6.1. Do you want to compile and link again? (yes/no): </div><div class='output co'>#&gt; <span class='error'>Error in validate_answer(answer): Invalid option. Procedure interrupted.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

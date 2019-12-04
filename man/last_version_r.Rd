@@ -7,7 +7,7 @@
 last_version_r(major = NULL)
 }
 \arguments{
-\item{major}{Major release number of \R language (eg. 1L, 2L, 3L, ...). If \code{major = NULL}, the function
+\item{major}{Major release number of \R language (e.g. 1L, 2L, 3L, ...). If \code{major = NULL}, the function
 will consider the major release number.}
 }
 \description{

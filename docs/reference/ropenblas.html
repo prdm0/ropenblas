@@ -148,9 +148,8 @@ invok the function <code>ropenblas()</code>.</p>
 <p>Considering using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library rather than the <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a> may bring extra optimizations for your code and improved
 computational performance for your simulations, since <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> is an optimized implementation of the library <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a>.</p>
 <p>You must install the following dependencies on your operating system (Linux):</p><ol>
-<li><p><strong>make</strong>;</p></li>
-<li><p><strong>gcc</strong>;</p></li>
-<li><p><strong>gcc-fortran</strong>.</p></li>
+<li><p><strong>GNU Make</strong>;</p></li>
+<li><p><strong>GNU GCC Compiler (C and Fortran)</strong>.</p></li>
 </ol><p>Your linux operating system may already be configured to use the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library. Therefore, most likely <span style="R">R</span> will already be linked to this library. To find out if the <span style="R">R</span> language is using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library,
  at <span style="R">R</span>, do:</p>
 <p><code>extSoftVersion()["BLAS"]</code></p>
@@ -164,20 +163,23 @@ computational performance for your simulations, since <a href='https://www.openb
 
     <p>You do not have to in every section of <span style="R">R</span> make use of the <code>ropenblas()</code> function. Once the function is used, <span style="R">R</span>
 will always consider using the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library in future sections.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>[rcompiler()], [last_version_r()]</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>ropenblas</span>()</div><div class='output co'>#&gt; cloning into '/tmp/openblas'...
-#&gt; Receiving objects:   1% (386/38502),  200 kb
-#&gt; Receiving objects:  11% (4236/38502), 1422 kb
-#&gt; Receiving objects:  21% (8086/38502), 5998 kb
-#&gt; Receiving objects:  31% (11936/38502), 7261 kb
-#&gt; Receiving objects:  41% (15786/38502), 11175 kb
-#&gt; Receiving objects:  51% (19637/38502), 13901 kb
-#&gt; Receiving objects:  61% (23487/38502), 18092 kb
-#&gt; Receiving objects:  71% (27337/38502), 19788 kb
-#&gt; Receiving objects:  81% (31187/38502), 22156 kb
-#&gt; Receiving objects:  91% (35037/38502), 23851 kb
-#&gt; Receiving objects: 100% (38502/38502), 24855 kb, done.
+#&gt; Receiving objects:   1% (386/38521),  201 kb
+#&gt; Receiving objects:  11% (4238/38521), 1424 kb
+#&gt; Receiving objects:  21% (8090/38521), 5998 kb
+#&gt; Receiving objects:  31% (11942/38521), 7261 kb
+#&gt; Receiving objects:  41% (15794/38521), 11197 kb
+#&gt; Receiving objects:  51% (19646/38521), 13933 kb
+#&gt; Receiving objects:  61% (23498/38521), 18108 kb
+#&gt; Receiving objects:  71% (27350/38521), 19804 kb
+#&gt; Receiving objects:  81% (31203/38521), 22172 kb
+#&gt; Receiving objects:  91% (35055/38521), 23851 kb
+#&gt; Receiving objects: 100% (38521/38521), 24878 kb, done.
 #&gt; The latest version of OpenBLAS is already in use. Do you want to compile and link again? (yes/no): </div><div class='output co'>#&gt; <span class='error'>Error in validate_answer(answer): Invalid option. Procedure interrupted.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -186,6 +188,7 @@ will always consider using the <a href='https://www.openblas.net/'><strong>OpenB
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#note">Note</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
