@@ -4,11 +4,18 @@
 \alias{last_version_r}
 \title{Given the higher version, the function will return the latest stable version of the \R language.}
 \usage{
-last_version_r(major = 3L)
+last_version_r(major = NULL)
 }
 \arguments{
-\item{major}{Major release number of R language (eg. 1L, 2L, 3L, ...).}
+\item{major}{Major release number of \R language (e.g. 1L, 2L, 3L, ...). If \code{major = NULL}, the function
+will consider the major release number.}
 }
 \description{
 Given the higher version, the function will return the latest stable version of the \R language.
+}
+\examples{
+\donttest{last_version_r()}
+}
+\seealso{
+[ropenblas()], [rcompiler()]
 }

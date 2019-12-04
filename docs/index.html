@@ -88,9 +88,8 @@
 <h2 class="hasAnchor">
 <a href="#dependencies" class="anchor"></a>Dependencies</h2>
 <p>You must install the following dependencies on your operating system (Linux):</p>
-<p>1 - <strong>make</strong>: GNU make utility to maintain groups of programs; <br></p>
-<p>2 - <strong>gcc</strong>: The GNU Compiler Collection - C frontends; <br></p>
-<p>3 - <strong>gcc-fortran</strong>: The GNU Compiler Collection - Fortran frontends.</p>
+<p>1 - <strong>GNU Make</strong>: GNU Make utility to maintain groups of programs; <br></p>
+<p>2 - <strong>GNU GCC Compiler (C/C++ and Fortran)</strong>: The GNU Compiler Collection - C/C++ and Fortran frontends.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -99,22 +98,27 @@
 <pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)</a></code></pre>
 <p>or</p>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("ropenblas")</a></code></pre>
+<p><strong>Note</strong>: If you want to access the latest features of the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package, install it using the first procedure.</p>
 </div>
-<div id="use" class="section level2">
+<div id="use-of-functions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#use" class="anchor"></a>Use</h2>
+<a href="#use-of-functions" class="anchor"></a>Use of Functions</h2>
+<p>O pacote <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> disponibiliza atualmente três funções: <code><a href="reference/ropenblas.html">ropenblas()</a></code>, <code><a href="reference/last_version_r.html">last_version_r()</a></code> e <code><a href="reference/rcompiler.html">rcompiler()</a></code>. First of all, do:</p>
+<pre><code><a href="https://rdrr.io/r/base/library.html">library(ropenblas)</a></code></pre>
+<div id="ropenblas-function" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ropenblas-function" class="anchor"></a>ropenblas() function:</h3>
 <p>Installing, compiling, and linking the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> version <strong>0.3.7</strong> library to the <a href="https://www.r-project.org/"><strong>R</strong></a> language:</p>
-<pre><code><a href="https://rdrr.io/r/base/library.html">library(ropenblas)
-ropenblas(x = "0.3.7")</a></code></pre>
+<pre><code><a href="reference/ropenblas.html">ropenblas(x = "0.3.7")</a></code></pre>
 <p><strong>Notes</strong>:</p>
 <ul>
 <li><p>You do not have to in every section of <a href="https://www.r-project.org/"><strong>R</strong></a> make use of the <code><a href="reference/ropenblas.html">ropenblas()</a></code> function. Once the function is used, <a href="https://www.r-project.org/"><strong>R</strong></a> will always consider using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library in future sections.</p></li>
-<li><p><a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7. These are the values that will be passed to <code>x</code> in <code><a href="reference/ropenblas.html">ropenblas(x)</a></code>.</p></li>
+<li><p><a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7. These are the values that will be passed to <code>x</code> in <code><a href="reference/ropenblas.html">ropenblas(x)</a></code>;</p></li>
+<li><p>If <code>x = NULL</code>, the latest stable version of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library will be compiled and linked to <a href="https://www.r-project.org/"><strong>R</strong></a>.</p></li>
 </ul>
-</div>
-<div id="details" class="section level2">
-<h2 class="hasAnchor">
-<a href="#details" class="anchor"></a>Details</h2>
+<div id="details" class="section level4">
+<h4 class="hasAnchor">
+<a href="#details" class="anchor"></a>Details</h4>
 <p>Your linux operating system may already be configured to use the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Therefore, most likely <a href="https://www.r-project.org/"><strong>R</strong></a> will already be linked to this library. To find out if the <a href="https://www.r-project.org/"><strong>R</strong></a> language is using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library, at <a href="https://www.r-project.org/"><strong>R</strong></a>, do:</p>
 <pre><code>extSoftVersion()["BLAS"]</code></pre>
 <p>If <a href="https://www.r-project.org/"><strong>R</strong></a> is using the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library, something like <code>/any_directory/libopenblas.so</code> should be returned. Therefore, there should be the name <strong>openblas</strong> in the <strong>s</strong>hared <strong>o</strong>bject returned (file extension <strong>.so</strong>).</p>
@@ -122,9 +126,44 @@ ropenblas(x = "0.3.7")</a></code></pre>
 <p>The <code><a href="reference/ropenblas.html">ropenblas()</a></code> function will download the desired version of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a>, compile and install the library in the <code>/opt</code> directory of your operational system. If the directory does not exist, it will be created so that the installation can be completed. Subsequently, files from the version of <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> used in <a href="https://www.r-project.org/"><strong>R</strong></a> will be symbolically linked to the shared object files of the library version <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> compiled and installed in <code>/opt</code>.</p>
 <p>You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system.</p>
 </div>
-<div id="advantages" class="section level2">
+</div>
+<div id="last_version_r-function" class="section level3">
+<h3 class="hasAnchor">
+<a href="#last_version_r-function" class="anchor"></a>last_version_r() function:</h3>
+<p>Given the higher version, the function will return the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. Veja o exemplo:</p>
+<pre><code>&gt; last_version_r(major = 3L)
+$last_version
+[1] "R-3.6.1"
+
+$versions
+ [1] "R-3.0.0" "R-3.0.1" "R-3.0.2" "R-3.0.3" "R-3.1.0" "R-3.1.1" "R-3.1.2" "R-3.1.3" "R-3.2.0" "R-3.2.1" "R-3.2.2" "R-3.2.3"
+[13] "R-3.2.4" "R-3.2.5" "R-3.3.0" "R-3.3.1" "R-3.3.2" "R-3.3.3" "R-3.4.0" "R-3.4.1" "R-3.4.2" "R-3.4.3" "R-3.4.4" "R-3.5.0"
+[25] "R-3.5.1" "R-3.5.2" "R-3.5.3" "R-3.6.0" "R-3.6.1"</code></pre>
+<p>or</p>
+<pre><code>&gt; last_version_r(2L)
+$last_version
+[1] "R-2.9.2"
+
+$versions
+ [1] "R-2.0.0"  "R-2.0.1"  "R-2.1.0"  "R-2.1.1"  "R-2.10.0" "R-2.10.1" "R-2.11.0" "R-2.11.1" "R-2.12.0" "R-2.12.1" "R-2.12.2"
+[12] "R-2.13.0" "R-2.13.1" "R-2.13.2" "R-2.14.0" "R-2.14.1" "R-2.14.2" "R-2.15.0" "R-2.15.1" "R-2.15.2" "R-2.15.3" "R-2.2.0" 
+[23] "R-2.2.1"  "R-2.3.0"  "R-2.3.1"  "R-2.4.0"  "R-2.4.1"  "R-2.5.0"  "R-2.5.1"  "R-2.6.0"  "R-2.6.1"  "R-2.6.2"  "R-2.7.0" 
+[34] "R-2.7.1"  "R-2.7.2"  "R-2.8.0"  "R-2.8.1"  "R-2.9.0"  "R-2.9.1"  "R-2.9.2" </code></pre>
+<p><strong>Note</strong>: If <code>major = NULL</code>, the function will consider the major release number.</p>
+</div>
+<div id="rcompiler-function" class="section level3">
+<h3 class="hasAnchor">
+<a href="#rcompiler-function" class="anchor"></a>rcompiler() function:</h3>
+<p>This function is responsible for compiling a version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href="https://www.r-project.org/"><strong>R</strong></a> that you want to compile. For example, <code>x = "3.6.2"</code> will compile and link <strong>R-3.6.2</strong> version as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a></p>
+<p>The <code>version_openblas</code> <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> argument is a version of the library that will be linked to the <a href="https://www.r-project.org/"><strong>R</strong></a> code that will be compiled. By default if <code>version_openblas = NULL</code>, the latest stable version of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> will be linked.</p>
+<p>For example, to compile the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language, do:</p>
+<pre><code><a href="reference/rcompiler.html">rcompiler()</a></code></pre>
+<p>Regardless of your GNU/Linux distribution and what version of <a href="https://www.r-project.org/"><strong>R</strong></a> is in your repositories, you can have the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language compiled into your computer architecture.</p>
+</div>
+</div>
+<div id="advantages-of-using-ropenblas-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#advantages" class="anchor"></a>Advantages</h2>
+<a href="#advantages-of-using-ropenblas-package" class="anchor"></a>Advantages of using ropenblas package:</h2>
 <p>Some advantages of using the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> library:</p>
 <ul>
 <li><p>Everything is done within the <a href="https://www.r-project.org/"><strong>R</strong></a> language;</p></li>
@@ -134,6 +173,7 @@ ropenblas(x = "0.3.7")</a></code></pre>
 <li><p>You do not need to know Linux well. In some distributions, it may not be so simple for a less experienced user to compile and link the library to the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library with the <a href="https://www.r-project.org/"><strong>R</strong></a> language;</p></li>
 <li><p>It is much easier to direct a person to link <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with <a href="https://www.r-project.org/"><strong>R</strong></a> saying “run <code><a href="reference/ropenblas.html">ropenblas()</a></code> within <a href="https://www.r-project.org/"><strong>R</strong></a>” than asking that person to verify that an unoptimized version of <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> installed on the system. Then you have to guide the removal of the unoptimized version of <a href="http://www.netlib.org/blas/"><strong>BLAS</strong></a> and guide it to the installation of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> through the most diverse procedures depending on the GNU/Linux distribution used;</p></li>
 <li><p>As stated earlier, the procedure works for any Linux and this includes Android. If your Android is capable of running privileged commands (ROOT) and if you have <a href="https://www.r-project.org/"><strong>R</strong></a> installed via Termux with the required dependencies, you can compile and link <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with <a href="https://www.r-project.org/"><strong>R</strong></a> using ropenblas.</p></li>
+<li><p>With the <code><a href="reference/rcompiler.html">rcompiler()</a></code> function you can build any version of <a href="https://www.r-project.org/"><strong>R</strong></a> into your computer architecture, which includes the most stable version of the language.</p></li>
 </ul>
 </div>
 </div>
@@ -155,7 +195,7 @@ ropenblas(x = "0.3.7")</a></code></pre>
 <h2>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a> | <a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> [expanded from: GPL (&gt;= 2)]</li>
+<a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> </li>
 </ul>
 </div>
 <div class="developers">

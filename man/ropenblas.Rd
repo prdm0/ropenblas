@@ -27,9 +27,8 @@ computational performance for your simulations, since \href{https://www.openblas
 
 You must install the following dependencies on your operating system (Linux):
 \enumerate{
-   \item \strong{make};
-   \item \strong{gcc};
-   \item \strong{gcc-fortran}.
+   \item \strong{GNU Make};
+   \item \strong{GNU GCC Compiler (C and Fortran)}.
 }
 Your linux operating system may already be configured to use the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Therefore, most likely \R will already be linked to this library. To find out if the \R language is using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library,
  at \R, do:
@@ -52,6 +51,9 @@ will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS
 }
 \examples{
 \donttest{ropenblas()}
+}
+\seealso{
+[rcompiler()], [last_version_r()]
 }
 \author{
 Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})

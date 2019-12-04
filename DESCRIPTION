@@ -9,7 +9,7 @@ Authors@R:
            email = "pedro.rafael.marinho@gmail.com")
 Maintainer: Pedro Rafael D. Marinho <pedro.rafael.marinho@gmail.com>
 Description: The 'ropenblas' package (<https://prdm0.github.io/ropenblas/>) is useful for users of any 'GNU/Linux' distribution. It will be possible to download, compile and link the 'OpenBLAS' library (<https://www.openblas.net/>) with the R language, always by the same procedure, regardless of the 'GNU/Linux' distribution used. With the 'ropenblas' package it is possible to download, compile and link the latest version of the 'OpenBLAS' library even the repositories of the 'GNU/Linux' distribution used do not include the latest versions of 'OpenBLAS'. If of interest, older versions of the 'OpenBLAS' library may be considered. Linking R with an optimized version of 'BLAS' (<http://www.netlib.org/blas/>) may improve the computational performance of R code. The 'OpenBLAS' library is an optimized implementation of 'BLAS' that can be easily linked to R with the 'ropenblas' package.    
-License: GPL-2 | GPL-3 [expanded from: GPL (>= 2)]
+License: GPL-3 
 URL: https://prdm0.github.io/ropenblas/, https://github.com/prdm0/ropenblas
 BugReports: https://github.com/prdm0/ropenblas/issues
 SystemRequirements: GNU Make, GCC Compiler Suite (C and Fortran)
@@ -23,4 +23,5 @@ Imports:
     stringr,
     git2r,
     fs,
-RoxygenNote: 7.0.0
+    RCurl,
+RoxygenNote: 7.0.2.9000

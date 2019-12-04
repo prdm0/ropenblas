@@ -62,7 +62,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist,-1L) %>%
+           unlist, -1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -163,9 +163,8 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @param x \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = NULL}.
 #' @details You must install the following dependencies on your operating system (Linux):
 #' \enumerate{
-#'    \item \strong{make};
-#'    \item \strong{gcc};
-#'    \item \strong{gcc-fortran}.
+#'    \item \strong{GNU Make};
+#'    \item \strong{GNU GCC Compiler (C and Fortran)}.
 #' }
 #' Your linux operating system may already be configured to use the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Therefore, most likely \R will already be linked to this library. To find out if the \R language is using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library,
 #'  at \R, do:
@@ -189,6 +188,7 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
+#' @seealso [rcompiler()], [last_version_r()]
 #' @examples
 #' \donttest{ropenblas()}
 #' @export
@@ -360,40 +360,98 @@ ropenblas <- function(x = NULL) {
 }
 
 #' @title Given the higher version, the function will return the latest stable version of the \R language.
-#' @param major Major release number of R language (eg. 1L, 2L, 3L, ...).
+#' @param major Major release number of \R language (e.g. 1L, 2L, 3L, ...). If \code{major = NULL}, the function
+#' will consider the major release number.
 #' @importFrom stringr str_extract_all
 #' @importFrom glue glue
 #' @importFrom RCurl getURL
 #' @importFrom magrittr "%>%"
+#' @seealso [ropenblas()], [rcompiler()]
+#' @examples 
+#' \donttest{last_version_r()}
 #' @export
-last_version_r <- function(major = 3L) {
+last_version_r <- function(major = NULL) {
+  search <- function(x) {
+    stringr::str_extract_all(RCurl::getURL(glue(
+      "https://cloud.r-project.org/src/base/R-{x}/"
+    )),
+    "R-[0-9]+.[0-9]+.[0-9]+") %>%
+      unlist %>%
+      unique %>%
+      length
+  }
+  
+  if (is.null(major))
+    major <-   vapply(X = 1L:10L,
+                      FUN = search,
+                      FUN.VALUE = integer(length = 1L)) %>% which.min - 1L
+  
   vec_versions <-
     stringr::str_extract_all(RCurl::getURL(glue(
       "https://cloud.r-project.org/src/base/R-{major}/"
     )),
     "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist
-  vec_versions[length(vec_versions)]
+  list(last_version = vec_versions[length(vec_versions)],
+       versions = unique(vec_versions))
 }
 
+#' @importFrom utils untar
+#' @importFrom fs file_exists dir_create file_delete
+#' @importFrom glue glue
 download_r <- function(x) {
   if (file_exists("/tmp/r"))
-    file_delete("/tmp/r")
+    "/tmp/r" %>% file_delete
   
-  path_r <- dir_create(path = "/tmp/r")
+  path_r <- "/tmp/r" %>% dir_create
   
   url <-
-    glue("https://cloud.r-project.org/src/base/R-{substr(x, 1, 1)}/R-{x}.tar.gz")
-  download.file(url = url,
-                destfile = glue("{path_r}/R-{x}.tar.gz"))
+    "https://cloud.r-project.org/src/base/R-{substr(x, 1L, 1L)}/R-{x}.tar.gz" %>%
+    glue
   
-  glue("{path_r}/R-{x}.tar.gz") %>% untar(exdir = glue("{path_r}"))
+  url %>% download.file(destfile = glue("{path_r}/R-{x}.tar.gz"))
   
-  glue("{path_r}/R-{x}")
+  "{path_r}/R-{x}.tar.gz" %>%
+    glue %>%
+    untar(exdir = glue("{path_r}"))
+  
+  "{path_r}/R-{x}" %>%
+    glue
+}
+
+check_r_opt <- function(x = NULL) {
+  if (is.null(x))
+    x <- last_version_r(x)$last_version
+  
+  "/opt/R/{x}" %>% glue %>% dir_exists
 }
 
 #' @title Compile a version of \R on GNU/Linux systems
-#' @description This function is responsible for compiling a version of the R language.
+#' @description This function is responsible for compiling a version of the \R language.
+#' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
+#' language. For example, \code{x = "3.6.2"} will compile and link \strong{R-3.6.2} version  as the major version on your system.
+#' @param version_openblas \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version that will be linked to the \R code that will be compiled. By default, if
+#' \code{version_openblas = NULL}, the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library will be linked.
+#' @details The \code{rcompiler()} function will compile the \R language and make the \strong{R} and \strong{Rscript} binaries available 
+#' in the \code{/usr/bin} directory. Therefore, the version compiled by \code{rcompiler()} will be available to all users of the Linux system.
+#' The \code{rcompiler()} function will work on any GNU/Linux distribution, as long as your distribution has the following dependencies:
+#' \enumerate{
+#'    \item \strong{GNU Make};
+#'    \item \strong{GNU GCC Compiler (C and Fortran)}.
+#' }
+#' \strong{Note}: If the above dependencies are not installed, the function will automatically identify.
+#' In the \code{/opt/R} directory subdirectories will be created with the compiled version numbering of \R. For example, when running
+#' \code{rcompiler(x = "version_r")}, at the end of the language compilation process, the \code{/opt/R/version_r} directory will be created.
+#' The function will link the \strong{R} and \strong{Rscript} binaries from the current section of \R to the respective newly compiled
+#' binaries found in \code{/opt/R/version_r/lib64/R/bin}, where, for example, \code{version_r} could be some version of \R like \code{"3.6.2"}
+#' or any other version. If \code{version_r = NULL}, the latest stable version of \R will be compiled.
+#' @seealso [ropenblas()], [last_version_r()]
 #' @importFrom RCurl getURL
+#' @importFrom fs dir_exists
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom getPass getPass
+#' @examples
+#' \donttest{rcompiler()}
 #' @export
 rcompiler <- function(x = NULL,
                       version_openblas = NULL) {
@@ -412,8 +470,24 @@ rcompiler <- function(x = NULL,
   
   
   if (is.null(x))
-    x <- last_version_r() %>%
-      substr(3L, nchar(last_version_r()))
+    x <- last_version_r()$last_version %>%
+      substr(3L, nchar(last_version_r()$last_version))
+  
+  if (check_r_opt(x)) {
+    if ("/opt/R/{x}" %>% glue %>% dir_exists) {
+      answer <-
+        readline(
+          prompt = glue(
+            "This version of R has already been compiled and is found in /opt/R/{x}. Do you want to compile and link again? (yes/no): "
+          )
+        ) %>% tolower
+      
+      validate_answer(answer)
+      
+      if (answer %in% c("n", "no"))
+        return(warning("Ok, procedure interrupted!"))
+    }
+  }
   
   path_r <- download_r(x)
   
