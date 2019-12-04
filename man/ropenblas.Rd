@@ -53,6 +53,9 @@ will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS
 \examples{
 \donttest{ropenblas()}
 }
+\seealso{
+[rcompiler()], [last_version_r()]
+}
 \author{
 Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})
 }

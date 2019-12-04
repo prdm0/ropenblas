@@ -62,7 +62,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist,-1L) %>%
+           unlist, -1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -361,22 +361,43 @@ ropenblas <- function(x = NULL) {
 }
 
 #' @title Given the higher version, the function will return the latest stable version of the \R language.
-#' @param major Major release number of R language (eg. 1L, 2L, 3L, ...).
+#' @param major Major release number of \R language (eg. 1L, 2L, 3L, ...). If \code{major = NULL}, the function
+#' will consider the major release number.
 #' @importFrom stringr str_extract_all
 #' @importFrom glue glue
 #' @importFrom RCurl getURL
 #' @importFrom magrittr "%>%"
 #' @seealso [ropenblas()], [rcompiler()]
+#' \donttest{last_version_r()}
 #' @export
-last_version_r <- function(major = 3L) {
+last_version_r <- function(major = NULL) {
+  search <- function(x) {
+    stringr::str_extract_all(RCurl::getURL(glue(
+      "https://cloud.r-project.org/src/base/R-{x}/"
+    )),
+    "R-[0-9]+.[0-9]+.[0-9]+") %>%
+      unlist %>%
+      unique %>%
+      length
+  }
+  
+  if (is.null(major))
+    major <-   vapply(X = 1L:10L,
+                      FUN = search,
+                      FUN.VALUE = integer(length = 1L)) %>% which.min - 1L
+  
   vec_versions <-
     stringr::str_extract_all(RCurl::getURL(glue(
       "https://cloud.r-project.org/src/base/R-{major}/"
     )),
     "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist
-  list(last_version = vec_versions[length(vec_versions)], versions = unique(vec_versions))
+  list(last_version = vec_versions[length(vec_versions)],
+       versions = unique(vec_versions))
 }
 
+#' @importFrom utils untar
+#' @importFrom stringr file_exists dir_create file_delete
+#' @importFrom glue glue
 download_r <- function(x) {
   if (file_exists("/tmp/r"))
     "/tmp/r" %>% file_delete
@@ -397,16 +418,26 @@ download_r <- function(x) {
     glue
 }
 
-check_r_version <- function(x) {
-    
-  ("R-{x}" %>% glue) %in% last_version_r(major = substr(x, 1L, 1L)) %>% 
-    ifelse(TRUE, FALSE)
+check_r_opt <- function(x = NULL) {
+  if (is.null(x))
+    x <- last_version_r(x)$last_version
+  
+  "/opt/R/{x}" %>% glue %>% dir_exists
 }
 
-
 #' @title Compile a version of \R on GNU/Linux systems
-#' @description This function is responsible for compiling a version of the R language.
+#' @description This function is responsible for compiling a version of the \R language.
+#' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
+#' language. For example, \code{x = "3.6.2"} will compile and link \strong{R-3.6.2} version  as the major version on your system.
+#' @param version_openblas 'OpenBLAS' library version that will be linked to the \R code that will be compiled. By default, if
+#' \code{version_openblas = NULL}, the latest stable version of the 'OpenBLAS' library will be linked.
+#' @seealso [ropenblas()], [last_version_r()]
 #' @importFrom RCurl getURL
+#' @importFrom fs dir_exists
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom getPass getPass
+#' \donttest{rcompiler()}
 #' @export
 rcompiler <- function(x = NULL,
                       version_openblas = NULL) {
@@ -427,6 +458,22 @@ rcompiler <- function(x = NULL,
   if (is.null(x))
     x <- last_version_r()$last_version %>%
       substr(3L, nchar(last_version_r()$last_version))
+  
+  if (check_r_opt(x)) {
+    if ("/opt/R/{x}" %>% glue %>% dir_exists) {
+      answer <-
+        readline(
+          prompt = glue(
+            "This version of R has already been compiled and is found in /opt/R/{x}. Do you want to compile and link again? (yes/no): "
+          )
+        ) %>% tolower
+      
+      validate_answer(answer)
+      
+      if (answer %in% c("n", "no"))
+        return(warning("Ok, procedure interrupted!"))
+    }
+  }
   
   path_r <- download_r(x)
   

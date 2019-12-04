@@ -23,4 +23,5 @@ Imports:
     stringr,
     git2r,
     fs,
-RoxygenNote: 7.0.0
+    RCurl,
+RoxygenNote: 7.0.2.9000
