@@ -374,24 +374,35 @@ last_version_r <- function(major = 3L) {
       "https://cloud.r-project.org/src/base/R-{major}/"
     )),
     "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist
-  list(last_version = vec_versions[length(vec_versions)], versions = vec_versions)
+  list(last_version = vec_versions[length(vec_versions)], versions = unique(vec_versions))
 }
 
 download_r <- function(x) {
   if (file_exists("/tmp/r"))
-    file_delete("/tmp/r")
+    "/tmp/r" %>% file_delete
   
-  path_r <- dir_create(path = "/tmp/r")
+  path_r <- "/tmp/r" %>% dir_create
   
   url <-
-    glue("https://cloud.r-project.org/src/base/R-{substr(x, 1, 1)}/R-{x}.tar.gz")
-  download.file(url = url,
-                destfile = glue("{path_r}/R-{x}.tar.gz"))
+    "https://cloud.r-project.org/src/base/R-{substr(x, 1L, 1L)}/R-{x}.tar.gz" %>%
+    glue
   
-  glue("{path_r}/R-{x}.tar.gz") %>% untar(exdir = glue("{path_r}"))
+  url %>% download.file(destfile = glue("{path_r}/R-{x}.tar.gz"))
   
-  glue("{path_r}/R-{x}")
+  "{path_r}/R-{x}.tar.gz" %>%
+    glue %>%
+    untar(exdir = glue("{path_r}"))
+  
+  "{path_r}/R-{x}" %>%
+    glue
 }
+
+check_r_version <- function(x) {
+    
+  ("R-{x}" %>% glue) %in% last_version_r(major = substr(x, 1L, 1L)) %>% 
+    ifelse(TRUE, FALSE)
+}
+
 
 #' @title Compile a version of \R on GNU/Linux systems
 #' @description This function is responsible for compiling a version of the R language.
@@ -414,8 +425,8 @@ rcompiler <- function(x = NULL,
   
   
   if (is.null(x))
-    x <- last_version_r() %>%
-      substr(3L, nchar(last_version_r()))
+    x <- last_version_r()$last_version %>%
+      substr(3L, nchar(last_version_r()$last_version))
   
   path_r <- download_r(x)
   
