@@ -57,7 +57,7 @@ will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS
 # ropenblas()
 }
 \seealso{
-\code{\link{rcompiler()}}, \code{\link{last_version_r()}}
+\code{\link{rcompiler}}, \code{\link{last_version_r}}
 }
 \author{
 Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})

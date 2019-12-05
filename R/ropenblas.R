@@ -62,7 +62,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist, -1L) %>%
+           unlist,-1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -190,7 +190,7 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
-#' @seealso \code{\link{rcompiler()}}, \code{\link{last_version_r()}}
+#' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
 #' # ropenblas()
 #' @export
@@ -199,7 +199,7 @@ ropenblas <- function(x = NULL) {
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
   if (!connection())
-    stop("You apparently have no internet connection\n")
+    stop("You apparently have no internet connection.\n")
   
   download <- download_openblas(x)
   repo <- download$repo_openblas
@@ -361,11 +361,15 @@ ropenblas <- function(x = NULL) {
   
 }
 
+#' @importFrom stringr str_extract_all
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom RCurl getURL
 #' @title Given the higher version, the function will return the latest stable version of the \R language.
 #' @param major Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
 #' will consider the major release number.
 #' @details This function automatically searches \R language versions in the official language repositories. That way,
-#' doing \code{last_version_r (major = NULL)} you will always be well informed about which latest stable version the 
+#' doing \code{last_version_r(major = NULL)} you will always be well informed about which latest stable version the
 #' \R language is in. You can also set the higher version and do a search on the versions of the \R language whose major
 #' version was \code{1L} or \code{2L}, for example.
 #' @return A list of two named elements will be returned. Are they:
@@ -374,38 +378,46 @@ ropenblas <- function(x = NULL) {
 #'    If \code{major = NULL}, the latest stable version of the language will be returned based on the set of all language versions.
 #'    \item \code{versions}: Character vector with all language versions based on a major version (higher version).
 #'    If \code{major = NULL}, \code{versions} will be a vector with the latest language versions.
-#' }  
-#' @importFrom stringr str_extract_all
-#' @importFrom glue glue
-#' @importFrom RCurl getURL
-#' @importFrom magrittr "%>%"
-#' @seealso \code{\link{ropenblas()}}, \code{\link{rcompiler()}}
-#' @examples 
+#' }
+#' @seealso \code{\link{ropenblas}}, \code{\link{rcompiler}}
+#' @examples
 #' last_version_r(major = NULL)
 #' @export
 last_version_r <- function(major = NULL) {
-  search <- function(x) {
-    stringr::str_extract_all(RCurl::getURL(glue(
-      "https://cloud.r-project.org/src/base/R-{x}/"
-    )),
-    "R-[0-9]+.[0-9]+.[0-9]+") %>%
-      unlist %>%
-      unique %>%
-      length
+  if (!connection())
+    stop("You apparently have no internet connection.\n")
+  
+  search <- function(x, number_version = TRUE) {
+    if (number_version) {
+      stringr::str_extract_all(getURL(
+        glue("https://cloud.r-project.org/src/base/R-{x}/")
+      ), "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist %>% unique %>% length
+    } else {
+      stringr::str_extract_all(getURL(
+        glue("https://cloud.r-project.org/src/base/R-{x}/")
+      ), "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist %>% unique
+    }
   }
   
-  if (is.null(major))
-    major <-   vapply(X = 1L:10L,
-                      FUN = search,
-                      FUN.VALUE = integer(length = 1L)) %>% which.min - 1L
+  trysearch <-
+    function(...)
+      tryCatch(
+        expr = search(...),
+        error = function(e)
+          return(0),
+        warning = function(w)
+          return(0)
+      )
   
-  vec_versions <-
-    stringr::str_extract_all(RCurl::getURL(glue(
-      "https://cloud.r-project.org/src/base/R-{major}/"
-    )),
-    "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist
+  if (is.null(major))
+    major <-
+    vapply(X = 1L:5L, FUN = trysearch, FUN.VALUE = double(1L)) %>% unlist %>% which.min - 1L
+  
+  
+  vec_versions <- trysearch(x = major, number_version = FALSE)
+  
   list(last_version = vec_versions[length(vec_versions)],
-       versions = unique(vec_versions))
+       versions = vec_versions)
 }
 
 #' @importFrom utils untar
@@ -438,13 +450,17 @@ check_r_opt <- function(x = NULL) {
   "/opt/R/{x}" %>% glue %>% dir_exists
 }
 
+#' @importFrom fs dir_exists
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom getPass getPass
 #' @title Compile a version of \R on GNU/Linux systems
 #' @description This function is responsible for compiling a version of the \R language.
 #' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
 #' language. For example, \code{x = "3.6.2"} will compile and link \strong{R-3.6.2} version  as the major version on your system.
 #' @param version_openblas \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version that will be linked to the \R code that will be compiled. By default, if
 #' \code{version_openblas = NULL}, the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library will be linked.
-#' @details The \code{rcompiler()} function will compile the \R language and make the \strong{R} and \strong{Rscript} binaries available 
+#' @details The \code{rcompiler()} function will compile the \R language and make the \strong{R} and \strong{Rscript} binaries available
 #' in the \code{/usr/bin} directory. Therefore, the version compiled by \code{rcompiler()} will be available to all users of the Linux system.
 #' The \code{rcompiler()} function will work on any GNU/Linux distribution, as long as your distribution has the following dependencies:
 #' \enumerate{
@@ -457,14 +473,9 @@ check_r_opt <- function(x = NULL) {
 #' The function will link the \strong{R} and \strong{Rscript} binaries from the current section of \R to the respective newly compiled
 #' binaries found in \code{/opt/R/version_r/lib64/R/bin}, where, for example, \code{version_r} could be some version of \R like \code{"3.6.2"}
 #' or any other version. If \code{version_r = NULL}, the latest stable version of \R will be compiled.
-#' @seealso \code{\link{ropenblas()}}, \code{\link{last_version_r()}}
+#' @seealso \code{\link{ropenblas}}, \code{\link{last_version_r}}
 #' @return Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
 #' missing dependencies.
-#' @importFrom RCurl getURL
-#' @importFrom fs dir_exists
-#' @importFrom glue glue
-#' @importFrom magrittr "%>%"
-#' @importFrom getPass getPass
 #' @examples
 #' # rcompiler()
 #' @export
@@ -474,7 +485,7 @@ rcompiler <- function(x = NULL,
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
   if (!connection())
-    stop("You apparently have no internet connection\n")
+    stop("You apparently have no internet connection.\n")
   
   if (!exist())
     stop(

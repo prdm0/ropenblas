@@ -21,7 +21,7 @@ missing dependencies.
 This function is responsible for compiling a version of the \R language.
 }
 \details{
-The \code{rcompiler()} function will compile the \R language and make the \strong{R} and \strong{Rscript} binaries available 
+The \code{rcompiler()} function will compile the \R language and make the \strong{R} and \strong{Rscript} binaries available
 in the \code{/usr/bin} directory. Therefore, the version compiled by \code{rcompiler()} will be available to all users of the Linux system.
 The \code{rcompiler()} function will work on any GNU/Linux distribution, as long as your distribution has the following dependencies:
 \enumerate{
@@ -39,5 +39,5 @@ or any other version. If \code{version_r = NULL}, the latest stable version of \
 # rcompiler()
 }
 \seealso{
-\code{\link{ropenblas()}}, \code{\link{last_version_r()}}
+\code{\link{ropenblas}}, \code{\link{last_version_r}}
 }
