@@ -188,9 +188,9 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
-#' @seealso [rcompiler()], [last_version_r()]
+#' @seealso \code{\link{rcompiler()}}, \code{\link{last_version_r()}}
 #' @examples
-#' \donttest{ropenblas()}
+#' # ropenblas()
 #' @export
 ropenblas <- function(x = NULL) {
   if (Sys.info()[[1]] != "Linux")
@@ -360,15 +360,19 @@ ropenblas <- function(x = NULL) {
 }
 
 #' @title Given the higher version, the function will return the latest stable version of the \R language.
-#' @param major Major release number of \R language (e.g. 1L, 2L, 3L, ...). If \code{major = NULL}, the function
+#' @param major Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
 #' will consider the major release number.
 #' @importFrom stringr str_extract_all
 #' @importFrom glue glue
 #' @importFrom RCurl getURL
 #' @importFrom magrittr "%>%"
-#' @seealso [ropenblas()], [rcompiler()]
+#' @details This function automatically searches \R language versions in the official language repositories. That way,
+#' doing \code{last_version_r (major = NULL)} you will always be well informed about which latest stable version the 
+#' \R language is in. You can also set the higher version and do a search on the versions of the \R language whose major
+#' version was \code{1L} or \code{2L}, for example.
+#' @seealso \code{\link{ropenblas()}}, \code{\link{rcompiler()}}
 #' @examples 
-#' \donttest{last_version_r()}
+#' last_version_r(major = NULL)
 #' @export
 last_version_r <- function(major = NULL) {
   search <- function(x) {
@@ -444,14 +448,14 @@ check_r_opt <- function(x = NULL) {
 #' The function will link the \strong{R} and \strong{Rscript} binaries from the current section of \R to the respective newly compiled
 #' binaries found in \code{/opt/R/version_r/lib64/R/bin}, where, for example, \code{version_r} could be some version of \R like \code{"3.6.2"}
 #' or any other version. If \code{version_r = NULL}, the latest stable version of \R will be compiled.
-#' @seealso [ropenblas()], [last_version_r()]
+#' @seealso \code{\link{ropenblas()}}, \code{\link{last_version_r()}}
 #' @importFrom RCurl getURL
 #' @importFrom fs dir_exists
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom getPass getPass
 #' @examples
-#' \donttest{rcompiler()}
+#' # rcompiler()
 #' @export
 rcompiler <- function(x = NULL,
                       version_openblas = NULL) {

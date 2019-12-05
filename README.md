@@ -43,7 +43,7 @@ O pacote [**ropenblas**](https://prdm0.github.io/ropenblas/) disponibiliza atual
 library(ropenblas)
 ```
 
-### ropenblas() function:
+### 'ropenblas' function:
 
 Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.7** library to the [**R**](https://www.r-project.org/) language:
 
@@ -75,7 +75,7 @@ The `ropenblas()` function will download the desired version of the library [**O
 
 You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system.
 
-### last_version_r() function:
+### 'last_version_r' function:
 
 Given the higher version, the function will return the latest stable version of the [**R**](https://www.r-project.org/) language. Veja o exemplo:
 
@@ -93,7 +93,7 @@ $versions
 or
 
 ```
-> last_version_r(2L)
+> last_version_r(major = 2L)
 $last_version
 [1] "R-2.9.2"
 
@@ -106,9 +106,9 @@ $versions
 
 **Note**: If `major = NULL`, the function will consider the major release number.
 
-### rcompiler() function:
+### 'rcompiler' function:
 
-This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "3.6.2"` will compile and link **R-3.6.2** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/)
+This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "3.6.1"` will compile and link **R-3.6.1** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/)
 
 The `version_openblas` [**OpenBLAS**](https://www.openblas.net/) argument is a version of the library that will be linked to the [**R**](https://www.r-project.org/) code that will be compiled. By default if `version_openblas = NULL`, the latest stable version of the library [**OpenBLAS**](https://www.openblas.net/) will be linked.
 

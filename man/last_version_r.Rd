@@ -7,15 +7,21 @@
 last_version_r(major = NULL)
 }
 \arguments{
-\item{major}{Major release number of \R language (e.g. 1L, 2L, 3L, ...). If \code{major = NULL}, the function
+\item{major}{Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
 will consider the major release number.}
 }
 \description{
 Given the higher version, the function will return the latest stable version of the \R language.
 }
+\details{
+This function automatically searches \R language versions in the official language repositories. That way,
+doing \code{last_version_r (major = NULL)} you will always be well informed about which latest stable version the 
+\R language is in. You can also set the higher version and do a search on the versions of the \R language whose major
+version was \code{1L} or \code{2L}, for example.
+}
 \examples{
-\donttest{last_version_r()}
+last_version_r(major = NULL)
 }
 \seealso{
-[ropenblas()], [rcompiler()]
+\code{\link{ropenblas()}}, \code{\link{rcompiler()}}
 }
