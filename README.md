@@ -77,7 +77,7 @@ You must be the operating system administrator to use this library. Therefore, d
 
 ### 'last_version_r' function:
 
-Given the higher version, the function will return the latest stable version of the [**R**](https://www.r-project.org/) language. Veja o exemplo:
+Given the higher version, the function will return the latest stable version of the [**R**](https://www.r-project.org/) language. See the following example:
 
 ```
 > last_version_r(major = 3L)
@@ -136,6 +136,8 @@ Some advantages of using the [**ropenblas**](https://prdm0.github.io/ropenblas/)
 
    - It is much easier to direct a person to link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) saying "run `ropenblas()` within [**R**](https://www.r-project.org/)" than asking that person to verify that an unoptimized version of [**BLAS**](http://www.netlib.org/blas/) installed on the system. Then you have to guide the removal of the unoptimized version of [**BLAS**](http://www.netlib.org/blas/) and guide it to the installation of the library [**OpenBLAS**](https://www.openblas.net/) through the most diverse procedures depending on the GNU/Linux distribution used;
 
-   - As stated earlier, the procedure works for any Linux and this includes Android. If your Android is capable of running privileged commands (ROOT) and if you have [**R**](https://www.r-project.org/) installed via Termux with the required dependencies, you can compile and link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) using ropenblas.
+   - As stated earlier, the procedure works for any Linux and this includes Android. If your Android is capable of running privileged commands (ROOT) and if you have [**R**](https://www.r-project.org/) installed via Termux with the required dependencies, you can compile and link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) using ropenblas;
    
-   - With the `rcompiler()` function you can build any version of [**R**](https://www.r-project.org/) into your computer architecture, which includes the most stable version of the language.
+   - With the `rcompiler()` function you can build any version of [**R**](https://www.r-project.org/) into your computer architecture, which includes the most stable version of the language;
+   
+   - What is the latest stable version of [**R**](https://www.r-project.org/)? Are you too lazy to go to the [**R**](https://www.r-project.org/) site? Run `ropenblas::last_version_r(major = NULL)`.
