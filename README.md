@@ -35,7 +35,7 @@ install.packages("ropenblas")
 
 **Note**: If you want to access the latest features of the [**ropenblas**](https://prdm0.github.io/ropenblas/) package, install it using the first procedure.
 
-## Use of Functions
+## Using the package
 
 O pacote [**ropenblas**](https://prdm0.github.io/ropenblas/) disponibiliza atualmente três funções: `ropenblas()`, `last_version_r()` e `rcompiler()`. First of all, do:
 
