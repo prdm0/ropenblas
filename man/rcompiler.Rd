@@ -13,6 +13,10 @@ language. For example, \code{x = "3.6.2"} will compile and link \strong{R-3.6.2}
 \item{version_openblas}{\href{https://www.openblas.net/}{\strong{OpenBLAS}} library version that will be linked to the \R code that will be compiled. By default, if
 \code{version_openblas = NULL}, the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library will be linked.}
 }
+\value{
+Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
+missing dependencies.
+}
 \description{
 This function is responsible for compiling a version of the \R language.
 }

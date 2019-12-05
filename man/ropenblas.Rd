@@ -9,6 +9,10 @@ ropenblas(x = NULL)
 \arguments{
 \item{x}{\href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = NULL}.}
 }
+\value{
+Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
+missing dependencies.
+}
 \description{
 Link \R with an optimized version of the \href{http://www.netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
 }

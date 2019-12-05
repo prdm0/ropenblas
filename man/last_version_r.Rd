@@ -10,6 +10,15 @@ last_version_r(major = NULL)
 \item{major}{Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
 will consider the major release number.}
 }
+\value{
+A list of two named elements will be returned. Are they:
+\enumerate{
+   \item \code{last_version}: Returns the latest stable version of the language given a major version (major version).
+   If \code{major = NULL}, the latest stable version of the language will be returned based on the set of all language versions.
+   \item \code{versions}: Character vector with all language versions based on a major version (higher version).
+   If \code{major = NULL}, \code{versions} will be a vector with the latest language versions.
+}
+}
 \description{
 Given the higher version, the function will return the latest stable version of the \R language.
 }

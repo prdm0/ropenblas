@@ -180,6 +180,8 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #'  be created so that the installation can be completed. Subsequently, files from the version of \href{http://www.netlib.org/blas/}{\strong{BLAS}} used in \R will be symbolically linked to the shared object files of the library version \href{https://www.openblas.net/}{\strong{OpenBLAS}} compiled and installed in \code{/opt}.
 #'
 #' You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system. Other details you may also find \href{https://prdm0.github.io/ropenblas/index.html}{\strong{here}}.
+#' @return Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
+#' missing dependencies.
 #' @importFrom glue glue
 #' @importFrom getPass getPass
 #' @importFrom magrittr "%>%"
@@ -362,14 +364,21 @@ ropenblas <- function(x = NULL) {
 #' @title Given the higher version, the function will return the latest stable version of the \R language.
 #' @param major Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
 #' will consider the major release number.
-#' @importFrom stringr str_extract_all
-#' @importFrom glue glue
-#' @importFrom RCurl getURL
-#' @importFrom magrittr "%>%"
 #' @details This function automatically searches \R language versions in the official language repositories. That way,
 #' doing \code{last_version_r (major = NULL)} you will always be well informed about which latest stable version the 
 #' \R language is in. You can also set the higher version and do a search on the versions of the \R language whose major
 #' version was \code{1L} or \code{2L}, for example.
+#' @return A list of two named elements will be returned. Are they:
+#' \enumerate{
+#'    \item \code{last_version}: Returns the latest stable version of the language given a major version (major version).
+#'    If \code{major = NULL}, the latest stable version of the language will be returned based on the set of all language versions.
+#'    \item \code{versions}: Character vector with all language versions based on a major version (higher version).
+#'    If \code{major = NULL}, \code{versions} will be a vector with the latest language versions.
+#' }  
+#' @importFrom stringr str_extract_all
+#' @importFrom glue glue
+#' @importFrom RCurl getURL
+#' @importFrom magrittr "%>%"
 #' @seealso \code{\link{ropenblas()}}, \code{\link{rcompiler()}}
 #' @examples 
 #' last_version_r(major = NULL)
@@ -449,6 +458,8 @@ check_r_opt <- function(x = NULL) {
 #' binaries found in \code{/opt/R/version_r/lib64/R/bin}, where, for example, \code{version_r} could be some version of \R like \code{"3.6.2"}
 #' or any other version. If \code{version_r = NULL}, the latest stable version of \R will be compiled.
 #' @seealso \code{\link{ropenblas()}}, \code{\link{last_version_r()}}
+#' @return Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
+#' missing dependencies.
 #' @importFrom RCurl getURL
 #' @importFrom fs dir_exists
 #' @importFrom glue glue
