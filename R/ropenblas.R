@@ -369,7 +369,7 @@ ropenblas <- function(x = NULL) {
 #' \R language is in. You can also set the higher version and do a search on the versions of the \R language whose major
 #' version was \code{1L} or \code{2L}, for example.
 #' @return A list of two named elements will be returned. Are they:
-#' #' \enumerate{
+#' \enumerate{
 #'    \item \code{last_version}: Returns the latest stable version of the language given a major version (major version).
 #'    If \code{major = NULL}, the latest stable version of the language will be returned based on the set of all language versions.
 #'    \item \code{versions}: Character vector with all language versions based on a major version (higher version).

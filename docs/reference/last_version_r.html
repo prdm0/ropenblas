@@ -137,6 +137,15 @@ will consider the major release number.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list of two named elements will be returned. Are they:</p><ol>
+<li><p><code>last_version</code>: Returns the latest stable version of the language given a major version (major version).
+   If <code>major = NULL</code>, the latest stable version of the language will be returned based on the set of all language versions.</p></li>
+<li><p><code>versions</code>: Character vector with all language versions based on a major version (higher version).
+   If <code>major = NULL</code>, <code>versions</code> will be a vector with the latest language versions.</p></li>
+</ol>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function automatically searches <span style="R">R</span> language versions in the official language repositories. That way,
@@ -163,6 +172,7 @@ version was <code>1L</code> or <code>2L</code>, for example.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
