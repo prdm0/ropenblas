@@ -32,8 +32,8 @@ binaries found in \code{/opt/R/version_r/lib64/R/bin}, where, for example, \code
 or any other version. If \code{version_r = NULL}, the latest stable version of \R will be compiled.
 }
 \examples{
-\donttest{rcompiler()}
+# rcompiler()
 }
 \seealso{
-[ropenblas()], [last_version_r()]
+\code{\link{ropenblas()}}, \code{\link{last_version_r()}}
 }

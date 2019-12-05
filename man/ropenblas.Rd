@@ -50,10 +50,10 @@ You do not have to in every section of \R make use of the \code{ropenblas()} fun
 will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sections.
 }
 \examples{
-\donttest{ropenblas()}
+# ropenblas()
 }
 \seealso{
-[rcompiler()], [last_version_r()]
+\code{\link{rcompiler()}}, \code{\link{last_version_r()}}
 }
 \author{
 Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})

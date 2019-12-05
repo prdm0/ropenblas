@@ -107,7 +107,7 @@
 <pre><code><a href="https://rdrr.io/r/base/library.html">library(ropenblas)</a></code></pre>
 <div id="ropenblas-function" class="section level3">
 <h3 class="hasAnchor">
-<a href="#ropenblas-function" class="anchor"></a>ropenblas() function:</h3>
+<a href="#ropenblas-function" class="anchor"></a>‘ropenblas’ function:</h3>
 <p>Installing, compiling, and linking the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> version <strong>0.3.7</strong> library to the <a href="https://www.r-project.org/"><strong>R</strong></a> language:</p>
 <pre><code><a href="reference/ropenblas.html">ropenblas(x = "0.3.7")</a></code></pre>
 <p><strong>Notes</strong>:</p>
@@ -129,7 +129,7 @@
 </div>
 <div id="last_version_r-function" class="section level3">
 <h3 class="hasAnchor">
-<a href="#last_version_r-function" class="anchor"></a>last_version_r() function:</h3>
+<a href="#last_version_r-function" class="anchor"></a>‘last_version_r’ function:</h3>
 <p>Given the higher version, the function will return the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. Veja o exemplo:</p>
 <pre><code>&gt; last_version_r(major = 3L)
 $last_version
@@ -140,7 +140,7 @@ $versions
 [13] "R-3.2.4" "R-3.2.5" "R-3.3.0" "R-3.3.1" "R-3.3.2" "R-3.3.3" "R-3.4.0" "R-3.4.1" "R-3.4.2" "R-3.4.3" "R-3.4.4" "R-3.5.0"
 [25] "R-3.5.1" "R-3.5.2" "R-3.5.3" "R-3.6.0" "R-3.6.1"</code></pre>
 <p>or</p>
-<pre><code>&gt; last_version_r(2L)
+<pre><code>&gt; last_version_r(major = 2L)
 $last_version
 [1] "R-2.9.2"
 
@@ -153,8 +153,8 @@ $versions
 </div>
 <div id="rcompiler-function" class="section level3">
 <h3 class="hasAnchor">
-<a href="#rcompiler-function" class="anchor"></a>rcompiler() function:</h3>
-<p>This function is responsible for compiling a version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href="https://www.r-project.org/"><strong>R</strong></a> that you want to compile. For example, <code>x = "3.6.2"</code> will compile and link <strong>R-3.6.2</strong> version as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a></p>
+<a href="#rcompiler-function" class="anchor"></a>‘rcompiler’ function:</h3>
+<p>This function is responsible for compiling a version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href="https://www.r-project.org/"><strong>R</strong></a> that you want to compile. For example, <code>x = "3.6.1"</code> will compile and link <strong>R-3.6.1</strong> version as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a></p>
 <p>The <code>version_openblas</code> <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> argument is a version of the library that will be linked to the <a href="https://www.r-project.org/"><strong>R</strong></a> code that will be compiled. By default if <code>version_openblas = NULL</code>, the latest stable version of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> will be linked.</p>
 <p>For example, to compile the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language, do:</p>
 <pre><code><a href="reference/rcompiler.html">rcompiler()</a></code></pre>

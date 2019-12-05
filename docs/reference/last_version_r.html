@@ -132,17 +132,23 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>major</th>
-      <td><p>Major release number of <span style="R">R</span> language (e.g. 1L, 2L, 3L, ...). If <code>major = NULL</code>, the function
+      <td><p>Major release number of <span style="R">R</span> language (e.g. <code>1L</code>, <code>2L</code>, <code>3L</code>, ...). If <code>major = NULL</code>, the function
 will consider the major release number.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function automatically searches <span style="R">R</span> language versions in the official language repositories. That way,
+doing <code>last_version_r (major = NULL)</code> you will always be well informed about which latest stable version the 
+<span style="R">R</span> language is in. You can also set the higher version and do a search on the versions of the <span style="R">R</span> language whose major
+version was <code>1L</code> or <code>2L</code>, for example.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>[ropenblas()], [rcompiler()]</p></div>
+    <div class='dont-index'><p><code><a href='ropenblas.html'>ropenblas()</a></code>, <code><a href='rcompiler.html'>rcompiler()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>last_version_r</span>()</div><div class='output co'>#&gt; $last_version
+    <pre class="examples"><div class='input'><span class='fu'>last_version_r</span>(<span class='kw'>major</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; $last_version
 #&gt; [1] "R-3.6.1"
 #&gt; 
 #&gt; $versions
@@ -157,6 +163,7 @@ will consider the major release number.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
