@@ -24,7 +24,7 @@ Given the higher version, the function will return the latest stable version of 
 }
 \details{
 This function automatically searches \R language versions in the official language repositories. That way,
-doing \code{last_version_r (major = NULL)} you will always be well informed about which latest stable version the 
+doing \code{last_version_r(major = NULL)} you will always be well informed about which latest stable version the
 \R language is in. You can also set the higher version and do a search on the versions of the \R language whose major
 version was \code{1L} or \code{2L}, for example.
 }
@@ -32,5 +32,5 @@ version was \code{1L} or \code{2L}, for example.
 last_version_r(major = NULL)
 }
 \seealso{
-\code{\link{ropenblas()}}, \code{\link{rcompiler()}}
+\code{\link{ropenblas}}, \code{\link{rcompiler}}
 }
