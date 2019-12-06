@@ -62,7 +62,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist,-1L) %>%
+           unlist, -1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -390,54 +390,62 @@ last_version_r <- function(major = NULL) {
   if (!connection())
     stop("You apparently have no internet connection.\n")
   
-    search <- function(x, number_version = TRUE) {
-      
-        test <- function(index, vector_versions)
-          grepl(pattern = "^R-", vector_versions[index])
-  
-      if (number_version) {
-        vector_versions <-
-          glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
-          getURL %>%
-          getHTMLLinks
-        index <-
-          sapply(X = 1L:length(vector_versions), FUN = test, vector_versions)
-        vector_versions[index] %>%
-          unique %>%
-          length
-      } else {
-        vector_versions <-
-          glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
-          getURL %>%
-          getHTMLLinks
-        index <-
-          sapply(X = 1L:length(vector_versions), FUN = test, vector_versions)
-        vector_versions[index] %>%
-          unique %>% 
-          str_remove(pattern = "(.tar.gz$|.tgz$)")
-      }
-    }
-  
-    trysearch <-
-      function(...)
-        tryCatch(
-          expr = search(...),
-          error = function(e)
-            return(0),
-          warning = function(w)
-            return(0)
-        )  
+  search <- function(x, number_version = TRUE) {
+    test <- function(index, vector_versions)
+      grepl(pattern = "^R-", vector_versions[index])
     
+    if (number_version) {
+      vector_versions <-
+        glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
+        getURL %>%
+        getHTMLLinks
+      index <-
+        sapply(X = 1L:length(vector_versions),
+               FUN = test,
+               vector_versions)
+      vector_versions[index] %>%
+        unique %>%
+        length
+    } else {
+      vector_versions <-
+        glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
+        getURL %>%
+        getHTMLLinks
+      index <-
+        sapply(X = 1L:length(vector_versions),
+               FUN = test,
+               vector_versions)
+      vector_versions[index] %>%
+        unique %>%
+        str_remove(pattern = "(.tar.gz$|.tgz$)")
+    }
+  }
+  
+  trysearch <-
+    function(...)
+      tryCatch(
+        expr = search(...),
+        error = function(e)
+          return(0),
+        warning = function(w)
+          return(0)
+      )
+  
   if (is.null(major))
     major <-
-    vapply(X = 1L:6L, FUN = trysearch,
+    vapply(X = 1L:6L,
+           FUN = trysearch,
            FUN.VALUE = double(1L)) %>% which.min - 1L
   
   
-  vec_versions <- search(x = major, number_version = FALSE)
+  vec_versions <- search(x = major, number_version = FALSE) %>% 
+    str_remove(pattern = "^R-")
   
-  list(last_version = vec_versions[length(vec_versions)],
-       versions = vec_versions, n = length(vec_versions))
+  list(
+    last_version = vec_versions[length(vec_versions)],
+    versions = vec_versions,
+    n = length(vec_versions)
+  )
 }
 
 #' @importFrom utils untar
