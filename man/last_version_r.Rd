@@ -17,6 +17,8 @@ A list of two named elements will be returned. Are they:
    If \code{major = NULL}, the latest stable version of the language will be returned based on the set of all language versions.
    \item \code{versions}: Character vector with all language versions based on a major version (higher version).
    If \code{major = NULL}, \code{versions} will be a vector with the latest language versions.
+   \item \code{n}: Total number of versions of \R based on major version. If \code{major = NULL}, \code{versions}
+   will be a vector with the latest language versions.
 }
 }
 \description{

@@ -144,6 +144,8 @@ will consider the major release number.</p></td>
    If <code>major = NULL</code>, the latest stable version of the language will be returned based on the set of all language versions.</p></li>
 <li><p><code>versions</code>: Character vector with all language versions based on a major version (higher version).
    If <code>major = NULL</code>, <code>versions</code> will be a vector with the latest language versions.</p></li>
+<li><p><code>n</code>: Total number of versions of <span style="R">R</span> based on major version. If <code>major = NULL</code>, <code>versions</code>
+   will be a vector with the latest language versions.</p></li>
 </ol>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -161,11 +163,17 @@ version was <code>1L</code> or <code>2L</code>, for example.</p>
 #&gt; [1] "R-3.6.1"
 #&gt; 
 #&gt; $versions
-#&gt;  [1] "R-3.0.0" "R-3.0.1" "R-3.0.2" "R-3.0.3" "R-3.1.0" "R-3.1.1" "R-3.1.2"
-#&gt;  [8] "R-3.1.3" "R-3.2.0" "R-3.2.1" "R-3.2.2" "R-3.2.3" "R-3.2.4" "R-3.2.5"
-#&gt; [15] "R-3.3.0" "R-3.3.1" "R-3.3.2" "R-3.3.3" "R-3.4.0" "R-3.4.1" "R-3.4.2"
-#&gt; [22] "R-3.4.3" "R-3.4.4" "R-3.5.0" "R-3.5.1" "R-3.5.2" "R-3.5.3" "R-3.6.0"
-#&gt; [29] "R-3.6.1"
+#&gt;  [1] "R-3.0.0"         "R-3.0.1"         "R-3.0.2"         "R-3.0.3"        
+#&gt;  [5] "R-3.1.0"         "R-3.1.1"         "R-3.1.2"         "R-3.1.3"        
+#&gt;  [9] "R-3.2.0"         "R-3.2.1"         "R-3.2.2"         "R-3.2.3"        
+#&gt; [13] "R-3.2.4-revised" "R-3.2.4"         "R-3.2.5"         "R-3.3.0"        
+#&gt; [17] "R-3.3.1"         "R-3.3.2"         "R-3.3.3"         "R-3.4.0"        
+#&gt; [21] "R-3.4.1"         "R-3.4.2"         "R-3.4.3"         "R-3.4.4"        
+#&gt; [25] "R-3.5.0"         "R-3.5.1"         "R-3.5.2"         "R-3.5.3"        
+#&gt; [29] "R-3.6.0"         "R-3.6.1"        
+#&gt; 
+#&gt; $n
+#&gt; [1] 30
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
