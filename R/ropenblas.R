@@ -457,13 +457,15 @@ download_r <- function(x) {
   
   path_r <- "/tmp/r" %>% dir_create
   
+  extension <- ifelse(x <= 1L, "tgz", "tar.gz")
+  
   url <-
-    "https://cloud.r-project.org/src/base/R-{substr(x, 1L, 1L)}/R-{x}.tar.gz" %>%
+    "https://cloud.r-project.org/src/base/R-{substr(x, 1L, 1L)}/R-{x}.{extension}" %>%
     glue
   
-  url %>% download.file(destfile = glue("{path_r}/R-{x}.tar.gz"))
+  url %>% download.file(destfile = glue("{path_r}/R-{x}.{extension}"))
   
-  "{path_r}/R-{x}.tar.gz" %>%
+  "{path_r}/R-{x}.{extension}" %>%
     glue %>%
     untar(exdir = glue("{path_r}"))
   
