@@ -469,8 +469,16 @@ download_r <- function(x) {
     glue %>%
     untar(exdir = glue("{path_r}"))
   
-  "{path_r}/R-{x}" %>%
-    glue
+  x <-
+    list.files("/tmp/r")[!stringr::str_detect(list.files("/tmp/r"), pattern = "gz$")]
+  
+  if (!grepl(pattern = "^R", x)) {
+    "{path_r}/R-{x}" %>%
+      glue
+  } else {
+    "{path_r}/{x}" %>%
+      glue
+  }
 }
 
 check_r_opt <- function(x = NULL) {
