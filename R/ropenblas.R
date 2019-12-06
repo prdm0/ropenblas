@@ -361,10 +361,11 @@ ropenblas <- function(x = NULL) {
   
 }
 
-#' @importFrom stringr str_extract_all
+#' @importFrom stringr str_remove
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom RCurl getURL
+#' @importFrom XML getHTMLLinks
 #' @title Given the higher version, the function will return the latest stable version of the \R language.
 #' @param major Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
 #' will consider the major release number.
@@ -378,6 +379,8 @@ ropenblas <- function(x = NULL) {
 #'    If \code{major = NULL}, the latest stable version of the language will be returned based on the set of all language versions.
 #'    \item \code{versions}: Character vector with all language versions based on a major version (higher version).
 #'    If \code{major = NULL}, \code{versions} will be a vector with the latest language versions.
+#'    \item \code{n}: Total number of versions of \R based on major version. If \code{major = NULL}, \code{versions}
+#'    will be a vector with the latest language versions.
 #' }
 #' @seealso \code{\link{ropenblas}}, \code{\link{rcompiler}}
 #' @examples
@@ -387,37 +390,54 @@ last_version_r <- function(major = NULL) {
   if (!connection())
     stop("You apparently have no internet connection.\n")
   
-  search <- function(x, number_version = TRUE) {
-    if (number_version) {
-      stringr::str_extract_all(getURL(
-        glue("https://cloud.r-project.org/src/base/R-{x}/")
-      ), "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist %>% unique %>% length
-    } else {
-      stringr::str_extract_all(getURL(
-        glue("https://cloud.r-project.org/src/base/R-{x}/")
-      ), "R-[0-9]+.[0-9]+.[0-9]+") %>% unlist %>% unique
+    search <- function(x, number_version = TRUE) {
+      
+        test <- function(index, vector_versions)
+          grepl(pattern = "^R-", vector_versions[index])
+  
+      if (number_version) {
+        vector_versions <-
+          glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
+          getURL %>%
+          getHTMLLinks
+        index <-
+          sapply(X = 1L:length(vector_versions), FUN = test, vector_versions)
+        vector_versions[index] %>%
+          unique %>%
+          length
+      } else {
+        vector_versions <-
+          glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
+          getURL %>%
+          getHTMLLinks
+        index <-
+          sapply(X = 1L:length(vector_versions), FUN = test, vector_versions)
+        vector_versions[index] %>%
+          unique %>% 
+          str_remove(pattern = "(.tar.gz$|.tgz$)")
+      }
     }
-  }
   
-  trysearch <-
-    function(...)
-      tryCatch(
-        expr = search(...),
-        error = function(e)
-          return(0),
-        warning = function(w)
-          return(0)
-      )
-  
+    trysearch <-
+      function(...)
+        tryCatch(
+          expr = search(...),
+          error = function(e)
+            return(0),
+          warning = function(w)
+            return(0)
+        )  
+    
   if (is.null(major))
     major <-
-    vapply(X = 1L:5L, FUN = trysearch, FUN.VALUE = double(1L)) %>% unlist %>% which.min - 1L
+    vapply(X = 1L:6L, FUN = trysearch,
+           FUN.VALUE = double(1L)) %>% which.min - 1L
   
   
-  vec_versions <- trysearch(x = major, number_version = FALSE)
+  vec_versions <- search(x = major, number_version = FALSE)
   
   list(last_version = vec_versions[length(vec_versions)],
-       versions = vec_versions)
+       versions = vec_versions, n = length(vec_versions))
 }
 
 #' @importFrom utils untar
