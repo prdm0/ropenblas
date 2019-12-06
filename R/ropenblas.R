@@ -457,7 +457,7 @@ download_r <- function(x) {
   
   path_r <- "/tmp/r" %>% dir_create
   
-  extension <- ifelse(x <= 1L, "tgz", "tar.gz")
+  extension <- ifelse(x < 2L, "tgz", "tar.gz")
   
   url <-
     "https://cloud.r-project.org/src/base/R-{substr(x, 1L, 1L)}/R-{x}.{extension}" %>%
