@@ -1,8 +1,10 @@
-# ropenblas 0.1.1 (development version)
+# ropenblas 0.2.0 (development version)
 
 * Function `last_version_r(major = 3L)` implemented.  Given the higher version, the function will return the latest stable version of the R language. Major release number of R language (eg. `1L`, `2L`, `3L`, ...);
 
-* The `rcompiler()` function has been exported. This function is responsible for compiling a version of the R language.
+* The `rcompiler()` function has been exported. This function is responsible for compiling a version of the R language;
+
+* It now depends on the version of R >= 3.1.0;
 
 # ropenblas 0.1.0
 

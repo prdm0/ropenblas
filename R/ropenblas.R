@@ -22,25 +22,25 @@ download_openblas <- function(x = NULL) {
   path_openblas <- dir_create(path = "/tmp/openblas")
   
   repo_openblas <-
-    clone("https://github.com/xianyi/OpenBLAS.git", path_openblas)
+    git2r::clone("https://github.com/xianyi/OpenBLAS.git", path_openblas)
   
-  last_version <- names(tail(tags(repo_openblas), 1L))
+  last_version <- names(tail(git2r::tags(repo_openblas), 1L))
   
   if (is.null(x))
     x <- last_version
   
-  if (glue("v{x}") < names(tail(tags(repo_openblas), 1L))) {
+  if (glue("v{x}") < names(tail(git2r::tags(repo_openblas), 1L))) {
     list(
       new = TRUE,
-      version = names(tail(tags(repo_openblas), 1L)),
+      version = names(tail(git2r::tags(repo_openblas), 1L)),
       path_openblas = path_openblas,
       repo_openblas = repo_openblas,
       exist_x = TRUE
     )
-  } else if (glue("v{x}") > names(tail(tags(repo_openblas), 1L))) {
+  } else if (glue("v{x}") > names(tail(git2r::tags(repo_openblas), 1L))) {
     list(
       new = FALSE,
-      version = names(tail(tags(repo_openblas), 1L)),
+      version = names(tail(git2r::tags(repo_openblas), 1L)),
       path_openblas = path_openblas,
       repo_openblas = repo_openblas,
       exist_x = FALSE
@@ -95,7 +95,7 @@ exist <- function(x = "gcc") {
 }
 
 validate_answer <- function(x) {
-  if (!(x %in% c("y", "no", "yes", "no")))
+  if (!(x %in% c("y", "no", "yes", "n")))
     stop("Invalid option. Procedure interrupted.")
 }
 
@@ -142,6 +142,11 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
   } else {
     glue("{x}") %>% system
   }
+}
+
+answer_yes_no <- function(text) {
+  readline(prompt = glue("{text} (yes/no): ")) %>%
+    tolower
 }
 
 #' @title Download, Compile and Link OpenBLAS Library with \R
@@ -197,7 +202,7 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' # ropenblas()
 #' @export
 ropenblas <- function(x = NULL, restart_r = TRUE) {
-  if (Sys.info()[[1]] != "Linux")
+  if (Sys.info()[[1L]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
   if (!connection())
@@ -221,11 +226,9 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         cat("\n")
         if (glue("v{x}") != download$version) {
           answer <-
-            readline(
-              prompt = glue(
-                "The latest version of OpenBLAS is {substr(download$version, 2L, nchar(download$version))}. Do you want to install this version? (yes/no): "
-              )
-            ) %>% tolower
+            "The latest version of OpenBLAS is {substr(download$version, 2L, nchar(download$version))}. Do you want to install this version?" %>%
+            glue %>%
+            answer_yes_no
           
           validate_answer(answer)
           
@@ -241,16 +244,13 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
       } else {
         if (glue("v{dir_blas()$version_openblas}") == download$version) {
           answer <-
-            readline(
-              prompt = glue(
-                "The latest version of OpenBLAS is already in use. Do you want to compile and link again? (yes/no): "
-              )
-            ) %>% tolower
+            "The latest version of OpenBLAS is already in use. Do you want to compile and link again?" %>%
+            answer_yes_no
           
           validate_answer(answer)
           
           if (answer %in% c("y", "yes")) {
-            checkout(repo, download$version)
+            checkout(repo, glue("v{x}"))
           } else {
             return(warning("Ok, procedure interrupted!"))
           }
@@ -265,11 +265,9 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     } else {
       if (glue("v{x}") < download$version) {
         answer <-
-          readline(
-            prompt = glue(
-              "The latest version is {substr(download$version, 2L, nchar(download$version))}. Want to consider the latest version? (yes/no): "
-            )
-          )
+          "The latest version is {substr(download$version, 2L, nchar(download$version))}. Want to consider the latest version?" %>%
+          glue %>%
+          answer_yes_no
         
         validate_answer(answer)
         
@@ -290,12 +288,8 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         checkout(repo, download$version)
       } else {
         answer <-
-          readline(
-            prompt = glue(
-              "The latest version of OpenBLAS is already in use. Do you want to compile and link again? (yes/no): "
-            )
-          ) %>% tolower
-        
+          "The latest version of OpenBLAS is already in use. Do you want to compile and link again?" %>%
+          answer_yes_no
         validate_answer(answer)
         
         if (answer %in% c("n", "no")) {
@@ -347,7 +341,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
       "sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
     ) %>% loop_root(attempt = 5L)
   }
-
+  
   .refresh_terminal <- function() {
     system("R")
     q("no")
@@ -360,27 +354,29 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
       .refresh_terminal()
     }
   }
-
+  
   cat("\n")
   
-  cat(cli::rule(
-    width = 35L,
-    center = "Procedure Completed",
-    col = "blue",
-    background_col = "gray90",
-    line = 2L
-  ))
+  cat(
+    cli::rule(
+      width = 35L,
+      center = "Procedure Completed",
+      col = "blue",
+      background_col = "gray90",
+      line = 2L
+    )
+  )
   
   cat("\n")
   
   if (is.null(x)) {
-    "[{cli::col_green(cli::symbol$tick)}] OpenBLAS version {substr(download$version, 2L, nchar(download$version))}." %>%
-      glue %>% 
+    "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] OpenBLAS version {substr(download$version, 2L, nchar(download$version))}." %>%
+      glue %>%
       cat
     
   } else {
-    "[{cli::col_green(cli::symbol$tick)}] OpenBLAS version {x}." %>%
-      glue %>% 
+    "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] OpenBLAS version {x}." %>%
+      glue %>%
       cat
   }
   
@@ -513,6 +509,37 @@ check_r_opt <- function(x = NULL) {
   "/opt/R/{x}" %>% glue %>% dir_exists
 }
 
+attention <- function(x) {
+  cat("\n")
+  
+  cat(
+    cli::rule(
+      width = 60L,
+      center = "VERY ATTENTION",
+      col = "red",
+      background_col = "gray90",
+      line = 2L
+    )
+  )
+  
+  cat("\n")
+  
+  glue(
+    'The {cli::style_bold("ropenblas")} package depends on versions of {cli::style_bold("R")} ',
+    '{cli::style_bold(cli::symbol$geq)} {cli::style_bold("3.1.0")}. Therefore,',
+    'you will not be able to \nuse this package to go back to a later version of R!'
+  ) %>% cat
+  
+  answer <- NULL
+  for (i in 1L:3L) {
+    answer[i] <-
+      answer_yes_no(text = glue("{cli::symbol$bullet} Do you understand? ({i} of 3)"))
+    validate_answer(answer[i])
+  }
+  
+  answer
+}
+
 #' @importFrom fs dir_exists
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
@@ -545,7 +572,7 @@ check_r_opt <- function(x = NULL) {
 #' @export
 rcompiler <- function(x = NULL,
                       version_openblas = NULL) {
-  if (Sys.info()[[1]] != "Linux")
+  if (Sys.info()[[1L]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
   if (!connection())
@@ -553,10 +580,16 @@ rcompiler <- function(x = NULL,
   
   if (!exist())
     stop(
-      "GNU GCC Compiler not installed. Install GNU GCC Compiler (C and Fortran) on your operating system."
+      "GNU GCC Compiler not installed. Install GNU GCC Compiler (C and Fortran) on your operating system.\n"
     )
   if (!exist("make"))
-    stop("GNU Make not installed. Install GNU Make on your operating system.")
+    stop("GNU Make not installed. Install GNU Make on your operating system.\n")
+  
+  if (!is.null(x) && x < "3.1.0") {
+    answer <- attention(x)
+    if (any(answer != "y" || answer != "yes"))
+      return(warning("Given the answers, it is not possible to continue ..."))
+  }
   
   
   if (is.null(x))
@@ -564,12 +597,8 @@ rcompiler <- function(x = NULL,
   
   if (check_r_opt(x)) {
     if ("/opt/R/{x}" %>% glue %>% dir_exists) {
-      answer <-
-        readline(
-          prompt = glue(
-            "This version of R has already been compiled and is found in /opt/R/{x}. Do you want to compile and link again? (yes/no): "
-          )
-        ) %>% tolower
+      answer <- "R version already compiled. Compile again?" %>%
+        answer_yes_no
       
       validate_answer(answer)
       
@@ -623,31 +652,39 @@ rcompiler <- function(x = NULL,
   
   cat("\n")
   
-  cat(cli::rule(
-    width = 35L,
-    center = "Procedure Completed",
-    col = "blue",
-    background_col = "gray90",
-    line = 2L
-  ))
+  cat(
+    cli::rule(
+      width = 35L,
+      center = "Procedure Completed",
+      col = "blue",
+      background_col = "gray90",
+      line = 2L
+    )
+  )
   
   cat("\n")
   
-  "[{cli::col_green(cli::symbol$tick)}] R version {x};" %>%
-    glue %>% 
+  "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] R version {x};" %>%
+    glue %>%
     cat
   
   cat("\n")
   
   if (is.null(version_openblas)) {
-    "[{cli::col_green(cli::symbol$tick)}] Latest version of OpenBLAS." %>%
-      glue %>% 
+    "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] Latest version of OpenBLAS." %>%
+      glue %>%
       cat
     
   } else {
-    "[{cli::col_green(cli::symbol$tick)}] OpenBLAS version {x}." %>%
-      glue %>% 
+    "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] OpenBLAS version {x}." %>%
+      glue %>%
       cat
   }
+  
+  cat("\n")
+  
+  "[{cli::style_bold(cli::col_blue(cli::symbol$info))}] The roles are active after terminating the current R session." %>%
+    glue %>%
+    cat
   
 }

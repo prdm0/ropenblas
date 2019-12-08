@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ropenblas</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -125,7 +125,7 @@
     <p>Link <span style="R">R</span> with an optimized version of the <a href='http://www.netlib.org/blas/'><strong>BLAS</strong></a> library (<a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ropenblas</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>ropenblas</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>restart_r</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,6 +133,10 @@
     <tr>
       <th>x</th>
       <td><p><a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library version to be considered. By default, <code>x = NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>restart_r</th>
+      <td><p>If <code>TRUE</code>, a new section of <span style="R">R</span> is started after compiling and linking the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library.</p></td>
     </tr>
     </table>
 
