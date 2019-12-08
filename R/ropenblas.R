@@ -161,6 +161,7 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @note You do not have to in every section of \R make use of the \code{ropenblas()} function. Once the function is used, \R
 #' will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sections.
 #' @param x \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = NULL}.
+#' @param restart_r If \code{TRUE}, a new section of \R is started after compiling and linking the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
 #' @details You must install the following dependencies on your operating system (Linux):
 #' \enumerate{
 #'    \item \strong{GNU Make};
@@ -190,11 +191,12 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
+#' @importFrom cli rule col_green symbol
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
 #' # ropenblas()
 #' @export
-ropenblas <- function(x = NULL) {
+ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (Sys.info()[[1]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
@@ -336,27 +338,50 @@ ropenblas <- function(x = NULL) {
   }) %>% setwd
   
   glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>%
-    loop_root
+    loop_root(attempt = 5L)
   
   setwd(dir_blas()$path)
   
   if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     glue(
       "sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-    ) %>% loop_root
+    ) %>% loop_root(attempt = 5L)
   }
-  
-  cat("Done!\n")
-  
+
   .refresh_terminal <- function() {
     system("R")
     q("no")
   }
   
-  if (rstudioapi::isAvailable()) {
-    tmp <- rstudioapi::restartSession() # .rs.restartR()
+  if (restart_r) {
+    if (rstudioapi::isAvailable()) {
+      tmp <- rstudioapi::restartSession() # .rs.restartR()
+    } else {
+      .refresh_terminal()
+    }
+  }
+
+  cat("\n")
+  
+  cat(cli::rule(
+    width = 35L,
+    center = "Procedure Completed",
+    col = "blue",
+    background_col = "gray90",
+    line = 2L
+  ))
+  
+  cat("\n")
+  
+  if (is.null(x)) {
+    "[{cli::col_green(cli::symbol$tick)}] OpenBLAS version {substr(download$version, 2L, nchar(download$version))}." %>%
+      glue %>% 
+      cat
+    
   } else {
-    .refresh_terminal()
+    "[{cli::col_green(cli::symbol$tick)}] OpenBLAS version {x}." %>%
+      glue %>% 
+      cat
   }
   
 }
@@ -438,7 +463,7 @@ last_version_r <- function(major = NULL) {
            FUN.VALUE = double(1L)) %>% which.min - 1L
   
   
-  vec_versions <- search(x = major, number_version = FALSE) %>% 
+  vec_versions <- search(x = major, number_version = FALSE) %>%
     str_remove(pattern = "^R-")
   
   list(
@@ -492,6 +517,7 @@ check_r_opt <- function(x = NULL) {
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom getPass getPass
+#' @importFrom cli rule col_green symbol
 #' @title Compile a version of \R on GNU/Linux systems
 #' @description This function is responsible for compiling a version of the \R language.
 #' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
@@ -534,8 +560,7 @@ rcompiler <- function(x = NULL,
   
   
   if (is.null(x))
-    x <- last_version_r()$last_version %>%
-      substr(3L, nchar(last_version_r()$last_version))
+    x <- last_version_r()$last_version
   
   if (check_r_opt(x)) {
     if ("/opt/R/{x}" %>% glue %>% dir_exists) {
@@ -570,11 +595,10 @@ rcompiler <- function(x = NULL,
       system
     
     glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
-      loop_root
+      loop_root(attempt = 5L)
     
   } else {
-    setwd(path_r)
-    ropenblas(x = version_openblas)
+    ropenblas(x = version_openblas, restart_r = FALSE)
     glue("export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/") %>%
       system
     glue(
@@ -584,18 +608,46 @@ rcompiler <- function(x = NULL,
     ) %>%
       system
     
-    glue("make -j $(nproc)") %>%
+    glue("cd {path_r} && make -j $(nproc)") %>%
       system
     
+    
+    setwd(path_r)
     glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
-      loop_root
+      loop_root(attempt = 5L)
     
   }
   
   glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
-    loop_root
+    loop_root(attempt = 5L)
   
-  cat("Done!\n")
-  cat(glue("In the next section of R, version {x} will be considered!"))
+  cat("\n")
+  
+  cat(cli::rule(
+    width = 35L,
+    center = "Procedure Completed",
+    col = "blue",
+    background_col = "gray90",
+    line = 2L
+  ))
+  
+  cat("\n")
+  
+  "[{cli::col_green(cli::symbol$tick)}] R version {x};" %>%
+    glue %>% 
+    cat
+  
+  cat("\n")
+  
+  if (is.null(version_openblas)) {
+    "[{cli::col_green(cli::symbol$tick)}] Latest version of OpenBLAS." %>%
+      glue %>% 
+      cat
+    
+  } else {
+    "[{cli::col_green(cli::symbol$tick)}] OpenBLAS version {x}." %>%
+      glue %>% 
+      cat
+  }
   
 }
