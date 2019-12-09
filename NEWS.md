@@ -1,4 +1,4 @@
-# ropenblas 0.2.0 (development version)
+# ropenblas 0.2.0
 
 * Function `last_version_r(major = 3L)` implemented.  Given the higher version, the function will return the latest stable version of the R language. Major release number of R language (eg. `1L`, `2L`, `3L`, ...);
 
