@@ -358,9 +358,9 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   cat("\n")
   
   cat(
-    cli::rule(
-      width = 35L,
-      center = "Procedure Completed",
+    rule(
+      width = 50L,
+      center = glue("{style_bold(\"Procedure Completed\")}"),
       col = "blue",
       background_col = "gray90",
       line = 2L
@@ -514,9 +514,9 @@ attention <- function(x) {
   cat("\n")
   
   cat(
-    cli::rule(
+    rule(
       width = 60L,
-      center = "VERY ATTENTION",
+      center = glue("{style_bold(\"VERY ATTENTION\")}"), 
       col = "red",
       background_col = "gray90",
       line = 2L
@@ -567,8 +567,8 @@ change_r <- function (x, change = TRUE) {
   
   cat(
     rule(
-      width = 35L,
-      center = "Procedure Completed",
+      width = 50L,
+      center = glue("{style_bold(\"Procedure Completed\")}"), 
       col = "blue",
       background_col = "gray90",
       line = 2L
@@ -686,8 +686,8 @@ rcompiler <- function(x = NULL,
       
       cat(
         rule(
-          width = 35L,
-          center = "Procedure Completed",
+          width = 50L,
+          center = glue("{style_bold(\"Procedure Completed\")}"),
           col = "blue",
           background_col = "gray90",
           line = 2L
