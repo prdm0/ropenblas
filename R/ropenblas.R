@@ -591,7 +591,6 @@ change_r <- function (x, change = TRUE) {
   
 }
 
-
 #' @importFrom fs dir_exists
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
@@ -648,7 +647,7 @@ rcompiler <- function(x = NULL,
   
   if (check_r_opt(x)) {
     if ("/opt/R/{x}" %>% glue %>% dir_exists) {
-      answer <- "R version already compiled. Do you want to use the compiled version?" %>%
+      answer <- "R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
         answer_yes_no
       
       validate_answer(answer)

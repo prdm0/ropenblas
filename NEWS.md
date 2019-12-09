@@ -6,6 +6,10 @@
 
 * It now depends on the version of R >= 3.1.0;
 
+* Compiled versions of R will be kept. When attempting to compile a previously compiled version, you will be given the option to only switch between versions of R without compiling;
+
+* An alert will be issued when attempting to compile and link a version of R earlier than version 3.6.1. The user will have to respond three times that they are aware that they will not be able to use the ropenblas package to return to a newer version of R.
+
 # ropenblas 0.1.0
 
 * Maintenance release;
