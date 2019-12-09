@@ -591,7 +591,6 @@ rcompiler <- function(x = NULL,
       return(warning("Given the answers, it is not possible to continue ..."))
   }
   
-  
   if (is.null(x))
     x <- last_version_r()$last_version
   
@@ -626,65 +625,54 @@ rcompiler <- function(x = NULL,
     glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
       loop_root(attempt = 5L)
     
+    glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
+      loop_root(attempt = 5L)
+    
+    cat("\n")
+    
+    cat(
+      cli::rule(
+        width = 35L,
+        center = "Procedure Completed",
+        col = "blue",
+        background_col = "gray90",
+        line = 2L
+      )
+    )
+
   } else {
-    ropenblas(x = version_openblas, restart_r = FALSE)
-    glue("export LD_LIBRARY_PATH=/opt/OpenBLAS/lib/") %>%
-      system
+    setwd(path_r)
     glue(
       "cd {path_r} && ./configure --prefix=/opt/R/{x} ",
       "--enable-R-shlib --enable-threads=posix --with-blas=\"-lopenblas ",
-      "-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -m64 -lpthread -lm\""
+      "-m64 -lpthread -lm\""
     ) %>%
       system
-    
-    glue("cd {path_r} && make -j $(nproc)") %>%
+  
+    glue("make -j $(nproc)") %>%
       system
     
-    
-    setwd(path_r)
     glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
       loop_root(attempt = 5L)
     
-  }
-  
-  glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
-    loop_root(attempt = 5L)
-  
-  cat("\n")
-  
-  cat(
-    cli::rule(
-      width = 35L,
-      center = "Procedure Completed",
-      col = "blue",
-      background_col = "gray90",
-      line = 2L
-    )
-  )
-  
-  cat("\n")
-  
-  "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] R version {x};" %>%
-    glue %>%
-    cat
-  
-  cat("\n")
-  
-  if (is.null(version_openblas)) {
-    "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] Latest version of OpenBLAS." %>%
-      glue %>%
-      cat
+    glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
+      loop_root(attempt = 5L)
     
-  } else {
-    "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] OpenBLAS version {x}." %>%
-      glue %>%
-      cat
+    ropenblas(x = version_openblas, restart_r = FALSE)
+    
   }
   
   cat("\n")
   
-  "[{cli::style_bold(cli::col_blue(cli::symbol$info))}] The roles are active after terminating the current R session." %>%
+  "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] R version {x}." %>%
     glue %>%
     cat
   
+  cat("\n")
+  
+  "{cli::symbol$mustache} The roles are active after terminating the current R session ..." %>% 
+    glue %>% 
+    col_blue %>% 
+    style_bold %>% 
+    cat
 }
