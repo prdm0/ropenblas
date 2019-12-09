@@ -731,9 +731,11 @@ rcompiler <- function(x = NULL,
   
   cat("\n")
   
-  "{symbol$mustache} The roles are active after terminating the current R session ..." %>%
+  "{symbol$mustache} The roles are active after terminating the current R session ...\n\n" %>%
     glue %>%
     col_blue %>%
     style_bold %>%
     cat
+  
+  
 }
