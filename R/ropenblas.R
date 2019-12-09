@@ -62,7 +62,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist, -1L) %>%
+           unlist,-1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -196,7 +196,7 @@ answer_yes_no <- function(text) {
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
-#' @importFrom cli rule col_green symbol
+#' @importFrom cli rule col_green symbol style_bold
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
 #' # ropenblas()
@@ -370,12 +370,12 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   cat("\n")
   
   if (is.null(x)) {
-    "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] OpenBLAS version {substr(download$version, 2L, nchar(download$version))}." %>%
+    "[{style_bold(col_green(symbol$tick))}] OpenBLAS version {substr(download$version, 2L, nchar(download$version))}." %>%
       glue %>%
       cat
     
   } else {
-    "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] OpenBLAS version {x}." %>%
+    "[{style_bold(col_green(symbol$tick))}] OpenBLAS version {x}." %>%
       glue %>%
       cat
   }
@@ -472,6 +472,7 @@ last_version_r <- function(major = NULL) {
 #' @importFrom utils untar
 #' @importFrom fs file_exists dir_create file_delete
 #' @importFrom glue glue
+#' @importFrom cli style_bold symbol
 download_r <- function(x) {
   if (file_exists("/tmp/r"))
     "/tmp/r" %>% file_delete
@@ -525,26 +526,77 @@ attention <- function(x) {
   cat("\n")
   
   glue(
-    'The {cli::style_bold("ropenblas")} package depends on versions of {cli::style_bold("R")} ',
-    '{cli::style_bold(cli::symbol$geq)} {cli::style_bold("3.1.0")}. Therefore,',
+    'The {style_bold("ropenblas")} package depends on versions of {style_bold("R")} ',
+    '{style_bold(symbol$geq)} {style_bold("3.1.0")}. Therefore,',
     'you will not be able to \nuse this package to go back to a later version of R!'
   ) %>% cat
   
   answer <- NULL
   for (i in 1L:3L) {
     answer[i] <-
-      answer_yes_no(text = glue("{cli::symbol$bullet} Do you understand? ({i} of 3)"))
+      answer_yes_no(text = glue("{symbol$bullet} Do you understand? ({i} of 3)"))
     validate_answer(answer[i])
   }
   
   answer
 }
 
+
+#' @importFrom glue glue
+#' @importFrom fs dir_exists
+#' @importFrom magrittr "%>%"
+change_r <- function (x, change = TRUE) {
+  
+  exist_version_r <- "/opt/R/{x}" %>%
+    glue %>%
+    dir_exists
+  
+  dir_r  <- R.home("bin")
+  
+  if (change) {
+    "sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>% 
+      glue %>% 
+      loop_root(attempt = 5L)
+    
+    "ln -sf /opt/R/{x}/lib64/R/bin/Rscript /usr/bin/Rscript" %>% 
+      glue %>% 
+      loop_root(attempt = 5L)
+  }
+  
+  cat("\n")
+  
+  cat(
+    rule(
+      width = 35L,
+      center = "Procedure Completed",
+      col = "blue",
+      background_col = "gray90",
+      line = 2L
+    )
+  )
+  
+  cat("\n")
+  
+  "[{style_bold(col_green(symbol$tick))}] R version {x}." %>%
+    glue %>%
+    cat
+  
+  cat("\n")
+  
+  "{symbol$mustache} The roles are active after terminating the current R session ..." %>%
+    glue %>%
+    col_blue %>%
+    style_bold %>%
+    cat
+  
+}
+
+
 #' @importFrom fs dir_exists
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom getPass getPass
-#' @importFrom cli rule col_green symbol
+#' @importFrom cli rule col_green symbol style_bold col_blue
 #' @title Compile a version of \R on GNU/Linux systems
 #' @description This function is responsible for compiling a version of the \R language.
 #' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
@@ -596,13 +648,13 @@ rcompiler <- function(x = NULL,
   
   if (check_r_opt(x)) {
     if ("/opt/R/{x}" %>% glue %>% dir_exists) {
-      answer <- "R version already compiled. Compile again?" %>%
+      answer <- "R version already compiled. Do you want to use the compiled version?" %>%
         answer_yes_no
       
       validate_answer(answer)
       
-      if (answer %in% c("n", "no"))
-        return(warning("Ok, procedure interrupted!"))
+      if (answer %in% c("y", "yes"))
+        return(change_r(x))
     }
   }
   
@@ -628,18 +680,22 @@ rcompiler <- function(x = NULL,
     glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
       loop_root(attempt = 5L)
     
-    cat("\n")
-    
-    cat(
-      cli::rule(
-        width = 35L,
-        center = "Procedure Completed",
-        col = "blue",
-        background_col = "gray90",
-        line = 2L
+    if (!is.null(version_openblas)) {
+      ropenblas(x = version_openblas, restart_r = FALSE)
+    } else {
+      cat("\n")
+      
+      cat(
+        rule(
+          width = 35L,
+          center = "Procedure Completed",
+          col = "blue",
+          background_col = "gray90",
+          line = 2L
+        )
       )
-    )
-
+    }
+    
   } else {
     setwd(path_r)
     glue(
@@ -648,14 +704,20 @@ rcompiler <- function(x = NULL,
       "-m64 -lpthread -lm\""
     ) %>%
       system
-  
+    
     glue("make -j $(nproc)") %>%
       system
     
     glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
       loop_root(attempt = 5L)
     
-    glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
+    
+    "sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>% 
+      glue %>% 
+      loop_root(attempt = 5L)
+    
+    "ln -sf /opt/R/{x}/lib64/R/bin/Rscript /usr/bin/Rscript" %>% 
+      glue %>% 
       loop_root(attempt = 5L)
     
     ropenblas(x = version_openblas, restart_r = FALSE)
@@ -664,15 +726,15 @@ rcompiler <- function(x = NULL,
   
   cat("\n")
   
-  "[{cli::style_bold(cli::col_green(cli::symbol$tick))}] R version {x}." %>%
+  "[{style_bold(col_green(symbol$tick))}] R version {x}." %>%
     glue %>%
     cat
   
   cat("\n")
   
-  "{cli::symbol$mustache} The roles are active after terminating the current R session ..." %>% 
-    glue %>% 
-    col_blue %>% 
-    style_bold %>% 
+  "{symbol$mustache} The roles are active after terminating the current R session ..." %>%
+    glue %>%
+    col_blue %>%
+    style_bold %>%
     cat
 }
