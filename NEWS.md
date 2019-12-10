@@ -1,6 +1,8 @@
 # ropenblas 0.2.1 (development version)
 
-* Code review.
+* Code review;
+
+* Highlighting some messages.
 
 # ropenblas 0.2.0
 
