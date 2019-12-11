@@ -1,9 +1,9 @@
 # ropenblas: Download, Compile and Link OpenBLAS Library with R
 
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=AdequacyModel)
-[![total](http://cranlogs.r-pkg.org/badges/grand-total/ropenblas)](https://CRAN.R-project.org/package=AdequacyModel)
-[![month](https://cranlogs.r-pkg.org/badges/ropenblas)](https://CRAN.R-project.org/package=AdequacyModel)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
+[![total](http://cranlogs.r-pkg.org/badges/grand-total/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
+[![month](https://cranlogs.r-pkg.org/badges/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 
 <img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right" />
 
