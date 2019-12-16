@@ -594,6 +594,23 @@ change_r <- function (x, change = TRUE) {
   
 }
 
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom stringr str_detect
+turn_back <- function(x){
+  current_directory <- "{R.home()}/bin" %>% glue
+  run_r <- "cd {R.home()}/bin && ./R --no-save&" %>% 
+    glue %>% 
+    system(intern = TRUE)
+  error <- any(FALSE, str_detect(run_r, pattern = "Error:"))
+  
+  if (error) {
+    /usr/bin/R
+  }
+  
+  list(current_directory = current_directory, error = error)
+}
+
 #' @importFrom fs dir_exists
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
