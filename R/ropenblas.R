@@ -325,6 +325,8 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!exist("make"))
     stop(glue("{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."))
   
+  "sudo -sK mv {dir_blas()$path}{dir_blas()$file_blas}"
+  
   if (!exist_opt())
     mkdir_opt()
   
@@ -597,7 +599,7 @@ change_r <- function (x, change = TRUE) {
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom stringr str_detect
-turn_back <- function(x){
+turn_back <- function(){
   current_directory <- "{R.home()}/bin" %>% glue
   run_r <- "cd {R.home()}/bin && ./R --no-save&" %>% 
     glue %>% 
@@ -605,7 +607,8 @@ turn_back <- function(x){
   error <- any(FALSE, str_detect(run_r, pattern = "Error:"))
   
   if (error) {
-    /usr/bin/R
+    "sudo -kS mv /usr/bin/R.keep /usr/bin/R" %>% 
+    loop_root(attempt = 5L)
   }
   
   list(current_directory = current_directory, error = error)
