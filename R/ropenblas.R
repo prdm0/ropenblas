@@ -325,6 +325,8 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!exist("make"))
     stop(glue("{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."))
   
+  "sudo -sK mv {dir_blas()$path}{dir_blas()$file_blas}"
+  
   if (!exist_opt())
     mkdir_opt()
   
@@ -594,6 +596,30 @@ change_r <- function (x, change = TRUE) {
   
 }
 
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom stringr str_detect
+turn_back <- function(){
+  #current_directory <- "{R.home()}/bin" %>% glue
+  run_r <- "cd /usr/bin && ./R --no-save&" %>% 
+    glue %>% 
+    system(intern = TRUE)
+  
+  error <- any(FALSE, str_detect(run_r, pattern = "Error:"))
+  
+  if(length(error) == 0L) error <- TRUE
+  
+  if (error) {
+    "sudo -kS mv /usr/bin/R.keep /usr/bin/R && mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
+      loop_root(attempt = 5L)
+    
+    "sudo -kS mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
+      loop_root(attempt = 5L)
+  }
+  
+  error
+}
+
 #' @importFrom fs dir_exists
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
@@ -647,6 +673,13 @@ rcompiler <- function(x = NULL,
   
   if (is.null(x))
     x <- last_version_r()$last_version
+  
+  
+  "sudo -kS mv /usr/bin/R /usr/bin/R.keep" %>% 
+    loop_root(attempt = 5L)
+  
+  "sudo -kS mv /usr/bin/Rscript /usr/bin/Rscript.keep" %>% 
+    loop_root(attempt = 5L)
   
   if (check_r_opt(x)) {
     if ("/opt/R/{x}" %>% glue %>% dir_exists) {
@@ -724,6 +757,23 @@ rcompiler <- function(x = NULL,
     
     ropenblas(x = version_openblas, restart_r = FALSE)
     
+  }
+  
+  if (turn_back()) {
+    
+    cat("\n")
+    
+    cat(
+      rule(
+        width = 50L,
+        center = glue("{style_bold(\"Procedure not completed\")}"), 
+        col = "red",
+        background_col = "gray90",
+        line = 2L
+      )
+    )
+    
+    return(warning("Some error has occurred. No changes have been made."))
   }
   
   cat("\n")
