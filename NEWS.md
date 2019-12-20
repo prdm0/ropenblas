@@ -2,7 +2,9 @@
 
 * Code review;
 
-* Highlighting some messages.
+* Highlighting some messages;
+
+* If an error occurs, your version of R will not stop working.
 
 # ropenblas 0.2.0
 
