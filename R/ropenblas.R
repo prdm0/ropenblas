@@ -610,7 +610,7 @@ turn_back <- function(){
   if(length(error) == 0L) error <- TRUE
   
   if (error) {
-    "sudo -kS mv /usr/bin/R.keep /usr/bin/R" %>% 
+    "sudo -kS mv /usr/bin/R.keep /usr/bin/R && mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
       loop_root(attempt = 5L)
     
     "sudo -kS mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
@@ -673,6 +673,13 @@ rcompiler <- function(x = NULL,
   
   if (is.null(x))
     x <- last_version_r()$last_version
+  
+  
+  "sudo -kS mv /usr/bin/R /usr/bin/R.keep" %>% 
+    loop_root(attempt = 5L)
+  
+  "sudo -kS mv /usr/bin/Rscript /usr/bin/Rscript.keep" %>% 
+    loop_root(attempt = 5L)
   
   if (check_r_opt(x)) {
     if ("/opt/R/{x}" %>% glue %>% dir_exists) {
