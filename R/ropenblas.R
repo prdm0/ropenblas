@@ -600,18 +600,24 @@ change_r <- function (x, change = TRUE) {
 #' @importFrom magrittr "%>%"
 #' @importFrom stringr str_detect
 turn_back <- function(){
-  current_directory <- "{R.home()}/bin" %>% glue
-  run_r <- "cd {R.home()}/bin && ./R --no-save&" %>% 
+  #current_directory <- "{R.home()}/bin" %>% glue
+  run_r <- "cd /usr/bin && ./R --no-save&" %>% 
     glue %>% 
     system(intern = TRUE)
+  
   error <- any(FALSE, str_detect(run_r, pattern = "Error:"))
+  
+  if(length(error) == 0L) error <- TRUE
   
   if (error) {
     "sudo -kS mv /usr/bin/R.keep /usr/bin/R" %>% 
-    loop_root(attempt = 5L)
+      loop_root(attempt = 5L)
+    
+    "sudo -kS mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
+      loop_root(attempt = 5L)
   }
   
-  list(current_directory = current_directory, error = error)
+  error
 }
 
 #' @importFrom fs dir_exists
@@ -744,6 +750,23 @@ rcompiler <- function(x = NULL,
     
     ropenblas(x = version_openblas, restart_r = FALSE)
     
+  }
+  
+  if (turn_back()) {
+    
+    cat("\n")
+    
+    cat(
+      rule(
+        width = 50L,
+        center = glue("{style_bold(\"Procedure not completed\")}"), 
+        col = "red",
+        background_col = "gray90",
+        line = 2L
+      )
+    )
+    
+    return(warning("Some error has occurred. No changes have been made."))
   }
   
   cat("\n")
