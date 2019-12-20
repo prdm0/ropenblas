@@ -79,6 +79,7 @@
 <div id="ropenblas-download-compile-and-link-openblas-library-with-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ropenblas-download-compile-and-link-openblas-library-with-r" class="anchor"></a>ropenblas: Download, Compile and Link OpenBLAS Library with R</h1></div>
+
 <p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right"></p>
 <p>The <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> is a package designed to facilitate the linking of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with the language <a href="https://www.r-project.org/"><strong>R</strong></a>. The package, which works only for Linux systems, will automatically download the latest source code from the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and compile the code. The package will automatically bind the language <a href="https://www.r-project.org/"><strong>R</strong></a> to use the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Everything will be done automatically regardless of the Linux distribution you are using.</p>
 <p>You can also specify older versions of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Automatically, if no version is specified, the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package will consider the latest version of the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a>.</p>
@@ -95,7 +96,7 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Installing the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> library is easy and will require you to have installed the <strong>devtools</strong> package. This will allow you to install the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package directly from GitHub. To install, after installing the <strong>devtools</strong> package, do:</p>
-<pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)</a></code></pre>
+<pre><code>devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)</code></pre>
 <p>or</p>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("ropenblas")</a></code></pre>
 <p><strong>Note</strong>: If you want to access the latest features of the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package, install it using the first procedure.</p>
@@ -214,7 +215,16 @@ $n
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=ropenblas"><img src="https://www.r-pkg.org/badges/last-release/ropenblas" alt="last"></a></li>
+<li><a href="https://CRAN.R-project.org/package=ropenblas"><img src="https://www.r-pkg.org/badges/version/ropenblas" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://CRAN.R-project.org/package=ropenblas"><img src="http://cranlogs.r-pkg.org/badges/grand-total/ropenblas" alt="total"></a></li>
+<li><a href="https://CRAN.R-project.org/package=ropenblas"><img src="https://cranlogs.r-pkg.org/badges/ropenblas" alt="month"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
