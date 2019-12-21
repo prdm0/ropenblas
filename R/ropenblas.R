@@ -153,7 +153,7 @@ answer_yes_no <- function(text) {
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom stringr str_detect
-turn_back <- function(rename = TRUE){
+error_r <- function(){
   #current_directory <- "{R.home()}/bin" %>% glue
   run_r <- "cd /usr/bin && ./R --no-save&" %>% 
     glue %>% 
@@ -162,14 +162,6 @@ turn_back <- function(rename = TRUE){
   error <- any(FALSE, str_detect(run_r, pattern = "Error:"))
   
   if(length(error) == 0L) error <- TRUE
-  
-  if (rename) {
-      "mv /usr/bin/R.keep /usr/bin/R" %>% 
-        loop_root(attempt = 5L)
-      
-      "mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
-        loop_root(attempt = 5L)
-  }
   
   error
 }
@@ -372,10 +364,28 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     ) %>% loop_root(attempt = 5L)
   }
   
-  if (turn_back(FALSE)) {
+  if (error_r()) {
     "mv {dir_blas()$path}{dir_blas()$file_blas}.keep {dir_blas()$path}{dir_blas()$file_blas}" %>% 
       glue %>% 
       loop_root(attempt = 5L)
+  
+    cat("\n")
+    
+    cat(
+      rule(
+        width = 50L,
+        center = glue("{style_bold(\"Procedure Incompleted\")}"),
+        col = "red",
+        background_col = "gray90",
+        line = 2L
+      )
+    )    
+    
+    "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>% 
+      glue %>% 
+      warning %>% 
+      return
+    
   }
   
   .refresh_terminal <- function() {
@@ -681,13 +691,6 @@ rcompiler <- function(x = NULL,
   if (is.null(x))
     x <- last_version_r()$last_version
   
-  
-  "mv /usr/bin/R /usr/bin/R.keep" %>% 
-    loop_root(attempt = 5L)
-  
-  "mv /usr/bin/Rscript /usr/bin/Rscript.keep" %>% 
-    loop_root(attempt = 5L)
-  
   if (check_r_opt(x)) {
     if ("/opt/R/{x}" %>% glue %>% dir_exists) {
       answer <- "R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
@@ -764,23 +767,6 @@ rcompiler <- function(x = NULL,
     
     ropenblas(x = version_openblas, restart_r = FALSE)
     
-  }
-  
-  if (turn_back()) {
-    
-    cat("\n")
-    
-    cat(
-      rule(
-        width = 50L,
-        center = glue("{style_bold(\"Procedure not completed\")}"), 
-        col = "red",
-        background_col = "gray90",
-        line = 2L
-      )
-    )
-    
-    return(warning("Some error has occurred. No changes have been made."))
   }
   
   cat("\n")
