@@ -150,6 +150,30 @@ answer_yes_no <- function(text) {
     tolower
 }
 
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom stringr str_detect
+turn_back <- function(rename = TRUE){
+  #current_directory <- "{R.home()}/bin" %>% glue
+  run_r <- "cd /usr/bin && ./R --no-save&" %>% 
+    glue %>% 
+    system(intern = TRUE)
+  
+  error <- any(FALSE, str_detect(run_r, pattern = "Error:"))
+  
+  if(length(error) == 0L) error <- TRUE
+  
+  if (rename) {
+      "mv /usr/bin/R.keep /usr/bin/R" %>% 
+        loop_root(attempt = 5L)
+      
+      "mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
+        loop_root(attempt = 5L)
+  }
+  
+  error
+}
+
 #' @title Download, Compile and Link OpenBLAS Library with \R
 #' @author Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})
 #' @description Link \R with an optimized version of the \href{http://www.netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
@@ -213,13 +237,16 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   repo <- download$repo_openblas
   diretory_tmp <- download$path_openblas
   
+  "cp {dir_blas()$path}{dir_blas()$file_blas} {dir_blas()$path}{dir_blas()$file_blas}.keep" %>%
+    glue %>% 
+    loop_root(attempt = 5L)
+  
   if (!is.null(x) && glue("v{x}") > download$version)
     stop(
       glue(
         "{symbol$bullet} Version {style_bold({x})} does not exist. The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$version, 2L, nchar(download$version))})}."
       )
     )
-  
   
   if (!is.null(x)) {
     if (dir_blas()$use_openblas) {
@@ -325,8 +352,6 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!exist("make"))
     stop(glue("{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."))
   
-  "sudo -sK mv {dir_blas()$path}{dir_blas()$file_blas}"
-  
   if (!exist_opt())
     mkdir_opt()
   
@@ -336,15 +361,21 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     diretory_tmp
   }) %>% setwd
   
-  glue("sudo -kS make install PREFIX=/opt/OpenBLAS") %>%
+  glue("make install PREFIX=/opt/OpenBLAS") %>%
     loop_root(attempt = 5L)
   
   setwd(dir_blas()$path)
   
   if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     glue(
-      "sudo -kS ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+      "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
     ) %>% loop_root(attempt = 5L)
+  }
+  
+  if (turn_back(FALSE)) {
+    "mv {dir_blas()$path}{dir_blas()$file_blas}.keep {dir_blas()$path}{dir_blas()$file_blas}" %>% 
+      glue %>% 
+      loop_root(attempt = 5L)
   }
   
   .refresh_terminal <- function() {
@@ -559,7 +590,7 @@ change_r <- function (x, change = TRUE) {
   dir_r  <- R.home("bin")
   
   if (change) {
-    "sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>% 
+    "ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>% 
       glue %>% 
       loop_root(attempt = 5L)
     
@@ -594,30 +625,6 @@ change_r <- function (x, change = TRUE) {
     style_bold %>%
     cat
   
-}
-
-#' @importFrom glue glue
-#' @importFrom magrittr "%>%"
-#' @importFrom stringr str_detect
-turn_back <- function(){
-  #current_directory <- "{R.home()}/bin" %>% glue
-  run_r <- "cd /usr/bin && ./R --no-save&" %>% 
-    glue %>% 
-    system(intern = TRUE)
-  
-  error <- any(FALSE, str_detect(run_r, pattern = "Error:"))
-  
-  if(length(error) == 0L) error <- TRUE
-  
-  if (error) {
-    "sudo -kS mv /usr/bin/R.keep /usr/bin/R && mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
-      loop_root(attempt = 5L)
-    
-    "sudo -kS mv /usr/bin/Rscript.keep /usr/bin/Rscript" %>% 
-      loop_root(attempt = 5L)
-  }
-  
-  error
 }
 
 #' @importFrom fs dir_exists
@@ -675,10 +682,10 @@ rcompiler <- function(x = NULL,
     x <- last_version_r()$last_version
   
   
-  "sudo -kS mv /usr/bin/R /usr/bin/R.keep" %>% 
+  "mv /usr/bin/R /usr/bin/R.keep" %>% 
     loop_root(attempt = 5L)
   
-  "sudo -kS mv /usr/bin/Rscript /usr/bin/Rscript.keep" %>% 
+  "mv /usr/bin/Rscript /usr/bin/Rscript.keep" %>% 
     loop_root(attempt = 5L)
   
   if (check_r_opt(x)) {
@@ -709,10 +716,10 @@ rcompiler <- function(x = NULL,
     glue("make -j $(nproc)") %>%
       system
     
-    glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
+    glue("make install PREFIX=/opt/R/{x}") %>%
       loop_root(attempt = 5L)
     
-    glue("sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
+    glue("ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R")  %>%
       loop_root(attempt = 5L)
     
     if (!is.null(version_openblas)) {
@@ -743,11 +750,11 @@ rcompiler <- function(x = NULL,
     glue("make -j $(nproc)") %>%
       system
     
-    glue("sudo -kS make install PREFIX=/opt/R/{x}") %>%
+    glue("make install PREFIX=/opt/R/{x}") %>%
       loop_root(attempt = 5L)
     
     
-    "sudo -kS ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>% 
+    "ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>% 
       glue %>% 
       loop_root(attempt = 5L)
     
