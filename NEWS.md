@@ -1,10 +1,17 @@
-# ropenblas 0.2.1 (development version)
+# ropenblas 0.2.2 (development version)
+
+* Code review;
+
+* Improve code efficiency.
+
+# ropenblas 0.2.1 (latest stable version)
 
 * Code review;
 
 * Highlighting some messages;
 
-* If an error occurs, your version of R will not stop working.
+* In the tests performed, apparently an error will not break the installed version of R.
+
 
 # ropenblas 0.2.0
 
