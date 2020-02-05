@@ -1,7 +1,7 @@
 # ropenblas 0.2.2 (development version)
 
 * Code review;
-
+  
 * Improve code efficiency.
 
 # ropenblas 0.2.1 (latest stable version)
