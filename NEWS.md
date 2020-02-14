@@ -4,7 +4,7 @@
   
 * Improve code efficiency.
 
-# ropenblas 0.2.1 (latest stable version)
+# ropenblas 0.2.1
 
 * Code review;
 
