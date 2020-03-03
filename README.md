@@ -85,19 +85,18 @@ You must be the operating system administrator to use this library. Therefore, d
 Given the higher version, the function will return the latest stable version of the [**R**](https://www.r-project.org/) language. See the following example:
 
 ```
-> last_version_r(major = 3L)
+> last_version_r()
 $last_version
-[1] "3.6.2"
+[1] "3.6.3"
 
 $versions
- [1] "3.0.0"         "3.0.1"         "3.0.2"         "3.0.3"         "3.1.0"         "3.1.1"         "3.1.2"        
- [8] "3.1.3"         "3.2.0"         "3.2.1"         "3.2.2"         "3.2.3"         "3.2.4-revised" "3.2.4"        
-[15] "3.2.5"         "3.3.0"         "3.3.1"         "3.3.2"         "3.3.3"         "3.4.0"         "3.4.1"        
-[22] "3.4.2"         "3.4.3"         "3.4.4"         "3.5.0"         "3.5.1"         "3.5.2"         "3.5.3"        
-[29] "3.6.0"         "3.6.1"         "3.6.2"        
+ [1] "3.0.0"         "3.0.1"         "3.0.2"         "3.0.3"         "3.1.0"         "3.1.1"         "3.1.2"         "3.1.3"        
+ [9] "3.2.0"         "3.2.1"         "3.2.2"         "3.2.3"         "3.2.4-revised" "3.2.4"         "3.2.5"         "3.3.0"        
+[17] "3.3.1"         "3.3.2"         "3.3.3"         "3.4.0"         "3.4.1"         "3.4.2"         "3.4.3"         "3.4.4"        
+[25] "3.5.0"         "3.5.1"         "3.5.2"         "3.5.3"         "3.6.0"         "3.6.1"         "3.6.2"         "3.6.3"        
 
 $n
-[1] 31
+[1] 32
 ```
 
 or
