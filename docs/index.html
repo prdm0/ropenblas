@@ -95,7 +95,7 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Installing the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> library is easy and will require you to have installed the <strong>devtools</strong> package. This will allow you to install the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package directly from GitHub. To install, after installing the <strong>devtools</strong> package, do:</p>
-<pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)</a></code></pre>
+<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)</a></code></pre>
 <p>or</p>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("ropenblas")</a></code></pre>
 <p><strong>Note</strong>: If you want to access the latest features of the <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package, install it using the first procedure.</p>
@@ -131,19 +131,18 @@
 <h3 class="hasAnchor">
 <a href="#last_version_r-function" class="anchor"></a>‘last_version_r’ function:</h3>
 <p>Given the higher version, the function will return the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. See the following example:</p>
-<pre><code>&gt; last_version_r(major = 3L)
+<pre><code>&gt; last_version_r()
 $last_version
-[1] "3.6.2"
+[1] "3.6.3"
 
 $versions
- [1] "3.0.0"         "3.0.1"         "3.0.2"         "3.0.3"         "3.1.0"         "3.1.1"         "3.1.2"        
- [8] "3.1.3"         "3.2.0"         "3.2.1"         "3.2.2"         "3.2.3"         "3.2.4-revised" "3.2.4"        
-[15] "3.2.5"         "3.3.0"         "3.3.1"         "3.3.2"         "3.3.3"         "3.4.0"         "3.4.1"        
-[22] "3.4.2"         "3.4.3"         "3.4.4"         "3.5.0"         "3.5.1"         "3.5.2"         "3.5.3"        
-[29] "3.6.0"         "3.6.1"         "3.6.2"        
+ [1] "3.0.0"         "3.0.1"         "3.0.2"         "3.0.3"         "3.1.0"         "3.1.1"         "3.1.2"         "3.1.3"        
+ [9] "3.2.0"         "3.2.1"         "3.2.2"         "3.2.3"         "3.2.4-revised" "3.2.4"         "3.2.5"         "3.3.0"        
+[17] "3.3.1"         "3.3.2"         "3.3.3"         "3.4.0"         "3.4.1"         "3.4.2"         "3.4.3"         "3.4.4"        
+[25] "3.5.0"         "3.5.1"         "3.5.2"         "3.5.3"         "3.6.0"         "3.6.1"         "3.6.2"         "3.6.3"        
 
 $n
-[1] 31</code></pre>
+[1] 32</code></pre>
 <p>or</p>
 <pre><code>&gt; last_version_r(major = 2L)
 $last_version
