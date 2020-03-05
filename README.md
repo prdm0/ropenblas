@@ -22,7 +22,7 @@ You must install the following dependencies on your operating system (Linux):
 
    1 - **GNU Make**: GNU Make utility to maintain groups of programs; <br/>
    
-   2 - **GNU GCC Compiler (C/C++ and Fortran)**: The GNU Compiler Collection - C/C++ and Fortran frontends. 
+   2 - **GNU GCC Compiler (C and Fortran)**: The GNU Compiler Collection - C and Fortran frontends. 
    
 ## Installation
 
@@ -50,17 +50,17 @@ library(ropenblas)
 
 ### 'ropenblas' function:
 
-Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.7** library to the [**R**](https://www.r-project.org/) language:
+Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.9** library to the [**R**](https://www.r-project.org/) language:
 
 ```
-ropenblas(x = "0.3.7")
+ropenblas(x = "0.3.9")
 ```
 
 **Notes**: 
 
    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections.
 
-   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6 and 0.3.7. These are the values that will be passed to `x` in `ropenblas(x)`; 
+   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 0.3.8 and 0.3.9. These are the values that will be passed to `x` in `ropenblas(x)`; 
    
    - If `x = NULL`, the latest stable version of the [**OpenBLAS**](https://www.openblas.net/) library will be compiled and linked to [**R**](https://www.r-project.org/).
   
@@ -79,6 +79,8 @@ If the `ropenblas()` function can identify that the [**R**](https://www.r-projec
 The `ropenblas()` function will download the desired version of the library [**OpenBLAS**](https://www.openblas.net/), compile and install the library in the `/opt` directory of your operational system. If the directory does not exist, it will be created so that the installation can be completed. Subsequently, files from the version of [**BLAS**](http://www.netlib.org/blas/) used in [**R**](https://www.r-project.org/) will be symbolically linked to the shared object files of the library version [**OpenBLAS**](https://www.openblas.net/) compiled and installed in `/opt`.
 
 You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system.
+
+You will not necessarily have to run `ropenblas()` on every section of [**R**](https://www.r-project.org/). Almost always it will not be necessary. However, it may be that the [**R**](https://www.r-project.org/) is updated by the operating system (GNU/Linux). Thus, it may be that in this update the [**R**](https://www.r-project.org/) unlink with the [**OpenBLAS**](https://www.openblas.net/) library. Therefore, from time to time check using the command `extSoftVersion()["BLAS"]` if the link with [**OpenBLAS**](https://www.openblas.net/) is correct, otherwise run the command `ropenblas()` again.
 
 ### 'last_version_r' function:
 
@@ -120,7 +122,7 @@ $n
 
 ### 'rcompiler' function:
 
-This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "3.6.2"` will compile and link **R-3.6.2** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/)
+This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "3.6.3"` will compile and link **R-3.6.3** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/)
 
 The `version_openblas` [**OpenBLAS**](https://www.openblas.net/) argument is a version of the library that will be linked to the [**R**](https://www.r-project.org/) code that will be compiled. By default if `version_openblas = NULL`, the latest stable version of the library [**OpenBLAS**](https://www.openblas.net/) will be linked.
 
