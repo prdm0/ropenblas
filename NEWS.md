@@ -2,7 +2,9 @@
 
 * Code review;
 
-* Improve code efficiency.
+* Improve code efficiency;
+
+* The `last_version_openblas()` function will be added.
 
 # ropenblas 0.2.1
 
