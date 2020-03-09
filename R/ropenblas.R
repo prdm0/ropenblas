@@ -809,7 +809,7 @@ last_version_openblas <- function() {
   
   versions <-
     diretory_tmp %>%
-    tags() %>% names %>%
+    tags %>% names %>%
     str_remove(pattern = "^v")
   
   list(
