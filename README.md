@@ -120,6 +120,28 @@ $n
 
 **Note**: If `major = NULL`, the function will consider the major release number.
 
+### 'last_version_openblas' function:
+
+The `last_version_openblas()` function automatically searches [**OpenBLAS**](https://www.openblas.net/) library versions in the official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
+
+```
+> last_version_openblas()
+$last_version
+[1] "0.3.9"
+
+$versions
+ [1] "0.1.0"       "0.1.1"       "0.1alpha1"   "0.1alpha2"   "0.1alpha2.1" "0.1alpha2.2" "0.1alpha2.3"
+ [8] "0.1alpha2.4" "0.1alpha2.5" "0.2.0"       "0.2.1"       "0.2.10"      "0.2.10.rc1"  "0.2.10.rc2" 
+[15] "0.2.11"      "0.2.12"      "0.2.13"      "0.2.14"      "0.2.15"      "0.2.16"      "0.2.16.rc1" 
+[22] "0.2.17"      "0.2.18"      "0.2.19"      "0.2.2"       "0.2.20"      "0.2.3"       "0.2.4"      
+[29] "0.2.5"       "0.2.6"       "0.2.7"       "0.2.8"       "0.2.9"       "0.2.9.rc1"   "0.2.9.rc2"  
+[36] "0.3.0"       "0.3.1"       "0.3.2"       "0.3.3"       "0.3.4"       "0.3.5"       "0.3.6"      
+[43] "0.3.7"       "0.3.8"       "0.3.9"      
+
+$n
+[1] 45
+```
+
 ### 'rcompiler' function:
 
 This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "3.6.3"` will compile and link **R-3.6.3** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/)
