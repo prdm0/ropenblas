@@ -810,8 +810,9 @@ last_version_openblas <- function() {
   
   versions <- pulls %>% str_extract(
     pattern = "v[:digit:][:punct:][:graph:]+") %>%
-    na.omit %>% unique %>% 
-    str_remove(pattern = "\\^\\{\\}")
+    na.omit %>% 
+    str_remove(pattern = "\\^\\{\\}") %>% 
+    unique
   
   list(
     last_version = versions[length(versions)],
