@@ -2,12 +2,12 @@
 % Please edit documentation in R/ropenblas.R
 \name{last_version_openblas}
 \alias{last_version_openblas}
-\title{Given the higher version, the function will return the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.}
+\title{OpenBLAS library versions}
 \usage{
 last_version_openblas()
 }
 \description{
-Given the higher version, the function will return the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
+OpenBLAS library versions
 }
 \details{
 This function automatically searches \href{https://www.openblas.net/}{\strong{OpenBLAS}} library versions in the official \href{https://github.com/xianyi/OpenBLAS}{\strong{GitHub}} project.

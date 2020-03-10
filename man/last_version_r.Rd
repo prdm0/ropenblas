@@ -2,7 +2,7 @@
 % Please edit documentation in R/ropenblas.R
 \name{last_version_r}
 \alias{last_version_r}
-\title{Given the higher version, the function will return the latest stable version of the \R language.}
+\title{\R language versions}
 \usage{
 last_version_r(major = NULL)
 }
@@ -22,7 +22,7 @@ A list of two named elements will be returned. Are they:
 }
 }
 \description{
-Given the higher version, the function will return the latest stable version of the \R language.
+\R language versions
 }
 \details{
 This function automatically searches \R language versions in the official language repositories. That way,

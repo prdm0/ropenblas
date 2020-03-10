@@ -118,7 +118,7 @@ connection <- function() {
         warning = function(w)
           cat("You apparently have no internet connection.\n")
       )
-  check <- "ping -c3 google.com" %>%
+  check <- "ping -c2 google.com" %>%
     nsystem(ignore.stderr = F, intern = TRUE)
   
   ifelse (!is.numeric(check) && !is.null(check), TRUE, FALSE)
@@ -433,7 +433,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
 #' @importFrom magrittr "%>%"
 #' @importFrom RCurl getURL
 #' @importFrom XML getHTMLLinks
-#' @title Given the higher version, the function will return the latest stable version of the \R language.
+#' @title \R language versions
 #' @param major Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
 #' will consider the major release number.
 #' @details This function automatically searches \R language versions in the official language repositories. That way,
@@ -786,10 +786,10 @@ rcompiler <- function(x = NULL,
 
 #' @importFrom magrittr "%>%"
 #' @importFrom fs file_exists dir_create 
-#' @importFrom git2r clone tags
+#' @importFrom git2r clone tags remote_ls
 #' @importFrom glue glue
-#' @importFrom stringr str_remove
-#' @title Given the higher version, the function will return the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
+#' @importFrom stringr str_extract
+#' @title OpenBLAS library versions
 #' @details This function automatically searches \href{https://www.openblas.net/}{\strong{OpenBLAS}} library versions in the official \href{https://github.com/xianyi/OpenBLAS}{\strong{GitHub}} project.
 #' \enumerate{
 #'    \item \code{last_version}: Returns the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
@@ -804,13 +804,14 @@ last_version_openblas <- function() {
   if (!connection())
     stop("You apparently have no internet connection.\n")
   
-  download <- download_openblas(x = NULL)
-  diretory_tmp <- download$path_openblas
+  pulls <- "https://github.com/xianyi/OpenBLAS.git" %>% 
+    remote_ls %>% 
+    names
   
-  versions <-
-    diretory_tmp %>%
-    tags %>% names %>%
-    str_remove(pattern = "^v")
+  versions <- pulls %>% str_extract(
+    pattern = "v[:digit:][:punct:][:graph:]+") %>%
+    na.omit %>% unique %>% 
+    str_remove(pattern = "\\^\\{\\}")
   
   list(
     last_version = versions[length(versions)],
