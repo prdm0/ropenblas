@@ -786,9 +786,9 @@ rcompiler <- function(x = NULL,
 
 #' @importFrom magrittr "%>%"
 #' @importFrom fs file_exists dir_create 
-#' @importFrom git2r clone tags
+#' @importFrom git2r clone tags remote_ls
 #' @importFrom glue glue
-#' @importFrom stringr str_remove
+#' @importFrom stringr str_extract
 #' @title Given the higher version, the function will return the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
 #' @details This function automatically searches \href{https://www.openblas.net/}{\strong{OpenBLAS}} library versions in the official \href{https://github.com/xianyi/OpenBLAS}{\strong{GitHub}} project.
 #' \enumerate{
@@ -804,13 +804,14 @@ last_version_openblas <- function() {
   if (!connection())
     stop("You apparently have no internet connection.\n")
   
-  download <- download_openblas(x = NULL)
-  diretory_tmp <- download$path_openblas
+  pulls <- "https://github.com/xianyi/OpenBLAS.git" %>% 
+    remote_ls %>% 
+    names
   
-  versions <-
-    diretory_tmp %>%
-    tags %>% names %>%
-    str_remove(pattern = "^v")
+  versions <- pulls %>% str_extract(
+    pattern = "v[:digit:][:punct:][:graph:]+") %>%
+    na.omit %>% unique %>% 
+    str_remove(pattern = "\\^\\{\\}")
   
   list(
     last_version = versions[length(versions)],
