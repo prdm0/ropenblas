@@ -1,8 +1,10 @@
-# ropenblas 0.2.2 (development version)
+# ropenblas 0.2.3 (development version)
 
 * Code review;
 
-* Improve code efficiency;
+* Improve code efficiency.
+
+# ropenblas 0.2.2 
 
 * The `last_version_openblas()` function will be added.
 
