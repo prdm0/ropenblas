@@ -108,20 +108,13 @@ modern_openblas <- function(x) {
   x > version_sistem
 }
 
+#' @importFrom pingr is_online
 connection <- function() {
-  nsystem <-
-    function(...)
-      tryCatch(
-        system(...),
-        error = function(e)
-          cat("You apparently have no internet connection.\n"),
-        warning = function(w)
-          cat("You apparently have no internet connection.\n")
-      )
-  check <- "ping -c2 google.com" %>%
-    nsystem(ignore.stderr = F, intern = TRUE)
-  
-  ifelse (!is.numeric(check) && !is.null(check), TRUE, FALSE)
+  if(is_online()) TRUE
+  else{
+    cat("You apparently have no internet connection.\n")
+    FALSE
+  }
 }
 
 loop_root <- function(x, attempt = 3L, sudo = TRUE) {
