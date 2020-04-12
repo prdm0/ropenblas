@@ -218,11 +218,13 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!connection())
     stop(glue("[{style_bold(col_red(symbol$cross))}] You apparently have no internet connection.\n"))
   
+  initial_blas <- dir_blas()$file_blas
+  
   download <- download_openblas(x)
   repo <- download$repo_openblas
   diretory_tmp <- download$path_openblas
   
-  "cp {dir_blas()$path}{dir_blas()$file_blas} {dir_blas()$path}{dir_blas()$file_blas}.keep" %>%
+  "cp {dir_blas()$path}{dir_blas()$file_blas} /opt" %>%
     glue %>% 
     loop_root(attempt = 5L)
   
@@ -358,7 +360,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   }
   
   if (error_r()) {
-    "mv {dir_blas()$path}{dir_blas()$file_blas}.keep {dir_blas()$path}{dir_blas()$file_blas}" %>% 
+    "mv /opt/{initial_blas} {dir_blas()$path}" %>% 
       glue %>% 
       loop_root(attempt = 5L)
   
