@@ -1,4 +1,11 @@
-# ropenblas 0.2.3 (development version)
+
+# ropenblas 0.2.4 (development version)
+
+* Code review;
+
+* identifying bugs.
+
+# ropenblas 0.2.3
 
 * Code review;
 
