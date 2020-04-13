@@ -784,6 +784,7 @@ rcompiler <- function(x = NULL,
 #' @importFrom git2r clone tags remote_ls
 #' @importFrom glue glue
 #' @importFrom stringr str_extract
+#' @importFrom stats na.omit
 #' @title OpenBLAS library versions
 #' @details This function automatically searches \href{https://www.openblas.net/}{\strong{OpenBLAS}} library versions in the official \href{https://github.com/xianyi/OpenBLAS}{\strong{GitHub}} project.
 #' \enumerate{
