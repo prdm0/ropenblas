@@ -209,7 +209,7 @@ error_r <- function(){
 #' @importFrom cli rule col_green symbol style_bold
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
-#' # ropenblas()
+#' \dontrun{ropenblas()}
 #' @export
 ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (Sys.info()[[1L]] != "Linux")
@@ -446,7 +446,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
 #' }
 #' @seealso \code{\link{ropenblas}}, \code{\link{rcompiler}}
 #' @examples
-#' last_version_r(major = NULL)
+#' \dontrun{last_version_r(major = NULL)}
 #' @export
 last_version_r <- function(major = NULL) {
   if (!connection())
@@ -660,7 +660,7 @@ change_r <- function (x, change = TRUE) {
 #' @return Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
 #' missing dependencies.
 #' @examples
-#' # rcompiler()
+#' \dontrun{rcompiler()}
 #' @export
 rcompiler <- function(x = NULL,
                       version_openblas = NULL) {
@@ -793,7 +793,7 @@ rcompiler <- function(x = NULL,
 #' }
 #' @seealso \code{\link{last_version_r}}, \code{\link{ropenblas}}, \code{\link{rcompiler}}
 #' @examples
-#' last_version_openblas()
+#' \dontrun{last_version_openblas()}
 #' @export
 last_version_openblas <- function() {
   if (!connection())

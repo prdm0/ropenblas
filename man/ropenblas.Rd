@@ -56,7 +56,7 @@ You do not have to in every section of \R make use of the \code{ropenblas()} fun
 will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sections.
 }
 \examples{
-# ropenblas()
+\dontrun{ropenblas()}
 }
 \seealso{
 \code{\link{rcompiler}}, \code{\link{last_version_r}}

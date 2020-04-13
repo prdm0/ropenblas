@@ -31,7 +31,7 @@ doing \code{last_version_r(major = NULL)} you will always be well informed about
 version was \code{1L} or \code{2L}, for example.
 }
 \examples{
-last_version_r(major = NULL)
+\dontrun{last_version_r(major = NULL)}
 }
 \seealso{
 \code{\link{ropenblas}}, \code{\link{rcompiler}}
