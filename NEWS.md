@@ -3,7 +3,9 @@
 
 * Code review;
 
-* identifying bugs.
+* identifying bugs;
+
+* Implementing the `link_again()` function. This function will allow you to link the R language again with the OpenBLAS library without having to recompile the OpenBLAS library. The `link_again()` function will be useful in situations where the operating system decouples the library from the OpenBLAS library. This is common in situations where the BLAS library binary file is updated.
 
 # ropenblas 0.2.3
 

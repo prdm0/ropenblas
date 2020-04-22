@@ -818,3 +818,9 @@ last_version_openblas <- function() {
   )
   
 }
+
+
+link_again <- function() {
+  if(!dir_blas()$use_openblas)
+    
+}
