@@ -819,8 +819,57 @@ last_version_openblas <- function() {
   
 }
 
-
-link_again <- function() {
-  if(!dir_blas()$use_openblas)
-    
+link_again <- function(restart_r = TRUE) {
+  if (dir_blas()$use_openblas){
+      "{symbol$mustache} Linking again is not necessary. {col_blue(style_underline(style_bold(\"R\")))} \\
+      already uses the {style_bold(\"OpenBLAS\")} library. You can stay calm." %>% 
+        glue
+  } else {
+    if (!exist_opt() || dir_blas()$path_blas == "/opt/OpenBLAS/lib/") 
+      "{symbol$mustache} Run the {style_bold(\"OpenBLAS\")} function." %>% 
+      glue
+    else {
+      glue(
+        "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+      ) %>% loop_root(attempt = 5L)
+      
+      .refresh_terminal <- function() {
+        system("R")
+        q("no")
+      }
+      
+      if (restart_r) {
+        if (rstudioapi::isAvailable()) {
+          tmp <- rstudioapi::restartSession() # .rs.restartR()
+        } else {
+          .refresh_terminal()
+        }
+      }
+      
+      cat("\n")
+      
+      cat(
+        rule(
+          width = 50L,
+          center = glue("{style_bold(\"Procedure Completed\")}"),
+          col = "blue",
+          background_col = "gray90",
+          line = 2L
+        )
+      )
+      
+      cat("\n")
+      
+      if(restart_r){
+        "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")}." %>%
+          glue %>%
+          cat  
+      } else {
+        "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} will be used in the next section." %>%
+          glue %>%
+          cat 
+      }
+      
+    }
+  }
 }
