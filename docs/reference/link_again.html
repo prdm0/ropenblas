@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OpenBLAS library versions — last_version_openblas • ropenblas</title>
+<title>Linking the OpenBLAS library with <span style="R">R</span> again — link_again • ropenblas</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="OpenBLAS library versions — last_version_openblas" />
-<meta property="og:description" content="OpenBLAS library versions" />
+<meta property="og:title" content="Linking the OpenBLAS library with <span style="R">R</span> again — link_again" />
+<meta property="og:description" content="The link_again function links again the OpenBLAS library with the R language, being useful to correct problems
+of untying the OpenBLAS library that is common when the operating system is updated." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,32 +120,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>OpenBLAS library versions</h1>
+    <h1>Linking the OpenBLAS library with <span style="R">R</span> again</h1>
     <small class="dont-index">Source: <a href='https://github.com/prdm0/ropenblas/blob/master/R/ropenblas.R'><code>R/ropenblas.R</code></a></small>
-    <div class="hidden name"><code>last_version_openblas.Rd</code></div>
+    <div class="hidden name"><code>link_again.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>OpenBLAS library versions</p>
+    <p>The <code>link_again</code> function links again the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library with the <span style="R">R</span> language, being useful to correct problems
+of untying the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library that is common when the operating system is updated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>last_version_openblas</span>()</pre>
+    <pre class="usage"><span class='fu'>link_again</span>(<span class='kw'>restart_r</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>restart_r</th>
+      <td><p>If <code>TRUE</code> (default), a new section of <span style="R">R</span> is started after linking the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function automatically searches <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library versions in the official <a href='https://github.com/xianyi/OpenBLAS'><strong>GitHub</strong></a> project.</p><ol>
-<li><p><code>last_version</code>: Returns the latest stable version of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library.</p></li>
-<li><p><code>versions</code>: All stable versions of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library.</p></li>
-<li><p><code>n</code>: Total number of versions.</p></li>
-</ol>
+    <p>The function <code>link_again</code> be able to link again the <span style="R">R</span> language with the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library. Thus, link_again will only make the
+relinkagem when in some previous section of <span style="R">R</span> the ropenblas function has been used for the initial binding of the <span style="R">R</span> language with the
+<a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library.</p>
+<p>Relinking is useful in situations of updating the operating system. In some update, it is possible that the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library compiled
+in the <code>/opt</code> directory is unlinked. In this scenario, when the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library has already been compiled using the ropenblas
+function, the <code>link_again</code> function performs a new link without the need to recompile, thus making the process less time
+consuming.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
+    <p>In situations where there was a disconnection due to an update of the operating system, the `ropenblas` function can be used to
+re-link the OpenBLAS library with the <span style="R">R</span> language, however, it will be necessary to compile the
+<a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library again. If you are interested in recompiling the
+<a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library and linking with <span style="R">R</span>, use the <code><a href='ropenblas.html'>ropenblas</a></code> function. If the
+interest is to take advantage of a previous compilation of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library, the
+function <code>link_again</code> may be useful.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='last_version_r.html'>last_version_r</a></code>, <code><a href='ropenblas.html'>ropenblas</a></code>, <code><a href='rcompiler.html'>rcompiler</a></code></p></div>
+    <div class='dont-index'><p><code><a href='ropenblas.html'>ropenblas</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># last_version_openblas()
+    <pre class="examples"><div class='input'># link_again()
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

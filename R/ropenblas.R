@@ -209,7 +209,7 @@ error_r <- function(){
 #' @importFrom cli rule col_green symbol style_bold
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
-#' \dontrun{ropenblas()}
+#' # ropenblas()
 #' @export
 ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (Sys.info()[[1L]] != "Linux")
@@ -446,7 +446,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
 #' }
 #' @seealso \code{\link{ropenblas}}, \code{\link{rcompiler}}
 #' @examples
-#' \dontrun{last_version_r(major = NULL)}
+#' # last_version_r(major = NULL)
 #' @export
 last_version_r <- function(major = NULL) {
   if (!connection())
@@ -660,7 +660,7 @@ change_r <- function (x, change = TRUE) {
 #' @return Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
 #' missing dependencies.
 #' @examples
-#' \dontrun{rcompiler()}
+#' # rcompiler()
 #' @export
 rcompiler <- function(x = NULL,
                       version_openblas = NULL) {
@@ -794,7 +794,7 @@ rcompiler <- function(x = NULL,
 #' }
 #' @seealso \code{\link{last_version_r}}, \code{\link{ropenblas}}, \code{\link{rcompiler}}
 #' @examples
-#' \dontrun{last_version_openblas()}
+#' # last_version_openblas()
 #' @export
 last_version_openblas <- function() {
   if (!connection())
@@ -819,6 +819,30 @@ last_version_openblas <- function() {
   
 }
 
+#' @importFrom magrittr "%>%"
+#' @importFrom glue glue 
+#' @title Linking the OpenBLAS library with \R again
+#' @description The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
+#' of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
+#' @param restart_r If \code{TRUE} (default), a new section of \R is started after linking the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
+#' @details The function \code{link_again} be able to link again the \R language with the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Thus, link_again will only make the
+#' relinkagem when in some previous section of \R the ropenblas function has been used for the initial binding of the \R language with the
+#' \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
+#' 
+#' Relinking is useful in situations of updating the operating system. In some update, it is possible that the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library compiled
+#' in the \code{/opt} directory is unlinked. In this scenario, when the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library has already been compiled using the ropenblas
+#' function, the \code{link_again} function performs a new link without the need to recompile, thus making the process less time
+#' consuming.
+#' @note In situations where there was a disconnection due to an update of the operating system, the `ropenblas` function can be used to
+#' re-link the OpenBLAS library with the \R language, however, it will be necessary to compile the
+#' \href{https://www.openblas.net/}{\strong{OpenBLAS}} library again. If you are interested in recompiling the
+#' \href{https://www.openblas.net/}{\strong{OpenBLAS}} library and linking with \R, use the \code{\link{ropenblas}} function. If the
+#' interest is to take advantage of a previous compilation of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library, the
+#' function \code{link_again} may be useful.
+#' @seealso \code{\link{ropenblas}}
+#' @examples 
+#' # link_again()
+#' @export
 link_again <- function(restart_r = TRUE) {
   if (dir_blas()$use_openblas){
       "{symbol$mustache} Linking again is not necessary. {col_blue(style_underline(style_bold(\"R\")))} \\

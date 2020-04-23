@@ -156,6 +156,28 @@ rcompiler()
 
 Regardless of your GNU/Linux distribution and what version of [**R**](https://www.r-project.org/) is in your repositories, you can have the latest stable version of the [**R**](https://www.r-project.org/) language compiled into your computer architecture.
 
+### 'link_again' function:
+
+The `link_again` function links again the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https://www.r-project.org/) language, being useful to correct problems of untying the [**OpenBLAS**](https://www.openblas.net/) library that is common when the operating system is updated.
+
+The function `link_again` be able to link again the [**R**](https://www.r-project.org/) language with the [**OpenBLAS**](https://www.openblas.net/) library. Thus, link_again will only make the relinkagem when in some previous section of
+[**R**](https://www.r-project.org/) the ropenblas function has been used for the initial binding of the [**R**](https://www.r-project.org/) language with the [**OpenBLAS**](https://www.openblas.net/) library.
+
+For example, to relink the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https://www.r-project.org/) language, do:
+
+```
+link_again()
+```
+
+If `restart_r = TRUE` (default), a new section of [**R**](https://www.r-project.org/) is started after linking the [**OpenBLAS**](https://www.openblas.net/) library.
+
+
+In situations where there was a disconnection due to an update of the operating system, the `ropenblas` function can be used to
+relink the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https://www.r-project.org/) language, however, it will be necessary to compile the [**OpenBLAS**](https://www.openblas.net/) library again. If you are interested in recompiling the
+[**OpenBLAS**](https://www.openblas.net/) library and linking with [**R**](https://www.r-project.org/), use the `ropenblas` function. If the interest is to take advantage of a previous compilation of the [**OpenBLAS**](https://www.openblas.net/) library, the
+function `link_again` may be useful.
+
+
 ## Advantages of using ropenblas package:
 
 Some advantages of using the [**ropenblas**](https://prdm0.github.io/ropenblas/) library:

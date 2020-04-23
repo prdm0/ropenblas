@@ -18,7 +18,7 @@ This function automatically searches \href{https://www.openblas.net/}{\strong{Op
 }
 }
 \examples{
-\dontrun{last_version_openblas()}
+# last_version_openblas()
 }
 \seealso{
 \code{\link{last_version_r}}, \code{\link{ropenblas}}, \code{\link{rcompiler}}

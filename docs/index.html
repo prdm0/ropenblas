@@ -189,6 +189,16 @@ $n
 <pre><code><a href="reference/rcompiler.html">rcompiler()</a></code></pre>
 <p>Regardless of your GNU/Linux distribution and what version of <a href="https://www.r-project.org/"><strong>R</strong></a> is in your repositories, you can have the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language compiled into your computer architecture.</p>
 </div>
+<div id="link_again-function" class="section level3">
+<h3 class="hasAnchor">
+<a href="#link_again-function" class="anchor"></a>‘link_again’ function:</h3>
+<p>The <code>link_again</code> function links again the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library with the <a href="https://www.r-project.org/"><strong>R</strong></a> language, being useful to correct problems of untying the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library that is common when the operating system is updated.</p>
+<p>The function <code>link_again</code> be able to link again the <a href="https://www.r-project.org/"><strong>R</strong></a> language with the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Thus, link_again will only make the relinkagem when in some previous section of <a href="https://www.r-project.org/"><strong>R</strong></a> the ropenblas function has been used for the initial binding of the <a href="https://www.r-project.org/"><strong>R</strong></a> language with the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library.</p>
+<p>For example, to relink the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library with the <a href="https://www.r-project.org/"><strong>R</strong></a> language, do:</p>
+<pre><code><a href="reference/link_again.html">link_again()</a></code></pre>
+<p>If <code>restart_r = TRUE</code> (default), a new section of <a href="https://www.r-project.org/"><strong>R</strong></a> is started after linking the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library.</p>
+<p>In situations where there was a disconnection due to an update of the operating system, the <code>ropenblas</code> function can be used to relink the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library with the <a href="https://www.r-project.org/"><strong>R</strong></a> language, however, it will be necessary to compile the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library again. If you are interested in recompiling the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and linking with <a href="https://www.r-project.org/"><strong>R</strong></a>, use the <code>ropenblas</code> function. If the interest is to take advantage of a previous compilation of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library, the function <code>link_again</code> may be useful.</p>
+</div>
 </div>
 <div id="advantages-of-using-ropenblas-package" class="section level2">
 <h2 class="hasAnchor">
