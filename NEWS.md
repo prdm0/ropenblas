@@ -1,9 +1,14 @@
-
-# ropenblas 0.2.4 (development version)
+# ropenblas 0.2.5 (development version)
 
 * Code review;
 
-* identifying bugs;
+* Identifying bugs.
+
+# ropenblas 0.2.4
+
+* Code review;
+
+* Identifying bugs;
 
 * Implementing the `link_again()` function. This function will allow you to link the R language again with the OpenBLAS library without having to recompile the OpenBLAS library. The `link_again()` function will be useful in situations where the operating system decouples the library from the OpenBLAS library. This is common in situations where the BLAS library binary file is updated.
 
