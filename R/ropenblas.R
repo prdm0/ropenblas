@@ -822,6 +822,7 @@ last_version_openblas <- function() {
 #' @importFrom magrittr "%>%"
 #' @importFrom glue glue 
 #' @importFrom fs dir_exists
+#' @importFrom cli style_bold style_underline col_blue col_green symbol
 #' @title Linking the OpenBLAS library with \R again
 #' @description The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
 #' of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
