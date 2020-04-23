@@ -42,7 +42,7 @@ install.packages("ropenblas")
 
 ## Using the package
 
-O pacote [**ropenblas**](https://prdm0.github.io/ropenblas/) disponibiliza atualmente três funções: `ropenblas()`, `last_version_r()` e `rcompiler()`. First of all, do:
+The [**ropenblas**](https://prdm0.github.io/ropenblas/) package currently provides five functions: `ropenblas()`, `rcompiler()`, `last_version_openblas()`, `last_version_r()` and `link_again()`. First of all, do:
 
 ```
 library(ropenblas)
