@@ -821,6 +821,7 @@ last_version_openblas <- function() {
 
 #' @importFrom magrittr "%>%"
 #' @importFrom glue glue 
+#' @importFrom fs dir_exists
 #' @title Linking the OpenBLAS library with \R again
 #' @description The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
 #' of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
@@ -849,8 +850,8 @@ link_again <- function(restart_r = TRUE) {
       already uses the {style_bold(\"OpenBLAS\")} library. You can stay calm." %>% 
         glue
   } else {
-    if (!exist_opt() || dir_blas()$path_blas == "/opt/OpenBLAS/lib/") 
-      "{symbol$mustache} Run the {style_bold(\"OpenBLAS\")} function." %>% 
+    if (!exist_opt() || !dir_exists("/opt/OpenBLAS/lib")) 
+      "{symbol$mustache} Run the {col_blue(style_underline(style_bold(\"ropenblas()\")))} function ..." %>% 
       glue
     else {
       glue(
