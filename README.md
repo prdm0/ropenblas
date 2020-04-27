@@ -89,6 +89,20 @@ Given the higher version, the function will return the latest stable version of 
 ```
 > last_version_r()
 $last_version
+[1] "4.0.0"
+
+$versions
+[1] "4.0.0"
+
+$n
+[1] 1
+```
+
+or
+
+```
+> last_version_r(major = 3L)
+$last_version
 [1] "3.6.3"
 
 $versions
@@ -101,22 +115,6 @@ $n
 [1] 32
 ```
 
-or
-
-```
-> last_version_r(major = 2L)
-$last_version
-[1] "2.9.2"
-
-$versions
- [1] "2.0.0"    "2.0.1"    "2.1.0"    "2.1.1"    "2.10.0"   "2.10.1"   "2.11.0"   "2.11.1"   "2.12.0"   "2.12.1"   "2.12.2"  
-[12] "2.13.0"   "2.13.1"   "2.13.2"   "2.14.0"   "2.14.1"   "2.14.2"   "2.15.0"   "2.15.1-w" "2.15.1"   "2.15.2"   "2.15.3"  
-[23] "2.2.0"    "2.2.1"    "2.3.0"    "2.3.1"    "2.4.0"    "2.4.1"    "2.5.0"    "2.5.1"    "2.6.0"    "2.6.1"    "2.6.2"   
-[34] "2.7.0"    "2.7.1"    "2.7.2"    "2.8.0"    "2.8.1"    "2.9.0"    "2.9.1"    "2.9.2"   
-
-$n
-[1] 41
-```
 
 **Note**: If `major = NULL`, the function will consider the major release number.
 
@@ -144,7 +142,7 @@ $n
 
 ### 'rcompiler' function:
 
-This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "3.6.3"` will compile and link **R-3.6.3** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/)
+This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "4.0.0"` will compile and link **R-4.0.0** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/)
 
 The `version_openblas` [**OpenBLAS**](https://www.openblas.net/) argument is a version of the library that will be linked to the [**R**](https://www.r-project.org/) code that will be compiled. By default if `version_openblas = NULL`, the latest stable version of the library [**OpenBLAS**](https://www.openblas.net/) will be linked.
 
