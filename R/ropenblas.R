@@ -618,13 +618,13 @@ change_r <- function (x, change = TRUE) {
   
   cat("\n")
   
-  "[{style_bold(col_green(symbol$tick))}] {style_bold(\"R\")} version {style_bold({x})}." %>%
+  "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
     glue %>%
     cat
   
   cat("\n")
   
-  "{symbol$mustache} The roles are active after terminating the current {style_bold(\"R\")} session ..." %>%
+  "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ..." %>%
     glue %>%
     col_blue %>%
     style_bold %>%
@@ -766,13 +766,13 @@ rcompiler <- function(x = NULL,
   
   cat("\n")
   
-  "[{style_bold(col_green(symbol$tick))}] {style_bold(\"R\")} version {style_bold({x})}." %>%
+  "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
     glue %>%
     cat
   
   cat("\n")
   
-  "{symbol$mustache} The roles are active after terminating the current {style_bold(\"R\")} session ...\n\n" %>%
+  "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ...\n\n" %>%
     glue %>%
     col_blue %>%
     style_bold %>%
@@ -848,7 +848,7 @@ last_version_openblas <- function() {
 link_again <- function(restart_r = TRUE) {
   if (dir_blas()$use_openblas){
       "{symbol$mustache} Linking again is not necessary. {col_blue(style_underline(style_bold(\"R\")))} \\
-      already uses the {style_bold(\"OpenBLAS\")} library. You can stay calm." %>% 
+      already uses the {col_blue(style_underline(style_bold(\"OpenBLAS\")))} library. You can stay calm." %>% 
         glue
   } else {
     if (!exist_opt() || !dir_exists("/opt/OpenBLAS/lib")) 
@@ -887,11 +887,11 @@ link_again <- function(restart_r = TRUE) {
       cat("\n")
       
       if(restart_r){
-        "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")}." %>%
+        "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"OpenBLAS\")))}." %>%
           glue %>%
           cat  
       } else {
-        "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} will be used in the next section." %>%
+        "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"OpenBLAS\")))} will be used in the next section." %>%
           glue %>%
           cat 
       }
