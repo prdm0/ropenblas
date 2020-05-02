@@ -70,6 +70,14 @@ dir_blas <- function() {
   )
 }
 
+is_sudo <-  function()
+  ifelse(
+    glue("{dir_blas()$path_blas}{dir_blas()$file_blas}") %>%
+      file.access(mode = 2L) == -1L,
+    TRUE,
+    FALSE
+  )
+
 exist <- function(x = "gcc") {
   nsystem <-
     function(...)
@@ -138,11 +146,25 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @importFrom git2r checkout
 #' @importFrom fs dir_delete
 #' @importFrom fs dir_exists
+#' @importFrom cli rule col_red symbol style_bold
 compiler_openblas <-
   function(download,
            openblas_version = NULL,
            local = TRUE) {
     # download <- download_openblas(x = openblas_version)
+    
+    if (!exist())
+      stop(
+        glue(
+          "{style_bold(col_red(symbol$cross))} GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system."
+        )
+      )
+    if (!exist("make"))
+      stop(
+        glue(
+          "{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."
+        )
+      )
     
     if (is.null(openblas_version)) {
       git2r::checkout(object = download$path_openblas,
@@ -160,8 +182,15 @@ compiler_openblas <-
     # Install OpenBLAS --------------------------------------------------------
     
     if (isTRUE(local)) {
-      if (dir_exists(path = "~/.config_r_lang/OpenBLAS"))
-        dir_delete("~/.config_r_lang/OpenBLAS")
+      # if (dir_exists(path = "~/.config_r_lang/OpenBLAS"))
+      #   dir_delete("~/.config_r_lang/OpenBLAS")
+      
+      if (!dir_exists(path = "~/.config_r_lang"))
+        dir_create(path = "~/.config_r_lang")
+      
+      "cp {dir_blas()$path}{dir_blas()$file_blas} ~/.config_r_lang/{dir_blas()$file_blas}" %>%
+        glue %>%
+        loop_root(attempt = 5L, sudo = is_sudo())
       
       with_dir(
         new = "/tmp/openblas",
@@ -264,21 +293,9 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   
   initial_blas <- dir_blas()$file_blas
   
-  is_sudo <-  function()
-    ifelse(
-      glue("{dir_blas()$path_blas}{dir_blas()$file_blas}") %>%
-        file.access(mode = 2L) == -1L,
-      TRUE,
-      FALSE
-    )
-  
   download <- download_openblas(x)
   # repo <- download$repo_openblas
-  # diretory_tmp <- download$path_openblas
-  
-  "cp {dir_blas()$path}{dir_blas()$file_blas} ~/.config_r_lang" %>%
-    glue %>%
-    loop_root(attempt = 5L, sudo = is_sudo())
+  #diretory_tmp <- download$path_openblas
   
   if (!is.null(x) && glue("v{x}") > download$last_version)
     stop(
@@ -293,7 +310,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         cat("\n")
         if (glue("v{x}") != download$last_version) {
           answer <-
-            "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))})}. Do you want to install this version?" %>%
+            "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$last_version, 2L, nchar(download$last_version))})}. Do you want to install this version?" %>%
             glue %>%
             answer_yes_no
           
@@ -429,26 +446,13 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   "
   )
   
-  if (!exist())
-    stop(
-      glue(
-        "{style_bold(col_red(symbol$cross))} GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system."
-      )
-    )
-  if (!exist("make"))
-    stop(
-      glue(
-        "{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."
-      )
-    )
-  
   # if (!exist_opt())
   #   mkdir_opt()
   
   # glue("cd {diretory_tmp} && make -j $(nproc)") %>% system
   
   # glue({
-  #   diretory_tmp
+  #    diretory_tmp
   # }) %>% setwd
   
   # glue("make install PREFIX=/opt/OpenBLAS") %>%
@@ -728,6 +732,56 @@ change_r <- function (x, change = TRUE) {
     cat
   
 }
+
+#' @importFrom withr with_dir
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom git2r checkout
+#' @importFrom fs dir_delete
+#' @importFrom fs dir_exists
+compiler_r <-
+  function(
+           r_version = NULL,
+           local = TRUE) {
+    # download <- download_openblas(x = openblas_version)
+    
+    if (is.null(r_version)) {
+      git2r::checkout(object = download$path_openblas,
+                      branch = download$last_version)
+    } else {
+      git2r::checkout(object = download$path_openblas,
+                      branch = glue("{openblas_version}"))
+    }
+    
+    # make --------------------------------------------------------------------
+    
+    with_dir(new = "/tmp/openblas",
+             code = loop_root("make -j $(nproc)", sudo = FALSE))
+    
+    # Install OpenBLAS --------------------------------------------------------
+    
+    if (isTRUE(local)) {
+      if (dir_exists(path = "~/.config_r_lang/OpenBLAS"))
+        dir_delete("~/.config_r_lang/OpenBLAS")
+      
+      with_dir(
+        new = "/tmp/openblas",
+        code = loop_root(
+          "make install PREFIX=$HOME/.config_r_lang/OpenBLAS",
+          sudo = FALSE
+        )
+      )
+    } else {
+      with_dir(new = "/tmp/openblas",
+               code = loop_root("make install",
+                                sudo = TRUE))
+    }
+    
+    download
+    
+  }
+
+
 
 #' @importFrom fs dir_exists
 #' @importFrom glue glue
