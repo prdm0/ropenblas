@@ -179,6 +179,23 @@ compiler_openblas <-
     
   }
 
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%"
+#' @importFrom stringr str_detect
+error_r <- function() {
+  #current_directory <- "{R.home()}/bin" %>% glue
+  run_r <- "$(which R) --no-save&" %>%
+    glue %>%
+    system(intern = TRUE)
+  
+  error <- any(FALSE, str_detect(run_r, pattern = "Error:"))
+  
+  if (length(error) == 0L)
+    error <- TRUE
+  
+  error
+}
+
 #' @title Download, Compile and Link OpenBLAS Library with \R
 #' @author Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})
 #' @description Link \R with an optimized version of the \href{http://www.netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
@@ -400,7 +417,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   # if (error_r()) {
   #   "mv ~/.config_r_lang/OpenBLAS/{initial_blas} {dir_blas()$path}" %>% 
   #     glue %>% 
-  #     loop_root(attempt = 5L, sudo = is_sudo())
+  #     loop_root(attempt = 5L, sudo = TRUE)
   #   
   #   cat("\n")
   #   
