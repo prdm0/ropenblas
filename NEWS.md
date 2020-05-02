@@ -2,7 +2,9 @@
 
 * Code review;
 
-* Identifying bugs.
+* Identifying bugs;
+
+* Decreasing the need for many user password requests.
 
 # ropenblas 0.2.4
 
