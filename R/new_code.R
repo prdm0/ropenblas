@@ -463,29 +463,29 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     ) %>% loop_root(attempt = 5L, sudo = is_sudo())
   }
   
-  # if (error_r()) {
-  #   "mv ~/.config_r_lang/OpenBLAS/{initial_blas} {dir_blas()$path}" %>%
-  #     glue %>%
-  #     loop_root(attempt = 5L, sudo = TRUE)
-  #
-  #   cat("\n")
-  #
-  #   cat(
-  #     rule(
-  #       width = 50L,
-  #       center = glue("{style_bold(\"Procedure Incompleted\")}"),
-  #       col = "red",
-  #       background_col = "gray90",
-  #       line = 2L
-  #     )
-  #   )
-  #
-  #   "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>%
-  #     glue %>%
-  #     warning %>%
-  #     return
-  #
-  # }
+  if (error_r()) {
+    "mv ~/.config_r_lang/OpenBLAS/{initial_blas} {dir_blas()$path}" %>%
+      glue %>%
+      loop_root(attempt = 5L, sudo = TRUE)
+
+    cat("\n")
+
+    cat(
+      rule(
+        width = 50L,
+        center = glue("{style_bold(\"Procedure Incompleted\")}"),
+        col = "red",
+        background_col = "gray90",
+        line = 2L
+      )
+    )
+
+    "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>%
+      glue %>%
+      warning %>%
+      return
+
+  }
   
   .refresh_terminal <- function() {
     system("R")
