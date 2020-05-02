@@ -1,3 +1,8 @@
+answer_yes_no <- function(text) {
+  readline(prompt = glue("{text} (yes/no): ")) %>%
+    tolower
+}
+
 download_openblas <- function(x = NULL) {
   if (file_exists("/tmp/openblas"))
     file_delete("/tmp/openblas")
@@ -134,16 +139,16 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @importFrom fs dir_delete
 #' @importFrom fs dir_exists
 compiler_openblas <-
-  function(openblas_version = NULL,
+  function(download, openblas_version = NULL,
            local = TRUE) {
-    download <- download_openblas(x = openblas_version)
+    # download <- download_openblas(x = openblas_version)
     
     if (is.null(openblas_version)) {
       git2r::checkout(object = download$path_openblas,
                       branch = download$last_version)
     } else {
       git2r::checkout(object = download$path_openblas,
-                      branch = glue("v{openblas_version}"))
+                      branch = glue("{openblas_version}"))
     }
     
     # make --------------------------------------------------------------------
@@ -235,28 +240,36 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   
   initial_blas <- dir_blas()$file_blas
   
+  is_sudo <-  function()
+    ifelse(
+      glue("{dir_blas()$path_blas}{dir_blas()$file_blas}") %>%
+        file.access(mode = 2L) == -1L,
+      TRUE,
+      FALSE
+    )
+  
   download <- download_openblas(x)
-  repo <- download$repo_openblas
-  diretory_tmp <- download$path_openblas
+  # repo <- download$repo_openblas
+  # diretory_tmp <- download$path_openblas
   
-  "cp {dir_blas()$path}{dir_blas()$file_blas} /opt" %>%
-    glue %>% 
-    loop_root(attempt = 5L)
-  
-  if (!is.null(x) && glue("v{x}") > download$version)
+  "cp {dir_blas()$path}{dir_blas()$file_blas} ~/.config_r_lang" %>%
+    glue %>%
+    loop_root(attempt = 5L, sudo = is_sudo())
+   
+  if (!is.null(x) && glue("v{x}") > download$last_version)
     stop(
       glue(
-        "{symbol$bullet} Version {style_bold({x})} does not exist. The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$version, 2L, nchar(download$version))})}."
+        "{symbol$bullet} Version {style_bold({x})} does not exist. The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$last_version, 2L, nchar(download$last_version))})}."
       )
     )
   
   if (!is.null(x)) {
     if (dir_blas()$use_openblas) {
-      if (glue("v{dir_blas()$version_openblas}") < download$version) {
+      if (glue("v{dir_blas()$version_openblas}") < download$last_version) {
         cat("\n")
-        if (glue("v{x}") != download$version) {
+        if (glue("v{x}") != download$last_version) {
           answer <-
-            "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({{substr(download$version, 2L, nchar(download$version))})}. Do you want to install this version?" %>%
+            "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))})}. Do you want to install this version?" %>%
             glue %>%
             answer_yes_no
           
@@ -267,12 +280,14 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         }
         
         if (answer %in% c("y", "yes")) {
-          checkout(repo, download$version)
+          # checkout(repo, download$version)
+          compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
         } else {
-          checkout(repo, glue("v{x}"))
+          # checkout(repo, glue("v{x}"))
+          compiler_openblas(download = download, openblas_version = glue("v{x}"), local = TRUE)
         }
       } else {
-        if (glue("v{dir_blas()$version_openblas}") == download$version) {
+        if (glue("v{dir_blas()$version_openblas}") == download$last_version) {
           answer <-
             "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
             glue %>% 
@@ -281,42 +296,47 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
           validate_answer(answer)
           
           if (answer %in% c("y", "yes")) {
-            checkout(repo, glue("v{x}"))
+            # checkout(repo, glue("v{x}"))
+            compiler_openblas(download = download, openblas_version = glue("v{x}"), local = TRUE)
           } else {
             return(warning("Ok, procedure interrupted!"))
           }
         } else {
           stop(
             glue(
-              "{symbol$bullet} There is no {style_bold(\"OpenBLAS\")} version {style_bold({x})}. The latest version is {style_bold({{substr(download$version, 2L, nchar(download$version))}})}."
+              "{symbol$bullet} There is no {style_bold(\"OpenBLAS\")} version {style_bold({x})}. The latest version is {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}."
             )
           )
         }
       }
     } else {
-      if (glue("v{x}") < download$version) {
+      if (glue("v{x}") < download$last_version) {
         answer <-
-          "{symbol$bullet} The latest version is {style_bold({{substr(download$version, 2L, nchar(download$version))}})}. Want to consider the latest version?" %>%
+          "{symbol$bullet} The latest version is {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}. Want to consider the latest version?" %>%
           glue %>%
           answer_yes_no
         
         validate_answer(answer)
         
         if (answer %in% c("y", "yes")) {
-          checkout(repo, download$version)
+          # checkout(repo, download$version)
+          compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
         } else {
-          checkout(repo, glue("v{x}"))
+          # checkout(repo, glue("v{x}"))
+          compiler_openblas(download = download, openblas_version = glue("v{x}"), local = TRUE)
         }
         
       } else {
-        checkout(repo, glue("v{x}"))
+        # checkout(repo, glue("v{x}"))
+        compiler_openblas(download = download, openblas_version = glue("v{x}"), local = TRUE)
       }
       
     }
   } else {
     if (dir_blas()$use_openblas) {
-      if (glue("v{dir_blas()$version}") < download$version) {
-        checkout(repo, download$version)
+      if (glue("v{dir_blas()$version}") < download$last_version) {
+        # checkout(repo, download$version)
+        compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
       } else {
         answer <-
           "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
@@ -327,12 +347,14 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         if (answer %in% c("n", "no")) {
           return(warning("Ok, procedure interrupted!"))
         } else {
-          checkout(repo, download$version)
+          # checkout(repo, download$version)
+          compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
         }
         
       }
     } else {
-      checkout(repo, download$version)
+      # checkout(repo, download$version)
+      compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
     }
     
   }
@@ -354,49 +376,50 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!exist("make"))
     stop(glue("{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."))
   
-  if (!exist_opt())
-    mkdir_opt()
+  # if (!exist_opt())
+  #   mkdir_opt()
   
-  glue("cd {diretory_tmp} && make -j $(nproc)") %>% system
+  # glue("cd {diretory_tmp} && make -j $(nproc)") %>% system
   
-  glue({
-    diretory_tmp
-  }) %>% setwd
+  # glue({
+  #   diretory_tmp
+  # }) %>% setwd
   
-  glue("make install PREFIX=/opt/OpenBLAS") %>%
-    loop_root(attempt = 5L)
-  
-  setwd(dir_blas()$path)
+  # glue("make install PREFIX=/opt/OpenBLAS") %>%
+  #   loop_root(attempt = 5L)
+  # 
+  # setwd(dir_blas()$path)
+  # 
   
   if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     glue(
-      "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-    ) %>% loop_root(attempt = 5L)
+      "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+    ) %>% loop_root(attempt = 5L, sudo = is_sudo())
   }
   
-  if (error_r()) {
-    "mv /opt/{initial_blas} {dir_blas()$path}" %>% 
-      glue %>% 
-      loop_root(attempt = 5L)
-    
-    cat("\n")
-    
-    cat(
-      rule(
-        width = 50L,
-        center = glue("{style_bold(\"Procedure Incompleted\")}"),
-        col = "red",
-        background_col = "gray90",
-        line = 2L
-      )
-    )    
-    
-    "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>% 
-      glue %>% 
-      warning %>% 
-      return
-    
-  }
+  # if (error_r()) {
+  #   "mv ~/.config_r_lang/OpenBLAS/{initial_blas} {dir_blas()$path}" %>% 
+  #     glue %>% 
+  #     loop_root(attempt = 5L, sudo = is_sudo())
+  #   
+  #   cat("\n")
+  #   
+  #   cat(
+  #     rule(
+  #       width = 50L,
+  #       center = glue("{style_bold(\"Procedure Incompleted\")}"),
+  #       col = "red",
+  #       background_col = "gray90",
+  #       line = 2L
+  #     )
+  #   )    
+  #   
+  #   "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>% 
+  #     glue %>% 
+  #     warning %>% 
+  #     return
+  #   
+  # }
   
   .refresh_terminal <- function() {
     system("R")
@@ -426,7 +449,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   cat("\n")
   
   if (is.null(x)) {
-    "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} version {style_bold({{substr(download$version, 2L, nchar(download$version))}})}." %>%
+    "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} version {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}." %>%
       glue %>%
       cat
     
