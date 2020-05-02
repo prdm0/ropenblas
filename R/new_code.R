@@ -50,7 +50,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist, -1L) %>%
+           unlist,-1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -139,7 +139,8 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
 #' @importFrom fs dir_delete
 #' @importFrom fs dir_exists
 compiler_openblas <-
-  function(download, openblas_version = NULL,
+  function(download,
+           openblas_version = NULL,
            local = TRUE) {
     # download <- download_openblas(x = openblas_version)
     
@@ -250,10 +251,16 @@ error_r <- function() {
 #' @export
 ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (Sys.info()[[1L]] != "Linux")
-    stop("Sorry, this package for now configures {style_bold(\"R\")} to use the {style_bold(\"OpenBLAS\")} library on Linux systems.\n")
+    stop(
+      "Sorry, this package for now configures {style_bold(\"R\")} to use the {style_bold(\"OpenBLAS\")} library on Linux systems.\n"
+    )
   
   if (!connection())
-    stop(glue("[{style_bold(col_red(symbol$cross))}] You apparently have no internet connection.\n"))
+    stop(
+      glue(
+        "[{style_bold(col_red(symbol$cross))}] You apparently have no internet connection.\n"
+      )
+    )
   
   initial_blas <- dir_blas()$file_blas
   
@@ -272,7 +279,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   "cp {dir_blas()$path}{dir_blas()$file_blas} ~/.config_r_lang" %>%
     glue %>%
     loop_root(attempt = 5L, sudo = is_sudo())
-   
+  
   if (!is.null(x) && glue("v{x}") > download$last_version)
     stop(
       glue(
@@ -298,23 +305,35 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         
         if (answer %in% c("y", "yes")) {
           # checkout(repo, download$version)
-          compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
+          compiler_openblas(
+            download = download,
+            openblas_version = download$last_version,
+            local = TRUE
+          )
         } else {
           # checkout(repo, glue("v{x}"))
-          compiler_openblas(download = download, openblas_version = glue("v{x}"), local = TRUE)
+          compiler_openblas(
+            download = download,
+            openblas_version = glue("v{x}"),
+            local = TRUE
+          )
         }
       } else {
         if (glue("v{dir_blas()$version_openblas}") == download$last_version) {
           answer <-
             "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
-            glue %>% 
+            glue %>%
             answer_yes_no
           
           validate_answer(answer)
           
           if (answer %in% c("y", "yes")) {
             # checkout(repo, glue("v{x}"))
-            compiler_openblas(download = download, openblas_version = glue("v{x}"), local = TRUE)
+            compiler_openblas(
+              download = download,
+              openblas_version = glue("v{x}"),
+              local = TRUE
+            )
           } else {
             return(warning("Ok, procedure interrupted!"))
           }
@@ -337,15 +356,27 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         
         if (answer %in% c("y", "yes")) {
           # checkout(repo, download$version)
-          compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
+          compiler_openblas(
+            download = download,
+            openblas_version = download$last_version,
+            local = TRUE
+          )
         } else {
           # checkout(repo, glue("v{x}"))
-          compiler_openblas(download = download, openblas_version = glue("v{x}"), local = TRUE)
+          compiler_openblas(
+            download = download,
+            openblas_version = glue("v{x}"),
+            local = TRUE
+          )
         }
         
       } else {
         # checkout(repo, glue("v{x}"))
-        compiler_openblas(download = download, openblas_version = glue("v{x}"), local = TRUE)
+        compiler_openblas(
+          download = download,
+          openblas_version = glue("v{x}"),
+          local = TRUE
+        )
       }
       
     }
@@ -353,11 +384,15 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     if (dir_blas()$use_openblas) {
       if (glue("v{dir_blas()$version}") < download$last_version) {
         # checkout(repo, download$version)
-        compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
+        compiler_openblas(
+          download = download,
+          openblas_version = download$last_version,
+          local = TRUE
+        )
       } else {
         answer <-
           "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
-          glue %>% 
+          glue %>%
           answer_yes_no
         validate_answer(answer)
         
@@ -365,13 +400,21 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
           return(warning("Ok, procedure interrupted!"))
         } else {
           # checkout(repo, download$version)
-          compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
+          compiler_openblas(
+            download = download,
+            openblas_version = download$last_version,
+            local = TRUE
+          )
         }
         
       }
     } else {
       # checkout(repo, download$version)
-      compiler_openblas(download = download, openblas_version = download$last_version, local = TRUE)
+      compiler_openblas(
+        download = download,
+        openblas_version = download$last_version,
+        local = TRUE
+      )
     }
     
   }
@@ -388,10 +431,16 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   
   if (!exist())
     stop(
-      glue("{style_bold(col_red(symbol$cross))} GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system.")
+      glue(
+        "{style_bold(col_red(symbol$cross))} GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system."
+      )
     )
   if (!exist("make"))
-    stop(glue("{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."))
+    stop(
+      glue(
+        "{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."
+      )
+    )
   
   # if (!exist_opt())
   #   mkdir_opt()
@@ -404,9 +453,9 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   
   # glue("make install PREFIX=/opt/OpenBLAS") %>%
   #   loop_root(attempt = 5L)
-  # 
+  #
   # setwd(dir_blas()$path)
-  # 
+  #
   
   if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     glue(
@@ -415,12 +464,12 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   }
   
   # if (error_r()) {
-  #   "mv ~/.config_r_lang/OpenBLAS/{initial_blas} {dir_blas()$path}" %>% 
-  #     glue %>% 
+  #   "mv ~/.config_r_lang/OpenBLAS/{initial_blas} {dir_blas()$path}" %>%
+  #     glue %>%
   #     loop_root(attempt = 5L, sudo = TRUE)
-  #   
+  #
   #   cat("\n")
-  #   
+  #
   #   cat(
   #     rule(
   #       width = 50L,
@@ -429,13 +478,13 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   #       background_col = "gray90",
   #       line = 2L
   #     )
-  #   )    
-  #   
-  #   "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>% 
-  #     glue %>% 
-  #     warning %>% 
+  #   )
+  #
+  #   "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>%
+  #     glue %>%
+  #     warning %>%
   #     return
-  #   
+  #
   # }
   
   .refresh_terminal <- function() {
@@ -453,15 +502,13 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   
   cat("\n")
   
-  cat(
-    rule(
-      width = 50L,
-      center = glue("{style_bold(\"Procedure Completed\")}"),
-      col = "blue",
-      background_col = "gray90",
-      line = 2L
-    )
-  )
+  cat(rule(
+    width = 50L,
+    center = glue("{style_bold(\"Procedure Completed\")}"),
+    col = "blue",
+    background_col = "gray90",
+    line = 2L
+  ))
   
   cat("\n")
   
@@ -609,15 +656,13 @@ check_r_opt <- function(x = NULL) {
 attention <- function(x) {
   cat("\n")
   
-  cat(
-    rule(
-      width = 60L,
-      center = glue("{style_bold(\"VERY ATTENTION\")}"), 
-      col = "red",
-      background_col = "gray90",
-      line = 2L
-    )
-  )
+  cat(rule(
+    width = 60L,
+    center = glue("{style_bold(\"VERY ATTENTION\")}"),
+    col = "red",
+    background_col = "gray90",
+    line = 2L
+  ))
   
   cat("\n")
   
@@ -642,7 +687,6 @@ attention <- function(x) {
 #' @importFrom fs dir_exists
 #' @importFrom magrittr "%>%"
 change_r <- function (x, change = TRUE) {
-  
   exist_version_r <- "/opt/R/{x}" %>%
     glue %>%
     dir_exists
@@ -650,26 +694,24 @@ change_r <- function (x, change = TRUE) {
   dir_r  <- R.home("bin")
   
   if (change) {
-    "ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>% 
-      glue %>% 
+    "ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>%
+      glue %>%
       loop_root(attempt = 5L)
     
-    "ln -sf /opt/R/{x}/lib64/R/bin/Rscript /usr/bin/Rscript" %>% 
-      glue %>% 
+    "ln -sf /opt/R/{x}/lib64/R/bin/Rscript /usr/bin/Rscript" %>%
+      glue %>%
       loop_root(attempt = 5L)
   }
   
   cat("\n")
   
-  cat(
-    rule(
-      width = 50L,
-      center = glue("{style_bold(\"Procedure Completed\")}"), 
-      col = "blue",
-      background_col = "gray90",
-      line = 2L
-    )
-  )
+  cat(rule(
+    width = 50L,
+    center = glue("{style_bold(\"Procedure Completed\")}"),
+    col = "blue",
+    background_col = "gray90",
+    line = 2L
+  ))
   
   cat("\n")
   
@@ -718,7 +760,8 @@ change_r <- function (x, change = TRUE) {
 #' # rcompiler()
 #' @export
 rcompiler <- function(x = NULL,
-                      version_openblas = NULL, local = TRUE) {
+                      version_openblas = NULL,
+                      local = TRUE) {
   if (Sys.info()[[1L]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
@@ -743,7 +786,8 @@ rcompiler <- function(x = NULL,
   
   if (check_r_opt(x)) {
     if ("/opt/R/{x}" %>% glue %>% dir_exists) {
-      answer <- "R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
+      answer <-
+        "R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
         answer_yes_no
       
       validate_answer(answer)
@@ -780,15 +824,13 @@ rcompiler <- function(x = NULL,
     } else {
       cat("\n")
       
-      cat(
-        rule(
-          width = 50L,
-          center = glue("{style_bold(\"Procedure Completed\")}"),
-          col = "blue",
-          background_col = "gray90",
-          line = 2L
-        )
-      )
+      cat(rule(
+        width = 50L,
+        center = glue("{style_bold(\"Procedure Completed\")}"),
+        col = "blue",
+        background_col = "gray90",
+        line = 2L
+      ))
     }
     
   } else {
@@ -807,12 +849,12 @@ rcompiler <- function(x = NULL,
       loop_root(attempt = 5L)
     
     
-    "ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>% 
-      glue %>% 
+    "ln -sf /opt/R/{x}/lib64/R/bin/R /usr/bin/R"  %>%
+      glue %>%
       loop_root(attempt = 5L)
     
-    "ln -sf /opt/R/{x}/lib64/R/bin/Rscript /usr/bin/Rscript" %>% 
-      glue %>% 
+    "ln -sf /opt/R/{x}/lib64/R/bin/Rscript /usr/bin/Rscript" %>%
+      glue %>%
       loop_root(attempt = 5L)
     
     ropenblas(x = version_openblas, restart_r = FALSE)
@@ -835,7 +877,7 @@ rcompiler <- function(x = NULL,
 }
 
 #' @importFrom magrittr "%>%"
-#' @importFrom fs file_exists dir_create 
+#' @importFrom fs file_exists dir_create
 #' @importFrom git2r clone tags remote_ls
 #' @importFrom glue glue
 #' @importFrom stringr str_extract
@@ -855,15 +897,14 @@ last_version_openblas <- function() {
   if (!connection())
     stop("You apparently have no internet connection.\n")
   
-  pulls <- "https://github.com/xianyi/OpenBLAS.git" %>% 
-    remote_ls %>% 
+  pulls <- "https://github.com/xianyi/OpenBLAS.git" %>%
+    remote_ls %>%
     names
   
-  versions <- pulls %>% str_extract(
-    pattern = "v[:digit:][:punct:][:graph:]+") %>%
-    na.omit %>% 
-    str_remove(pattern = "\\^\\{\\}") %>% 
-    unique %>% 
+  versions <- pulls %>% str_extract(pattern = "v[:digit:][:punct:][:graph:]+") %>%
+    na.omit %>%
+    str_remove(pattern = "\\^\\{\\}") %>%
+    unique %>%
     str_remove(pattern = "^v")
   
   list(
@@ -875,7 +916,7 @@ last_version_openblas <- function() {
 }
 
 #' @importFrom magrittr "%>%"
-#' @importFrom glue glue 
+#' @importFrom glue glue
 #' @importFrom fs dir_exists
 #' @importFrom cli style_bold style_underline col_blue col_green symbol
 #' @title Linking the OpenBLAS library with \R again
@@ -885,7 +926,7 @@ last_version_openblas <- function() {
 #' @details The function \code{link_again} be able to link again the \R language with the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Thus, link_again will only make the
 #' relinkagem when in some previous section of \R the ropenblas function has been used for the initial binding of the \R language with the
 #' \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
-#' 
+#'
 #' Relinking is useful in situations of updating the operating system. In some update, it is possible that the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library compiled
 #' in the \code{/opt} directory is unlinked. In this scenario, when the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library has already been compiled using the ropenblas
 #' function, the \code{link_again} function performs a new link without the need to recompile, thus making the process less time
@@ -897,17 +938,17 @@ last_version_openblas <- function() {
 #' interest is to take advantage of a previous compilation of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library, the
 #' function \code{link_again} may be useful.
 #' @seealso \code{\link{ropenblas}}
-#' @examples 
+#' @examples
 #' # link_again()
 #' @export
 link_again <- function(restart_r = TRUE) {
-  if (dir_blas()$use_openblas){
+  if (dir_blas()$use_openblas) {
     "{symbol$mustache} Linking again is not necessary. {col_blue(style_underline(style_bold(\"R\")))} \\
-      already uses the {col_blue(style_underline(style_bold(\"OpenBLAS\")))} library. You can stay calm." %>% 
+      already uses the {col_blue(style_underline(style_bold(\"OpenBLAS\")))} library. You can stay calm." %>%
       glue
   } else {
-    if (!exist_opt() || !dir_exists("/opt/OpenBLAS/lib")) 
-      "{symbol$mustache} Run the {col_blue(style_underline(style_bold(\"ropenblas()\")))} function ..." %>% 
+    if (!exist_opt() || !dir_exists("/opt/OpenBLAS/lib"))
+      "{symbol$mustache} Run the {col_blue(style_underline(style_bold(\"ropenblas()\")))} function ..." %>%
       glue
     else {
       glue(
@@ -929,29 +970,26 @@ link_again <- function(restart_r = TRUE) {
       
       cat("\n")
       
-      cat(
-        rule(
-          width = 50L,
-          center = glue("{style_bold(\"Procedure Completed\")}"),
-          col = "blue",
-          background_col = "gray90",
-          line = 2L
-        )
-      )
+      cat(rule(
+        width = 50L,
+        center = glue("{style_bold(\"Procedure Completed\")}"),
+        col = "blue",
+        background_col = "gray90",
+        line = 2L
+      ))
       
       cat("\n")
       
-      if(restart_r){
+      if (restart_r) {
         "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"OpenBLAS\")))}." %>%
           glue %>%
-          cat  
+          cat
       } else {
         "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"OpenBLAS\")))} will be used in the next section." %>%
           glue %>%
-          cat 
+          cat
       }
       
     }
   }
 }
-
