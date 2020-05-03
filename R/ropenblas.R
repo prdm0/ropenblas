@@ -657,7 +657,7 @@ change_r <- function (x, change = TRUE) {
     glue %>%
     dir_exists
   
-  dir_r  <- R.home("bin")
+  dir_r  <- paste(system("which R", intern = TRUE), collapse = "\n")
   
   if (change) {
     "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}/R"  %>%
@@ -703,44 +703,39 @@ change_r <- function (x, change = TRUE) {
 #' @importFrom fs dir_exists
 compiler_r <- function(r_version = NULL,
                        version_openblas = NULL,
-                       complementary_flags = "") {
+                       with_blas = NULL, 
+                       complementary_flags = NULL) {
   
   if (is.null(r_version))
     r_version <- last_version_r()$last_version
   
   download <- download_r(x = r_version)
   
-  if (dir_exists(path = "~/.config_r_lang/OpenBLAS")) {
-    configure <- "./configure \\
-       --prefix=$HOME/.config_r_lang/R/{r_version} \\
-       --enable-memory-profiling \\
-       --enable-R-shlib \\
-       --enable-threads=posix \\
-       --with-blas=\"-L~/.config_r_lang/OpenBLAS/lib \\
-       -I~/.config_r_lang/OpenBLAS/include \\
-       -lpthread \\
-       -lm\" \\
-       {complementary_flags}" %>%
+  if (is.null(with_blas)) {
+    with_blas <-  "-L~/.config_r_lang/OpenBLAS/lib \\
+     -I~/.config_r_lang/OpenBLAS/include \\
+     -lpthread \\
+     -lm" %>% 
       glue
-    
-    
+  }
+  
+  if (is.null(complementary_flags)) 
+    complementary_flags <- ""
+  
+  configure <- 
+      "./configure \\
+     --prefix=$HOME/.config_r_lang/R/{r_version} \\
+     --enable-memory-profiling \\
+     --enable-R-shlib \\
+     --enable-threads=posix \\
+     --with-blas=\"{with_blas}\" \\
+     {complementary_flags}" %>%
+    glue
+  
+  if (dir_exists(path = "~/.config_r_lang/OpenBLAS")) 
     with_dir(new = download, code = loop_root(configure, sudo = FALSE))
-    
-  } else {
+  else {
     ropenblas(x = version_openblas, restart_r = TRUE)
-    
-    configure <- "./configure \\
-       --prefix=$HOME/.config_r_lang/R/{r_version} \\
-       --enable-memory-profiling \\
-       --enable-R-shlib \\
-       --enable-threads=posix \\
-       --with-blas=\"-L~/.config_r_lang/OpenBLAS/lib \\
-       -I~/.config_r_lang/OpenBLAS/include \\
-       -lpthread \\
-       -lm\" \\
-       {complementary_flags}" %>%
-      glue
-    
     with_dir(new = download, code = loop_root(configure, sudo = FALSE))
   }
   
@@ -810,24 +805,24 @@ rcompiler <- function(x = NULL,
       return(warning("Given the answers, it is not possible to continue ..."))
   }
   
+  dir_r  <- paste(system("which R", intern = TRUE), collapse = "\n")
+  
   compiler_r(
     r_version = x,
     version_openblas = version_openblas,
     complementary_flags = complementary_flags
   )
       
-  "ln -sf ~/.config_r_lang/R/{x}/bin/R {R.home(\"bin\")}/R"  %>%
+  "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}/R"  %>%
     glue %>%
     loop_root(attempt = 5L)
   
-  "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {R.home(\"bin\")}/Rscript" %>%
+  "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {dir_r}/Rscript" %>%
     glue %>%
     loop_root(attempt = 5L)
   
   ropenblas(x = version_openblas, restart_r = FALSE)
   
-
-
   cat("\n")
 
   "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
@@ -915,12 +910,12 @@ link_again <- function(restart_r = TRUE) {
       already uses the {col_blue(style_underline(style_bold(\"OpenBLAS\")))} library. You can stay calm." %>%
       glue
   } else {
-    if (!exist_opt() || !dir_exists("/opt/OpenBLAS/lib"))
+    if (!dir_exists(" ~/.config_r_lang/OpenBLAS/lib"))
       "{symbol$mustache} Run the {col_blue(style_underline(style_bold(\"ropenblas()\")))} function ..." %>%
       glue
     else {
       glue(
-        "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+        "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
       ) %>% loop_root(attempt = 5L)
       
       .refresh_terminal <- function() {
