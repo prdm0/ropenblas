@@ -657,7 +657,7 @@ change_r <- function (x, change = TRUE) {
     glue %>%
     dir_exists
   
-  dir_r  <- paste(system("which R", intern = TRUE), collapse = "\n")
+  dir_r  <-  paste(system(command = "which R", intern = TRUE))
   
   if (change) {
     "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}/R"  %>%
@@ -805,7 +805,7 @@ rcompiler <- function(x = NULL,
       return(warning("Given the answers, it is not possible to continue ..."))
   }
   
-  dir_r  <- paste(system("which R", intern = TRUE), collapse = "\n")
+  dir_r  <-  paste(system(command = "which R", intern = TRUE))
   
   compiler_r(
     r_version = x,
