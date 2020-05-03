@@ -311,15 +311,13 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
           # checkout(repo, download$version)
           compiler_openblas(
             download = download,
-            openblas_version = download$last_version,
-            local = TRUE
+            openblas_version = download$last_version
           )
         } else {
           # checkout(repo, glue("v{x}"))
           compiler_openblas(
             download = download,
-            openblas_version = glue("v{x}"),
-            local = TRUE
+            openblas_version = glue("v{x}")
           )
         }
       } else {
@@ -335,8 +333,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
             # checkout(repo, glue("v{x}"))
             compiler_openblas(
               download = download,
-              openblas_version = glue("v{x}"),
-              local = TRUE
+              openblas_version = glue("v{x}")
             )
           } else {
             return(warning("Ok, procedure interrupted!"))
@@ -362,15 +359,13 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
           # checkout(repo, download$version)
           compiler_openblas(
             download = download,
-            openblas_version = download$last_version,
-            local = TRUE
+            openblas_version = download$last_version
           )
         } else {
           # checkout(repo, glue("v{x}"))
           compiler_openblas(
             download = download,
-            openblas_version = glue("v{x}"),
-            local = TRUE
+            openblas_version = glue("v{x}")
           )
         }
         
@@ -378,8 +373,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         # checkout(repo, glue("v{x}"))
         compiler_openblas(
           download = download,
-          openblas_version = glue("v{x}"),
-          local = TRUE
+          openblas_version = glue("v{x}")
         )
       }
       
@@ -390,8 +384,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         # checkout(repo, download$version)
         compiler_openblas(
           download = download,
-          openblas_version = download$last_version,
-          local = TRUE
+          openblas_version = download$last_version
         )
       } else {
         answer <-
@@ -406,8 +399,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
           # checkout(repo, download$version)
           compiler_openblas(
             download = download,
-            openblas_version = download$last_version,
-            local = TRUE
+            openblas_version = download$last_version
           )
         }
         
@@ -416,8 +408,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
       # checkout(repo, download$version)
       compiler_openblas(
         download = download,
-        openblas_version = download$last_version,
-        local = TRUE
+        openblas_version = download$last_version
       )
     }
     
