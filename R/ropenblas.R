@@ -785,7 +785,7 @@ compiler_r <- function(r_version = NULL,
 #' @export
 rcompiler <- function(x = NULL,
                       version_openblas = NULL,
-                      complementary_flags = "") {
+                      complementary_flags = NULL) {
   if (Sys.info()[[1L]] != "Linux")
     stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
   
@@ -810,6 +810,7 @@ rcompiler <- function(x = NULL,
   compiler_r(
     r_version = x,
     version_openblas = version_openblas,
+    with_blas = with_blas,
     complementary_flags = complementary_flags
   )
       
