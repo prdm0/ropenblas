@@ -816,11 +816,11 @@ rcompiler <- function(x = NULL,
     complementary_flags = complementary_flags
   )
       
-  "ln -sf ~/.config_r_lang/R/{x}/bin/R /usr/bin/R"  %>%
+  "ln -sf ~/.config_r_lang/R/{x}/bin/R {R.home(\"bin\")}/R"  %>%
     glue %>%
     loop_root(attempt = 5L)
   
-  "ln -sf /opt/R/{x}/lib64/R/bin/Rscript /usr/bin/Rscript" %>%
+  "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {R.home(\"bin\")}/Rscript" %>%
     glue %>%
     loop_root(attempt = 5L)
   
