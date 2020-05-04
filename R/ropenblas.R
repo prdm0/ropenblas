@@ -70,13 +70,23 @@ dir_blas <- function() {
   )
 }
 
-is_sudo <-  function()
-  ifelse(
-    glue("{dir_blas()$path_blas}{dir_blas()$file_blas}") %>%
-      file.access(mode = 2L) == -1L,
-    TRUE,
-    FALSE
-  )
+is_sudo <-  function(blas = TRUE) {
+  if (blas == TRUE) {
+    ifelse(
+      glue("{dir_blas()$path_blas}{dir_blas()$file_blas}") %>%
+        file.access(mode = 2L) == -1L,
+      TRUE,
+      FALSE
+    )
+  } else {
+    ifelse(
+      paste(system(command = "which R", intern = TRUE)) %>%
+        file.access(mode = 2L) == -1L,
+      TRUE,
+      FALSE
+    )
+  }
+}
 
 exist <- function(x = "gcc") {
   nsystem <-
@@ -138,7 +148,6 @@ loop_root <- function(x, attempt = 3L, sudo = TRUE) {
     glue("{x}") %>% system
   }
 }
-
 
 #' @importFrom withr with_dir
 #' @importFrom glue glue
@@ -427,7 +436,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     glue(
       "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-    ) %>% loop_root(attempt = 5L, sudo = is_sudo())
+    ) %>% loop_root(attempt = 5L, sudo = is_sudo(blas = TRUE))
   }
   
   if (error_r()) {
@@ -649,15 +658,16 @@ change_r <- function (x, change = TRUE) {
     dir_exists
   
   dir_r  <-  paste(system(command = "which R", intern = TRUE))
+  dir_rscript  <-  paste(system(command = "which Rscript", intern = TRUE))
   
   if (change) {
-    "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}/R"  %>%
+    "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}"  %>%
       glue %>%
-      loop_root(attempt = 5L)
+      loop_root(attempt = 5L, sudo = is_sudo(blas = FALSE))
     
-    "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {dir_r}/Rscript" %>%
+    "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {dir_rscript}" %>%
       glue %>%
-      loop_root(attempt = 5L)
+      loop_root(attempt = 5L, sudo = is_sudo(blas = FALSE))
   }
   
   cat("\n")
@@ -726,7 +736,7 @@ compiler_r <- function(r_version = NULL,
   if (dir_exists(path = "~/.config_r_lang/OpenBLAS")) 
     with_dir(new = download, code = loop_root(configure, sudo = FALSE))
   else {
-    ropenblas(x = version_openblas, restart_r = TRUE)
+    ropenblas(x = version_openblas, restart_r = FALSE)
     with_dir(new = download, code = loop_root(configure, sudo = FALSE))
   }
   
@@ -798,6 +808,7 @@ rcompiler <- function(x = NULL,
   }
   
   dir_r  <-  paste(system(command = "which R", intern = TRUE))
+  dir_rscript <- paste(system(command = "which Rscript", intern = TRUE))
   
   compiler_r(
     r_version = x,
@@ -806,16 +817,14 @@ rcompiler <- function(x = NULL,
     complementary_flags = complementary_flags
   )
       
-  "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}/R"  %>%
+  "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}"  %>%
     glue %>%
-    loop_root(attempt = 5L)
+    loop_root(attempt = 5L, sudo = is_sudo(blas = FALSE))
   
-  "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {dir_r}/Rscript" %>%
+  "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {dir_rscript}" %>%
     glue %>%
-    loop_root(attempt = 5L)
-  
-  ropenblas(x = version_openblas, restart_r = FALSE)
-  
+    loop_root(attempt = 5L, sudo = is_sudo(blas = FALSE))
+
   cat("\n")
 
   "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
@@ -909,7 +918,7 @@ link_again <- function(restart_r = TRUE) {
     else {
       glue(
         "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-      ) %>% loop_root(attempt = 5L)
+      ) %>% loop_root(attempt = 5L, sudo = is_sudo(blas = TRUE))
       
       .refresh_terminal <- function() {
         system("R")
