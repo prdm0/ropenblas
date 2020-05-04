@@ -195,7 +195,7 @@ compiler_openblas <-
     
     "cp {dir_blas()$path}{dir_blas()$file_blas} ~/.config_r_lang/{dir_blas()$file_blas}" %>%
       glue %>%
-      loop_root(attempt = 5L, sudo = is_sudo())
+      loop_root(attempt = 5L, sudo = is_sudo(blas = TRUE))
     
     with_dir(
       new = "/tmp/openblas",
@@ -816,14 +816,16 @@ rcompiler <- function(x = NULL,
     with_blas = with_blas,
     complementary_flags = complementary_flags
   )
-      
+  
+  permission <- is_sudo(blas = FALSE)    
+  
   "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}"  %>%
     glue %>%
-    loop_root(attempt = 5L, sudo = is_sudo(blas = FALSE))
+    loop_root(attempt = 5L, sudo = permission)
   
   "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {dir_rscript}" %>%
     glue %>%
-    loop_root(attempt = 5L, sudo = is_sudo(blas = FALSE))
+    loop_root(attempt = 5L, sudo = permission)
 
   cat("\n")
 
