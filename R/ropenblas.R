@@ -736,17 +736,28 @@ compiler_r <- function(r_version = NULL,
      {complementary_flags}" %>%
     glue
   
-  if (dir_exists(path = "~/.config_r_lang/OpenBLAS")) 
+  if (dir_exists(path = "~/.config_r_lang/OpenBLAS")) {
     with_dir(new = download, code = loop_root(configure, sudo = FALSE))
-  else {
+    
+    # make --------------------------------------------------------------------
+    
+    with_dir(new = download,
+             code = loop_root("make -j $(nproc)", sudo = FALSE))
+    
+    # glue(
+    #   "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+    # ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
+    
+  } else {
+    with_dir(new = download, code = loop_root(configure, sudo = FALSE))
+    
+    # make --------------------------------------------------------------------
+    
+    with_dir(new = download,
+             code = loop_root("make -j $(nproc)", sudo = FALSE))
+    
     ropenblas(x = version_openblas, restart_r = FALSE)
-    with_dir(new = download, code = loop_root(configure, sudo = FALSE))
   }
-  
-  # make --------------------------------------------------------------------
-  
-  with_dir(new = download,
-           code = loop_root("make -j $(nproc)", sudo = FALSE))
   
   # make install ------------------------------------------------------------
   
