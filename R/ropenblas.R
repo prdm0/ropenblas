@@ -758,6 +758,15 @@ compiler_r <- function(r_version = NULL,
     
     ropenblas(x = version_openblas, restart_r = FALSE)
   }
+
+  # build library directory -------------------------------------------------
+
+  version <- str_extract(string = r_version, pattern = "\\d.\\d")
+  dir_path <- glue("~/.confir_r_lang/R/{version}")
+  
+  if (!dir_exists(path = dir_path)) 
+    dir_create(path = dir_path)
+  
   
   # make install ------------------------------------------------------------
   
