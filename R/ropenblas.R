@@ -705,6 +705,7 @@ change_r <- function (x, change = TRUE) {
 #' @importFrom git2r checkout
 #' @importFrom fs dir_delete
 #' @importFrom fs dir_exists
+#' @importFrom stringr str_extract
 compiler_r <- function(r_version = NULL,
                        version_openblas = NULL,
                        with_blas = NULL, 
@@ -744,6 +745,13 @@ compiler_r <- function(r_version = NULL,
     with_dir(new = download,
              code = loop_root("make -j $(nproc)", sudo = FALSE))
     
+    # make install ------------------------------------------------------------
+    
+    with_dir(
+      new = download,
+      code = loop_root("make install PREFIX=~/.config_r_lang/R/{r_version}", sudo = FALSE)
+    )
+    
     # glue(
     #   "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
     # ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
@@ -756,7 +764,15 @@ compiler_r <- function(r_version = NULL,
     with_dir(new = download,
              code = loop_root("make -j $(nproc)", sudo = FALSE))
     
+    # make install ------------------------------------------------------------
+    
+    with_dir(
+      new = download,
+      code = loop_root("make install PREFIX=~/.config_r_lang/R/{r_version}", sudo = FALSE)
+    )
+    
     ropenblas(x = version_openblas, restart_r = FALSE)
+    
   }
 
   # build library directory -------------------------------------------------
@@ -766,14 +782,6 @@ compiler_r <- function(r_version = NULL,
   
   if (!dir_exists(path = dir_path)) 
     dir_create(path = dir_path)
-  
-  
-  # make install ------------------------------------------------------------
-  
-  with_dir(
-    new = download,
-    code = loop_root("make install PREFIX=~/.config_r_lang/R/{r_version}", sudo = FALSE)
-  )
   
 }
 
