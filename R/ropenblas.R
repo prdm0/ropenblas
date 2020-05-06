@@ -752,10 +752,6 @@ compiler_r <- function(r_version = NULL,
       code = loop_root("make install PREFIX=~/.config_r_lang/R/{r_version}", sudo = FALSE)
     )
     
-    # glue(
-    #   "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-    # ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
-    
   } else {
     with_dir(new = download, code = loop_root(configure, sudo = FALSE))
     
