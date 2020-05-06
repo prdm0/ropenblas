@@ -759,6 +759,16 @@ compiler_r <- function(r_version = NULL,
       new = download,
       code = loop_root("make install PREFIX=~/.config_r_lang/R/{r_version}", sudo = FALSE)
     )
+
+    # creating symbolic links -------------------------------------------------
+        
+    "ln -sf ~/.config_r_lang/R/{r_version}/bin/R {dir_r}"  %>%
+      glue %>%
+      loop_root(attempt = 5L, sudo =  is_sudo()$r)
+    
+    "ln -sf ~/.config_r_lang/R/{r_version}/bin/Rscript {dir_rscript}" %>%
+      glue %>%
+      loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
     
   } else {
 
@@ -783,6 +793,18 @@ compiler_r <- function(r_version = NULL,
       code = loop_root("make install PREFIX=~/.config_r_lang/R/{r_version}", sudo = FALSE)
     )
     
+    # creating symbolic links -------------------------------------------------
+
+    "ln -sf ~/.config_r_lang/R/{r_version}/bin/R {dir_r}"  %>%
+      glue %>%
+      loop_root(attempt = 5L, sudo =  is_sudo()$r)
+    
+    "ln -sf ~/.config_r_lang/R/{r_version}/bin/Rscript {dir_rscript}" %>%
+      glue %>%
+      loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
+    
+    # compiling and linking the OpenBLAS library ------------------------------
+
     ropenblas(x = version_openblas, restart_r = FALSE)
     
   }
