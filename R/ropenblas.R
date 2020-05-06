@@ -704,7 +704,7 @@ change_r <- function (x, change = TRUE) {
 #' @importFrom magrittr "%>%"
 #' @importFrom git2r checkout
 #' @importFrom fs dir_delete
-#' @importFrom fs dir_exists
+#' @importFrom fs dir_exists path_split
 #' @importFrom stringr str_extract
 compiler_r <- function(r_version = NULL,
                        version_openblas = NULL,
@@ -774,7 +774,11 @@ compiler_r <- function(r_version = NULL,
   # build library directory -------------------------------------------------
 
   version <- str_extract(string = r_version, pattern = "\\d.\\d")
-  dir_path <- glue("~/R/{version}")
+  
+  path_library <- unlist(path_split(.libPaths()[1L]))
+  path_library <- path_join(path_library[-length(path_library)])
+  
+  dir_path <- glue("{path_library}/{version}")
   
   if (!dir_exists(path = dir_path)) 
     dir_create(path = dir_path)
