@@ -738,12 +738,20 @@ compiler_r <- function(r_version = NULL,
     glue
   
   if (dir_exists(path = "~/.config_r_lang/OpenBLAS")) {
-    with_dir(new = download, code = loop_root(configure, sudo = FALSE))
+
+    # configure ---------------------------------------------------------------
+    
+    with_dir(
+      new = download,
+      code = loop_root(configure, sudo = FALSE)
+    )
     
     # make --------------------------------------------------------------------
     
-    with_dir(new = download,
-             code = loop_root("make -j $(nproc)", sudo = FALSE))
+    with_dir(
+      new = download,
+      code = loop_root("make -j $(nproc)", sudo = FALSE)
+    )
     
     # make install ------------------------------------------------------------
     
@@ -753,12 +761,20 @@ compiler_r <- function(r_version = NULL,
     )
     
   } else {
-    with_dir(new = download, code = loop_root(configure, sudo = FALSE))
+
+    # configure ---------------------------------------------------------------
+
+    with_dir(
+      new = download,
+      code = loop_root(configure, sudo = FALSE)
+    )
     
     # make --------------------------------------------------------------------
     
-    with_dir(new = download,
-             code = loop_root("make -j $(nproc)", sudo = FALSE))
+    with_dir(
+      new = download,
+      code = loop_root("make -j $(nproc)", sudo = FALSE)
+    )
     
     # make install ------------------------------------------------------------
     
@@ -847,6 +863,9 @@ rcompiler <- function(x = NULL,
     with_blas = with_blas,
     complementary_flags = complementary_flags
   )
+  
+  if (is.null(x))
+    x <- last_version_r()$last_version
   
   "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}"  %>%
     glue %>%
