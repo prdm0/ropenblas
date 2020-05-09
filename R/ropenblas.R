@@ -71,20 +71,21 @@ dir_blas <- function() {
 }
 
 is_sudo <-  function() {
+  
   blas <- ifelse(
     glue("{dir_blas()$path_blas}{dir_blas()$file_blas}") %>%
-      file.access(mode = 2L) == -1L,
+      file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
     TRUE,
     FALSE
   )
   
   r <- ifelse(paste(system(command = "which R", intern = TRUE)) %>%
-                file.access(mode = 2L) == -1L,
+                file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
               TRUE,
               FALSE)
   
   rscript <- ifelse(paste(system(command = "which Rscript", intern = TRUE)) %>%
-                      file.access(mode = 2L) == -1L,
+                      file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
                     TRUE,
                     FALSE)
   
@@ -714,6 +715,9 @@ compiler_r <- function(r_version = NULL,
   if (is.null(r_version))
     r_version <- last_version_r()$last_version
   
+  dir_r  <-  paste(system(command = "which R", intern = TRUE))
+  dir_rscript <- paste(system(command = "which Rscript", intern = TRUE))
+    
   download <- download_r(x = r_version)
   
   if (is.null(with_blas)) {
@@ -876,26 +880,12 @@ rcompiler <- function(x = NULL,
       return(warning("Given the answers, it is not possible to continue ..."))
   }
   
-  dir_r  <-  paste(system(command = "which R", intern = TRUE))
-  dir_rscript <- paste(system(command = "which Rscript", intern = TRUE))
-  
   compiler_r(
     r_version = x,
     version_openblas = version_openblas,
     with_blas = with_blas,
     complementary_flags = complementary_flags
   )
-  
-  if (is.null(x))
-    x <- last_version_r()$last_version
-  
-  "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}"  %>%
-    glue %>%
-    loop_root(attempt = 5L, sudo =  is_sudo()$r)
-  
-  "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {dir_rscript}" %>%
-    glue %>%
-    loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
 
   cat("\n")
 
