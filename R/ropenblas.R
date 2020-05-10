@@ -777,6 +777,24 @@ compiler_r <- function(r_version = NULL,
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
     
+    # restart R ---------------------------------------------------------------
+    
+    .refresh_terminal <- function() {
+      system("R")
+      q("no")
+    }
+    
+    if (rstudioapi::isAvailable()) {
+      tmp <- rstudioapi::restartSession() # .rs.restartR()
+    } else {
+      .refresh_terminal()
+    }
+    
+    glue(
+      "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+    ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
+    
+    
   } else {
 
     # configure ---------------------------------------------------------------
@@ -811,7 +829,7 @@ compiler_r <- function(r_version = NULL,
       loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
     
 
-    # restart r ---------------------------------------------------------------
+    # restart R ---------------------------------------------------------------
 
     .refresh_terminal <- function() {
       system("R")
