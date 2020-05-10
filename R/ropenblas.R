@@ -741,8 +741,11 @@ compiler_r <- function(r_version = NULL,
      {complementary_flags}" %>%
     glue
   
-  if (dir_exists(path = "~/.config_r_lang/OpenBLAS")) {
-
+  if (dir_exists(path = "~/.config_r_lang/OpenBLAS/lib")) {
+    
+    glue("export LD_LIBRARY_PATH=~/.config_r_lang/OpenBLAS/lib") %>%
+      system
+    
     # configure ---------------------------------------------------------------
     
     with_dir(
@@ -807,8 +810,22 @@ compiler_r <- function(r_version = NULL,
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
     
-    # compiling and linking the OpenBLAS library ------------------------------
 
+    # restart r ---------------------------------------------------------------
+
+    .refresh_terminal <- function() {
+      system("R")
+      q("no")
+    }
+    
+    if (rstudioapi::isAvailable()) {
+      tmp <- rstudioapi::restartSession() # .rs.restartR()
+    } else {
+      .refresh_terminal()
+    }
+    
+    # compiling and linking the OpenBLAS library ------------------------------
+    
     ropenblas(x = version_openblas, restart_r = FALSE)
     
   }
