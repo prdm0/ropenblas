@@ -50,7 +50,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist, -1L) %>%
+           unlist,-1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -71,7 +71,6 @@ dir_blas <- function() {
 }
 
 is_sudo <-  function() {
-  
   blas <- ifelse(
     glue("{dir_blas()$path_blas}{dir_blas()$file_blas}") %>%
       file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
@@ -84,12 +83,15 @@ is_sudo <-  function() {
               TRUE,
               FALSE)
   
-  rscript <- ifelse(paste(system(command = "which Rscript", intern = TRUE)) %>%
-                      file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
-                    TRUE,
-                    FALSE)
+  rscript <-
+    ifelse(paste(system(command = "which Rscript", intern = TRUE)) %>%
+             file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
+           TRUE,
+           FALSE)
   
-  list(blas = blas, r = r, rscript = rscript)
+  list(blas = blas,
+       r = r,
+       rscript = rscript)
 }
 
 exist <- function(x = "gcc") {
@@ -296,7 +298,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   
   initial_blas <- dir_blas()$file_blas
   download <- download_openblas(x)
-
+  
   if (!is.null(x) && glue("v{x}") > download$last_version)
     stop(
       glue(
@@ -322,16 +324,12 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         
         if (answer %in% c("y", "yes")) {
           # checkout(repo, download$version)
-          compiler_openblas(
-            download = download,
-            openblas_version = download$last_version
-          )
+          compiler_openblas(download = download,
+                            openblas_version = download$last_version)
         } else {
           # checkout(repo, glue("v{x}"))
-          compiler_openblas(
-            download = download,
-            openblas_version = glue("v{x}")
-          )
+          compiler_openblas(download = download,
+                            openblas_version = glue("v{x}"))
         }
       } else {
         if (glue("v{dir_blas()$version_openblas}") == download$last_version) {
@@ -344,10 +342,8 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
           
           if (answer %in% c("y", "yes")) {
             # checkout(repo, glue("v{x}"))
-            compiler_openblas(
-              download = download,
-              openblas_version = glue("v{x}")
-            )
+            compiler_openblas(download = download,
+                              openblas_version = glue("v{x}"))
           } else {
             return(warning("Ok, procedure interrupted!"))
           }
@@ -370,24 +366,18 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         
         if (answer %in% c("y", "yes")) {
           # checkout(repo, download$version)
-          compiler_openblas(
-            download = download,
-            openblas_version = download$last_version
-          )
+          compiler_openblas(download = download,
+                            openblas_version = download$last_version)
         } else {
           # checkout(repo, glue("v{x}"))
-          compiler_openblas(
-            download = download,
-            openblas_version = glue("v{x}")
-          )
+          compiler_openblas(download = download,
+                            openblas_version = glue("v{x}"))
         }
         
       } else {
         # checkout(repo, glue("v{x}"))
-        compiler_openblas(
-          download = download,
-          openblas_version = glue("v{x}")
-        )
+        compiler_openblas(download = download,
+                          openblas_version = glue("v{x}"))
       }
       
     }
@@ -395,10 +385,8 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     if (dir_blas()$use_openblas) {
       if (glue("v{dir_blas()$version}") < download$last_version) {
         # checkout(repo, download$version)
-        compiler_openblas(
-          download = download,
-          openblas_version = download$last_version
-        )
+        compiler_openblas(download = download,
+                          openblas_version = download$last_version)
       } else {
         answer <-
           "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
@@ -410,19 +398,15 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
           return(warning("Ok, procedure interrupted!"))
         } else {
           # checkout(repo, download$version)
-          compiler_openblas(
-            download = download,
-            openblas_version = download$last_version
-          )
+          compiler_openblas(download = download,
+                            openblas_version = download$last_version)
         }
         
       }
     } else {
       # checkout(repo, download$version)
-      compiler_openblas(
-        download = download,
-        openblas_version = download$last_version
-      )
+      compiler_openblas(download = download,
+                        openblas_version = download$last_version)
     }
     
   }
@@ -662,7 +646,8 @@ change_r <- function (x, change = TRUE) {
     dir_exists
   
   dir_r  <-  paste(system(command = "which R", intern = TRUE))
-  dir_rscript  <-  paste(system(command = "which Rscript", intern = TRUE))
+  dir_rscript  <-
+    paste(system(command = "which Rscript", intern = TRUE))
   
   if (change) {
     "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}"  %>%
@@ -709,30 +694,30 @@ change_r <- function (x, change = TRUE) {
 #' @importFrom stringr str_extract
 compiler_r <- function(r_version = NULL,
                        version_openblas = NULL,
-                       with_blas = NULL, 
+                       with_blas = NULL,
                        complementary_flags = NULL) {
-  
   if (is.null(r_version))
     r_version <- last_version_r()$last_version
   
   dir_r  <-  paste(system(command = "which R", intern = TRUE))
-  dir_rscript <- paste(system(command = "which Rscript", intern = TRUE))
-    
+  dir_rscript <-
+    paste(system(command = "which Rscript", intern = TRUE))
+  
   download <- download_r(x = r_version)
   
   if (is.null(with_blas)) {
     with_blas <-  "-L~/.config_r_lang/OpenBLAS/lib \\
      -I~/.config_r_lang/OpenBLAS/include \\
      -lpthread \\
-     -lm" %>% 
+     -lm" %>%
       glue
   }
   
-  if (is.null(complementary_flags)) 
+  if (is.null(complementary_flags))
     complementary_flags <- ""
   
-  configure <- 
-      "./configure \\
+  configure <-
+    "./configure \\
      --prefix=$HOME/.config_r_lang/R/{r_version} \\
      --enable-memory-profiling \\
      --enable-R-shlib \\
@@ -742,33 +727,31 @@ compiler_r <- function(r_version = NULL,
     glue
   
   if (dir_exists(path = "~/.config_r_lang/OpenBLAS/lib")) {
-    
     glue("export LD_LIBRARY_PATH=~/.config_r_lang/OpenBLAS/lib") %>%
       system
     
     # configure ---------------------------------------------------------------
     
-    with_dir(
-      new = download,
-      code = loop_root(configure, sudo = FALSE)
-    )
+    with_dir(new = download,
+             code = loop_root(configure, sudo = FALSE))
     
     # make --------------------------------------------------------------------
     
-    with_dir(
-      new = download,
-      code = loop_root("make -j $(nproc)", sudo = FALSE)
-    )
+    with_dir(new = download,
+             code = loop_root("make -j $(nproc)", sudo = FALSE))
     
     # make install ------------------------------------------------------------
     
     with_dir(
       new = download,
-      code = loop_root("make install PREFIX=~/.config_r_lang/R/{r_version}", sudo = FALSE)
+      code = loop_root(
+        "make install PREFIX=~/.config_r_lang/R/{r_version}",
+        sudo = FALSE
+      )
     )
-
+    
     # creating symbolic links -------------------------------------------------
-        
+    
     "ln -sf ~/.config_r_lang/R/{r_version}/bin/R {dir_r}"  %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$r)
@@ -776,50 +759,30 @@ compiler_r <- function(r_version = NULL,
     "ln -sf ~/.config_r_lang/R/{r_version}/bin/Rscript {dir_rscript}" %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
-    
-    # restart R ---------------------------------------------------------------
-    
-    .refresh_terminal <- function() {
-      system("R")
-      q("no")
-    }
-    
-    if (rstudioapi::isAvailable()) {
-      tmp <- rstudioapi::restartSession() # .rs.restartR()
-    } else {
-      .refresh_terminal()
-    }
-    
-    glue(
-      "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-    ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
-    
     
   } else {
-
     # configure ---------------------------------------------------------------
-
-    with_dir(
-      new = download,
-      code = loop_root(configure, sudo = FALSE)
-    )
+    
+    with_dir(new = download,
+             code = loop_root(configure, sudo = FALSE))
     
     # make --------------------------------------------------------------------
     
-    with_dir(
-      new = download,
-      code = loop_root("make -j $(nproc)", sudo = FALSE)
-    )
+    with_dir(new = download,
+             code = loop_root("make -j $(nproc)", sudo = FALSE))
     
     # make install ------------------------------------------------------------
     
     with_dir(
       new = download,
-      code = loop_root("make install PREFIX=~/.config_r_lang/R/{r_version}", sudo = FALSE)
+      code = loop_root(
+        "make install PREFIX=~/.config_r_lang/R/{r_version}",
+        sudo = FALSE
+      )
     )
     
     # creating symbolic links -------------------------------------------------
-
+    
     "ln -sf ~/.config_r_lang/R/{r_version}/bin/R {dir_r}"  %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$r)
@@ -827,29 +790,13 @@ compiler_r <- function(r_version = NULL,
     "ln -sf ~/.config_r_lang/R/{r_version}/bin/Rscript {dir_rscript}" %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
-    
-
-    # restart R ---------------------------------------------------------------
-
-    .refresh_terminal <- function() {
-      system("R")
-      q("no")
-    }
-    
-    if (rstudioapi::isAvailable()) {
-      tmp <- rstudioapi::restartSession() # .rs.restartR()
-    } else {
-      .refresh_terminal()
-    }
-    
-    # compiling and linking the OpenBLAS library ------------------------------
     
     ropenblas(x = version_openblas, restart_r = FALSE)
     
   }
-
+  
   # build library directory -------------------------------------------------
-
+  
   version <- str_extract(string = r_version, pattern = "\\d.\\d")
   
   path_library <- unlist(path_split(.libPaths()[1L]))
@@ -857,7 +804,7 @@ compiler_r <- function(r_version = NULL,
   
   dir_path <- glue("{path_library}/{version}")
   
-  if (!dir_exists(path = dir_path)) 
+  if (!dir_exists(path = dir_path))
     dir_create(path = dir_path)
   
 }
@@ -921,15 +868,15 @@ rcompiler <- function(x = NULL,
     with_blas = with_blas,
     complementary_flags = complementary_flags
   )
-
+  
   cat("\n")
-
+  
   "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
     glue %>%
     cat
-
+  
   cat("\n")
-
+  
   "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ...\n\n" %>%
     glue %>%
     col_blue %>%
