@@ -163,34 +163,37 @@ sudo_key <- function(attempt = 3L) {
     key_true <- test_root(key_root = key_root)
     
     if (!key_true && attempt == i)
-      stop(
-        "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
-      )
+      stop("\rSorry. Apparently you don't is the administrator of the operating system. You missed all three attempts.")
     
     i <- i + 1L
   }
+  key_root
 }
 
-loop_root <- function(x, attempt = 3L, sudo = TRUE) {
-  if (sudo) {
-    i <- 1L
-    key_true <- 1L
-    while (i <= attempt && key_true != 0L) {
-      key_true <- glue("sudo -kS {x}") %>%
-        system(input = getPass::getPass(
-          glue("Enter your ROOT OS password (attempt {i} of {attempt}): ")
-        ),
-        ignore.stderr = TRUE)
-      if (key_true != 0L && attempt == i)
-        stop(
-          "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
-        )
-      i <- i + 1L
-    }
-  } else {
-    glue("{x}") %>% system
-  }
-}
+run_command <- function(x, key_root) 
+  system(command = glue("echo {key_root} | sudo -S -k {x}"), ignore.stderr = TRUE)
+
+
+# loop_root <- function(x, attempt = 3L, sudo = TRUE) {
+#   if (sudo) {
+#     i <- 1L
+#     key_true <- 1L
+#     while (i <= attempt && key_true != 0L) {
+#       key_true <- glue("sudo -kS {x}") %>%
+#         system(input = getPass::getPass(
+#           glue("Enter your ROOT OS password (attempt {i} of {attempt}): ")
+#         ),
+#         ignore.stderr = TRUE)
+#       if (key_true != 0L && attempt == i)
+#         stop(
+#           "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
+#         )
+#       i <- i + 1L
+#     }
+#   } else {
+#     glue("{x}") %>% system
+#   }
+# }
 
 #' @importFrom withr with_dir
 #' @importFrom glue glue
@@ -331,6 +334,8 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         "[{style_bold(col_red(symbol$cross))}] You apparently have no internet connection.\n"
       )
     )
+  
+  
   
   initial_blas <- dir_blas()$file_blas
   download <- download_openblas(x)
