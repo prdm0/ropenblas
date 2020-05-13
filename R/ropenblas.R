@@ -343,6 +343,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     root <- sudo_key()
   } else {
     root <- get(x = "root", envir = env_ropenblas_compiler_r)
+    rm(env_ropenblas_compiler_r, envir = global_env())
   }
 
   initial_blas <- dir_blas()$file_blas
@@ -840,7 +841,7 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
-    env_ropenblas_compiler_r <- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
+    env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
     exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
     
     # creating symbolic links -------------------------------------------------
