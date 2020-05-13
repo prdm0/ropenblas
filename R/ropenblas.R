@@ -50,7 +50,7 @@ dir_blas <- function() {
   
   path_blas <-
     head(sessionInfo()$BLAS %>% strsplit(split = "/") %>%
-           unlist,-1L) %>%
+           unlist, -1L) %>%
     paste(collapse = "/") %>% paste0("/")
   
   if (str_detect(file_blas, "openblas")) {
@@ -134,6 +134,43 @@ connection <- function() {
   }
 }
 
+sudo_key <- function(attempt = 3L) {
+  test <- function(key_root) {
+    system(
+      command = glue("echo {key_root} |sudo -S -k id -u"),
+      ignore.stderr = TRUE,
+      intern = TRUE
+    ) %>%
+      as.numeric %>% `+`(., 1L) %>%
+      as.logical
+  }
+  
+  test_root <-
+    function(...)
+      tryCatch(
+        expr = test(...),
+        error = function(e)
+          return(FALSE),
+        warning = function(w)
+          return(FALSE)
+      )
+  
+  i <- 1L
+  key_true <- FALSE
+  while (i <= attempt && !key_true) {
+    key_root <-
+      getPass::getPass(glue("Enter your ROOT OS password (attempt {i} of {attempt}): "))
+    key_true <- test_root(key_root = key_root)
+    
+    if (!key_true && attempt == i)
+      stop(
+        "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
+      )
+    
+    i <- i + 1L
+  }
+}
+
 loop_root <- function(x, attempt = 3L, sudo = TRUE) {
   if (sudo) {
     i <- 1L
@@ -191,24 +228,23 @@ compiler_openblas <-
     # make --------------------------------------------------------------------
     
     with_dir(new = "/tmp/openblas",
-             code = loop_root("make -j $(nproc)", sudo = FALSE))
+             code = loop_root("make -j $(nproc)", sudo = TRUE))
     
     # Install OpenBLAS --------------------------------------------------------
     
     
-    if (!dir_exists(path = "~/.config_r_lang"))
-      dir_create(path = "~/.config_r_lang")
+    if (!dir_exists(path = "/opt"))
+      dir_create(path = "/opt")
     
-    "cp {dir_blas()$path}{dir_blas()$file_blas} ~/.config_r_lang/{dir_blas()$file_blas}" %>%
+    "cp {dir_blas()$path}{dir_blas()$file_blas} /opt/{dir_blas()$file_blas}" %>%
       glue %>%
       loop_root(attempt = 5L, sudo = is_sudo()$blas)
     
     with_dir(
       new = "/tmp/openblas",
-      code = loop_root("make install PREFIX=$HOME/.config_r_lang/OpenBLAS",
-                       sudo = FALSE)
+      code = loop_root("make install PREFIX=/opt/OpenBLAS",
+                       sudo = TRUE)
     )
-    
     
     download
     
@@ -423,12 +459,12 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   
   if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     glue(
-      "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+      "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
     ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
   }
   
   if (error_r()) {
-    "mv ~/.config_r_lang/OpenBLAS/{initial_blas} {dir_blas()$path}" %>%
+    "mv /opt/OpenBLAS/{initial_blas} {dir_blas()$path}" %>%
       glue %>%
       loop_root(attempt = 5L, sudo = TRUE)
     
@@ -641,7 +677,7 @@ attention <- function(x) {
 #' @importFrom fs dir_exists
 #' @importFrom magrittr "%>%"
 change_r <- function (x, change = TRUE) {
-  exist_version_r <- "~/.config_r_lang/R/{x}" %>%
+  exist_version_r <- "/opt/R/{x}" %>%
     glue %>%
     dir_exists
   
@@ -650,11 +686,11 @@ change_r <- function (x, change = TRUE) {
     paste(system(command = "which Rscript", intern = TRUE))
   
   if (change) {
-    "ln -sf ~/.config_r_lang/R/{x}/bin/R {dir_r}"  %>%
+    "ln -sf /opt/R/{x}/bin/R {dir_r}"  %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$blas)
     
-    "ln -sf ~/.config_r_lang/R/{x}/bin/Rscript {dir_rscript}" %>%
+    "ln -sf /opt/R/{x}/bin/Rscript {dir_rscript}" %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$blas)
   }
@@ -703,11 +739,14 @@ compiler_r <- function(r_version = NULL,
   dir_rscript <-
     paste(system(command = "which Rscript", intern = TRUE))
   
+  dir_initial_blas <-
+    glue("{dir_blas()$path_blas}{dir_blas()$file_blas}")
+  
   download <- download_r(x = r_version)
   
   if (is.null(with_blas)) {
-    with_blas <-  "-L~/.config_r_lang/OpenBLAS/lib \\
-     -I~/.config_r_lang/OpenBLAS/include \\
+    with_blas <-  "-L/opt/OpenBLAS/lib \\
+     -I/opt/OpenBLAS/include \\
      -lpthread \\
      -lm" %>%
       glue
@@ -718,7 +757,7 @@ compiler_r <- function(r_version = NULL,
   
   configure <-
     "./configure \\
-     --prefix=$HOME/.config_r_lang/R/{r_version} \\
+     --prefix=/opt/R/{r_version} \\
      --enable-memory-profiling \\
      --enable-R-shlib \\
      --enable-threads=posix \\
@@ -726,10 +765,7 @@ compiler_r <- function(r_version = NULL,
      {complementary_flags}" %>%
     glue
   
-  if (dir_exists(path = "~/.config_r_lang/OpenBLAS/lib")) {
-    glue("export LD_LIBRARY_PATH=~/.config_r_lang/OpenBLAS/lib") %>%
-      system
-    
+  if (dir_exists(path = "/opt/OpenBLAS/lib")) {
     # configure ---------------------------------------------------------------
     
     with_dir(new = download,
@@ -745,22 +781,27 @@ compiler_r <- function(r_version = NULL,
     with_dir(
       new = download,
       code = loop_root(
-        "make install PREFIX=~/.config_r_lang/R/{r_version}",
-        sudo = FALSE
+        "make install PREFIX=/opt/R/{r_version}",
+        sudo = TRUE
       )
     )
     
-    # creating symbolic links -------------------------------------------------
+    # glue(
+    #   "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
+    # ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
     
-    "ln -sf ~/.config_r_lang/R/{r_version}/bin/R {dir_r}"  %>%
+    # creating symbolic links -------------------------------------------------
+
+    "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$r)
-    
-    "ln -sf ~/.config_r_lang/R/{r_version}/bin/Rscript {dir_rscript}" %>%
+
+    "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
     
   } else {
+    
     # configure ---------------------------------------------------------------
     
     with_dir(new = download,
@@ -776,22 +817,22 @@ compiler_r <- function(r_version = NULL,
     with_dir(
       new = download,
       code = loop_root(
-        "make install PREFIX=~/.config_r_lang/R/{r_version}",
-        sudo = FALSE
+        "make install PREFIX=/opt/R/{r_version}",
+        sudo = TRUE
       )
     )
     
+    ropenblas(x = version_openblas, restart_r = FALSE)
+    
     # creating symbolic links -------------------------------------------------
     
-    "ln -sf ~/.config_r_lang/R/{r_version}/bin/R {dir_r}"  %>%
+    "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$r)
     
-    "ln -sf ~/.config_r_lang/R/{r_version}/bin/Rscript {dir_rscript}" %>%
+    "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
       glue %>%
       loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
-    
-    ropenblas(x = version_openblas, restart_r = FALSE)
     
   }
   
@@ -956,12 +997,12 @@ link_again <- function(restart_r = TRUE) {
       already uses the {col_blue(style_underline(style_bold(\"OpenBLAS\")))} library. You can stay calm." %>%
       glue
   } else {
-    if (!dir_exists(" ~/.config_r_lang/OpenBLAS/lib"))
+    if (!dir_exists("/opt/OpenBLAS/lib"))
       "{symbol$mustache} Run the {col_blue(style_underline(style_bold(\"ropenblas()\")))} function ..." %>%
       glue
     else {
       glue(
-        "ln -snf ~/.config_r_lang/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
+        "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
       ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
       
       .refresh_terminal <- function() {
