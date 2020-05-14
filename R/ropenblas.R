@@ -700,7 +700,7 @@ attention <- function(x) {
 #' @importFrom glue glue
 #' @importFrom fs dir_exists
 #' @importFrom magrittr "%>%"
-change_r <- function (x, change = TRUE) {
+change_r <- function (x, change = TRUE, key_root) {
   exist_version_r <- "/opt/R/{x}" %>%
     glue %>%
     dir_exists
@@ -712,11 +712,11 @@ change_r <- function (x, change = TRUE) {
   if (change) {
     "ln -sf /opt/R/{x}/bin/R {dir_r}"  %>%
       glue %>%
-      loop_root(attempt = 5L, sudo =  is_sudo()$blas)
+     run_command(key_root = key_root)
     
     "ln -sf /opt/R/{x}/bin/Rscript {dir_rscript}" %>%
       glue %>%
-      loop_root(attempt = 5L, sudo =  is_sudo()$blas)
+      run_command(key_root = key_root)
   }
   
   cat("\n")
@@ -760,6 +760,19 @@ compiler_r <- function(r_version = NULL,
   if (is.null(r_version))
     r_version <- last_version_r()$last_version
   
+
+  if ("/opt/R/{r_version}" %>% glue %>% dir_exists) {
+    answer <-
+      "R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
+      answer_yes_no
+    
+    validate_answer(answer)
+    
+    if (answer %in% c("y", "yes"))
+      return(change_r(r_version, key_root = key_root))
+  }
+  
+  
   dir_r  <-  paste(system(command = "which R", intern = TRUE))
   dir_rscript <-
     paste(system(command = "which Rscript", intern = TRUE))
@@ -790,7 +803,7 @@ compiler_r <- function(r_version = NULL,
      {complementary_flags}" %>%
     glue
   
-  if (dir_exists(path = "/opt/OpenBLAS/lib")) {
+  if (dir_exists(path = "/opt/OpenBLAS/lib") && dir_blas()$use_openblas) {
     # configure ---------------------------------------------------------------
     
     with_dir(new = download,
@@ -808,9 +821,9 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
-    glue(
-       "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
-    ) %>% run_command(key_root = key_root)
+    # glue(
+    #    "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
+    # ) %>% run_command(key_root = key_root)
     
     # creating symbolic links -------------------------------------------------
 
@@ -823,6 +836,10 @@ compiler_r <- function(r_version = NULL,
       run_command(key_root = key_root) # loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
     
   } else {
+    
+    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
+    assign(x = "env_ropenblas_compiler_r", value = env(new_ropenblas = ropenblas, root = key_root), envir = global_env())  
+    exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
     
     # configure ---------------------------------------------------------------
     
@@ -841,20 +858,19 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
-    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
-    assign(x = "env_ropenblas_compiler_r", value = env(f = ropenblas, root = key_root), envir = global_env())  
-    exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
+    # # creating symbolic links -------------------------------------------------
+    # 
+    # "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
+    #   glue %>%
+    #   run_command(key_root = key_root) # loop_root(attempt = 5L, sudo =  is_sudo()$r)
+    # 
+    # "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
+    #   glue %>%
+    #   run_command(key_root = key_root)
+
+
     
-    # creating symbolic links -------------------------------------------------
-    
-    "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
-      glue %>%
-      run_command(key_root = key_root) # loop_root(attempt = 5L, sudo =  is_sudo()$r)
-    
-    "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
-      glue %>%
-      run_command(key_root = key_root)
-    
+
   }
   
   # # build library directory -------------------------------------------------
