@@ -342,7 +342,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (identical(caller_env(), global_env())){
     root <- sudo_key()
   } else {
-    root <- get(x = "root", envir = env_ropenblas_compiler_r)
+    root <- env_get(env = env_ropenblas_compiler_r, nm = "root") # get(x = "root", envir = env_ropenblas_compiler_r)
     rm(env_ropenblas_compiler_r, envir = global_env())
   }
 
@@ -808,9 +808,9 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
-    # glue(
-    #   "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
-    # ) %>% loop_root(attempt = 5L, sudo =  is_sudo()$blas)
+    glue(
+       "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
+    ) %>% run_command(key_root = key_root)
     
     # creating symbolic links -------------------------------------------------
 
@@ -841,7 +841,8 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
-    env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
+    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
+    assign(x = "env_ropenblas_compiler_r", value = env(f = ropenblas, root = key_root), envir = global_env())  
     exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
     
     # creating symbolic links -------------------------------------------------
