@@ -837,10 +837,6 @@ compiler_r <- function(r_version = NULL,
     
   } else {
     
-    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
-    assign(x = "env_ropenblas_compiler_r", value = env(new_ropenblas = ropenblas, root = key_root), envir = global_env())  
-    exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
-    
     # configure ---------------------------------------------------------------
     
     with_dir(new = download,
@@ -858,6 +854,22 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
+    .refresh_terminal <- function() {
+      system("R")
+      q("no")
+    }
+    
+    
+    if (rstudioapi::isAvailable()) {
+      tmp <- rstudioapi::restartSession() # .rs.restartR()
+    } else {
+      .refresh_terminal()
+    }
+    
+    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
+    assign(x = "env_ropenblas_compiler_r", value = env(new_ropenblas = ropenblas, root = key_root), envir = global_env())  
+    exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
+    
     # # creating symbolic links -------------------------------------------------
     # 
     # "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
@@ -868,18 +880,6 @@ compiler_r <- function(r_version = NULL,
     #   glue %>%
     #   run_command(key_root = key_root)
     
-  }
-  
-  .refresh_terminal <- function() {
-    system("R")
-    q("no")
-  }
-  
-  
-  if (rstudioapi::isAvailable()) {
-    tmp <- rstudioapi::restartSession() # .rs.restartR()
-  } else {
-    .refresh_terminal()
   }
   
   # # build library directory -------------------------------------------------
