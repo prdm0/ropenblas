@@ -867,10 +867,19 @@ compiler_r <- function(r_version = NULL,
     # "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
     #   glue %>%
     #   run_command(key_root = key_root)
-
-
     
-
+  }
+  
+  .refresh_terminal <- function() {
+    system("R")
+    q("no")
+  }
+  
+  
+  if (rstudioapi::isAvailable()) {
+    tmp <- rstudioapi::restartSession() # .rs.restartR()
+  } else {
+    .refresh_terminal()
   }
   
   # # build library directory -------------------------------------------------
