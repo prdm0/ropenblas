@@ -821,9 +821,9 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
-    # glue(
-    #    "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
-    # ) %>% run_command(key_root = key_root)
+     glue(
+        "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
+     ) %>% run_command(key_root = key_root)
     
     # creating symbolic links -------------------------------------------------
 
