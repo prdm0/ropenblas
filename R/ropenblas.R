@@ -777,9 +777,6 @@ compiler_r <- function(r_version = NULL,
   dir_rscript <-
     paste(system(command = "which Rscript", intern = TRUE))
   
-  dir_initial_blas <-
-    glue("{dir_blas()$path_blas}{dir_blas()$file_blas}")
-  
   download <- download_r(x = r_version)
   
   if (is.null(with_blas)) {
@@ -821,10 +818,6 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
-     glue(
-        "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
-     ) %>% run_command(key_root = key_root)
-    
     # creating symbolic links -------------------------------------------------
 
     "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
@@ -834,6 +827,26 @@ compiler_r <- function(r_version = NULL,
     "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
       glue %>%
       run_command(key_root = key_root) # loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
+    
+    .refresh_terminal <- function() {
+      system("R")
+      q("no")
+    }
+    
+    
+    if (rstudioapi::isAvailable()) {
+      tmp <- rstudioapi::restartSession() # .rs.restartR()
+    } else {
+      .refresh_terminal()
+    }
+    
+    dir_initial_blas <-
+      glue("{dir_blas()$path_blas}{dir_blas()$file_blas}")
+    
+    glue(
+      "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
+    ) %>% run_command(key_root = key_root)
+    
     
   } else {
     
@@ -854,6 +867,12 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
+    
+    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
+    assign(x = "env_ropenblas_compiler_r", value = env(new_ropenblas = ropenblas, root = key_root), envir = global_env())  
+    exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
+    
+    
     .refresh_terminal <- function() {
       system("R")
       q("no")
@@ -865,10 +884,6 @@ compiler_r <- function(r_version = NULL,
     } else {
       .refresh_terminal()
     }
-    
-    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
-    assign(x = "env_ropenblas_compiler_r", value = env(new_ropenblas = ropenblas, root = key_root), envir = global_env())  
-    exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
     
     # # creating symbolic links -------------------------------------------------
     # 
