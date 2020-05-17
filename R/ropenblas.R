@@ -179,28 +179,7 @@ run_command <- function(x, key_root = NULL) {
   else
     system(command = glue("echo {key_root} | sudo -S -k {x}"), ignore.stderr = TRUE)
 } 
-  
 
-# loop_root <- function(x, attempt = 3L, sudo = TRUE) {
-#   if (sudo) {
-#     i <- 1L
-#     key_true <- 1L
-#     while (i <= attempt && key_true != 0L) {
-#       key_true <- glue("sudo -kS {x}") %>%
-#         system(input = getPass::getPass(
-#           glue("Enter your ROOT OS password (attempt {i} of {attempt}): ")
-#         ),
-#         ignore.stderr = TRUE)
-#       if (key_true != 0L && attempt == i)
-#         stop(
-#           "Sorry. Apparently you don't is the administrator of the operating system. You missed all three attempts."
-#         )
-#       i <- i + 1L
-#     }
-#   } else {
-#     glue("{x}") %>% system
-#   }
-# }
 
 #' @importFrom withr with_dir
 #' @importFrom glue glue
@@ -250,7 +229,6 @@ compiler_openblas <-
     "cp {dir_blas()$path}{dir_blas()$file_blas} /opt/{dir_blas()$file_blas}" %>%
       glue %>%
       run_command(key_root)
-      # loop_root(attempt = 5L, sudo = is_sudo()$blas)
     
     with_dir(
       new = "/tmp/openblas",
@@ -265,7 +243,6 @@ compiler_openblas <-
 #' @importFrom magrittr "%>%"
 #' @importFrom stringr str_detect
 error_r <- function() {
-  #current_directory <- "{R.home()}/bin" %>% glue
   run_r <- "$(which R) --no-save&" %>%
     glue %>%
     system(intern = TRUE)
@@ -327,6 +304,7 @@ error_r <- function() {
 #' @importFrom fs file_exists file_delete dir_create
 #' @importFrom cli rule symbol style_bold
 #' @importFrom emojifont emoji
+#' @importFrom rlang env_get global_env caller_env
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
 #' # ropenblas()
@@ -347,7 +325,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (identical(caller_env(), global_env())){
     root <- sudo_key()
   } else {
-    root <- env_get(env = env_ropenblas_compiler_r, nm = "root") # get(x = "root", envir = env_ropenblas_compiler_r)
+    root <- env_get(env = env_ropenblas_compiler_r, nm = "root")
     rm(env_ropenblas_compiler_r, envir = global_env())
   }
 
@@ -378,12 +356,10 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         }
         
         if (answer %in% c("y", "yes")) {
-          # checkout(repo, download$version)
           compiler_openblas(download = download,
                             openblas_version = download$last_version,
                             key_root = root)
         } else {
-          # checkout(repo, glue("v{x}"))
           compiler_openblas(download = download,
                             openblas_version = glue("v{x}"),
                             key_root = root)
@@ -398,7 +374,6 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
           validate_answer(answer)
           
           if (answer %in% c("y", "yes")) {
-            # checkout(repo, glue("v{x}"))
             compiler_openblas(download = download,
                               openblas_version = glue("v{x}"),
                               key_root = root)
@@ -423,19 +398,16 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         validate_answer(answer)
         
         if (answer %in% c("y", "yes")) {
-          # checkout(repo, download$version)
           compiler_openblas(download = download,
                             openblas_version = download$last_version,
                             key_root = root)
         } else {
-          # checkout(repo, glue("v{x}"))
           compiler_openblas(download = download,
                             openblas_version = glue("v{x}"),
                             key_root = root)
         }
         
       } else {
-        # checkout(repo, glue("v{x}"))
         compiler_openblas(download = download,
                           openblas_version = glue("v{x}"),
                           key_root = root)
@@ -445,7 +417,6 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   } else {
     if (dir_blas()$use_openblas) {
       if (glue("v{dir_blas()$version}") < download$last_version) {
-        # checkout(repo, download$version)
         compiler_openblas(download = download,
                           openblas_version = download$last_version,
                           key_root = root)
@@ -459,7 +430,6 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         if (answer %in% c("n", "no")) {
           return(warning("Ok, procedure interrupted!"))
         } else {
-          # checkout(repo, download$version)
           compiler_openblas(download = download,
                             openblas_version = download$last_version,
                             key_root = root)
@@ -467,7 +437,6 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         
       }
     } else {
-      # checkout(repo, download$version)
       compiler_openblas(download = download,
                         openblas_version = download$last_version,
                         key_root = root)
@@ -475,27 +444,17 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     
   }
   
-  # cat(
-  #   "\n\nYou must be the system administrator. You must install the following dependencies on your operating system (Linux):
-  # 
-  #     1 - Make: GNU Make utility to maintain groups of programs;
-  #     2 - GNU GCC: The GNU Compiler Collection - C frontends;
-  #     3 - GNU GCC Fortran: The GNU Compiler Collection - Fortran frontends.
-  # 
-  # "
-  # )
-  
   if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     glue(
       "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-    ) %>% run_command(key_root = root) #loop_root(attempt = 5L, sudo =  is_sudo()$blas)
+    ) %>% run_command(key_root = root)
           
   }
   
   if (error_r()) {
     "mv /opt/OpenBLAS/{initial_blas} {dir_blas()$path}" %>%
       glue %>%
-      run_command(key_root = root) #loop_root(attempt = 5L, sudo = TRUE)
+      run_command(key_root = root)
     
     cat("\n")
     
@@ -640,7 +599,6 @@ last_version_r <- function(major = NULL) {
 }
 
 #' @importFrom utils untar
-#' @importFrom fs file_exists dir_create file_delete
 #' @importFrom glue glue
 #' @importFrom cli style_bold symbol
 download_r <- function(x) {
@@ -697,7 +655,7 @@ attention <- function(x) {
   answer <- NULL
   for (i in 1L:3L) {
     answer[i] <-
-      answer_yes_no(text = glue("{emoji(\"large_blue_circle\")} Do you understand? ({i} of 3)"))
+      answer_yes_no(text = glue("{emoji(\"red_circle\")} Do you understand? ({i} of 3)"))
     validate_answer(answer[i])
   }
   
@@ -778,8 +736,6 @@ fix_openblas_link <- function(restart_r = FALSE, key_root) {
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom git2r checkout
-#' @importFrom fs dir_delete
-#' @importFrom fs dir_exists path_split
 #' @importFrom stringr str_extract
 #' @importFrom emojifont emoji
 compiler_r <- function(r_version = NULL,
@@ -838,12 +794,12 @@ compiler_r <- function(r_version = NULL,
     # configure ---------------------------------------------------------------
     
     with_dir(new = download,
-             code = run_command(x = configure, key_root = NULL)) # loop_root(configure, sudo = FALSE))
+             code = run_command(x = configure, key_root = NULL))
     
     # make --------------------------------------------------------------------
     
     with_dir(new = download,
-             code = run_command(x = "make -j $(nproc)", key_root = NULL)) # loop_root("make -j $(nproc)", sudo = FALSE))
+             code = run_command(x = "make -j $(nproc)", key_root = NULL))
     
     # make install ------------------------------------------------------------
     
@@ -856,17 +812,16 @@ compiler_r <- function(r_version = NULL,
 
     "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
       glue %>%
-      run_command(key_root = key_root) # loop_root(attempt = 5L, sudo =  is_sudo()$r)
+      run_command(key_root = key_root) 
 
     "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
       glue %>%
-      run_command(key_root = key_root) # loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
+      run_command(key_root = key_root)
     
     fix_openblas_link(restart_r = FALSE, key_root = key_root)
     
   } else {
     
-    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
     assign(x = "env_ropenblas_compiler_r", value = env(new_ropenblas = ropenblas, root = key_root), envir = global_env())  
     exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = NULL, restart = FALSE) 
     
@@ -903,26 +858,11 @@ compiler_r <- function(r_version = NULL,
     glue %>%
     style_bold %>%
     cat
-  
-  # # build library directory -------------------------------------------------
-  # 
-  # version <- str_extract(string = r_version, pattern = "\\d.\\d")
-  # 
-  # path_library <- unlist(path_split(.libPaths()[1L]))
-  # path_library <- path_join(path_library[-length(path_library)])
-  # 
-  # dir_path <- glue("{path_library}/{version}")
-  # 
-  # if (!dir_exists(path = dir_path))
-  #   dir_create(path = dir_path)
-  
 }
 
-#' @importFrom fs dir_exists
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom getPass getPass
-#' @importFrom cli rule symbol style_bold
 #' @title Compile a version of \R on GNU/Linux systems
 #' @description This function is responsible for compiling a version of the \R language.
 #' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
@@ -982,8 +922,6 @@ rcompiler <- function(x = NULL,
 }
 
 #' @importFrom magrittr "%>%"
-#' @importFrom fs file_exists dir_create
-#' @importFrom git2r clone tags remote_ls
 #' @importFrom glue glue
 #' @importFrom stringr str_extract
 #' @importFrom stats na.omit
@@ -1023,7 +961,6 @@ last_version_openblas <- function() {
 
 #' @importFrom magrittr "%>%"
 #' @importFrom glue glue
-#' @importFrom fs dir_exists
 #' @importFrom cli style_bold style_underline symbol
 #' @importFrom emojifont emoji
 #' @title Linking the OpenBLAS library with \R again
@@ -1061,7 +998,7 @@ link_again <- function(restart_r = TRUE) {
       root <- sudo_key()
       glue(
         "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
-      ) %>% run_command(key_root = root) # loop_root(attempt = 5L, sudo =  is_sudo()$blas)
+      ) %>% run_command(key_root = root)
       
       .refresh_terminal <- function() {
         system("R")
