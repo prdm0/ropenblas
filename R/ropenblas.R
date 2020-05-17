@@ -736,13 +736,13 @@ change_r <- function (x, change = TRUE, key_root) {
   
    cat("\n")
   
-   "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
+   "{emoji(\"white_check_mark\")} {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
      glue %>%
      cat
 
    cat("\n")
 
-   "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ..." %>%
+   "{emoji(\"arrows_counterclockwise\")} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ..." %>%
       glue %>%
       col_blue %>%
       style_bold %>%
@@ -889,13 +889,13 @@ compiler_r <- function(r_version = NULL,
   
   cat("\n")
   
-  "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({r_version})))}." %>%
+  "{emoji(\"white_check_mark\")} {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({r_version})))}." %>%
     glue %>%
     cat
   
   cat("\n")
   
-  "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ...\n\n" %>%
+  "{emoji(\"arrows_counterclockwise\")} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ...\n\n" %>%
     glue %>%
     col_blue %>%
     style_bold %>%
@@ -1085,11 +1085,11 @@ link_again <- function(restart_r = TRUE) {
       cat("\n")
       
       if (restart_r) {
-        "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"OpenBLAS\")))}." %>%
+        "{emoji(\"white_check_mark\")} {col_blue(style_underline(style_bold(\"OpenBLAS\")))}." %>%
           glue %>%
           cat
       } else {
-        "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"OpenBLAS\")))} will be used in the next section." %>%
+        "{emoji(\"white_check_mark\")} {col_blue(style_underline(style_bold(\"OpenBLAS\")))} will be used in the next section." %>%
           glue %>%
           cat
       }
