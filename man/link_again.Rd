@@ -24,7 +24,7 @@ function, the \code{link_again} function performs a new link without the need to
 consuming.
 }
 \note{
-In situations where there was a disconnection due to an update of the operating system, the `ropenblas` function can be used to
+In situations where there was a disconnection due to an update of the operating system, the \code{ropenblas} function can be used to
 re-link the OpenBLAS library with the \R language, however, it will be necessary to compile the
 \href{https://www.openblas.net/}{\strong{OpenBLAS}} library again. If you are interested in recompiling the
 \href{https://www.openblas.net/}{\strong{OpenBLAS}} library and linking with \R, use the \code{\link{ropenblas}} function. If the

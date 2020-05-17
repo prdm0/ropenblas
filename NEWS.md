@@ -2,9 +2,15 @@
 
 * Code review;
 
-* Identifying bugs;
+* Bugs have been fixed;
 
-* Decreasing the need for many user password requests.
+* It is no longer necessary to enter the ROOT password several times;
+
+* The arguments `with_blas` and `complementary_flags` have been added which allows the modification of some compilation flags;
+
+* The `version_openblas` argument of the `rcompiler()` function has been removed. The `rcompiler()` function now keeps the pre-configured version of OpenBLAS or links the newest version of the OpenBLAS library to R;
+
+* The fs package was removed as a dependency. 
 
 # ropenblas 0.2.4
 

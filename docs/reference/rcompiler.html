@@ -128,7 +128,7 @@
     <p>This function is responsible for compiling a version of the <span style="R">R</span> language.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rcompiler</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>version_openblas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>rcompiler</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>with_blas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>complementary_flags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,9 +139,14 @@
 language. For example, <code>x = "3.6.2"</code> will compile and link <strong>R-3.6.2</strong> version  as the major version on your system.</p></td>
     </tr>
     <tr>
-      <th>version_openblas</th>
-      <td><p><a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library version that will be linked to the <span style="R">R</span> code that will be compiled. By default, if
-<code>version_openblas = NULL</code>, the latest stable version of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library will be linked.</p></td>
+      <th>with_blas</th>
+      <td><p>String, <code>--with-blas = NULL</code> by default, with flags for <code>--with-blas</code> used in the <span style="R">R</span> compilation process.
+Details on the use of this flag can be found <a href='https://cran.r-project.org/doc/manuals/r-devel/R-admin.html'><strong>here</strong></a>.</p></td>
+    </tr>
+    <tr>
+      <th>complementary_flags</th>
+      <td><p>String, <code>complementary_flags = NULL</code> by default, for adding complementary flags in the <a href='https://www.r-project.org/'><strong>R</strong></a> language
+compilation process.</p></td>
     </tr>
     </table>
 
@@ -151,17 +156,32 @@ language. For example, <code>x = "3.6.2"</code> will compile and link <strong>R-
 missing dependencies.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>rcompiler()</code> function will compile the <span style="R">R</span> language and make the <strong>R</strong> and <strong>Rscript</strong> binaries available
-in the <code>/usr/bin</code> directory. Therefore, the version compiled by <code>rcompiler()</code> will be available to all users of the Linux system.
-The <code>rcompiler()</code> function will work on any GNU/Linux distribution, as long as your distribution has the following dependencies:</p><ol>
-<li><p><strong>GNU Make</strong>;</p></li>
-<li><p><strong>GNU GCC Compiler (C and Fortran)</strong>.</p></li>
-</ol><p><strong>Note</strong>: If the above dependencies are not installed, the function will automatically identify.
-In the <code>/opt/R</code> directory subdirectories will be created with the compiled version numbering of <span style="R">R</span>. For example, when running
-<code>rcompiler(x = "version_r")</code>, at the end of the language compilation process, the <code>/opt/R/version_r</code> directory will be created.
-The function will link the <strong>R</strong> and <strong>Rscript</strong> binaries from the current section of <span style="R">R</span> to the respective newly compiled
-binaries found in <code>/opt/R/version_r/lib64/R/bin</code>, where, for example, <code>version_r</code> could be some version of <span style="R">R</span> like <code>"3.6.2"</code>
-or any other version. If <code>version_r = NULL</code>, the latest stable version of <span style="R">R</span> will be compiled.</p>
+    <p>This function is responsible for compiling a version of the <a href='https://www.r-project.org/'><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href='https://www.r-project.org/'><strong>R</strong></a> that you want to compile.
+For example, <code>x = "4.0.0"</code> will compile and link <strong>R-4.0.0</strong> version  as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href='https://www.r-project.org/'><strong>R</strong></a>.</p>
+<p>For example, to compile the latest stable version of the <a href='https://www.r-project.org/'><strong>R</strong></a> language, do:</p><pre> <span class='fu'>rcompiler</span>()</pre>
+
+<p>Regardless of your GNU/Linux distribution and what version of <a href='https://www.r-project.org/'><strong>R</strong></a> is in your repositories, you can have the latest stable version of the <a href='https://www.r-project.org/'><strong>R</strong></a> language compiled
+into your computer architecture.</p>
+<p>You can use the <code>rcompiler()</code> function to compile different versions of <a href='https://www.r-project.org/'><strong>R</strong></a>. For example, running <code>rcompiler(x = "3.6.3")</code> and <code>rcompiler()</code> will install versions 3.6.3 and 4.0.0 on its GNU/Linux distribution,
+respectively. If you are in version 4.0.0 of <a href='https://www.r-project.org/'><strong>R</strong></a> and run the code <code>rcompiler(x = "3.6.3")</code> again, the function will identify the existence of version 3.6.3 in the system and give you the option to use the binaries
+that were built in a previous compilation. This avoids unnecessarys compilations.</p>
+<p>In addition to the <code>x</code> argument, the<code> rcompiler()</code> function has two other arguments that will allow you to change and pass new compilation flags. Are they:</p><ol>
+<li><p><code>with_blas</code>: This argument sets the <code>--with-blas</code> flag in the R language compilation process and must be passed as a string. Details on the use of this flag
+can be found <a href='https://cran.r-project.org/doc/manuals/r-devel/R-admin.html'><strong>here</strong></a>. If <code>with_blas = NULL</code> (default), then it will be considered:</p><pre>./configure --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib
+ --enable-threads=posix --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include
+ -lpthread -lm"
+</pre>
+
+<p>Most likely, you will have little reason to change this argument. Unless you know what you're doing, consider <code>with_blas = NULL</code>. Do not change the installation directory,
+that is, always consider <code>--prefix = /opt/R/version_r</code>, where<code> version_r</code> is a valid version of <a href='https://www.r-project.org/'><strong>R</strong></a>. For a list of valid versions of
+<a href='https://www.r-project.org/'><strong>R</strong></a>, run the <code><a href='last_version_r.html'>last_version_r()</a></code>. Installing <a href='https://www.r-project.org/'><strong>R</strong></a> in the <code>/opt/R/version_r</code> directory is important because some
+functions in the package require this. Both the <a href='https://www.r-project.org/'><strong>R</strong></a> language and the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library will be installed in the <code>/opt</code> directory.
+If this directory does not exist in your GNU/Linux distribution, it will be created;</p></li>
+<li><p><code>complementary_flags</code>: String (<code>complementary_flags = NULL</code> by default) for adding complementary flags in the <a href='https://www.r-project.org/'><strong>R</strong></a> language compilation process.
+Passing a string to <code>complementary_flags</code> will compile it in the form:</p><pre>./configure --with-blas="..." complementary_flags
+</pre></li>
+</ol>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='ropenblas.html'>ropenblas</a></code>, <code><a href='last_version_r.html'>last_version_r</a></code></p></div>

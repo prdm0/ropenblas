@@ -28,4 +28,6 @@ Imports:
     XML,
     cli,
     pingr,
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
+

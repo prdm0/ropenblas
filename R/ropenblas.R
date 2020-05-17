@@ -867,21 +867,43 @@ compiler_r <- function(r_version = NULL,
 #' @description This function is responsible for compiling a version of the \R language.
 #' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
 #' language. For example, \code{x = "3.6.2"} will compile and link \strong{R-3.6.2} version  as the major version on your system.
-#' @param version_openblas \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version that will be linked to the \R code that will be compiled. By default, if
-#' \code{version_openblas = NULL}, the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library will be linked.
-#' @details The \code{rcompiler()} function will compile the \R language and make the \strong{R} and \strong{Rscript} binaries available
-#' in the \code{/usr/bin} directory. Therefore, the version compiled by \code{rcompiler()} will be available to all users of the Linux system.
-#' The \code{rcompiler()} function will work on any GNU/Linux distribution, as long as your distribution has the following dependencies:
-#' \enumerate{
-#'    \item \strong{GNU Make};
-#'    \item \strong{GNU GCC Compiler (C and Fortran)}.
-#' }
-#' \strong{Note}: If the above dependencies are not installed, the function will automatically identify.
-#' In the \code{/opt/R} directory subdirectories will be created with the compiled version numbering of \R. For example, when running
-#' \code{rcompiler(x = "version_r")}, at the end of the language compilation process, the \code{/opt/R/version_r} directory will be created.
-#' The function will link the \strong{R} and \strong{Rscript} binaries from the current section of \R to the respective newly compiled
-#' binaries found in \code{/opt/R/version_r/lib64/R/bin}, where, for example, \code{version_r} could be some version of \R like \code{"3.6.2"}
-#' or any other version. If \code{version_r = NULL}, the latest stable version of \R will be compiled.
+#' @param with_blas String, `--with-blas = NULL` by default, with flags for `--with-blas` used in the \R compilation process.
+#' Details on the use of this flag can be found [**here**](https://cran.r-project.org/doc/manuals/r-devel/R-admin.html). 
+#' @param complementary_flags String, `complementary_flags = NULL` by default, for adding complementary flags in the [**R**](https://www.r-project.org/) language
+#'  compilation process.
+#' @details 
+#' This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. 
+#' For example, `x = "4.0.0"` will compile and link **R-4.0.0** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/).
+#' 
+#' For example, to compile the latest stable version of the [**R**](https://www.r-project.org/) language, do:
+#'    ```
+#'     rcompiler()
+#'    ```
+#' Regardless of your GNU/Linux distribution and what version of [**R**](https://www.r-project.org/) is in your repositories, you can have the latest stable version of the [**R**](https://www.r-project.org/) language compiled
+#' into your computer architecture.
+#' 
+#' You can use the `rcompiler()` function to compile different versions of [**R**](https://www.r-project.org/). For example, running `rcompiler(x = "3.6.3")` and `rcompiler()` will install versions 3.6.3 and 4.0.0 on its GNU/Linux distribution,
+#' respectively. If you are in version 4.0.0 of [**R**](https://www.r-project.org/) and run the code `rcompiler(x = "3.6.3")` again, the function will identify the existence of version 3.6.3 in the system and give you the option to use the binaries
+#' that were built in a previous compilation. This avoids unnecessarys compilations.
+#' 
+#' In addition to the `x` argument, the` rcompiler()` function has two other arguments that will allow you to change and pass new compilation flags. Are they:
+#' 1. `with_blas`: This argument sets the `--with-blas` flag in the R language compilation process and must be passed as a string. Details on the use of this flag 
+#' can be found [**here**](https://cran.r-project.org/doc/manuals/r-devel/R-admin.html). If `with_blas = NULL` (default), then it will be considered:
+#'    ```
+#'    ./configure --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib
+#'     --enable-threads=posix --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include
+#'     -lpthread -lm"
+#'    ```
+#'    Most likely, you will have little reason to change this argument. Unless you know what you're doing, consider `with_blas = NULL`. Do not change the installation directory, 
+#' that is, always consider `--prefix = /opt/R/version_r`, where` version_r` is a valid version of [**R**](https://www.r-project.org/). For a list of valid versions of
+#' [**R**](https://www.r-project.org/), run the `last_version_r()`. Installing [**R**](https://www.r-project.org/) in the `/opt/R/version_r` directory is important because some
+#' functions in the package require this. Both the [**R**](https://www.r-project.org/) language and the [**OpenBLAS**](https://www.openblas.net/) library will be installed in the `/opt` directory. 
+#' If this directory does not exist in your GNU/Linux distribution, it will be created;
+#' 2. `complementary_flags`: String (`complementary_flags = NULL` by default) for adding complementary flags in the [**R**](https://www.r-project.org/) language compilation process. 
+#' Passing a string to `complementary_flags` will compile it in the form:
+#'    ```
+#'    ./configure --with-blas="..." complementary_flags
+#'    ```
 #' @seealso \code{\link{ropenblas}}, \code{\link{last_version_r}}
 #' @return Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
 #' missing dependencies.
