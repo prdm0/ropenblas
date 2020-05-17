@@ -4,10 +4,12 @@ answer_yes_no <- function(text) {
 }
 
 download_openblas <- function(x = NULL) {
-  if (file_exists("/tmp/openblas"))
-    file_delete("/tmp/openblas")
+  if (dir.exists("/tmp/openblas"))
+    unlink("/tmp/openblas", recursive = TRUE)
   
-  path_openblas <- dir_create(path = "/tmp/openblas")
+  dir.create("/tmp/openblas")
+  path_openblas <- "/tmp/openblas"
+  
   
   repo_openblas <-
     git2r::clone("https://github.com/xianyi/OpenBLAS.git", path_openblas)
@@ -639,10 +641,12 @@ last_version_r <- function(major = NULL) {
 #' @importFrom glue glue
 #' @importFrom cli style_bold symbol
 download_r <- function(x) {
-  if (file_exists("/tmp/r"))
-    "/tmp/r" %>% file_delete
+  if (dir.exists("/tmp/r"))
+    "/tmp/r" %>% unlink(recursive = TRUE)
   
-  path_r <- "/tmp/r" %>% dir_create
+  "/tmp/r" %>% dir.create %>% glue
+  
+  path_r <- "/tmp/r"
   
   extension <- ifelse(x < 2L, "tgz", "tar.gz")
   
@@ -703,7 +707,7 @@ attention <- function(x) {
 change_r <- function (x, change = TRUE, key_root) {
   exist_version_r <- "/opt/R/{x}" %>%
     glue %>%
-    dir_exists
+    dir.exists
   
   dir_r  <-  paste(system(command = "which R", intern = TRUE))
   dir_rscript  <-
@@ -729,20 +733,42 @@ change_r <- function (x, change = TRUE, key_root) {
     line = 2L
   ))
   
-  cat("\n")
+   cat("\n")
   
-  "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
-    glue %>%
-    cat
+   "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
+     glue %>%
+     cat
+
+   cat("\n")
+
+   "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ..." %>%
+      glue %>%
+      col_blue %>%
+      style_bold %>%
+      cat
+}
+
+fix_openblas_link <- function(restart_r = FALSE, key_root) {
+  path_blas <-
+    system("Rscript -e 'sessionInfo()$BLAS[1L]'", intern = TRUE) %>% 
+    tail(n = 1L) %>% 
+    str_match(string = .,pattern = "/([^;]*).so")
   
-  cat("\n")
+  path_blas <- path_blas[1L, 1L]
   
-  "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ..." %>%
-    glue %>%
-    col_blue %>%
-    style_bold %>%
-    cat
+  fix <- str_detect(string = path_blas, pattern = "openblas")
   
+  if (!fix)  
+      glue("ln -snf /opt/OpenBLAS/lib/libopenblas.so {path_blas}") %>% run_command(key_root = key_root)
+  
+  if (restart_r) {
+    if (rstudioapi::isAvailable()) {
+      tmp <- rstudioapi::restartSession() # .rs.restartR()
+    } else {
+      .refresh_terminal()
+    }
+  }
+
 }
 
 #' @importFrom withr with_dir
@@ -753,25 +779,28 @@ change_r <- function (x, change = TRUE, key_root) {
 #' @importFrom fs dir_exists path_split
 #' @importFrom stringr str_extract
 compiler_r <- function(r_version = NULL,
-                       version_openblas = NULL,
                        with_blas = NULL,
                        complementary_flags = NULL,
                        key_root) {
   if (is.null(r_version))
     r_version <- last_version_r()$last_version
   
+  dir_initial_blas <-
+    glue("{dir_blas()$path_blas}{dir_blas()$file_blas}")
+  
 
-  if ("/opt/R/{r_version}" %>% glue %>% dir_exists) {
+  if ("/opt/R/{r_version}" %>% glue %>% dir.exists) {
     answer <-
       "R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
       answer_yes_no
     
     validate_answer(answer)
     
-    if (answer %in% c("y", "yes"))
+    if (answer %in% c("y", "yes")) {
+      fix_openblas_link(restart_r = FALSE, key_root = key_root)
       return(change_r(r_version, key_root = key_root))
+    }
   }
-  
   
   dir_r  <-  paste(system(command = "which R", intern = TRUE))
   dir_rscript <-
@@ -800,7 +829,7 @@ compiler_r <- function(r_version = NULL,
      {complementary_flags}" %>%
     glue
   
-  if (dir_exists(path = "/opt/OpenBLAS/lib") && dir_blas()$use_openblas) {
+  if (dir.exists("/opt/OpenBLAS/lib/") && dir_blas()$use_openblas) {
     # configure ---------------------------------------------------------------
     
     with_dir(new = download,
@@ -828,27 +857,13 @@ compiler_r <- function(r_version = NULL,
       glue %>%
       run_command(key_root = key_root) # loop_root(attempt = 5L, sudo =  is_sudo()$rscript)
     
-    .refresh_terminal <- function() {
-      system("R")
-      q("no")
-    }
-    
-    
-    if (rstudioapi::isAvailable()) {
-      tmp <- rstudioapi::restartSession() # .rs.restartR()
-    } else {
-      .refresh_terminal()
-    }
-    
-    dir_initial_blas <-
-      glue("{dir_blas()$path_blas}{dir_blas()$file_blas}")
-    
-    glue(
-      "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_initial_blas}"
-    ) %>% run_command(key_root = key_root)
-    
+    fix_openblas_link(restart_r = FALSE, key_root = key_root)
     
   } else {
+    
+    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
+    assign(x = "env_ropenblas_compiler_r", value = env(new_ropenblas = ropenblas, root = key_root), envir = global_env())  
+    exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = NULL, restart = FALSE) 
     
     # configure ---------------------------------------------------------------
     
@@ -867,35 +882,23 @@ compiler_r <- function(r_version = NULL,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
     
-    
-    # env_ropenblas_compiler_r <<- env(empty_env(), new_ropenblas = ropenblas, root = key_root)
-    assign(x = "env_ropenblas_compiler_r", value = env(new_ropenblas = ropenblas, root = key_root), envir = global_env())  
-    exec(.fn = "new_ropenblas", .env = env_ropenblas_compiler_r, x = version_openblas, restart = FALSE) 
-    
-    
-    .refresh_terminal <- function() {
-      system("R")
-      q("no")
-    }
-    
-    
-    if (rstudioapi::isAvailable()) {
-      tmp <- rstudioapi::restartSession() # .rs.restartR()
-    } else {
-      .refresh_terminal()
-    }
-    
-    # # creating symbolic links -------------------------------------------------
-    # 
-    # "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
-    #   glue %>%
-    #   run_command(key_root = key_root) # loop_root(attempt = 5L, sudo =  is_sudo()$r)
-    # 
-    # "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
-    #   glue %>%
-    #   run_command(key_root = key_root)
+    fix_openblas_link(restart_r = FALSE, key_root = key_root)
     
   }
+  
+  cat("\n")
+  
+  "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({r_version})))}." %>%
+    glue %>%
+    cat
+  
+  cat("\n")
+  
+  "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ...\n\n" %>%
+    glue %>%
+    col_blue %>%
+    style_bold %>%
+    cat
   
   # # build library directory -------------------------------------------------
   # 
@@ -942,7 +945,6 @@ compiler_r <- function(r_version = NULL,
 #' # rcompiler()
 #' @export
 rcompiler <- function(x = NULL,
-                      version_openblas = NULL,
                       with_blas = NULL,
                       complementary_flags = NULL) {
   if (Sys.info()[[1L]] != "Linux")
@@ -968,25 +970,11 @@ rcompiler <- function(x = NULL,
   
   compiler_r(
     r_version = x,
-    version_openblas = version_openblas,
     with_blas = with_blas,
     complementary_flags = complementary_flags,
     key_root = root
   )
   
-  cat("\n")
-  
-  "[{style_bold(col_green(symbol$tick))}] {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
-    glue %>%
-    cat
-  
-  cat("\n")
-  
-  "{symbol$mustache} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ...\n\n" %>%
-    glue %>%
-    col_blue %>%
-    style_bold %>%
-    cat
 }
 
 #' @importFrom magrittr "%>%"
@@ -1061,7 +1049,7 @@ link_again <- function(restart_r = TRUE) {
       already uses the {col_blue(style_underline(style_bold(\"OpenBLAS\")))} library. You can stay calm." %>%
       glue
   } else {
-    if (!dir_exists("/opt/OpenBLAS/lib"))
+    if (!dir.exists("/opt/OpenBLAS/lib"))
       "{symbol$mustache} Run the {col_blue(style_underline(style_bold(\"ropenblas()\")))} function ..." %>%
       glue
     else {
