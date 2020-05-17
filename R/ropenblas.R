@@ -697,7 +697,7 @@ attention <- function(x) {
   answer <- NULL
   for (i in 1L:3L) {
     answer[i] <-
-      answer_yes_no(text = glue("{symbol$bullet} Do you understand? ({i} of 3)"))
+      answer_yes_no(text = glue("{emoji(\"large_blue_circle\")} Do you understand? ({i} of 3)"))
     validate_answer(answer[i])
   }
   
