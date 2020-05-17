@@ -85,6 +85,7 @@ exist <- function(x = "gcc") {
 }
 
 #' @importFrom cli style_bold col_red
+#' @importFrom emojifont emoji
 validate_answer <- function(x) {
   if (!(x %in% c("y", "no", "yes", "n")))
     stop(
@@ -112,6 +113,7 @@ connection <- function() {
   }
 }
 
+#' @importFrom emojifont emoji
 sudo_key <- function(attempt = 3L) {
   test <- function(key_root) {
     system(
@@ -158,6 +160,7 @@ run_command <- function(x, key_root = NULL) {
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom git2r checkout
+#' @importFrom emojifont emoji
 #' @importFrom cli rule col_red symbol style_bold
 compiler_openblas <-
   function(download,
@@ -273,6 +276,7 @@ error_r <- function() {
 #' @importFrom git2r clone checkout tags
 #' @importFrom rlang caller_env global_env env_get
 #' @importFrom cli rule symbol style_bold
+#' @importFrom emojifont emoji
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
 #' # ropenblas()
@@ -633,6 +637,7 @@ attention <- function(x) {
 #' @importFrom glue glue
 #' @importFrom fs dir_exists
 #' @importFrom magrittr "%>%"
+#' @importFrom emojifont emoji
 change_r <- function (x, change = TRUE, key_root) {
   exist_version_r <- "/opt/R/{x}" %>%
     glue %>%
@@ -706,6 +711,7 @@ fix_openblas_link <- function(restart_r = FALSE, key_root) {
 #' @importFrom stringr str_extract
 #' @importFrom withr with_dir
 #' @importFrom rlang env exec
+#' @importFrom emojifont emoji
 compiler_r <- function(r_version = NULL,
                        with_blas = NULL,
                        complementary_flags = NULL,
@@ -953,6 +959,7 @@ last_version_openblas <- function() {
 #' @importFrom magrittr "%>%"
 #' @importFrom glue glue
 #' @importFrom cli style_bold style_underline symbol
+#' @importFrom emojifont emoji
 #' @title Linking the OpenBLAS library with \R again
 #' @description The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
 #' of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
