@@ -113,7 +113,7 @@ validate_answer <- function(x) {
   if (!(x %in% c("y", "no", "yes", "n")))
     stop(
       glue(
-        "[{style_bold(col_red(symbol$cross))}] Invalid option. Procedure interrupted."
+        "{emoji(\"red_circle\")} Invalid option. Procedure interrupted."
       )
     )
 }
@@ -209,6 +209,7 @@ run_command <- function(x, key_root = NULL) {
 #' @importFrom fs dir_delete
 #' @importFrom fs dir_exists
 #' @importFrom cli rule col_red symbol style_bold
+#' @importFrom emojifont emoji
 compiler_openblas <-
   function(download,
            openblas_version = NULL, key_root) {
@@ -217,13 +218,13 @@ compiler_openblas <-
     if (!exist())
       stop(
         glue(
-          "{style_bold(col_red(symbol$cross))} GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system."
+          "{emoji(\"red_circle\")} GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system."
         )
       )
     if (!exist("make"))
       stop(
         glue(
-          "{style_bold(col_red(symbol$cross))} GNU Make not installed. Install GNU Make on your operating system."
+          "{emoji(\"red_circle\")} GNU Make not installed. Install GNU Make on your operating system."
         )
       )
     
@@ -324,7 +325,8 @@ error_r <- function() {
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom fs file_exists file_delete dir_create
-#' @importFrom cli rule col_green symbol style_bold
+#' @importFrom cli rule symbol style_bold
+#' @importFrom emojifont emoji
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
 #' # ropenblas()
@@ -338,7 +340,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!connection())
     stop(
       glue(
-        "[{style_bold(col_red(symbol$cross))}] You apparently have no internet connection.\n"
+        "{emoji(\"red_circle\")} You apparently have no internet connection.\n"
       )
     )
   
@@ -355,7 +357,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!is.null(x) && glue("v{x}") > download$last_version)
     stop(
       glue(
-        "{symbol$bullet} Version {style_bold({x})} does not exist. The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$last_version, 2L, nchar(download$last_version))})}."
+        "{emoji(\"red_circle\")} Version {style_bold({x})} does not exist. The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$last_version, 2L, nchar(download$last_version))})}."
       )
     )
   
@@ -365,7 +367,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         cat("\n")
         if (glue("v{x}") != download$last_version) {
           answer <-
-            "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$last_version, 2L, nchar(download$last_version))})}. Do you want to install this version?" %>%
+            "{emoji(\"large_blue_circle\")} The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$last_version, 2L, nchar(download$last_version))})}. Do you want to install this version?" %>%
             glue %>%
             answer_yes_no
           
@@ -389,7 +391,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
       } else {
         if (glue("v{dir_blas()$version_openblas}") == download$last_version) {
           answer <-
-            "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
+            "{emoji(\"large_blue_circle\")} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
             glue %>%
             answer_yes_no
           
@@ -406,7 +408,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
         } else {
           stop(
             glue(
-              "{symbol$bullet} There is no {style_bold(\"OpenBLAS\")} version {style_bold({x})}. The latest version is {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}."
+              "{emoji(\"red_circle\")} There is no {style_bold(\"OpenBLAS\")} version {style_bold({x})}. The latest version is {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}."
             )
           )
         }
@@ -414,7 +416,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     } else {
       if (glue("v{x}") < download$last_version) {
         answer <-
-          "{symbol$bullet} The latest version is {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}. Want to consider the latest version?" %>%
+          "{emoji(\"large_blue_circle\")} The latest version is {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}. Want to consider the latest version?" %>%
           glue %>%
           answer_yes_no
         
@@ -449,7 +451,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
                           key_root = root)
       } else {
         answer <-
-          "{symbol$bullet} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
+          "{emoji(\"large_blue_circle\")} The latest version of {style_bold(\"OpenBLAS\")} is already in use. Do you want to compile and link again?" %>%
           glue %>%
           answer_yes_no
         validate_answer(answer)
@@ -505,7 +507,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
       line = 2L
     ))
     
-    "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>%
+    "{emoji(\"red_circle\")} Some error has occurred. No changes have been made." %>%
       glue %>%
       warning %>%
       return
@@ -538,12 +540,12 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   cat("\n")
   
   if (is.null(x)) {
-    "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} version {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}." %>%
+    "{emoji(\"white_check_mark\")} {style_bold(\"OpenBLAS\")} version {style_bold({{substr(download$last_version, 2L, nchar(download$last_version))}})}." %>%
       glue %>%
       cat
     
   } else {
-    "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} version {style_bold({x})}." %>%
+    "{emoji(\"white_check_mark\")} {style_bold(\"OpenBLAS\")} version {style_bold({x})}." %>%
       glue %>%
       cat
   }
@@ -705,6 +707,7 @@ attention <- function(x) {
 #' @importFrom glue glue
 #' @importFrom fs dir_exists
 #' @importFrom magrittr "%>%"
+#' @importFrom emojifont emoji
 change_r <- function (x, change = TRUE, key_root) {
   exist_version_r <- "/opt/R/{x}" %>%
     glue %>%
@@ -736,15 +739,14 @@ change_r <- function (x, change = TRUE, key_root) {
   
    cat("\n")
   
-   "{emoji(\"white_check_mark\")} {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({x})))}." %>%
+   "{emoji(\"white_check_mark\")} {style_underline(style_bold(\"R\"))} version {style_underline(style_bold({x}))}." %>%
      glue %>%
      cat
 
    cat("\n")
 
-   "{emoji(\"arrows_counterclockwise\")} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ..." %>%
+   "{emoji(\"arrows_counterclockwise\")} The roles are active after terminating the current {style_underline(style_bold(\"R\"))} session ..." %>%
       glue %>%
-      col_blue %>%
       style_bold %>%
       cat
 }
@@ -779,6 +781,7 @@ fix_openblas_link <- function(restart_r = FALSE, key_root) {
 #' @importFrom fs dir_delete
 #' @importFrom fs dir_exists path_split
 #' @importFrom stringr str_extract
+#' @importFrom emojifont emoji
 compiler_r <- function(r_version = NULL,
                        with_blas = NULL,
                        complementary_flags = NULL,
@@ -792,7 +795,8 @@ compiler_r <- function(r_version = NULL,
 
   if ("/opt/R/{r_version}" %>% glue %>% dir.exists) {
     answer <-
-      "R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
+      "{emoji(\"large_blue_circle\")} R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
+      glue %>% 
       answer_yes_no
     
     validate_answer(answer)
@@ -889,15 +893,14 @@ compiler_r <- function(r_version = NULL,
   
   cat("\n")
   
-  "{emoji(\"white_check_mark\")} {col_blue(style_underline(style_bold(\"R\")))} version {col_blue(style_underline(style_bold({r_version})))}." %>%
+  "{emoji(\"white_check_mark\")} {style_underline(style_bold(\"R\"))} version {style_underline(style_bold({r_version}))}." %>%
     glue %>%
     cat
   
   cat("\n")
   
-  "{emoji(\"arrows_counterclockwise\")} The roles are active after terminating the current {col_blue(style_underline(style_bold(\"R\")))} session ...\n\n" %>%
+  "{emoji(\"arrows_counterclockwise\")} The roles are active after terminating the current {style_underline(style_bold(\"R\"))} session ...\n\n" %>%
     glue %>%
-    col_blue %>%
     style_bold %>%
     cat
   
@@ -919,7 +922,7 @@ compiler_r <- function(r_version = NULL,
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom getPass getPass
-#' @importFrom cli rule col_green symbol style_bold col_blue
+#' @importFrom cli rule symbol style_bold
 #' @title Compile a version of \R on GNU/Linux systems
 #' @description This function is responsible for compiling a version of the \R language.
 #' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
@@ -1021,7 +1024,8 @@ last_version_openblas <- function() {
 #' @importFrom magrittr "%>%"
 #' @importFrom glue glue
 #' @importFrom fs dir_exists
-#' @importFrom cli style_bold style_underline col_blue col_green symbol
+#' @importFrom cli style_bold style_underline symbol
+#' @importFrom emojifont emoji
 #' @title Linking the OpenBLAS library with \R again
 #' @description The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
 #' of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
@@ -1046,12 +1050,12 @@ last_version_openblas <- function() {
 #' @export
 link_again <- function(restart_r = TRUE) {
   if (dir_blas()$use_openblas) {
-    "{symbol$mustache} Linking again is not necessary. {col_blue(style_underline(style_bold(\"R\")))} \\
-      already uses the {col_blue(style_underline(style_bold(\"OpenBLAS\")))} library. You can stay calm." %>%
+    "{emoji(\"large_blue_circle\")} Linking again is not necessary. {style_underline(style_bold(\"R\"))} \\
+      already uses the {style_underline(style_bold(\"OpenBLAS\"))} library. You can stay calm." %>%
       glue
   } else {
     if (!dir.exists("/opt/OpenBLAS/lib"))
-      "{symbol$mustache} Run the {col_blue(style_underline(style_bold(\"ropenblas()\")))} function ..." %>%
+      "{emoji(\"large_blue_circle\")} Run the {style_underline(style_bold(\"ropenblas()\"))} function ..." %>%
       glue
     else {
       root <- sudo_key()
@@ -1085,11 +1089,11 @@ link_again <- function(restart_r = TRUE) {
       cat("\n")
       
       if (restart_r) {
-        "{emoji(\"white_check_mark\")} {col_blue(style_underline(style_bold(\"OpenBLAS\")))}." %>%
+        "{emoji(\"white_check_mark\")} {style_underline(style_bold(\"OpenBLAS\"))}." %>%
           glue %>%
           cat
       } else {
-        "{emoji(\"white_check_mark\")} {col_blue(style_underline(style_bold(\"OpenBLAS\")))} will be used in the next section." %>%
+        "{emoji(\"white_check_mark\")} {style_underline(style_bold(\"OpenBLAS\"))} will be used in the next section." %>%
           glue %>%
           cat
       }
