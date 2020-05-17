@@ -136,6 +136,7 @@ connection <- function() {
   }
 }
 
+#' @importFrom emojifont emoji
 sudo_key <- function(attempt = 3L) {
   test <- function(key_root) {
     system(
@@ -161,7 +162,7 @@ sudo_key <- function(attempt = 3L) {
   key_true <- FALSE
   while (i <= attempt && !key_true) {
     key_root <-
-      getPass::getPass(glue("Enter your ROOT OS password (attempt {i} of {attempt}): "))
+      getPass::getPass(glue("{emoji(\"closed_lock_with_key\")} Enter your ROOT OS password (attempt {i} of {attempt}): "))
     key_true <- test_root(key_root = key_root)
     
     if (!key_true && attempt == i)
