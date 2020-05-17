@@ -72,30 +72,6 @@ dir_blas <- function() {
   )
 }
 
-is_sudo <-  function() {
-  blas <- ifelse(
-    glue("{dir_blas()$path_blas}{dir_blas()$file_blas}") %>%
-      file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
-    TRUE,
-    FALSE
-  )
-  
-  r <- ifelse(paste(system(command = "which R", intern = TRUE)) %>%
-                file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
-              TRUE,
-              FALSE)
-  
-  rscript <-
-    ifelse(paste(system(command = "which Rscript", intern = TRUE)) %>%
-             file.mode %>% substr(., nchar(.), nchar(.)) < 6L,
-           TRUE,
-           FALSE)
-  
-  list(blas = blas,
-       r = r,
-       rscript = rscript)
-}
-
 exist <- function(x = "gcc") {
   nsystem <-
     function(...)
@@ -136,7 +112,6 @@ connection <- function() {
   }
 }
 
-#' @importFrom emojifont emoji
 sudo_key <- function(attempt = 3L) {
   test <- function(key_root) {
     system(
@@ -180,15 +155,10 @@ run_command <- function(x, key_root = NULL) {
     system(command = glue("echo {key_root} | sudo -S -k {x}"), ignore.stderr = TRUE)
 } 
 
-
-#' @importFrom withr with_dir
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom git2r checkout
-#' @importFrom fs dir_delete
-#' @importFrom fs dir_exists
 #' @importFrom cli rule col_red symbol style_bold
-#' @importFrom emojifont emoji
 compiler_openblas <-
   function(download,
            openblas_version = NULL, key_root) {
@@ -301,10 +271,8 @@ error_r <- function() {
 #' @importFrom utils download.file head sessionInfo tail
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
-#' @importFrom fs file_exists file_delete dir_create
+#' @importFrom rlang caller_env global_env env_get
 #' @importFrom cli rule symbol style_bold
-#' @importFrom emojifont emoji
-#' @importFrom rlang env_get global_env caller_env
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
 #' # ropenblas()
@@ -665,7 +633,6 @@ attention <- function(x) {
 #' @importFrom glue glue
 #' @importFrom fs dir_exists
 #' @importFrom magrittr "%>%"
-#' @importFrom emojifont emoji
 change_r <- function (x, change = TRUE, key_root) {
   exist_version_r <- "/opt/R/{x}" %>%
     glue %>%
@@ -709,11 +676,12 @@ change_r <- function (x, change = TRUE, key_root) {
       cat
 }
 
+#' @importFrom stringr str_match str_detect
 fix_openblas_link <- function(restart_r = FALSE, key_root) {
   path_blas <-
     system("Rscript -e 'sessionInfo()$BLAS[1L]'", intern = TRUE) %>% 
     tail(n = 1L) %>% 
-    str_match(string = .,pattern = "/([^;]*).so")
+    str_match(pattern = "/([^;]*).so")
   
   path_blas <- path_blas[1L, 1L]
   
@@ -732,12 +700,12 @@ fix_openblas_link <- function(restart_r = FALSE, key_root) {
 
 }
 
-#' @importFrom withr with_dir
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom git2r checkout
 #' @importFrom stringr str_extract
-#' @importFrom emojifont emoji
+#' @importFrom withr with_dir
+#' @importFrom rlang env exec
 compiler_r <- function(r_version = NULL,
                        with_blas = NULL,
                        complementary_flags = NULL,
@@ -947,6 +915,7 @@ rcompiler <- function(x = NULL,
 #' @importFrom glue glue
 #' @importFrom stringr str_extract
 #' @importFrom stats na.omit
+#' @importFrom git2r remote_ls
 #' @title OpenBLAS library versions
 #' @details This function automatically searches \href{https://www.openblas.net/}{\strong{OpenBLAS}} library versions in the official \href{https://github.com/xianyi/OpenBLAS}{\strong{GitHub}} project.
 #' \enumerate{
@@ -984,7 +953,6 @@ last_version_openblas <- function() {
 #' @importFrom magrittr "%>%"
 #' @importFrom glue glue
 #' @importFrom cli style_bold style_underline symbol
-#' @importFrom emojifont emoji
 #' @title Linking the OpenBLAS library with \R again
 #' @description The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
 #' of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
