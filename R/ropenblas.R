@@ -108,7 +108,7 @@ connection <- function() {
   if (is_online())
     TRUE
   else{
-    cat("You apparently have no internet connection.\n")
+    cat(glue("\r{emoji(\"red_circle\")} You apparently have no internet connection.\n"))
     FALSE
   }
 }
