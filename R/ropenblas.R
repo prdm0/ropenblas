@@ -682,11 +682,12 @@ change_r <- function (x, change = TRUE, key_root) {
 }
 
 #' @importFrom stringr str_match str_detect
+#' @importFrom magrittr "%>%" 
 fix_openblas_link <- function(restart_r = FALSE, key_root) {
   path_blas <-
     system("Rscript -e 'sessionInfo()$BLAS[1L]'", intern = TRUE) %>% 
     tail(n = 1L) %>% 
-    str_match(pattern = "/([^;]*).so")
+    str_match(string = ., pattern = "/([^;]*).so")
   
   path_blas <- path_blas[1L, 1L]
   
