@@ -90,7 +90,7 @@ validate_answer <- function(x) {
   if (!(x %in% c("y", "no", "yes", "n")))
     stop(
       glue(
-        "{emoji(\"red_circle\")} Invalid option. Procedure interrupted."
+        "\r{emoji(\"red_circle\")} Invalid option. Procedure interrupted."
       )
     )
 }
@@ -170,13 +170,13 @@ compiler_openblas <-
     if (!exist())
       stop(
         glue(
-          "{emoji(\"red_circle\")} GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system."
+          "\r{emoji(\"red_circle\")} GNU GCC not installed. Install GNU GCC Compiler (C and Fortran) on your operating system."
         )
       )
     if (!exist("make"))
       stop(
         glue(
-          "{emoji(\"red_circle\")} GNU Make not installed. Install GNU Make on your operating system."
+          "\r{emoji(\"red_circle\")} GNU Make not installed. Install GNU Make on your operating system."
         )
       )
     
@@ -284,13 +284,13 @@ error_r <- function() {
 ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (Sys.info()[[1L]] != "Linux")
     stop(
-      "Sorry, this package for now configures {style_bold(\"R\")} to use the {style_bold(\"OpenBLAS\")} library on Linux systems.\n"
+      glue("\r{emoji(\"red_circle\")} Sorry, this package for now configures {style_bold(\"R\")} to use the {style_bold(\"OpenBLAS\")} library on Linux systems.\n")
     )
   
   if (!connection())
     stop(
       glue(
-        "{emoji(\"red_circle\")} You apparently have no internet connection.\n"
+        "\r{emoji(\"red_circle\")} You apparently have no internet connection.\n"
       )
     )
   
@@ -307,7 +307,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   if (!is.null(x) && glue("v{x}") > download$last_version)
     stop(
       glue(
-        "{emoji(\"red_circle\")} Version {style_bold({x})} does not exist. The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$last_version, 2L, nchar(download$last_version))})}."
+        "\r{emoji(\"red_circle\")} Version {style_bold({x})} does not exist. The latest version of {style_bold(\"OpenBLAS\")} is {style_bold({substr(download$last_version, 2L, nchar(download$last_version))})}."
       )
     )
   
@@ -889,22 +889,22 @@ rcompiler <- function(x = NULL,
                       with_blas = NULL,
                       complementary_flags = NULL) {
   if (Sys.info()[[1L]] != "Linux")
-    stop("Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n")
+    stop(glue("\r{emoji(\"red_circle\")} Sorry, this package for now configures R to use the OpenBLAS library on Linux systems.\n"))
   
   if (!connection())
-    stop("You apparently have no internet connection.\n")
+    stop(glue("\r{emoji(\"red_circle\")} You apparently have no internet connection.\n"))
   
   if (!exist())
     stop(
-      "GNU GCC Compiler not installed. Install GNU GCC Compiler (C and Fortran) on your operating system.\n"
+      glue("\r{emoji(\"red_circle\")} GNU GCC Compiler not installed. Install GNU GCC Compiler (C and Fortran) on your operating system.\n")
     )
   if (!exist("make"))
-    stop("GNU Make not installed. Install GNU Make on your operating system.\n")
+    stop(glue("\r{emoji(\"red_circle\")} GNU Make not installed. Install GNU Make on your operating system.\n"))
   
   if (!is.null(x) && x < "3.1.0") {
     answer <- attention(x)
     if (any(answer != "y" || answer != "yes"))
-      return(warning("Given the answers, it is not possible to continue ..."))
+      return(warning(glue("\r{emoji(\"large_blue_circle\")} Given the answers, it is not possible to continue ...")))
   }
   
   root <- sudo_key()
@@ -936,7 +936,7 @@ rcompiler <- function(x = NULL,
 #' @export
 last_version_openblas <- function() {
   if (!connection())
-    stop("You apparently have no internet connection.\n")
+    stop(glue("\r{emoji(\"red_circle\")} You apparently have no internet connection ...\n"))
   
   pulls <- "https://github.com/xianyi/OpenBLAS.git" %>%
     remote_ls %>%
