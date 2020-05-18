@@ -1,4 +1,8 @@
-# ropenblas 0.2.5 (development version)
+# ropenblas 0.2.6 (development version)
+
+* Code review.
+
+# ropenblas 0.2.5
 
 * Code review;
 
