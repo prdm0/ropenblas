@@ -416,12 +416,12 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     
   }
   
-  if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
+  # if (!str_detect(dir_blas()$file_blas, "libopenblas")) {
     glue(
       "ln -snf /opt/OpenBLAS/lib/libopenblas.so {dir_blas()$path}{dir_blas()$file_blas}"
     ) %>% run_command(key_root = root)
           
-  }
+  # }
   
   if (error_r()) {
     "mv /opt/OpenBLAS/{initial_blas} {dir_blas()$path}" %>%
