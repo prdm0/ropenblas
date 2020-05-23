@@ -196,7 +196,7 @@ compiler_openblas <-
     # Install OpenBLAS --------------------------------------------------------
     
     
-    if (!dir_exists(path = "/opt"))
+    if (!dir.exists(paths = "/opt"))
       run_command(x = "mkdir /opt", key_root = key_root)
     
     "cp {dir_blas()$path}{dir_blas()$file_blas} /opt/{dir_blas()$file_blas}" %>%
@@ -635,7 +635,6 @@ attention <- function(x) {
 }
 
 #' @importFrom glue glue
-#' @importFrom fs dir_exists
 #' @importFrom magrittr "%>%"
 #' @importFrom emojifont emoji
 change_r <- function (x, change = TRUE, key_root) {

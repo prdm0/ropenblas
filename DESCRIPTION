@@ -1,7 +1,7 @@
 Package: ropenblas
 Type: Package
 Title: Download, Compile and Link 'OpenBLAS' Library with R
-Version: 0.2.5
+Version: 0.2.6
 Authors@R: 
     person(given = "Pedro Rafael",
            family = "D. Marinho",
@@ -23,7 +23,6 @@ Imports:
     rstudioapi,
     stringr,
     git2r,
-    fs,
     RCurl,
     XML,
     cli,
