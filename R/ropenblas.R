@@ -12,25 +12,33 @@ download_openblas <- function(x = NULL) {
   
   
   repo_openblas <-
-    git2r::clone("https://github.com/xianyi/OpenBLAS.git", path_openblas)
+    git2r::clone(
+      url = "https://github.com/xianyi/OpenBLAS.git", 
+      local_path = path_openblas,
+      branch = "develop"
+    )
   
-  last_version <- names(tail(git2r::tags(repo_openblas), 1L))
+  
+  all_versions <- 
+    system("cd /tmp/openblas && git tag --sort=committerdate", intern = TRUE)
+  
+  last_version <- all_versions[length(all_versions)]
   
   if (is.null(x))
     x <- last_version
   
-  if (glue("v{x}") < names(tail(git2r::tags(repo_openblas), 1L))) {
+  if (glue("v{x}") < last_version) {
     list(
       new = TRUE,
-      last_version = names(tail(git2r::tags(repo_openblas), 1L)),
+      last_version = last_version,
       path_openblas = path_openblas,
       repo_openblas = repo_openblas,
       exist_x = TRUE
     )
-  } else if (glue("v{x}") > names(tail(git2r::tags(repo_openblas), 1L))) {
+  } else if (glue("v{x}") > last_version) {
     list(
       new = FALSE,
-      last_version = names(tail(git2r::tags(repo_openblas), 1L)),
+      last_version = last_version,
       path_openblas = path_openblas,
       repo_openblas = repo_openblas,
       exist_x = FALSE
@@ -38,7 +46,7 @@ download_openblas <- function(x = NULL) {
   } else {
     list(
       new = FALSE,
-      last_version = names(tail(tags(repo_openblas), 1L)),
+      last_version = last_version,
       path_openblas = path_openblas,
       repo_openblas = repo_openblas,
       exist_x = TRUE
@@ -769,7 +777,7 @@ compiler_r <- function(r_version = NULL,
     with_blas <-  "-L/opt/OpenBLAS/lib \\
      -I/opt/OpenBLAS/include \\
      -lpthread \\
-     -lm" %>%
+     -lm" %>% 
       glue
   }
   
@@ -783,7 +791,7 @@ compiler_r <- function(r_version = NULL,
      --enable-R-shlib \\
      --enable-threads=posix \\
      --with-blas=\"{with_blas}\" \\
-     {complementary_flags}" %>%
+     {complementary_flags}" %>% 
     glue
   
   if (dir.exists("/opt/OpenBLAS/lib/") && dir_blas()$use_openblas) {
@@ -985,15 +993,13 @@ last_version_openblas <- function() {
       "\r{emoji(\"red_circle\")} You apparently have no internet connection ...\n"
     ))
   
-  pulls <- "https://github.com/xianyi/OpenBLAS.git" %>%
-    remote_ls %>%
-    names
-  
   versions <-
-    pulls %>% str_extract(pattern = "v[:digit:][:punct:][:graph:]+") %>%
-    na.omit %>%
+    system(command = "cd /tmp/openblas && git ls-remote --tags https://github.com/xianyi/OpenBLAS.git | sort -t '/' -k 3 -V",
+           intern = T) %>% 
+    str_extract(pattern = "v[:digit:][:punct:][:graph:]+") %>%
     str_remove(pattern = "\\^\\{\\}") %>%
-    unique %>%
+    na.omit %>%
+    unique %>% 
     str_remove(pattern = "^v")
   
   list(
