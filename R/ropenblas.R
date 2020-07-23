@@ -171,7 +171,7 @@ sudo_key <- function(attempt = 3L) {
     key_root <-
       getPass::getPass(
         glue(
-          "{cli::col_red(cli::symbol$fancy_question_mark)} Enter your ROOT OS password (attempt {i} of {attempt}): "
+          "Enter your ROOT OS password (attempt {i} of {attempt}): "
         )
       )
     key_true <- test_root(key_root = key_root)

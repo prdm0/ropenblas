@@ -28,10 +28,6 @@ Imports:
     cli,
     pingr,
     withr,
-    rlang,
-    emojifont,
-    icon
-Remotes: 
-    ropenscilabs/icon 
+    rlang
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
