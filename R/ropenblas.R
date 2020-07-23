@@ -9,7 +9,7 @@ connection <- function() {
     TRUE
   else{
     cat(glue(
-      "\r{cli::col_red(cli::symbol$bullet)} You apparently have no internet connection.\n"
+      "\r{cli::col_red(cli::symbol$bullet)} You apparently have no internet connection. "
     ))
     FALSE
   }
@@ -33,9 +33,7 @@ connection <- function() {
 #' @export
 last_version_openblas <- function() {
   if (!connection())
-    stop(glue(
-      "\r{cli::col_red(cli::symbol$bullet)} You apparently have no internet connection ...\n"
-    ))
+    stop("")
   
   all <- 
     system(command = "git ls-remote --tags https://github.com/xianyi/OpenBLAS.git | sort -t '/' -k 3 -V",
@@ -325,9 +323,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     )
   
   if (!connection())
-    stop(glue(
-      "\r{cli::col_red(cli::symbol$bullet)} You apparently have no internet connection.\n"
-    ))
+    stop("")
   
   if (identical(caller_env(), global_env())) {
     root <- sudo_key()
@@ -560,7 +556,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
 #' @export
 last_version_r <- function(major = NULL) {
   if (!connection())
-    stop("You apparently have no internet connection.\n")
+    stop("")
   
   search <- function(x, number_version = TRUE) {
     test <- function(index, vector_versions)
@@ -951,9 +947,7 @@ rcompiler <- function(x = NULL,
     )
   
   if (!connection())
-    stop(glue(
-      "\r{cli::col_red(cli::symbol$bullet)} You apparently have no internet connection.\n"
-    ))
+    stop("")
   
   if (!exist())
     stop(
