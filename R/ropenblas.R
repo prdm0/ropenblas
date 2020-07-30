@@ -1074,16 +1074,6 @@ link_again <- function(restart_r = TRUE) {
 #' Error in browseURL(url) : 'browser' must be a non-empty character string
 #' ```
 rnews <- function() {
-
-    nsystem <-
-      function(...)
-        tryCatch(
-          system(...),
-          error = function(e) {},
-          waring = function(w) {}
-        )
-    
-    
-    "xdg-open https://cran.r-project.org/doc/manuals/r-release/NEWS.html" %>% 
-    system(show.output.on.console = F)
+  "xdg-open https://cran.r-project.org/doc/manuals/r-release/NEWS.html" %>%
+    system
 }
