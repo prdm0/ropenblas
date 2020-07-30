@@ -1083,6 +1083,7 @@ rnews <- function() {
           waring = function(w) {}
         )
     
+    
     "xdg-open https://cran.r-project.org/doc/manuals/r-release/NEWS.html" %>% 
     system(show.output.on.console = F)
 }
