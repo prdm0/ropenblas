@@ -1061,3 +1061,28 @@ link_again <- function(restart_r = TRUE) {
     }
   }
 }
+
+#' @title R News file
+#' @description Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{\strong{NEWS.html}} file in the standard browser installed on the operating system.
+#' @details The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{\strong{NEWS.html}} file contains the main changes from the recently released versions of the \R language. 
+#' The goal is to facilitate the query by invoking it directly from the \R command prompt. The `rnews()` function is 
+#' analogous to the `news()` function of the **utils** package. However, using the `news()` command in a terminal style 
+#' bash shell is possible to receive a message like:
+#' ```  
+#' > news()
+#' starting httpd help server ... done
+#' Error in browseURL(url) : 'browser' must be a non-empty character string
+#' ```
+rnews <- function() {
+
+    nsystem <-
+      function(...)
+        tryCatch(
+          system(...),
+          error = function(e) {},
+          waring = function(w) {}
+        )
+    
+    "xdg-open https://cran.r-project.org/doc/manuals/r-release/NEWS.html" %>% 
+    system(show.output.on.console = F)
+}
