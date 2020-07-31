@@ -920,7 +920,7 @@ compiler_r <- function(r_version = NULL,
 #'     --enable-threads=posix --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include
 #'     -lpthread -lm"
 #'    ```
-#'    Most likely, you will have little reason to change this argument. Unless you know what you're doing, consider `with_blas = NULL`. Do not change the installation directory,
+#'    Most likely, you will have little reason to change this aprgument. Unless you know what you're doing, consider `with_blas = NULL`. Do not change the installation directory,
 #' that is, always consider `--prefix = /opt/R/version_r`, where` version_r` is a valid version of [**R**](https://www.r-project.org/). For a list of valid versions of
 #' [**R**](https://www.r-project.org/), run the `last_version_r()`. Installing [**R**](https://www.r-project.org/) in the `/opt/R/version_r` directory is important because some
 #' functions in the package require this. Both the [**R**](https://www.r-project.org/) language and the [**OpenBLAS**](https://www.openblas.net/) library will be installed in the `/opt` directory.
@@ -1064,28 +1064,36 @@ link_again <- function(restart_r = TRUE) {
 
 #' @importFrom fs file_show
 #' @title R News file
-#' @description Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{\strong{NEWS.html}} file in the standard browser installed on the operating system.
-#' @param  pdf If `FALSE` (default), the NEWS.html file will open in the browser, otherwise NEWS.pdf will be opened.
-#' @details The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{\strong{NEWS.html}} file contains the main changes from the recently released versions of the \R language. 
-#' The goal is to facilitate the query by invoking it directly from the \R command prompt. The `rnews()` function is 
-#' analogous to the `news()` function of the **utils** package. However, using the `news()` command in a terminal style 
+#' @description Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file in the standard browser installed on the operating system.
+#' @param pdf If `FALSE` (default), the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file will open in the browser, 
+#' @param dev If `FALSE` (default), it will not show changes made to the language development version. 
+#' To see changes in the development version, do `dev = TRUE`.
+#' otherwise \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf}{NEWS.pdf} will be opened.
+#' @details The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file contains the main changes from the recently released versions of the \R language. 
+#' The goal is to facilitate the query by invoking it directly from the \R command prompt. The \link{rnews} function is 
+#' analogous to the \link{news} function of the **utils** package. However, using the \link{news} command in a terminal style 
 #' bash shell is possible to receive a message like:
 #' ```  
 #' > news()
 #' starting httpd help server ... done
 #' Error in browseURL(url) : 'browser' must be a non-empty character string
 #' ```
+#' This is an error that may occur depending on the installation of \R. Always prefer the use of the news
+#' function but if you need to, use the \link{rnews} function.
 #' @export
-rnews <- function(pdf = FALSE) {
+rnews <- function(pdf = FALSE, dev = FALSE) {
   
-  extension <- 
-    ifelse(
-      pdf,
-      "pdf",
-      "html"
-    )
+  extension <-
+    ifelse(pdf,
+           "pdf",
+           "html")
   
-  "https://cran.r-project.org/doc/manuals/r-release/NEWS.{extension}" %>%
+  r_v <-
+    ifelse(dev,
+           "r-devel",
+           "r-release")
+  
+  "https://cran.r-project.org/doc/manuals/{r_v}/NEWS.{extension}" %>%
     glue %>% 
     file_show
 }

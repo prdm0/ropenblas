@@ -45,7 +45,7 @@ can be found \href{https://cran.r-project.org/doc/manuals/r-devel/R-admin.html}{
  -lpthread -lm"
 }
 
-Most likely, you will have little reason to change this argument. Unless you know what you're doing, consider \code{with_blas = NULL}. Do not change the installation directory,
+Most likely, you will have little reason to change this aprgument. Unless you know what you're doing, consider \code{with_blas = NULL}. Do not change the installation directory,
 that is, always consider \verb{--prefix = /opt/R/version_r}, where\code{ version_r} is a valid version of \href{https://www.r-project.org/}{\strong{R}}. For a list of valid versions of
 \href{https://www.r-project.org/}{\strong{R}}, run the \code{last_version_r()}. Installing \href{https://www.r-project.org/}{\strong{R}} in the \verb{/opt/R/version_r} directory is important because some
 functions in the package require this. Both the \href{https://www.r-project.org/}{\strong{R}} language and the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library will be installed in the \verb{/opt} directory.
