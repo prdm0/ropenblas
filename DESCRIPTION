@@ -1,7 +1,7 @@
 Package: ropenblas
 Type: Package
 Title: Download, Compile and Link 'OpenBLAS' Library with R
-Version: 0.2.7
+Version: 0.2.8
 Authors@R: 
     person(given = "Pedro Rafael",
            family = "D. Marinho",
@@ -28,6 +28,7 @@ Imports:
     cli,
     pingr,
     withr,
-    rlang
+    rlang,
+    fs,
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

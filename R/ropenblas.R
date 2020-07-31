@@ -4,6 +4,7 @@ answer_yes_no <- function(text) {
 }
 
 #' @importFrom pingr is_online
+#' @importFrom cli col_red symbol
 connection <- function() {
   if (is_online())
     TRUE
@@ -126,7 +127,7 @@ exist <- function(x = "gcc") {
   ifelse(length(result) == 1L, FALSE, TRUE)
 }
 
-#' @importFrom cli style_bold col_red
+#' @importFrom cli style_bold col_red symbol
 validate_answer <- function(x) {
   if (!(x %in% c("y", "no", "yes", "n")))
     stop(glue(
@@ -309,7 +310,7 @@ error_r <- function() {
 #' @importFrom stringr str_detect str_extract
 #' @importFrom git2r clone checkout tags
 #' @importFrom rlang caller_env global_env env_get
-#' @importFrom cli rule symbol style_bold
+#' @importFrom cli rule symbol style_bold col_green col_blue col_red
 #' @seealso \code{\link{rcompiler}}, \code{\link{last_version_r}}
 #' @examples
 #' # ropenblas()
@@ -517,12 +518,12 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   cat("\n")
   
   if (is.null(x)) {
-    "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} version {style_bold({download$last_version})}." %>%
+    "[{style_bold(cli::col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} version {style_bold({download$last_version})}." %>%
       glue %>%
       cat
     
   } else {
-    "[{style_bold(col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} version {style_bold({x})}." %>%
+    "[{style_bold(cli::col_green(symbol$tick))}] {style_bold(\"OpenBLAS\")} version {style_bold({x})}." %>%
       glue %>%
       cat
   }
@@ -618,7 +619,6 @@ last_version_r <- function(major = NULL) {
 
 #' @importFrom utils untar
 #' @importFrom glue glue
-#' @importFrom cli style_bold symbol
 download_r <- function(x) {
   if (dir.exists("/tmp/r"))
     "/tmp/r" %>% unlink(recursive = TRUE)
@@ -651,6 +651,7 @@ download_r <- function(x) {
   }
 }
 
+#' @importFrom cli style_bold symbol
 attention <- function(x) {
   cat("\n")
   
@@ -682,6 +683,7 @@ attention <- function(x) {
 
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
+#' @importFrom cli col_green style_bold style_underline
 change_r <- function (x, change = TRUE, key_root) {
   exist_version_r <- "/opt/R/{x}" %>%
     glue %>%
@@ -713,7 +715,7 @@ change_r <- function (x, change = TRUE, key_root) {
   
   cat("\n")
   
-  "[{style_bold(col_green(symbol$tick))}] {style_underline(style_bold(\"R\"))} version {style_underline(style_bold({x}))}." %>%
+  "[{style_bold(cli::col_green(symbol$tick))}] {style_underline(style_bold(\"R\"))} version {style_underline(style_bold({x}))}." %>%
     glue %>%
     cat
   
@@ -756,6 +758,7 @@ fix_openblas_link <- function(restart_r = FALSE, key_root) {
 #' @importFrom stringr str_extract
 #' @importFrom withr with_dir
 #' @importFrom rlang env exec
+#' @importFrom cli col_blue col_green style_underline style_bold symbol
 compiler_r <- function(r_version = NULL,
                        with_blas = NULL,
                        complementary_flags = NULL,
@@ -874,7 +877,7 @@ compiler_r <- function(r_version = NULL,
   
   cat("\n")
   
-  "[{style_bold(col_green(symbol$tick))}] {style_underline(style_bold(\"R\"))} version {style_underline(style_bold({r_version}))}." %>%
+  "[{style_bold(cli::col_green(symbol$tick))}] {style_underline(style_bold(\"R\"))} version {style_underline(style_bold({r_version}))}." %>%
     glue %>%
     cat
   
@@ -889,6 +892,7 @@ compiler_r <- function(r_version = NULL,
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom getPass getPass
+#' @importFrom cli col_blue col_red symbol
 #' @title Compile a version of \R on GNU/Linux systems
 #' @description This function is responsible for compiling a version of the \R language.
 #' @param x Version of \R you want to compile. By default (\code{x = NULL}) will be compiled the latest stable version of the \R
@@ -985,7 +989,7 @@ rcompiler <- function(x = NULL,
 
 #' @importFrom magrittr "%>%"
 #' @importFrom glue glue
-#' @importFrom cli style_bold style_underline symbol
+#' @importFrom cli style_bold style_underline symbol col_green col_blue
 #' @title Linking the OpenBLAS library with \R again
 #' @description The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
 #' of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
@@ -1049,11 +1053,11 @@ link_again <- function(restart_r = TRUE) {
       cat("\n")
       
       if (restart_r) {
-        "[{style_bold(col_green(symbol$tick))}] {style_underline(style_bold(\"OpenBLAS\"))}." %>%
+        "[{style_bold(cli::col_green(symbol$tick))}] {style_underline(style_bold(\"OpenBLAS\"))}." %>%
           glue %>%
           cat
       } else {
-        "[{style_bold(col_green(symbol$tick))}] {style_underline(style_bold(\"OpenBLAS\"))} will be used in the next section." %>%
+        "[{style_bold(cli::col_green(symbol$tick))}] {style_underline(style_bold(\"OpenBLAS\"))} will be used in the next section." %>%
           glue %>%
           cat
       }

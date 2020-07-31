@@ -1,6 +1,12 @@
-# ropenblas 0.2.8 (development version)
+# ropenblas 0.2.9 (development version)
 
-* Code review.
+* Code review;
+
+# ropenblas 0.2.8
+
+* Code review;
+
+* Bug fix in submission 0.2.7. Package not imported in **DESCRIPTION** file.
 
 # ropenblas 0.2.7
 
