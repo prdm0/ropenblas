@@ -56,17 +56,17 @@ library(ropenblas)
 
 ### 'ropenblas' function:
 
-Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.9** library to the [**R**](https://www.r-project.org/) language:
+Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.10** library to the [**R**](https://www.r-project.org/) language:
 
 ```
-ropenblas(x = "0.3.9")
+ropenblas(x = "0.3.10")
 ```
 
 **Notes**: 
 
    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections.
 
-   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 0.3.8 and 0.3.9. These are the values that will be passed to `x` in `ropenblas(x)`; 
+   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 0.3.8, 0.3.9, and 0.3.10. These are the values that will be passed to `x` in `ropenblas(x)`; 
    
    - If `x = NULL`, the latest stable version of the [**OpenBLAS**](https://www.openblas.net/) library will be compiled and linked to [**R**](https://www.r-project.org/).
   
@@ -95,13 +95,13 @@ Given the higher version, the function will return the latest stable version of 
 ```
 > last_version_r()
 $last_version
-[1] "4.0.0"
+[1] "4.0.2"
 
 $versions
-[1] "4.0.0"
+[1] "4.0.0" "4.0.1" "4.0.2"
 
 $n
-[1] 1
+[1] 3
 ```
 
 or
@@ -121,7 +121,6 @@ $n
 [1] 32
 ```
 
-
 **Note**: If `major = NULL`, the function will consider the major release number.
 
 ### 'last_version_openblas' function:
@@ -131,24 +130,22 @@ The `last_version_openblas()` function automatically searches [**OpenBLAS**](htt
 ```
 > last_version_openblas()
 $last_version
-[1] "0.3.9"
+[1] "0.3.10"
 
 $versions
- [1] "0.1.0"       "0.1.1"       "0.1alpha1"   "0.1alpha2"   "0.1alpha2.1" "0.1alpha2.2" "0.1alpha2.3"
- [8] "0.1alpha2.4" "0.1alpha2.5" "0.2.0"       "0.2.1"       "0.2.10"      "0.2.10.rc1"  "0.2.10.rc2" 
-[15] "0.2.11"      "0.2.12"      "0.2.13"      "0.2.14"      "0.2.15"      "0.2.16"      "0.2.16.rc1" 
-[22] "0.2.17"      "0.2.18"      "0.2.19"      "0.2.2"       "0.2.20"      "0.2.3"       "0.2.4"      
-[29] "0.2.5"       "0.2.6"       "0.2.7"       "0.2.8"       "0.2.9"       "0.2.9.rc1"   "0.2.9.rc2"  
-[36] "0.3.0"       "0.3.1"       "0.3.2"       "0.3.3"       "0.3.4"       "0.3.5"       "0.3.6"      
-[43] "0.3.7"       "0.3.8"       "0.3.9"      
+ [1] "0.1alpha1"   "0.1alpha2"   "0.1alpha2.1" "0.1alpha2.2" "0.1alpha2.3" "0.1alpha2.4" "0.1alpha2.5" "0.1.0"       "0.1.1"       "0.2.0"      
+[11] "0.2.1"       "0.2.2"       "0.2.3"       "0.2.4"       "0.2.5"       "0.2.6"       "0.2.7"       "0.2.8"       "0.2.9"       "0.2.9.rc1"  
+[21] "0.2.9.rc2"   "0.2.10"      "0.2.10.rc1"  "0.2.10.rc2"  "0.2.11"      "0.2.12"      "0.2.13"      "0.2.14"      "0.2.15"      "0.2.16"     
+[31] "0.2.16.rc1"  "0.2.17"      "0.2.18"      "0.2.19"      "0.2.20"      "0.3.0"       "0.3.1"       "0.3.2"       "0.3.3"       "0.3.4"      
+[41] "0.3.5"       "0.3.6"       "0.3.7"       "0.3.8"       "0.3.9"       "0.3.10"     
 
 $n
-[1] 45
+[1] 46
 ```
 
 ### 'rcompiler' function:
 
-This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "4.0.0"` will compile and link **R-4.0.0** version  as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/).
+This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "4.0.0"` will compile and link **R-4.0.0** version as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/).
 
 For example, to compile the latest stable version of the [**R**](https://www.r-project.org/) language, do:
 
