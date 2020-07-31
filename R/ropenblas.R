@@ -1073,7 +1073,12 @@ link_again <- function(restart_r = TRUE) {
 #' starting httpd help server ... done
 #' Error in browseURL(url) : 'browser' must be a non-empty character string
 #' ```
-rnews <- function() {
-  "xdg-open https://cran.r-project.org/doc/manuals/r-release/NEWS.html" %>%
+#' @export
+rnews <- function(pdf = FALSE) {
+  
+  extension <- ifelse(pdf, "html", "pdf")
+  
+  "xdg-open https://cran.r-project.org/doc/manuals/r-release/NEWS.{extension}" %>%
+    glue %>% 
     system
 }
