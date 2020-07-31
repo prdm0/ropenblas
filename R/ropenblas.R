@@ -1078,7 +1078,12 @@ link_again <- function(restart_r = TRUE) {
 #' @export
 rnews <- function(pdf = FALSE) {
   
-  extension <- ifelse(pdf, "pdf", "html")
+  extension <- 
+    ifelse(
+      pdf,
+      "pdf",
+      "html"
+    )
   
   "https://cran.r-project.org/doc/manuals/r-release/NEWS.{extension}" %>%
     glue %>% 
