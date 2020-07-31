@@ -1062,6 +1062,7 @@ link_again <- function(restart_r = TRUE) {
   }
 }
 
+#' @importFrom fs file_show
 #' @title R News file
 #' @description Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{\strong{NEWS.html}} file in the standard browser installed on the operating system.
 #' @details The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{\strong{NEWS.html}} file contains the main changes from the recently released versions of the \R language. 
