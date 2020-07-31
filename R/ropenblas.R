@@ -1065,6 +1065,7 @@ link_again <- function(restart_r = TRUE) {
 #' @importFrom fs file_show
 #' @title R News file
 #' @description Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{\strong{NEWS.html}} file in the standard browser installed on the operating system.
+#' @param  pdf If `FALSE` (default), the NEWS.html file will open in the browser, otherwise NEWS.pdf will be opened.
 #' @details The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{\strong{NEWS.html}} file contains the main changes from the recently released versions of the \R language. 
 #' The goal is to facilitate the query by invoking it directly from the \R command prompt. The `rnews()` function is 
 #' analogous to the `news()` function of the **utils** package. However, using the `news()` command in a terminal style 
@@ -1077,9 +1078,9 @@ link_again <- function(restart_r = TRUE) {
 #' @export
 rnews <- function(pdf = FALSE) {
   
-  extension <- ifelse(pdf, "html", "pdf")
+  extension <- ifelse(pdf, "pdf", "html")
   
-  "xdg-open https://cran.r-project.org/doc/manuals/r-release/NEWS.{extension}" %>%
+  "https://cran.r-project.org/doc/manuals/r-release/NEWS.{extension}" %>%
     glue %>% 
-    system
+    file_show
 }
