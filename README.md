@@ -201,7 +201,7 @@ function `link_again` may be useful.
 
 ### 'rnews' function:
 
-Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file in the standard browser installed on the operating system. The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file contains the main changes from the recently released versions of the [**R**](https://www.r-project.org/) language. The goal is to facilitate the query by invoking it directly from the [**R**](https://www.r-project.org/) command prompt. The rnews function is analogous to the news function of the utils package. However, using the news command in a terminal style bash shell is possible to receive a message like:
+Returns the contents of the [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html) file in the standard browser installed on the operating system. The [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html) file contains the main changes from the recently released versions of the [**R**](https://www.r-project.org/) language. The goal is to facilitate the query by invoking it directly from the [**R**](https://www.r-project.org/) command prompt. The rnews function is analogous to the news function of the utils package. However, using the news command in a terminal style bash shell is possible to receive a message like:
 
 ```
 > news()
@@ -209,7 +209,7 @@ starting httpd help server ... done
 Error in browseURL(url) : 'browser' must be a non-empty character string
 ```
 
-If `pdf = FALSE` (default), the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file will open in the browser, otherwise \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf}{NEWS.pdf} will be opened. If `dev = FALSE` (default), it will not show changes made to the language development version. To see changes in the development version, do `dev = TRUE`.
+If `pdf = FALSE` (default), the [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html) file will open in the browser, otherwise [**NEWS.pdf**](https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf) will be opened. If `dev = FALSE` (default), it will not show changes made to the language development version. To see changes in the development version, do `dev = TRUE`.
 
 ## Advantages of using ropenblas package:
 
