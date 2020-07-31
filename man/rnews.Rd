@@ -7,11 +7,11 @@
 rnews(pdf = FALSE, dev = FALSE)
 }
 \arguments{
-\item{pdf}{If \code{FALSE} (default), the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file will open in the browser,}
+\item{pdf}{If \code{FALSE} (default), the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file will open in the browser, otherwise
+\href{https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf}{NEWS.pdf} will be opened.}
 
 \item{dev}{If \code{FALSE} (default), it will not show changes made to the language development version.
-To see changes in the development version, do \code{dev = TRUE}.
-otherwise \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf}{NEWS.pdf} will be opened.}
+To see changes in the development version, do \code{dev = TRUE}.}
 }
 \description{
 Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file in the standard browser installed on the operating system.
@@ -20,7 +20,7 @@ Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-relea
 The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file contains the main changes from the recently released versions of the \R language.
 The goal is to facilitate the query by invoking it directly from the \R command prompt. The \link{rnews} function is
 analogous to the \link{news} function of the \strong{utils} package. However, using the \link{news} command in a terminal style
-bash shell is possible to receive a message like:\preformatted{> news()
+bash shell is possible to receive a message like:\preformatted{news()
 starting httpd help server ... done
 Error in browseURL(url) : 'browser' must be a non-empty character string
 }

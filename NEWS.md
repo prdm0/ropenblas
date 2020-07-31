@@ -6,7 +6,7 @@
 
 * Code review;
 
-* Bug fix in submission 0.2.7. Package not imported in **DESCRIPTION** file.
+* Bug fix in submission **0.2.7**. Function not imported in the **NAMESPACE** file.
 
 # ropenblas 0.2.7
 

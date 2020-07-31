@@ -135,13 +135,13 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pdf</th>
-      <td><p>If <code>FALSE</code> (default), the <a href='https://cran.r-project.org/doc/manuals/r-release/NEWS.html'>NEWS.html</a> file will open in the browser,</p></td>
+      <td><p>If <code>FALSE</code> (default), the <a href='https://cran.r-project.org/doc/manuals/r-release/NEWS.html'>NEWS.html</a> file will open in the browser, otherwise
+<a href='https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf'>NEWS.pdf</a> will be opened.</p></td>
     </tr>
     <tr>
       <th>dev</th>
       <td><p>If <code>FALSE</code> (default), it will not show changes made to the language development version.
-To see changes in the development version, do <code>dev = TRUE</code>.
-otherwise <a href='https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf'>NEWS.pdf</a> will be opened.</p></td>
+To see changes in the development version, do <code>dev = TRUE</code>.</p></td>
     </tr>
     </table>
 
@@ -150,7 +150,7 @@ otherwise <a href='https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf'>NE
     <p>The <a href='https://cran.r-project.org/doc/manuals/r-release/NEWS.html'>NEWS.html</a> file contains the main changes from the recently released versions of the <span style="R">R</span> language.
 The goal is to facilitate the query by invoking it directly from the <span style="R">R</span> command prompt. The rnews function is
 analogous to the <a href='https://rdrr.io/r/utils/news.html'>news</a> function of the <strong>utils</strong> package. However, using the <a href='https://rdrr.io/r/utils/news.html'>news</a> command in a terminal style
-bash shell is possible to receive a message like:</p><pre>&amp;gt; news()
+bash shell is possible to receive a message like:</p><pre>news()
 starting httpd help server ... done
 Error in browseURL(url) : 'browser' must be a non-empty character string
 </pre>

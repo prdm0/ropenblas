@@ -1069,16 +1069,16 @@ link_again <- function(restart_r = TRUE) {
 #' @importFrom fs file_show
 #' @title R News file
 #' @description Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file in the standard browser installed on the operating system.
-#' @param pdf If `FALSE` (default), the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file will open in the browser, 
+#' @param pdf If `FALSE` (default), the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file will open in the browser, otherwise
+#' \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf}{NEWS.pdf} will be opened.
 #' @param dev If `FALSE` (default), it will not show changes made to the language development version. 
 #' To see changes in the development version, do `dev = TRUE`.
-#' otherwise \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf}{NEWS.pdf} will be opened.
 #' @details The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file contains the main changes from the recently released versions of the \R language. 
 #' The goal is to facilitate the query by invoking it directly from the \R command prompt. The \link{rnews} function is 
 #' analogous to the \link{news} function of the **utils** package. However, using the \link{news} command in a terminal style 
 #' bash shell is possible to receive a message like:
 #' ```  
-#' > news()
+#' news()
 #' starting httpd help server ... done
 #' Error in browseURL(url) : 'browser' must be a non-empty character string
 #' ```
