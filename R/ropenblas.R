@@ -488,7 +488,7 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
     "[{style_bold(symbol$cross)}] Some error has occurred. No changes have been made." %>%
       glue %>%
       warning %>%
-      return
+      return()
     
   }
   
