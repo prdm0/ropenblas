@@ -4,3 +4,7 @@
 docs
 pkgdown
 logo.png
+^docs$
+^pkgdown$
+^logo\.png$
+^ropenblas\.Rproj$
