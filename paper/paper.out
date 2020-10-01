@@ -1,0 +1,13 @@
+\BOOKMARK [1][-]{section*.1}{Summary}{}% 1
+\BOOKMARK [1][-]{section*.2}{Introduction}{}% 2
+\BOOKMARK [1][-]{section*.3}{General\040package\040information}{}% 3
+\BOOKMARK [1][-]{section*.5}{Dependencies}{}% 4
+\BOOKMARK [1][-]{section*.6}{Installation}{}% 5
+\BOOKMARK [1][-]{section*.7}{Exported\040functions\040and\040usage}{}% 6
+\BOOKMARK [2][-]{subsection*.8}{`last_version_r'\040function}{section*.7}% 7
+\BOOKMARK [2][-]{subsection*.9}{`last_version_openblas'\040function}{section*.7}% 8
+\BOOKMARK [2][-]{subsection*.10}{`rcompiler'\040function}{section*.7}% 9
+\BOOKMARK [2][-]{subsection*.14}{`ropenblas'\040function}{section*.7}% 10
+\BOOKMARK [2][-]{subsection*.17}{`link_again'\040function}{section*.7}% 11
+\BOOKMARK [2][-]{subsection*.20}{`rnews\040function'}{section*.7}% 12
+\BOOKMARK [1][-]{subsection*.20}{References}{}% 13
