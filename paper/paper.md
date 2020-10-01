@@ -3,10 +3,10 @@
 title: 'ropenblas: Download, Compile and Link OpenBLAS Library with R'
 tags:
   - R
-  - BLAS
-  - Compiling R
-  - Compiling OpenBLAS
+  - Compiling R and OpenBLAS
   - Link OpenBLAS
+  - Switch between versions of R
+  - Fast algebraic computing
 authors:
   - name: Pedro Rafael Diniz Marinho
     orcid: 0000-0003-1591-8300
@@ -33,7 +33,7 @@ The `ropenblas` package aims to facilitate the daily life of R programmers on GN
 
 # Statement of Need
 
-The `ropenblas` package aims to allow algebraic computing of R to be performed using the OpenBLAS library, that is, it allows easy linking of R to the OpenBLAS library on GNU / Linux systems without depending on the distribution repositories. This will allow several researches in the areas of statistics, data science and machine learning to take advantage of a more efficient performance in algebraic calculations, for example, multiplication, factorization and matrix inversion. The `ropenblas` library, version 0.2.8 will also allow the R programmer to have, in his GNU / Linux distribution, several compiled versions of the R language giving the possibility to easily switch between these versions, this being an Open Source functionality that is only possible in some commercial IDEs of R. All this is done within the R language, minimizing the chance of less experienced users to break their operating system by running several instructions that are not perfectly understood.
+The `ropenblas` package aims to allow algebraic computing of R to be performed using the OpenBLAS library, that is, it allows easy linking of R to the OpenBLAS library on GNU/Linux systems without depending on the distribution repositories. This will allow several researches in the areas of statistics, data science and machine learning to take advantage of a more efficient performance in algebraic calculations, for example, multiplication, factorization and matrix inversion. The `ropenblas` library, version 0.2.8 will also allow the R programmer to have, in his GNU/Linux distribution, several compiled versions of the R language giving the possibility to easily switch between these versions, this being an Open Source functionality that is only possible in some commercial IDEs of R. All this is done within the R language, minimizing the chance of less experienced users to break their operating system by running several instructions that are not perfectly understood.
 
 The fact that the `ropenblas` package does not depend on the repositories of the GNU/Linux distribution will allow that in more stable distributions the R programmer will have at his disposal the most recent version of the OpenBLAS libraries and the R language. Everything is done in a safe way, a since the `ropenblas` package uses the stable versions of the official development repositories of the OpenBLAS library and the R programming language, respectively. Until the present version, the package has more than 6600 downloads, having an average of more than 820 downloads in the month prior to the date of this submission, based on the official R language repositories.
 
