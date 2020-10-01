@@ -273,7 +273,6 @@ The `ropenblas()` function is made up of two arguments. Are they:
 
   - `x`: String with the version of the OpenBLAS library to be compiled, installed and linked with the main R installation;
   - `restart_r`: Logical value (default `restart_r = TRUE`) to update the R section after compiling, installing and linking the OpenBLAS library.
-\end{itemize}
 
 By default, if `x = NULL` the latest version of the OpenBLAS library will be considered. This is equivalent to passing `last_version_openblas()$last_version` to `x`. There are no great reasons to consider an older version of the OpenBLAS library, although the `ropenblas` package will allow this to be done in a simple way, as in the following example: 
 
