@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.10.1)  1 OCT 2020 19:58
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.10.1)  1 OCT 2020 20:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1083,85 +1083,53 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
 [2]
-File: logo_ropenblas.png Graphic file (type bmp)
-<logo_ropenblas.png>
 File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 /joss/resources/JOSS-logo.png Graphic file (type bmp)
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
 [3]
-Underfull \hbox (badness 1152) in paragraph at lines 494--502
+Underfull \hbox (badness 1152) in paragraph at lines 473--481
 \TU/lmr/m/n/10 The \TU/lmtt/m/n/10 ropenblas \TU/lmr/m/n/10 package can be inst
 alled in two ways. The first is using the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 510--513
+Underfull \hbox (badness 10000) in paragraph at lines 489--492
 []\TU/lmtt/m/n/10 devtools::install_github(repo = "prdm0/ropenblas, ref = "mast
 er",
  []
 
 
-Underfull \hbox (badness 2809) in paragraph at lines 519--533
+Underfull \hbox (badness 2809) in paragraph at lines 498--512
 \TU/lmtt/m/n/10 ropenblas()\TU/lmr/m/n/10 , \TU/lmtt/m/n/10 last_version_r()\TU
 /lmr/m/n/10 , \TU/lmtt/m/n/10 last_version_openblas()\TU/lmr/m/n/10 , \TU/lmtt/
 m/n/10 link_again() \TU/lmr/m/n/10 and
  []
 
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 534.
 File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 /joss/resources/JOSS-logo.png Graphic file (type bmp)
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
 [4]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 555.
-File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
-/joss/resources/JOSS-logo.png Graphic file (type bmp)
-</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
-/resources/JOSS-logo.png>
-[5]
-Overfull \hbox (16.91139pt too wide) in paragraph at lines 651--651
-[]\TU/lmtt/m/n/10 ##  [1] "0.1alpha1"   "0.1alpha2"   "0.1alpha2.1" "0.1alpha2.
-2" "0.1alpha2.3"[] 
- []
-
-
-Overfull \hbox (6.41139pt too wide) in paragraph at lines 654--654
-[]\TU/lmtt/m/n/10 ## [16] "0.2.6"       "0.2.7"       "0.2.8"       "0.2.9"    
-   "0.2.9.rc1"[] 
- []
-
-File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
-/joss/resources/JOSS-logo.png Graphic file (type bmp)
-</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
-/resources/JOSS-logo.png>
-[6]
 File: root.png Graphic file (type bmp)
 <root.png>
 File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 /joss/resources/JOSS-logo.png Graphic file (type bmp)
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
+[5]
+File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
+/joss/resources/JOSS-logo.png Graphic file (type bmp)
+</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
+/resources/JOSS-logo.png>
+[6]
+File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
+/joss/resources/JOSS-logo.png Graphic file (type bmp)
+</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
+/resources/JOSS-logo.png>
 [7]
-File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
-/joss/resources/JOSS-logo.png Graphic file (type bmp)
-</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
-/resources/JOSS-logo.png>
-[8]
-File: linkar_again.png Graphic file (type bmp)
-<linkar_again.png>
-File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
-/joss/resources/JOSS-logo.png Graphic file (type bmp)
-</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
-/resources/JOSS-logo.png>
-[9]
-File: attention.png Graphic file (type bmp)
-<attention.png>
-File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
-/joss/resources/JOSS-logo.png Graphic file (type bmp)
-</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
-/resources/JOSS-logo.png>
-[10]
 File: ropenblas_01.png Graphic file (type bmp)
 <ropenblas_01.png>
 File: ropenblas_02.png Graphic file (type bmp)
@@ -1170,13 +1138,11 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 /joss/resources/JOSS-logo.png Graphic file (type bmp)
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
-[11]
+[8]
 File: link_again_01.png Graphic file (type bmp)
 <link_again_01.png>
-File: link_again_02.png Graphic file (type bmp)
-<link_again_02.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1127--1131
+Underfull \hbox (badness 10000) in paragraph at lines 907--911
 \TU/lmr/m/n/10 Retrieved from [][]$[][][][][] [] [] [] [][][] [] [][][][] [] []
 [][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][] [] [][][][][
 ][][][][][][][][][] []
@@ -1186,31 +1152,25 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 /joss/resources/JOSS-logo.png Graphic file (type bmp)
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
-[12]
-File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
-/joss/resources/JOSS-logo.png Graphic file (type bmp)
-</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
-/resources/JOSS-logo.png>
-[13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1142.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1142.
+[9]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 922.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 922.
 (./paper.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1142.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1142.
-
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 922.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 922.
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 22F4F740E4CD56D0BB72CB46AE8C3629;894.
+(rerunfilecheck)             Checksum: 08AB4B0A83359960FB8390FC50B1DC28;893.
 Package logreq Info: Writing requests to 'paper.run.xml'.
 \openout1 = `paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34334 strings out of 481657
- 685183 string characters out of 5932320
- 1401480 words of memory out of 5000000
- 50936 multiletter control sequences out of 15000+600000
+ 34290 strings out of 481657
+ 684427 string characters out of 5932320
+ 1401056 words of memory out of 5000000
+ 50892 multiletter control sequences out of 15000+600000
  541960 words of font info for 77 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  60i,12n,75p,791b,800s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paper.pdf (13 pages).
+Output written on paper.pdf (9 pages).
