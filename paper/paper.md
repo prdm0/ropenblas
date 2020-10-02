@@ -15,7 +15,7 @@ affiliations:
  - name: Department of Statistics, Federal University of Paraíba, João Pessoa, Paraíba - PB, Brazil
    index: 1
 citation_author: Marinho
-date: "2020-10-01"
+date: "2020-10-02"
 year: "2020"
 bibliography: paper.bib
 output: rticles::joss_article
@@ -47,15 +47,15 @@ The `ropenblas` package aims to provide useful and simple experiences to R [@R] 
 
 Linking the R language to the OpenBLAS library can bring several benefits to algebraic computing in R. OpenBLAS is an Open-Source implementation of the Basic Linear Algebra Subprograms - BLAS library that is often the first library option for algebraic computing to be linked in the installation of R on many GNU/Linux distributions. The OpenBLAS library is available at <https://github.com/xianyi/OpenBLAS> and adds optimized implementations of linear algebra kernels that can run optimized on various processor architectures. OpenBLAS is based on the GotoBLAS2 project code in version 1.13 [@gotoblas2], code available under the terms of the BSD license.
 
-The functions of the `ropenblas` package can help the R language user to make this link without leaving the R promprt, as well as allowing the user to choose the version of OpenBLAS to be considered, the last stable version being considered by default . Everything is accomplished by functions without many arguments and without major complications to be used. These functions can be very comforting for users of R on GNU/Linux systems who do not feel safe to run several codes in a terminal that runs Shell Script codes for the language configuration.
+<!-- The functions of the `ropenblas` package can help the R language user to make this link without leaving the R promprt, as well as allowing the user to choose the version of OpenBLAS to be considered, the last stable version being considered by default . Everything is accomplished by functions without many arguments and without major complications to be used. These functions can be very comforting for users of R on GNU/Linux systems who do not feel safe to run several codes in a terminal that runs Shell Script codes for the language configuration. -->
 
-It is very common to see users of R in distributions with repositories not prone to immediate updates of programs using several tutorials found in communities on the internet suggesting several lines of code and steps that can be potentially dangerous or easy to be misunderstood by many users of R language. Being able to compile, enable resources if necessary and switch between versions of R using simple functions to be used and without leaving the command pompt of the R language is attractive.
+<!-- It is very common to see users of R in distributions with repositories not prone to immediate updates of programs using several tutorials found in communities on the internet suggesting several lines of code and steps that can be potentially dangerous or easy to be misunderstood by many users of R language. Being able to compile, enable resources if necessary and switch between versions of R using simple functions to be used and without leaving the command pompt of the R language is attractive. -->
 
-# General package information
+<!-- # General package information -->
 
-The `ropenblas` is a package designed to facilitate the linking of the library OpenBLAS with the language R. The package, which works only for Linux systems, will automatically download the latest source code from the OpenBLAS library and compile the code. The package will automatically bind the language R, through the `ropenblas()` function, to use the OpenBLAS library. Everything will be done automatically regardless of the Linux distribution you are using.
+The `ropenblas` is a package designed to facilitate the linking of the library OpenBLAS with the language R. The package, which works only for Linux systems, will automatically download the latest source code from the OpenBLAS library and compile the code. The package will automatically bind the language R, through the `ropenblas()` function, to use the OpenBLAS library. Everything will be done automatically regardless of the Linux distribution you are using. Enumerating some advantages of the package:
 
-The `ropenblas` package is already available on the Comprehensive R Archive Network - CRAN, currently in version 0.2.8 and the project is maintained on GitHub at  <https://github.com/prdm0/ropenblas> where contributors can find others details of the code, information, as well as being able to contribute with the development of the project. Information can also be found on the project website. On the website it is also possible to read the `NEWS.md` file with details of the versions and the focus of the current development. The site is deposited at <https://prdm0.github.io/ropenblas/>. Suggestions for improvements and bug reports can be sent via the link <https://github.com/prdm0/ropenblas/issues>.
+<!-- The `ropenblas` package is already available on the Comprehensive R Archive Network - CRAN, currently in version 0.2.8 and the project is maintained on GitHub at  <https://github.com/prdm0/ropenblas> where contributors can find others details of the code, information, as well as being able to contribute with the development of the project. Information can also be found on the project website. On the website it is also possible to read the `NEWS.md` file with details of the versions and the focus of the current development. The site is deposited at <https://prdm0.github.io/ropenblas/>. Suggestions for improvements and bug reports can be sent via the link <https://github.com/prdm0/ropenblas/issues>. -->
 
 
 <!-- ```{r logo, echo = FALSE, message = FALSE, fig.cap = "Computer library logo.", fig.align = "center", out.width="30%"} -->
@@ -63,15 +63,15 @@ The `ropenblas` package is already available on the Comprehensive R Archive Netw
 <!-- ``` -->
 
 
-You can also specify older versions of the OpenBLAS library. Automatically, if no version is specified, the `ropenblas` package will consider the latest version of the library OpenBLAS.
+<!-- You can also specify older versions of the OpenBLAS library. Automatically, if no version is specified, the `ropenblas` package will consider the latest version of the library OpenBLAS.  -->
 
-Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS.
+<!-- Considering using the OpenBLAS library rather than the BLAS may bring extra optimizations for your code and improved computational performance for your simulations, since OpenBLAS is an optimized implementation of the library BLAS. -->
 
-Some of the reasons why it is convenient to link R language to the use of BLAS optimized alternatives can be found here. Several other benchmarks that point to improved computing performance by considering the library OpenBLAS can be found on the internet.
+<!-- Some of the reasons why it is convenient to link R language to the use of BLAS optimized alternatives can be found here. Several other benchmarks that point to improved computing performance by considering the library OpenBLAS can be found on the internet. -->
 
-The `ropenblas` package, by `rcompiler()` function is also useful if you want to install different versions of the R language. The different versions, specified by the user of the R language, will be compiled and will also be linked to the OpenBLAS library. If you want to switch between compiled versions of the R language, no compilation is needed anymore. This allows you to avoid having to get your hands dirty with tedious operating system settings, regardless of your GNU/Linux distribution. Another great use of the `rcompiler()` function is that you will not be dependent on updating your GNU/Linux distribution repositories and you can always have the latest version of the R language.
+<!-- The `ropenblas` package, by `rcompiler()` function is also useful if you want to install different versions of the R language. The different versions, specified by the user of the R language, will be compiled and will also be linked to the OpenBLAS library. If you want to switch between compiled versions of the R language, no compilation is needed anymore. This allows you to avoid having to get your hands dirty with tedious operating system settings, regardless of your GNU/Linux distribution. Another great use of the `rcompiler()` function is that you will not be dependent on updating your GNU/Linux distribution repositories and you can always have the latest version of the R language. -->
 
-The use of the `ropenblas` package will return warnings that help you proceed with the use of the functions. If your internet is not working or if any dependency on the operating system is not present, the package will let you know. Enumerating some advantages of the package:
+<!-- The use of the `ropenblas` package will return warnings that help you proceed with the use of the functions. If your internet is not working or if any dependency on the operating system is not present, the package will let you know. -->
 
   1. Everything is done within the R language;
   2. The procedure (use of functions) will be the same for any Linux distribution;
@@ -82,54 +82,50 @@ The use of the `ropenblas` package will return warnings that help you proceed wi
   7. If any errors occur, the functions of the package will not damage the previous installation of the language;
   8. If something better can be done or if a newer version of what you want to install (R or OpenBLAS) exists, the functions will automatically suggest that you consider installing newer versions.
 
-# Dependencies
+<!-- # Dependencies -->
 
-In addition to dependencies in the form of other packages deposited with CRAN, the `ropenblas` package depends on external dependencies that are normally installed or are easily installed on any GNU/Linux distribution. Are they:
+<!-- In addition to dependencies in the form of other packages deposited with CRAN, the `ropenblas` package depends on external dependencies that are normally installed or are easily installed on any GNU/Linux distribution. Are they: -->
 
 
-  1. **GNU Make**: GNU Make utility to maintain groups of programs; 
-  2. **GNU GCC Compiler (C and Fortran)**: The GNU Compiler Collection - C and Fortran frontends.
+<!--   1. **GNU Make**: GNU Make utility to maintain groups of programs;  -->
+<!--   2. **GNU GCC Compiler (C and Fortran)**: The GNU Compiler Collection - C and Fortran frontends. -->
 
 
 <!-- These programs that are described in `SystemRequirements` in the package's `DESCRIPTION` file are essential for compiling the OpenBLAS library and the R language. The functions of the `ropenblas` package are designed to identify the lack of these dependencies external to CRAN, informing the package user which dependencies are missing and suggesting that they should be installed. The other dependencies indexed to CRAN are described in `Imports` in the file  `DESCRIPTION`. These will be installed automatically. -->
 
 <!-- Other warnings can also be suggested, such as, for example, a problem with the internet connection. All warnings are given very clearly so that the user has no doubts about the problem that may be occurring. -->
 
-# Installation
+# Brief explanation
 
-The `ropenblas` package can be installed in two ways. The first is using the `install.packages()` function of the `utils` package which is available in any basic language installation and the second is using the `devtools` package which will allow the package to be installed directly from the development directory on GitHub. All code kept in the master branch of the package project on GitHub can be installed, since there will only be codes that are working properly and ready to use. The two forms of installation follow:
+<!-- # Installation -->
+
+The `ropenblas` package can be installed in two ways. The first is using the `install.packages()` function of the `utils` package which is available in any basic language installation and the second is using the `devtools` package which will allow the package to be installed directly from the development directory on GitHub. 
+
+<!-- All code kept in the master branch of the package project on GitHub can be installed, since there will only be codes that are working properly and ready to use. The two forms of installation follow: -->
 
 
-  1. `install.packages("ropenblas")`: for installing the package available at CRAN;
-  2. `devtools::install_github(repo = "prdm0/ropenblas, ref = "master", force = TRUE)`: for installing the package from the project development directory on GitHub.
+<!--   1. `install.packages("ropenblas")`: for installing the package available at CRAN; -->
+<!--   2. `devtools::install_github(repo = "prdm0/ropenblas, ref = "master", force = TRUE)`: for installing the package from the project development directory on GitHub. -->
 
-# Exported functions and usage
+<!-- # Exported functions and usage -->
 
 The `ropenblas` library exports six functions for use which are the `rcompiler()`,  `ropenblas()`,  `last_version_r()`, `last_version_openblas()`, `link_again()` and `rnews()`. All of them are very simple to use and have few arguments that are sufficient to maintain flexibility of use. Any example that follows will consider that the installation of the `ropenblas` package has been carried out and the package has been loaded (`library(ropenblas)`). In addition, functions like `rcompiler()` and `ropenblas()` do not return content or data structures that are of any practical use. What these functions do is configure the GNU/Linux system to use R, configure different versions of the language, switch between versions and link with the OpenBLAS library. It is also possible to obtain a summary of the versions of R and the OpenBLAS library that are available.
 
-The following subsections are intended to explain and exemplify the use of these functions focused on the main problems that can be solved using the `ropenblas` package. Some functions may take a few minutes to run, as they are responsible for compiling code that is considerably larges and complicateds. This is the case with the `rcompiler()` and  `ropenblas()` functions.
+<!-- The following subsections are intended to explain and exemplify the use of these functions focused on the main problems that can be solved using the `ropenblas` package. Some functions may take a few minutes to run, as they are responsible for compiling code that is considerably larges and complicateds. This is the case with the `rcompiler()` and  `ropenblas()` functions. -->
 
 ## 'last_version_r' function
 
-The function `last_version_r()` automatically searches, in the official repositories of language R, for information about versions of language R. Its general use is  `last_version_r(major = NULL)` , where the argument `major` indicates which is the largest version of R that you want to search for the version list. Therefore, for the argument `major` a number must be passed, preferably an integer that indicates which is the largest version to be considered. Consider the example:
+The function `last_version_r()` automatically searches, in the official repositories of language R, for information about versions of language R. Its general use is  `last_version_r(major = NULL)` , where the argument `major` indicates which is the largest version of R that you want to search for the version list. Therefore, for the argument `major` a number must be passed, preferably an integer that indicates which is the largest version to be considered. 
 
+<!-- Consider the example: -->
 
+<!-- ```{r packages, echo=FALSE, cache=TRUE} -->
+<!-- library("ropenblas") -->
+<!-- ``` -->
 
-
-```r
-> last_version_r(major = 4L)
-```
-
-```
-## $last_version
-## [1] "4.0.2"
-## 
-## $versions
-## [1] "4.0.0" "4.0.1" "4.0.2"
-## 
-## $n
-## [1] 3
-```
+<!-- ```{r, prompt=TRUE, dependson="ropenblas", cache=TRUE, eval=FALSE} -->
+<!-- last_version_r(major = 4L) -->
+<!-- ``` -->
 
 <!-- Note that the `last_version_r()` function returns a list of three elements, where the first element called `last_version` returns the latest version of the R language based on the argument `major`. Thus, the latest version of the R language since the largest version is $3$ is version $3.6.3$. The second element of name `versions` of the return list is a vector containing all versions of the language R for `major = 3L`. The third and last element of the return list is named `n` and returns an integer value referring to the number of versions of R given `major = 3L`. By default, the `major` argument of the `last_version_r()` function is `NULL`.  -->
 
@@ -139,11 +135,13 @@ The function `last_version_r()` automatically searches, in the official reposito
 <!-- last_version_r(major = NULL) -->
 <!-- ``` -->
 
-The function is always adapted to search for new versions and will understand the new language updates since it has been implemented in a general way. Therefore, `last_version_r(major = NULL)$last_version` will always return the latest version of R and not the latest version of R available in the repositories of your GNU/Linux distribution. Therefore, it may be that, depending on when this function is performed, different results may occur.
+<!-- The function is always adapted to search for new versions and will understand the new language updates since it has been implemented in a general way. Therefore, `last_version_r(major = NULL)$last_version` will always return the latest version of R and not the latest version of R available in the repositories of your GNU/Linux distribution. Therefore, it may be that, depending on when this function is performed, different results may occur. -->
 
 ## 'last_version_openblas' function
 
-The `last_version_openblas()` function works similarly to the `last_version_r()` function, returning a list of three elements named in the same way with the information from the latest version, all the versions and the number of versions of the OpenBLAS library, respectively. Unlike the `last_version_r()` function that searches for the versions of R on the official language website, the `last_version_openblas()` function will search for information on the OpenBLAS library versions on official language development repository on GitHub. In addition, due to the way that the versions of the OpenBLAS library are numbered, the function will always consider the universe of all versions of the OpenBLAS library, therefore, being a function without arguments. The latest version of the OpenBLAS library can be returned by doing `last_version_openblas()$last_version`. Just like the `last_version_r()` function, the `last_version_openblas()` function does not depend on which version of OpenBLAS is available in the repositories of your GNU/Linux distribution.
+The `last_version_openblas()` function works similarly to the `last_version_r()` function, returning a list of three elements named in the same way with the information from the latest version, all the versions and the number of versions of the OpenBLAS library, respectively. 
+
+<!-- Unlike the `last_version_r()` function that searches for the versions of R on the official language website, the `last_version_openblas()` function will search for information on the OpenBLAS library versions on official language development repository on GitHub. In addition, due to the way that the versions of the OpenBLAS library are numbered, the function will always consider the universe of all versions of the OpenBLAS library, therefore, being a function without arguments. The latest version of the OpenBLAS library can be returned by doing `last_version_openblas()$last_version`. Just like the `last_version_r()` function, the `last_version_openblas()` function does not depend on which version of OpenBLAS is available in the repositories of your GNU/Linux distribution. -->
 
 <!-- ```{r, dependson="ropenblas", cache=TRUE, prompt=TRUE} -->
 <!-- last_version_openblas() -->
@@ -153,88 +151,73 @@ The `last_version_openblas()` function works similarly to the `last_version_r()`
 
 This function is responsible for compiling a version of the R language. The x argument is the version of R that you want to compile. For example, `x = "4.0.2"` will compile and link R-4.0.2 version as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the R. For example, to compile the latest stable version of the R language, run `rcompiler()`. The `rcompiler()` function can only be used if the user is an administrator of the GNU/Linux distribution. If the user is using programming IDE's, a screen similar to the image below will be displayed requesting the entry of the system administrator password.
 
-\begin{figure}[H]
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.cap="Window for entering the system administration password.", out.width="55%"} -->
+<!-- knitr::include_graphics("root.png") -->
+<!-- ``` -->
 
-{\centering \includegraphics[width=0.55\linewidth]{root} 
+<!-- If the user is running the R language in a terminal of the GNU/Linux distribution, a Shell Bash type terminal, they will be asked to include the password by the terminal itself. The function will not change the operation of other programs, nor even major changes will be made in the initial version of R, just summarizing the creation of symbolic links. -->
 
-}
+<!-- The general way of using the function is given by: -->
 
-\caption{Window for entering the system administration password.}\label{fig:unnamed-chunk-2}
-\end{figure}
-
-If the user is running the R language in a terminal of the GNU/Linux distribution, a Shell Bash type terminal, they will be asked to include the password by the terminal itself. The function will not change the operation of other programs, nor even major changes will be made in the initial version of R, just summarizing the creation of symbolic links.
-
-The general way of using the function is given by:
-
-**General use**:
+<!-- **General use**: -->
 
 
 ```r
 > rcompiler(x = NULL, with_blas = NULL, complementary_flags = NULL)
 ```
 
-The function's arguments are described below:
+<!-- The function's arguments are described below: -->
 
   - `x`: String with a valid R language version. A list valid of the latest  language versions can be obtained using the `last_version_r()` function. You can move to ``x` any of the returned versions. This is the best way to choose a valid argument for `x`. By default, `x = NULL` is equivalent to pass `last_version_r()$last_version`, that is, it will be considered the last stable version of the R language;
   - `with_blas`: This argument sets the `--with-blas` flag in the R language compilation process and must be passed as a string. Details on the use of this flag can be found here;
   - `complementary_flags`: String with complementary flags to be used in the R language compilation process.
   
-If the goal is to install the R language, switch between versions of R, and link the installed versions of the language with the OpenBLAS library, you shouldn't have to worry about the `with_blas` and `complementary_flags` arguments, respectively. These arguments are useful for a minority of programmers who feel very specific needs to pass complementary flags to be considered in the R language compilation process, inclusion of complementary library directories, among other arguments that can be found in the official language manuals. By default, if nothing is passed to the `with_blas` and `complementary_flags` arguments, the compilation will be performed as follows:
+<!-- If the goal is to install the R language, switch between versions of R, and link the installed versions of the language with the OpenBLAS library, you shouldn't have to worry about the `with_blas` and `complementary_flags` arguments, respectively. These arguments are useful for a minority of programmers who feel very specific needs to pass complementary flags to be considered in the R language compilation process, inclusion of complementary library directories, among other arguments that can be found in the official language manuals. By default, if nothing is passed to the `with_blas` and `complementary_flags` arguments, the compilation will be performed as follows: -->
 
+<!-- ```{bash, eval=FALSE} -->
+<!-- ./configure --prefix=/opt/R/version_r --enable-memory-profiling  -->
+<!-- --enable-R-shlib --enable-threads=posix  -->
+<!-- --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -->
+<!-- -lpthread -lm" -->
+<!-- ``` -->
 
-```bash
-./configure --prefix=/opt/R/version_r --enable-memory-profiling 
---enable-R-shlib --enable-threads=posix 
---with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include
--lpthread -lm"
-```
+<!-- As a suggestion and if you want to use the complementary arguments, that is, use `with_blas` and `complementary_flags`, do not change the directory `include` and `lib` of the OpenBLAS library in argument `with_blas`, considering that the `rcompiler()` function will always install the OpenBLAS library in the `/opt/OpenBLAS` directory, thus avoiding problems with breaking important links on your system and in the configuration of the initial version of R. If you try to pass a different installation directory to the OpenBLAS library, the `rcompiler()` function will disregard this installation of OpenBLAS and perform a safe installation in the `/opt/OpenBLAS` directory. Everything is built in this directory and symbolic links are used so that the initial state of R configuration in the GNU/Linux distribution is not changed.  This allows no errors to be made and unforeseen bugs to occur. If there are reasons to consider complementary strings for the arguments `with_blas` and `complementary_flags`, the R language will be compiled as follows: -->
 
-As a suggestion and if you want to use the complementary arguments, that is, use `with_blas` and `complementary_flags`, do not change the directory `include` and `lib` of the OpenBLAS library in argument `with_blas`, considering that the `rcompiler()` function will always install the OpenBLAS library in the `/opt/OpenBLAS` directory, thus avoiding problems with breaking important links on your system and in the configuration of the initial version of R. If you try to pass a different installation directory to the OpenBLAS library, the `rcompiler()` function will disregard this installation of OpenBLAS and perform a safe installation in the `/opt/OpenBLAS` directory. Everything is built in this directory and symbolic links are used so that the initial state of R configuration in the GNU/Linux distribution is not changed.  This allows no errors to be made and unforeseen bugs to occur. If there are reasons to consider complementary strings for the arguments `with_blas` and `complementary_flags`, the R language will be compiled as follows:
+<!-- ```{bash, eval=FALSE} -->
+<!-- --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib -->
+<!-- --enable-threads=posix --with-blas="..." complementary_flags -->
+<!-- ``` -->
 
+<!-- The `rcompiler()` function will also avoid unnecessary compilations. Therefore, if your initial version of R is already linked to some version of the OpenBLAS library, only the R language will be compiled, with no need to compile the OpenBLAS library. Although the initial description of the `rcompiler()` function may seem a little complicated, its use is very simple. Below I will exemplify some situations in which the use of the `rcompiler()` function may be convenient. -->
 
-```bash
---prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib
---enable-threads=posix --with-blas="..." complementary_flags
-```
+<!-- **Example**: In the hypothetical situation of an R user on any GNU/Linux distribution, if are interested in knowing the latest version of the R language, installing it and linking it to the OpenBLAS library, it should proceed as follows: -->
 
-The `rcompiler()` function will also avoid unnecessary compilations. Therefore, if your initial version of R is already linked to some version of the OpenBLAS library, only the R language will be compiled, with no need to compile the OpenBLAS library. Although the initial description of the `rcompiler()` function may seem a little complicated, its use is very simple. Below I will exemplify some situations in which the use of the `rcompiler()` function may be convenient.
+<!-- ```{r, eval=FALSE, prompt=TRUE} -->
+<!-- rcompiler(x = "4.0.2") # or simply rcompiler () or rcompiler (x = NULL) -->
+<!-- ``` -->
 
-**Example**: In the hypothetical situation of an R user on any GNU/Linux distribution, if are interested in knowing the latest version of the R language, installing it and linking it to the OpenBLAS library, it should proceed as follows:
+<!-- After executing the function, everything will be ready, and can be checked by executing the command `extSoftVersion()["BLAS"]` in the next execution of R, that is, in a new instance. Thus the user will know that the compilation of the R library, and if necessary, of the OpenBLAS library was carried out as requested. Briefly, the `extSoftVersion()["BLAS"]` command will return something like: -->
 
-
-```r
-> rcompiler(x = "4.0.2") # or simply rcompiler () or rcompiler (x = NULL)
-```
-
-After executing the function, everything will be ready, and can be checked by executing the command `extSoftVersion()["BLAS"]` in the next execution of R, that is, in a new instance. Thus the user will know that the compilation of the R library, and if necessary, of the OpenBLAS library was carried out as requested. Briefly, the `extSoftVersion()["BLAS"]` command will return something like:
-
-
-```r
-> extSoftVersion()["BLAS"]
-```
-
-```
-##                                                BLAS 
-## "/opt/OpenBLAS/lib/libopenblas_haswellp-r0.3.10.so"
-```
+<!-- ```{r, prompt=TRUE} -->
+<!-- extSoftVersion()["BLAS"] -->
+<!-- ``` -->
 
 <!-- ```{r, prompt=TRUE} -->
 <!-- sessionInfo() -->
 <!-- ``` -->
 
-**Example**: In a new hypothetical situation of a user of R having installed two different versions of the R language as presented above, using the function `rcompiler()`, for example, versions 3.6.3 and 4.0.0, so:
+<!-- **Example**: In a new hypothetical situation of a user of R having installed two different versions of the R language as presented above, using the function `rcompiler()`, for example, versions 3.6.3 and 4.0.0, so: -->
 
+<!-- ```{r, eval=FALSE, prompt=TRUE} -->
+<!-- # First installation of R performed by the rcompiler() function: -->
+<!-- rcompiler(x = "4.0.0")  -->
+<!-- # Second installation of R performed by the rcompiler() function: -->
+<!-- rcompiler(x = "3.6.3") -->
+<!-- # Returning version 4.0.0 from R: -->
+<!-- rcompiler(x = "4.0.0") -->
+<!-- ``` -->
 
-```r
-> # First installation of R performed by the rcompiler() function:
-> rcompiler(x = "4.0.0") 
-> # Second installation of R performed by the rcompiler() function:
-> rcompiler(x = "3.6.3")
-> # Returning version 4.0.0 from R:
-> rcompiler(x = "4.0.0")
-```
-
-Running the code `rcompiler(x = "4.0.0")` as the last line of the example above will allow the user to link the binaries previously created in the 4.0.0 compilation process when `rcompiler(x = "4.0.0")` was run for the first time. This will avoid a compilation so that switching between versions of R that have already been compiled will be quick and easy. Although this seems ideal and it is, the function will ask if the user wants to recompile an already compiled version.
+<!-- Running the code `rcompiler(x = "4.0.0")` as the last line of the example above will allow the user to link the binaries previously created in the 4.0.0 compilation process when `rcompiler(x = "4.0.0")` was run for the first time. This will avoid a compilation so that switching between versions of R that have already been compiled will be quick and easy. Although this seems ideal and it is, the function will ask if the user wants to recompile an already compiled version. -->
 
 <!-- **Example**: Assuming that the user of the package has already used the function `rcompiler(x = "4.0.0")` and is in a version other than 4.0.0 but intends to return to version 4.0.0, he can return without compile the language again, as shown in the image below. The output was placed in the form of an image since the return of the functions of the package use symbols that facilitate the user of the functions of the package to understand the suggestions, as well as understand if something went right or wrong. -->
 
@@ -260,9 +243,9 @@ Running the code `rcompiler(x = "4.0.0")` as the last line of the example above 
 
 The `ropenblas()` function, a function of the same name in the package, links the main version of the R language installed on your operating system with the OpenBLAS library. As in the `rcompiler()` function, the `ropenblas()` function requires the operating system administration password, that is, it must be executed by the system administrator.
 
-Unlike the `rcompiler()` function that will allow multiple versions of R to be available in your GNU/Linux distribution, the `ropenblas()` function will allow only one version of the OpenBLAS library to be installed. The function will allow versions of OpenBLAS $\geq 0.3.0$ to be installed. Even if the function `rcompile()` responsible for compiling and installing the R language has not been used, the function `ropenblas()` may link a version of OpenBLAS to the main installation of R, that is, even if the R is installed by procedures external to the package.
+<!-- Unlike the `rcompiler()` function that will allow multiple versions of R to be available in your GNU/Linux distribution, the `ropenblas()` function will allow only one version of the OpenBLAS library to be installed. The function will allow versions of OpenBLAS $\geq 0.3.0$ to be installed. Even if the function `rcompile()` responsible for compiling and installing the R language has not been used, the function `ropenblas()` may link a version of OpenBLAS to the main installation of R, that is, even if the R is installed by procedures external to the package. -->
 
-**General use**:
+<!-- **General use**: -->
 
 
 ```r
@@ -271,42 +254,30 @@ Unlike the `rcompiler()` function that will allow multiple versions of R to be a
 
 The `ropenblas()` function is made up of two arguments. Are they:
 
-  - `x`: String with the version of the OpenBLAS library to be compiled, installed and linked with the main R installation;
+  - `x`: String with the version of the OpenBLAS library to be compiled, installed and linked with the main R installation (by default it is considered the latest version);
   - `restart_r`: Logical value (default `restart_r = TRUE`) to update the R section after compiling, installing and linking the OpenBLAS library.
 
-By default, if `x = NULL` the latest version of the OpenBLAS library will be considered. This is equivalent to passing `last_version_openblas()$last_version` to `x`. There are no great reasons to consider an older version of the OpenBLAS library, although the `ropenblas` package will allow this to be done in a simple way, as in the following example: 
+<!-- By default, if `x = NULL` the latest version of the OpenBLAS library will be considered. This is equivalent to passing `last_version_openblas()$last_version` to `x`. There are no great reasons to consider an older version of the OpenBLAS library, although the `ropenblas` package will allow this to be done in a simple way, as in the following example:  -->
 
-**Example**: Regardless of how the R language was installed, suppose you want to compile, install and link the latest version of the OpenBLAS library to the R language. This can be done by doing:
+<!-- **Example**: Regardless of how the R language was installed, suppose you want to compile, install and link the latest version of the OpenBLAS library to the R language. This can be done by doing: -->
 
+<!-- ```{r, eval=FALSE, prompt=TRUE} -->
+<!-- ropenblas() -->
+<!-- ``` -->
 
-```r
-> ropenblas()
-```
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.cap="Output informing the end of the procedure for linking the OpenBLAS library to the R language.", out.width="100%"} -->
+<!-- knitr::include_graphics("ropenblas_01.png") -->
+<!-- ``` -->
 
-\begin{figure}[H]
+<!-- **Example**: In situations where the latest version of the OpenBLAS library is already installed, if the user wishes to install a previous version of OpenBLAS, for example the version $0.3.8$, he should make it clear by answering a question, as shown in the image below: -->
 
-{\centering \includegraphics[width=1\linewidth]{ropenblas_01} 
+<!-- ```{r, eval=FALSE, prompt=TRUE} -->
+<!-- ropenblas("0.3.8") -->
+<!-- ``` -->
 
-}
-
-\caption{Output informing the end of the procedure for linking the OpenBLAS library to the R language.}\label{fig:unnamed-chunk-11}
-\end{figure}
-
-**Example**: In situations where the latest version of the OpenBLAS library is already installed, if the user wishes to install a previous version of OpenBLAS, for example the version $0.3.8$, he should make it clear by answering a question, as shown in the image below:
-
-
-```r
-> ropenblas("0.3.8")
-```
-
-\begin{figure}[H]
-
-{\centering \includegraphics[width=1\linewidth]{ropenblas_02} 
-
-}
-
-\caption{Asking if the user really wants to compile and link an older version of the OpenBLAS library.}\label{fig:unnamed-chunk-13}
-\end{figure}
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.cap="Asking if the user really wants to compile and link an older version of the OpenBLAS library.", out.width="100%"} -->
+<!-- knitr::include_graphics("ropenblas_02.png") -->
+<!-- ``` -->
 
 <!-- The code below is a small example of the benefits of considering linking the R language to the OpenBLAS library, in which singular-value decomposition of a rectangular matrix is computed, codes that are executed on the same machine, version of R and section. The first part of the code was executed with R without being linked to a version of the OpenBLAS library and the second part was executed after using the `ropenblas()` function. Note that the code when executed in R linked to a version of the OpenBLAS library can be clearly more efficient: -->
 
@@ -337,23 +308,20 @@ By default, if `x = NULL` the latest version of the OpenBLAS library will be con
 ## 'link_again' function
 
 The `link_again()` function links again the OpenBLAS library with the R language, being useful to correct problems of untying the OpenBLAS library that is common when the operating system is updated.
-The function be able to link again the R language with the OpenBLAS library. Thus, `link_again()` will only make the relinkagem when in some previous section of R the `ropenblas()` function has been used for the initial binding of the R language with the OpenBLAS library. 
+The function be able to link again the R language with the OpenBLAS library. 
 
-The use of the function is quite simple, just by running the code `link_again()`, since the function has no arguments. It will automatically detect if there was a link break that will be rebuilt again without the need for any compilation. From time to time, after a major update of the operating system, it may be convenient to run the `link_again()` function. Link breakage rarely occurs, but if it does, it can be resolved quickly. The following code and image exemplify a possible reconstruction of symbolic links using the `link_again()` function:
+<!-- Thus, `link_again()` will only make the relinkagem when in some previous section of R the `ropenblas()` function has been used for the initial binding of the R language with the OpenBLAS library.  -->
+
+<!-- The use of the function is quite simple, just by running the code `link_again()`, since the function has no arguments. It will automatically detect if there was a link break that will be rebuilt again without the need for any compilation. From time to time, after a major update of the operating system, it may be convenient to run the `link_again()` function. Link breakage rarely occurs, but if it does, it can be resolved quickly. The following code and image exemplify a possible reconstruction of symbolic links using the `link_again()` function: -->
 
 
 ```r
 > link_again()
 ```
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=1\linewidth]{link_again_01} 
-
-}
-
-\caption{If an unlinking of the OpenBLAS library occurs, the function will re-link the library.}\label{fig:unnamed-chunk-15}
-\end{figure}
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.cap="If an unlinking of the OpenBLAS library occurs, the function will re-link the library.", out.width="100%"} -->
+<!-- knitr::include_graphics("link_again_01.png") -->
+<!-- ``` -->
 
 <!-- Running the `link_again()` function in a situation where there is no need will not generate problems. The function will return the message that everything is linked correctly, according to the code and image that follows: -->
 
@@ -363,15 +331,16 @@ The use of the function is quite simple, just by running the code `link_again()`
 
 ## 'rnews function'
 
-Returns the contents of the `NEWS.html` file in the standard browser installed on the operating system. The `NEWS.html` file contains the main changes from the recently released versions of the R language. The goal is to facilitate the query by invoking it directly from the R command prompt. The `rnews()` function is analogous to the news function of the `utils` package. However, using the news command in a terminal style bash shell is possible to receive a message like:
+The `rnews()` function returns the contents of the `NEWS.html` file in the standard browser installed on the operating system. The `NEWS.html` file contains the main changes from the recently released versions of the R language. The goal is to facilitate the query by invoking it directly from the R command prompt. 
 
+<!-- The `rnews()` function is analogous to the news function of the `utils` package. However, using the news command in a terminal style bash shell is possible to receive a message like: -->
 
-```r
-news()
-## starting httpd help server ... done
-## Error in browseURL(url): 'browser' must be a non-empty character string
-```
+<!-- ```{r, eval=FALSE} -->
+<!-- news() -->
+<!-- ## starting httpd help server ... done -->
+<!-- ## Error in browseURL(url): 'browser' must be a non-empty character string -->
+<!-- ``` -->
 
-If `pdf = FALSE` (default), the `NEWS.html` file will open in the browser, otherwise `NEWS.pdf` will be opened. If `dev = FALSE` (default), it will not show changes made to the language development version. To see changes in the development version, do `dev = TRUE`.
+<!-- If `pdf = FALSE` (default), the `NEWS.html` file will open in the browser, otherwise `NEWS.pdf` will be opened. If `dev = FALSE` (default), it will not show changes made to the language development version. To see changes in the development version, do `dev = TRUE`. -->
 
 # References
