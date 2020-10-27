@@ -56,17 +56,17 @@ library(ropenblas)
 
 ### 'ropenblas' function:
 
-Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.10** library to the [**R**](https://www.r-project.org/) language:
+Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.12** library to the [**R**](https://www.r-project.org/) language:
 
 ```
-ropenblas(x = "0.3.10")
+ropenblas(x = "0.3.12")
 ```
 
 **Notes**: 
 
    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections.
 
-   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 0.3.8, 0.3.9, and 0.3.10. These are the values that will be passed to `x` in `ropenblas(x)`; 
+   - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 0.3.8, 0.3.9, 0.3.10, 0.3.11 and 0.3.12. These are the values that will be passed to `x` in `ropenblas(x)`; 
    
    - If `x = NULL`, the latest stable version of the [**OpenBLAS**](https://www.openblas.net/) library will be compiled and linked to [**R**](https://www.r-project.org/).
   
@@ -95,13 +95,13 @@ Given the higher version, the function will return the latest stable version of 
 ```
 > last_version_r()
 $last_version
-[1] "4.0.2"
+[1] "4.0.3"
 
 $versions
-[1] "4.0.0" "4.0.1" "4.0.2"
+[1] "4.0.0" "4.0.1" "4.0.2" "4.0.3"
 
 $n
-[1] 3
+[1] 4
 ```
 
 or
@@ -130,17 +130,18 @@ The `last_version_openblas()` function automatically searches [**OpenBLAS**](htt
 ```
 > last_version_openblas()
 $last_version
-[1] "0.3.10"
+[1] "0.3.12"
 
 $versions
- [1] "0.1alpha1"   "0.1alpha2"   "0.1alpha2.1" "0.1alpha2.2" "0.1alpha2.3" "0.1alpha2.4" "0.1alpha2.5" "0.1.0"       "0.1.1"       "0.2.0"      
-[11] "0.2.1"       "0.2.2"       "0.2.3"       "0.2.4"       "0.2.5"       "0.2.6"       "0.2.7"       "0.2.8"       "0.2.9"       "0.2.9.rc1"  
-[21] "0.2.9.rc2"   "0.2.10"      "0.2.10.rc1"  "0.2.10.rc2"  "0.2.11"      "0.2.12"      "0.2.13"      "0.2.14"      "0.2.15"      "0.2.16"     
-[31] "0.2.16.rc1"  "0.2.17"      "0.2.18"      "0.2.19"      "0.2.20"      "0.3.0"       "0.3.1"       "0.3.2"       "0.3.3"       "0.3.4"      
-[41] "0.3.5"       "0.3.6"       "0.3.7"       "0.3.8"       "0.3.9"       "0.3.10"     
+ [1] "0.1alpha1"   "0.1alpha2"   "0.1alpha2.1" "0.1alpha2.2" "0.1alpha2.3" "0.1alpha2.4" "0.1alpha2.5" "0.1.0"      
+ [9] "0.1.1"       "0.2.0"       "0.2.1"       "0.2.2"       "0.2.3"       "0.2.4"       "0.2.5"       "0.2.6"      
+[17] "0.2.7"       "0.2.8"       "0.2.9"       "0.2.9.rc1"   "0.2.9.rc2"   "0.2.10"      "0.2.10.rc1"  "0.2.10.rc2" 
+[25] "0.2.11"      "0.2.12"      "0.2.13"      "0.2.14"      "0.2.15"      "0.2.16"      "0.2.16.rc1"  "0.2.17"     
+[33] "0.2.18"      "0.2.19"      "0.2.20"      "0.3.0"       "0.3.1"       "0.3.2"       "0.3.3"       "0.3.4"      
+[41] "0.3.5"       "0.3.6"       "0.3.7"       "0.3.8"       "0.3.9"       "0.3.10"      "0.3.11"      "0.3.12"     
 
 $n
-[1] 46
+[1] 48
 ```
 
 ### 'rcompiler' function:
