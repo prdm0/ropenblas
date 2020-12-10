@@ -123,7 +123,7 @@ of all, do:
 
     library(ropenblas)
 
-## 4.1 ‘ropenblas’ function:
+## 4.1 ‘ropenblas’ function
 
 Installing, compiling, and linking the
 [**OpenBLAS**](https://www.openblas.net/) version **0.3.12** library to
@@ -199,7 +199,7 @@ to time check using the command `extSoftVersion()["BLAS"]` if the link
 with [**OpenBLAS**](https://www.openblas.net/) is correct, otherwise run
 the command `ropenblas()` again.
 
-## 4.2 ‘last\_version\_r’ function:
+## 4.2 ‘last\_version\_r’ function
 
 Given the higher version, the function will return the latest stable
 version of the [**R**](https://www.r-project.org/) language. See the
@@ -233,7 +233,7 @@ or
 **Note**: If `major = NULL`, the function will consider the major
 release number.
 
-## 4.3 ‘last\_version\_openblas’ function:
+## 4.3 ‘last\_version\_openblas’ function
 
 The `last_version_openblas()` function automatically searches
 [**OpenBLAS**](https://www.openblas.net/) library versions in the
@@ -254,7 +254,7 @@ official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
     $n
     [1] 48
 
-## 4.4 ‘rcompiler’ function:
+## 4.4 ‘rcompiler’ function
 
 This function is responsible for compiling a version of the
 [**R**](https://www.r-project.org/) language. The `x` argument is the
@@ -320,7 +320,7 @@ Are they:
 
          ./configure --with-blas="..." complementary_flags
 
-## 4.5 ‘link\_again’ function:
+## 4.5 ‘link\_again’ function
 
 The `link_again` function links again the
 [**OpenBLAS**](https://www.openblas.net/) library with the
@@ -357,7 +357,7 @@ the interest is to take advantage of a previous compilation of the
 [**OpenBLAS**](https://www.openblas.net/) library, the function
 `link_again` may be useful.
 
-## 4.6 ‘rnews’ function:
+## 4.6 ‘rnews’ function
 
 Returns the contents of the
 [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html)
@@ -383,7 +383,7 @@ will be opened. If `dev = FALSE` (default), it will not show changes
 made to the language development version. To see changes in the
 development version, do `dev = TRUE`.
 
-# 5 Advantages of using ropenblas package:
+# 5 Advantages of using ropenblas package
 
 Some advantages of using the
 [**ropenblas**](https://prdm0.github.io/ropenblas/) library:
