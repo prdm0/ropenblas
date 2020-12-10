@@ -12,7 +12,6 @@ Download, Compile and Link OpenBLAS Library with R
 -   [3 Installation](#installation)
 -   [4 Use](#use)
     -   [4.1 ‘ropenblas’ function:](#ropenblas-function)
-        -   [4.1.1 Details](#details)
     -   [4.2 ‘last\_version\_r’ function:](#last_version_r-function)
     -   [4.3 ‘last\_version\_openblas’
         function:](#last_version_openblas-function)

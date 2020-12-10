@@ -9,7 +9,9 @@ author: |
   | **Summary**
 output: 
   bookdown::github_document2:
+    number_sections: true
     toc: true
+    toc_depth: 2
 toccolor: 'blue'
 ---
 
