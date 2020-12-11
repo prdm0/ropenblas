@@ -1,8 +1,7 @@
 Download, Compile and Link OpenBLAS Library with R
 ================
-**Author**: Prof. Dr. Pedro Rafael Diniz Marinho  
+
 **Package website**: **<https://prdm0.github.io/ropenblas>**  
-  
   
   
 **Summary**
