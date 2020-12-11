@@ -148,7 +148,7 @@ the [**R**](https://www.r-project.org/) language:
     [**OpenBLAS**](https://www.openblas.net/) library will be compiled
     and linked to [**R**](https://www.r-project.org/).
 
-### 4.1.1 Details
+### Details {-}
 
 Your linux operating system may already be configured to use the
 [**OpenBLAS**](https://www.openblas.net/) library. Therefore, most
