@@ -1,7 +1,6 @@
 ---
 title: "Download, Compile and Link OpenBLAS Library with R"
 author: |
-  | **Author**: Prof. Dr. Pedro Rafael Diniz Marinho
   | **Package website**: **<https://prdm0.github.io/ropenblas>**
   |
   |
@@ -38,6 +37,28 @@ The ropenblas package, by `rcompiler()` function is also useful if you want to i
 
 The use of the ropenblas package will return warnings that help you proceed with the use of the functions. If your internet is not working or if any dependency on the operating system is not present, the package will let you know. 
 
+# Advantages of using ropenblas package
+
+Some advantages of using the [**ropenblas**](https://prdm0.github.io/ropenblas/) library:
+
+   - Everything is done within the [**R**](https://www.r-project.org/) language;
+
+   - The procedure will be the same for any Linux distribution;
+
+   - The [**OpenBLAS**](https://www.openblas.net/) library will be compiled and you will choose which build version to bind to [**R**](https://www.r-project.org/), regardless of your Linux distribution;
+
+   - If your GNU/Linux distribution does not have updated versions of [**OpenBLAS**](https://www.openblas.net/), it matters little. The ropenblas package fetches the latest stable release of the [**OpenBLAS**](https://www.openblas.net/) library development account on GitHub;
+
+   - You do not need to know Linux well. In some distributions, it may not be so simple for a less experienced user to compile and link the library to the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https://www.r-project.org/) language;
+
+   - It is much easier to direct a person to link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) saying "run `ropenblas()` within [**R**](https://www.r-project.org/)" than asking that person to verify that an unoptimized version of [**BLAS**](http://www.netlib.org/blas/) installed on the system. Then you have to guide the removal of the unoptimized version of [**BLAS**](http://www.netlib.org/blas/) and guide it to the installation of the library [**OpenBLAS**](https://www.openblas.net/) through the most diverse procedures depending on the GNU/Linux distribution used;
+
+   - As stated earlier, the procedure works for any Linux and this includes Android. If your Android is capable of running privileged commands (ROOT) and if you have [**R**](https://www.r-project.org/) installed via Termux with the required dependencies, you can compile and link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) using ropenblas;
+   
+   - With the `rcompiler()` function you can build any version of [**R**](https://www.r-project.org/) into your computer architecture, which includes the most stable version of the language;
+   
+   - What is the latest stable version of [**R**](https://www.r-project.org/)? Are you too lazy to go to the [**R**](https://www.r-project.org/) site? Run `ropenblas::last_version_r(major = NULL)`.
+
 # Dependencies
 
 You must install the following dependencies on your operating system (Linux):
@@ -72,7 +93,7 @@ The [**ropenblas**](https://prdm0.github.io/ropenblas/) package currently provid
 library(ropenblas)
 ```
 
-## 'ropenblas' function:
+## 'ropenblas' function
 
 Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.12** library to the [**R**](https://www.r-project.org/) language:
 
@@ -88,7 +109,7 @@ ropenblas(x = "0.3.12")
    
    - If `x = NULL`, the latest stable version of the [**OpenBLAS**](https://www.openblas.net/) library will be compiled and linked to [**R**](https://www.r-project.org/).
   
-### Details
+**Details**
 
 Your linux operating system may already be configured to use the [**OpenBLAS**](https://www.openblas.net/) library. Therefore, most likely [**R**](https://www.r-project.org/) will already be linked to this library. To find out if the [**R**](https://www.r-project.org/) language is using the [**OpenBLAS**](https://www.openblas.net/) library, at [**R**](https://www.r-project.org/), do:
 
@@ -106,7 +127,7 @@ You must be the operating system administrator to use this library. Therefore, d
 
 You will not necessarily have to run `ropenblas()` on every section of [**R**](https://www.r-project.org/). Almost always it will not be necessary. However, it may be that the [**R**](https://www.r-project.org/) is updated by the operating system (GNU/Linux). Thus, it may be that in this update the [**R**](https://www.r-project.org/) unlink with the [**OpenBLAS**](https://www.openblas.net/) library. Therefore, from time to time check using the command `extSoftVersion()["BLAS"]` if the link with [**OpenBLAS**](https://www.openblas.net/) is correct, otherwise run the command `ropenblas()` again.
 
-## 'last_version_r' function:
+## 'last_version_r' function
 
 Given the higher version, the function will return the latest stable version of the [**R**](https://www.r-project.org/) language. See the following example:
 
@@ -141,7 +162,7 @@ $n
 
 **Note**: If `major = NULL`, the function will consider the major release number.
 
-## 'last_version_openblas' function:
+## 'last_version_openblas' function
 
 The `last_version_openblas()` function automatically searches [**OpenBLAS**](https://www.openblas.net/) library versions in the official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
 
@@ -162,7 +183,7 @@ $n
 [1] 48
 ```
 
-## 'rcompiler' function:
+## 'rcompiler' function
 
 This function is responsible for compiling a version of the [**R**](https://www.r-project.org/) language. The `x` argument is the version of [**R**](https://www.r-project.org/) that you want to compile. For example, `x = "4.0.0"` will compile and link **R-4.0.0** version as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the [**R**](https://www.r-project.org/).
 
@@ -196,7 +217,7 @@ Installing [**R**](https://www.r-project.org/) in the `/opt/R/version_r` directo
    ```
 
 
-## 'link_again' function:
+## 'link_again' function
 
 The `link_again` function links again the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https://www.r-project.org/) language, being useful to correct problems of untying the [**OpenBLAS**](https://www.openblas.net/) library that is common when the operating system is updated.
 
@@ -218,7 +239,7 @@ relink the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](ht
 function `link_again` may be useful.
 
 
-## 'rnews' function:
+## 'rnews' function
 
 Returns the contents of the [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html) file in the standard browser installed on the operating system. The [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html) file contains the main changes from the recently released versions of the [**R**](https://www.r-project.org/) language. The goal is to facilitate the query by invoking it directly from the [**R**](https://www.r-project.org/) command prompt. The rnews function is analogous to the news function of the utils package. However, using the news command in a terminal style bash shell is possible to receive a message like:
 
@@ -229,25 +250,3 @@ Error in browseURL(url) : 'browser' must be a non-empty character string
 ```
 
 If `pdf = FALSE` (default), the [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html) file will open in the browser, otherwise [**NEWS.pdf**](https://cran.r-project.org/doc/manuals/r-release/NEWS.pdf) will be opened. If `dev = FALSE` (default), it will not show changes made to the language development version. To see changes in the development version, do `dev = TRUE`.
-
-# Advantages of using ropenblas package:
-
-Some advantages of using the [**ropenblas**](https://prdm0.github.io/ropenblas/) library:
-
-   - Everything is done within the [**R**](https://www.r-project.org/) language;
-
-   - The procedure will be the same for any Linux distribution;
-
-   - The [**OpenBLAS**](https://www.openblas.net/) library will be compiled and you will choose which build version to bind to [**R**](https://www.r-project.org/), regardless of your Linux distribution;
-
-   - If your GNU/Linux distribution does not have updated versions of [**OpenBLAS**](https://www.openblas.net/), it matters little. The ropenblas package fetches the latest stable release of the [**OpenBLAS**](https://www.openblas.net/) library development account on GitHub;
-
-   - You do not need to know Linux well. In some distributions, it may not be so simple for a less experienced user to compile and link the library to the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https://www.r-project.org/) language;
-
-   - It is much easier to direct a person to link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) saying "run `ropenblas()` within [**R**](https://www.r-project.org/)" than asking that person to verify that an unoptimized version of [**BLAS**](http://www.netlib.org/blas/) installed on the system. Then you have to guide the removal of the unoptimized version of [**BLAS**](http://www.netlib.org/blas/) and guide it to the installation of the library [**OpenBLAS**](https://www.openblas.net/) through the most diverse procedures depending on the GNU/Linux distribution used;
-
-   - As stated earlier, the procedure works for any Linux and this includes Android. If your Android is capable of running privileged commands (ROOT) and if you have [**R**](https://www.r-project.org/) installed via Termux with the required dependencies, you can compile and link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) using ropenblas;
-   
-   - With the `rcompiler()` function you can build any version of [**R**](https://www.r-project.org/) into your computer architecture, which includes the most stable version of the language;
-   
-   - What is the latest stable version of [**R**](https://www.r-project.org/)? Are you too lazy to go to the [**R**](https://www.r-project.org/) site? Run `ropenblas::last_version_r(major = NULL)`.
