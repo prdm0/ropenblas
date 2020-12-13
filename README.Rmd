@@ -74,7 +74,7 @@ Do not worry that you will be notified if any of these dependencies are not inst
 Installing the [**ropenblas**](https://prdm0.github.io/ropenblas/) library is easy and will require you to have installed the **devtools** package. This will allow you to install the [**ropenblas**](https://prdm0.github.io/ropenblas/) package directly from GitHub. To install, after installing the **devtools** package, do:
 
 ```
-devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)
+remotes::install_github(repo = "prdm0/ropenblas", force = TRUE)
 ```
 
 or
