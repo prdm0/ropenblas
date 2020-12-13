@@ -157,11 +157,16 @@ package. This will allow you to install the
 [**ropenblas**](https://prdm0.github.io/ropenblas/) package directly
 from GitHub. To install, after installing the **devtools** package, do:
 
-    devtools::install_github(repo = "prdm0/ropenblas", force = TRUE)
+``` r 
+remotes::install_github(repo = "prdm0/ropenblas", force = TRUE)
+```  
 
 or
 
-    install.packages("ropenblas")
+```r    
+install.packages("ropenblas")
+```
+
 
 **Note**: If you want to access the latest features of the
 [**ropenblas**](https://prdm0.github.io/ropenblas/) package, install it
@@ -179,11 +184,26 @@ of all, do:
 ## 5.1 ‘ropenblas’ function
 
 Installing, compiling, and linking the
-[**OpenBLAS**](https://www.openblas.net/) version **0.3.12** library to
+[**OpenBLAS**](https://www.openblas.net/) version **0.3.13** library to
 the [**R**](https://www.r-project.org/) language:
 
-    ropenblas(x = "0.3.12")
+```r
+> ropenblas::ropenblas("0.3.13")
+cloning into '/tmp/openblas'...
+Receiving objects:   1% (452/45124),  246 kb
+Receiving objects:  11% (4964/45124), 1930 kb
+Receiving objects:  21% (9477/45124), 6813 kb
+Receiving objects:  31% (13989/45124), 8549 kb
+Receiving objects:  41% (18501/45124), 13484 kb
+Receiving objects:  51% (23014/45124), 16443 kb
+Receiving objects:  61% (27526/45124), 19627 kb
+Receiving objects:  71% (32039/45124), 22779 kb
+Receiving objects:  81% (36551/45124), 24698 kb
+Receiving objects:  91% (41063/45124), 27530 kb
+Receiving objects: 100% (45124/45124), 28694 kb, done.
 
+● The latest version of OpenBLAS is already in use. Do you want to compile and link again? (yes/no): no
+```
 **Notes**:
 
 -   You do not have to in every section of
@@ -258,30 +278,36 @@ Given the higher version, the function will return the latest stable
 version of the [**R**](https://www.r-project.org/) language. See the
 following example:
 
-    > last_version_r()
-    $last_version
-    [1] "4.0.3"
+```r
+> ropenblas::last_version_r()
+$last_version
+[1] "4.0.3"
 
-    $versions
-    [1] "4.0.0" "4.0.1" "4.0.2" "4.0.3"
+$versions
+[1] "4.0.0" "4.0.1" "4.0.2" "4.0.3"
 
-    $n
-    [1] 4
+$n
+[1] 4
+```
 
 or
 
-    > last_version_r(major = 3L)
-    $last_version
-    [1] "3.6.3"
+```r
+> ropenblas::last_version_r(major = 3L)
+$last_version
+[1] "3.6.3"
 
-    $versions
-     [1] "3.0.0"         "3.0.1"         "3.0.2"         "3.0.3"         "3.1.0"         "3.1.1"         "3.1.2"         "3.1.3"        
-     [9] "3.2.0"         "3.2.1"         "3.2.2"         "3.2.3"         "3.2.4-revised" "3.2.4"         "3.2.5"         "3.3.0"        
-    [17] "3.3.1"         "3.3.2"         "3.3.3"         "3.4.0"         "3.4.1"         "3.4.2"         "3.4.3"         "3.4.4"        
-    [25] "3.5.0"         "3.5.1"         "3.5.2"         "3.5.3"         "3.6.0"         "3.6.1"         "3.6.2"         "3.6.3"        
+$versions
+ [1] "3.0.0"         "3.0.1"         "3.0.2"         "3.0.3"         "3.1.0"         "3.1.1"        
+ [7] "3.1.2"         "3.1.3"         "3.2.0"         "3.2.1"         "3.2.2"         "3.2.3"        
+[13] "3.2.4-revised" "3.2.4"         "3.2.5"         "3.3.0"         "3.3.1"         "3.3.2"        
+[19] "3.3.3"         "3.4.0"         "3.4.1"         "3.4.2"         "3.4.3"         "3.4.4"        
+[25] "3.5.0"         "3.5.1"         "3.5.2"         "3.5.3"         "3.6.0"         "3.6.1"        
+[31] "3.6.2"         "3.6.3"        
 
-    $n
-    [1] 32
+$n
+[1] 32
+```
 
 **Note**: If `major = NULL`, the function will consider the major
 release number.
@@ -323,7 +349,14 @@ compiled the latest stable version of the
 For example, to compile the latest stable version of the
 [**R**](https://www.r-project.org/) language, do:
 
-    rcompiler()
+```r
+> ropenblas::rcompiler()
+● R version already compiled: (yes - changes without recompiling) and (no - compiles again) (yes/no): yes
+
+═══════════════ Procedure Completed ══════════════
+[✓] R version 4.0.3.
+෴ The roles are active after terminating the current R session ...
+```
 
 Regardless of your GNU/Linux distribution and what version of
 [**R**](https://www.r-project.org/) is in your repositories, you can
@@ -395,7 +428,10 @@ language with the [**OpenBLAS**](https://www.openblas.net/) library.
 For example, to relink the [**OpenBLAS**](https://www.openblas.net/)
 library with the [**R**](https://www.r-project.org/) language, do:
 
-    link_again()
+```r
+> ropenblas::link_again()
+● Linking again is not necessary. R already uses the OpenBLAS library. You can stay calm.
+```
 
 If `restart_r = TRUE` (default), a new section of
 [**R**](https://www.r-project.org/) is started after linking the
@@ -427,9 +463,11 @@ is analogous to the news function of the utils package. However, using
 the news command in a terminal style bash shell is possible to receive a
 message like:
 
-    > news()
-    starting httpd help server ... done
-    Error in browseURL(url) : 'browser' must be a non-empty character string
+```r
+> news()
+starting httpd help server ... done
+Error in browseURL(url) : 'browser' must be a non-empty character string
+```
 
 If `pdf = FALSE` (default), the
 [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html)
