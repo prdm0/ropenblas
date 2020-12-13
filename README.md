@@ -16,7 +16,7 @@ Download, Compile and Link OpenBLAS Library with R
     -   [5.2 ‘last\_version\_r’ function](#52-last_version_r-function)
     -   [5.3 ‘last\_version\_openblas’
         function](#53-last_version_openblas-function)
-    -   [5.4 ‘rcompiler’ function](#53-rcompiler-function)
+    -   [5.4 ‘rcompiler’ function](#54-rcompiler-function)
     -   [5.5 ‘link\_again’ function](#55-link_again-function)
     -   [5.6 ‘rnews’ function](#56-rnews-function)
 
