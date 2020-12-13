@@ -1,0 +1,29 @@
+---
+title: Contributing to the development of the ropenbals package
+author: |
+  | **Package website**: **<https://prdm0.github.io/ropenblas>**
+  |
+  | **Summary**
+output: 
+  bookdown::github_document2:
+    number_sections: true
+    toc: true
+    toc_depth: 2
+toccolor: 'blue'
+---
+
+# General information
+
+The **ropenblas** package introduces a simple way, through its functions, to link the library [**OpenBLAS**](https://www.openblas.net/) with the language [**R**](https: //www.r-project.org/). In addition, with ropenblas it is possible to link different versions of R, making it possible to easily switch between the different versions of R compiled.
+
+The package currently works only on GNU/Linux systems and is independent of the official repositories of the user's GNU/Linux distribution. This allows the R user on GNU/Linux systems who is the administrator of the operating system - OS to link the latest versions of R and OpenBLAS as well as switch between versions if they wish.
+
+# Main contributions
+
+The main contributions to the **ropenblas** package are listed below:
+
+  1. Revision of the code to detect possible inconsistent points that may cause the functions provided by the package to fail in some GNU / Linux distribution;
+  2. Test the package on different GNU / Linux distributions, reporting possible inconsistencies at <https://github.com/prdm0/ropenblas/issues>;
+  3. Improved English for package messages and documentation;
+  4. Improved writing of job documentation;
+  5. Allow Windows system users to take advantage of the `ropenblas()` function. One suggestion would be to link precompiled binaries from the OpenBLAS library and distribute them in a `inst/` directory.
