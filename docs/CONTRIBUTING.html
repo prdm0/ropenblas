@@ -6,15 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OpenBLAS library versions — last_version_openblas • ropenblas</title>
+<title>Contributing to the development of the ropenbals package • ropenblas</title>
 
 <!-- favicons -->
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -25,8 +25,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -40,14 +40,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="OpenBLAS library versions — last_version_openblas" />
-<meta property="og:description" content="OpenBLAS library versions" />
+<meta property="og:title" content="Contributing to the development of the ropenbals package" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -67,7 +66,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -79,7 +78,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ropenblas</a>
+        <a class="navbar-link" href="index.html">ropenblas</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.8</span>
       </span>
     </div>
@@ -87,16 +86,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -117,42 +116,51 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>OpenBLAS library versions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/prdm0/ropenblas/blob/master/R/ropenblas.R'><code>R/ropenblas.R</code></a></small>
-    <div class="hidden name"><code>last_version_openblas.Rd</code></div>
+      <h1>Contributing to the development of the ropenbals package</h1>
     </div>
 
-    <div class="ref-description">
-    <p>OpenBLAS library versions</p>
-    </div>
 
-    <pre class="usage"><span class='fu'>last_version_openblas</span><span class='op'>(</span><span class='op'>)</span></pre>
+<div id="contributing-to-the-development-of-the-ropenbals-package" class="section level1">
 
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function automatically searches <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library versions in the official <a href='https://github.com/xianyi/OpenBLAS'><strong>GitHub</strong></a> project.</p><ol>
-<li><p><code>last_version</code>: Returns the latest stable version of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library.</p></li>
-<li><p><code>versions</code>: All stable versions of the <a href='https://www.openblas.net/'><strong>OpenBLAS</strong></a> library.</p></li>
-<li><p><code>n</code>: Total number of versions.</p></li>
+<p><strong>Package website</strong>: <strong><a href="https://prdm0.github.io/ropenblas" class="uri">https://prdm0.github.io/ropenblas</a></strong></p>
+<p><strong>Summary</strong></p>
+<ul>
+<li><a href="#general-information">1 General information</a></li>
+<li><a href="#main-contributions">2 Main contributions</a></li>
+</ul>
+</div>
+<div id="1-general-information" class="section level1">
+<h1 class="hasAnchor">
+<a href="#1-general-information" class="anchor"></a>1 General information</h1>
+<p>The <strong>ropenblas</strong> package introduces a simple way, through its functions, to link the library <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> with the language <a href="https:%20//www.r-project.org/"><strong>R</strong></a>. In addition, with ropenblas it is possible to link different versions of R, making it possible to easily switch between the different versions of R compiled.</p>
+<p>The package currently works only on GNU/Linux systems and is independent of the official repositories of the user’s GNU/Linux distribution. This allows the R user on GNU/Linux systems who is the administrator of the operating system - OS to link the latest versions of R and OpenBLAS as well as switch between versions if they wish.</p>
+</div>
+<div id="2-main-contributions" class="section level1">
+<h1 class="hasAnchor">
+<a href="#2-main-contributions" class="anchor"></a>2 Main contributions</h1>
+<p>The main contributions to the <strong>ropenblas</strong> package are listed below:</p>
+<ol>
+<li>Revision of the code to detect possible inconsistent points that may cause the functions provided by the package to fail in some GNU / Linux distribution;</li>
+<li>Test the package on different GNU / Linux distributions, reporting possible inconsistencies at <a href="https://github.com/prdm0/ropenblas/issues" class="uri">https://github.com/prdm0/ropenblas/issues</a>;</li>
+<li>Improved English for package messages and documentation;</li>
+<li>Improved writing of job documentation;</li>
+<li>Allow Windows system users to take advantage of the <code><a href="reference/ropenblas.html">ropenblas()</a></code> function. One suggestion would be to link precompiled binaries from the OpenBLAS library and distribute them in a <code>inst/</code> directory.</li>
 </ol>
+</div>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='last_version_r.html'>last_version_r</a></code>, <code><a href='ropenblas.html'>ropenblas</a></code>, <code><a href='rcompiler.html'>rcompiler</a></code></p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># last_version_openblas()</span>
-</div></pre>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
+
 
 
       <footer>

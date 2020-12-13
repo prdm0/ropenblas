@@ -292,7 +292,7 @@ The `last_version_openblas()` function automatically searches
 [**OpenBLAS**](https://www.openblas.net/) library versions in the
 official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
 
-```{r}
+```r
 > ropenblas::last_version_openblas()
 $last_version
 [1] "0.3.13"
