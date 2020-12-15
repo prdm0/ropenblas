@@ -120,12 +120,7 @@ Some advantages of using the
     [**OpenBLAS**](https://www.openblas.net/) through the most diverse
     procedures depending on the GNU/Linux distribution used;
 
--   As stated earlier, the procedure works for any Linux and this
-    includes Android. If your Android is capable of running privileged
-    commands (ROOT) and if you have [**R**](https://www.r-project.org/)
-    installed via Termux with the required dependencies, you can compile
-    and link [**OpenBLAS**](https://www.openblas.net/) with
-    [**R**](https://www.r-project.org/) using ropenblas;
+<!-- - As stated earlier, the procedure works for any Linux and this includes Android. If your Android is capable of running privileged commands (ROOT) and if you have [**R**](https://www.r-project.org/) installed via Termux with the required dependencies, you can compile and link [**OpenBLAS**](https://www.openblas.net/) with [**R**](https://www.r-project.org/) using ropenblas; -->
 
 -   With the `rcompiler()` function you can build any version of
     [**R**](https://www.r-project.org/) into your computer architecture,
@@ -157,20 +152,13 @@ package. This will allow you to install the
 [**ropenblas**](https://prdm0.github.io/ropenblas/) package directly
 from GitHub. To install, after installing the **devtools** package, do:
 
-``` r 
-remotes::install_github(repo = "prdm0/ropenblas", force = TRUE)
-```  
+    remotes::install_github(repo = "prdm0/ropenblas", force = TRUE)
 
 or
 
-```r    
-install.packages("ropenblas")
-```
+    install.packages("ropenblas")
 
-
-**Note**: If you want to access the latest features of the
-[**ropenblas**](https://prdm0.github.io/ropenblas/) package, install it
-using the first procedure.
+<!-- **Note**: If you want to access the latest features of the [**ropenblas**](https://prdm0.github.io/ropenblas/) package, install it using the first procedure. -->
 
 # 5 Use
 
@@ -187,90 +175,22 @@ Installing, compiling, and linking the
 [**OpenBLAS**](https://www.openblas.net/) version **0.3.13** library to
 the [**R**](https://www.r-project.org/) language:
 
-```r
-> ropenblas::ropenblas("0.3.13")
-cloning into '/tmp/openblas'...
-Receiving objects:   1% (452/45124),  246 kb
-Receiving objects:  11% (4964/45124), 1930 kb
-Receiving objects:  21% (9477/45124), 6813 kb
-Receiving objects:  31% (13989/45124), 8549 kb
-Receiving objects:  41% (18501/45124), 13484 kb
-Receiving objects:  51% (23014/45124), 16443 kb
-Receiving objects:  61% (27526/45124), 19627 kb
-Receiving objects:  71% (32039/45124), 22779 kb
-Receiving objects:  81% (36551/45124), 24698 kb
-Receiving objects:  91% (41063/45124), 27530 kb
-Receiving objects: 100% (45124/45124), 28694 kb, done.
+<img src="inst/asciicast/ropenblas.svg" style="display: block; margin: auto;" />
 
-● The latest version of OpenBLAS is already in use. Do you want to compile and link again? (yes/no): no
-```
-**Notes**:
-
--   You do not have to in every section of
-    [**R**](https://www.r-project.org/) make use of the `ropenblas()`
-    function. Once the function is used,
-    [**R**](https://www.r-project.org/) will always consider using the
-    [**OpenBLAS**](https://www.openblas.net/) library in future
-    sections.
-
--   [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0,
-    0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 0.3.8, 0.3.9,
-    0.3.10, 0.3.11, 0.3.12 and 0.3.13. These are the values that will be passed
-    to `x` in `ropenblas(x)`;
-
--   If `x = NULL`, the latest stable version of the
-    [**OpenBLAS**](https://www.openblas.net/) library will be compiled
-    and linked to [**R**](https://www.r-project.org/).
-
-**Details**
-
-Your linux operating system may already be configured to use the
-[**OpenBLAS**](https://www.openblas.net/) library. Therefore, most
-likely [**R**](https://www.r-project.org/) will already be linked to
-this library. To find out if the [**R**](https://www.r-project.org/)
-language is using the [**OpenBLAS**](https://www.openblas.net/) library,
-at [**R**](https://www.r-project.org/), do:
-
-    extSoftVersion()["BLAS"]
-
-If [**R**](https://www.r-project.org/) is using the
-[**OpenBLAS**](https://www.openblas.net/) library, something like
-`/any_directory/libopenblas.so` should be returned. Therefore, there
-should be the name **openblas** in the **s**hared **o**bject returned
-(file extension **.so**).
-
-If the `ropenblas()` function can identify that the
-[**R**](https://www.r-project.org/) language is using the version of
-[**OpenBLAS**](https://www.openblas.net/) you wish to configure, a
-warning message will be returned asking if you really would like to
-proceed with the configuration again.
-
-The `ropenblas()` function will download the desired version of the
-library [**OpenBLAS**](https://www.openblas.net/), compile and install
-the library in the `/opt` directory of your operational system. If the
-directory does not exist, it will be created so that the installation
-can be completed. Subsequently, files from the version of
-[**BLAS**](http://www.netlib.org/blas/) used in
-[**R**](https://www.r-project.org/) will be symbolically linked to the
-shared object files of the library version
-[**OpenBLAS**](https://www.openblas.net/) compiled and installed in
-`/opt`.
-
-You must be the operating system administrator to use this library.
-Therefore, do not attempt to use it without telling your system
-administrator. If you have the ROOT password, you will be responsible
-for everything you do on your operating system.
-
-You will not necessarily have to run `ropenblas()` on every section of
-[**R**](https://www.r-project.org/). Almost always it will not be
-necessary. However, it may be that the
-[**R**](https://www.r-project.org/) is updated by the operating system
-(GNU/Linux). Thus, it may be that in this update the
-[**R**](https://www.r-project.org/) unlink with the
-[**OpenBLAS**](https://www.openblas.net/) library. Therefore, from time
-to time check using the command `extSoftVersion()["BLAS"]` if the link
-with [**OpenBLAS**](https://www.openblas.net/) is correct, otherwise run
-the command `ropenblas()` again.
+<!-- **Notes**:  -->
+<!--    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections. -->
+<!--    - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 0.3.8, 0.3.9, 0.3.10, 0.3.11, 0.3.12 and 0.3.13. These are the values that will be passed to `x` in `ropenblas(x)`;  -->
+<!--    - If `x = NULL`, the latest stable version of the [**OpenBLAS**](https://www.openblas.net/) library will be compiled and linked to [**R**](https://www.r-project.org/). -->
+<!-- **Details** -->
+<!-- Your linux operating system may already be configured to use the [**OpenBLAS**](https://www.openblas.net/) library. Therefore, most likely [**R**](https://www.r-project.org/) will already be linked to this library. To find out if the [**R**](https://www.r-project.org/) language is using the [**OpenBLAS**](https://www.openblas.net/) library, at [**R**](https://www.r-project.org/), do: -->
+<!-- ``` -->
+<!-- extSoftVersion()["BLAS"] -->
+<!-- ``` -->
+<!-- If [**R**](https://www.r-project.org/) is using the [**OpenBLAS**](https://www.openblas.net/) library, something like `/any_directory/libopenblas.so` should be returned. Therefore, there should be the name **openblas** in the **s**hared **o**bject returned (file extension **.so**). -->
+<!-- If the `ropenblas()` function can identify that the [**R**](https://www.r-project.org/) language is using the version of [**OpenBLAS**](https://www.openblas.net/) you wish to configure, a warning message will be returned asking if you really would like to proceed with the configuration again. -->
+<!-- The `ropenblas()` function will download the desired version of the library [**OpenBLAS**](https://www.openblas.net/), compile and install the library in the `/opt` directory of your operational system. If the directory does not exist, it will be created so that the installation can be completed. Subsequently, files from the version of [**BLAS**](http://www.netlib.org/blas/) used in [**R**](https://www.r-project.org/) will be symbolically linked to the shared object files of the library version [**OpenBLAS**](https://www.openblas.net/) compiled and installed in `/opt`. -->
+<!-- You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system. -->
+<!-- You will not necessarily have to run `ropenblas()` on every section of [**R**](https://www.r-project.org/). Almost always it will not be necessary. However, it may be that the [**R**](https://www.r-project.org/) is updated by the operating system (GNU/Linux). Thus, it may be that in this update the [**R**](https://www.r-project.org/) unlink with the [**OpenBLAS**](https://www.openblas.net/) library. Therefore, from time to time check using the command `extSoftVersion()["BLAS"]` if the link with [**OpenBLAS**](https://www.openblas.net/) is correct, otherwise run the command `ropenblas()` again. -->
 
 ## 5.2 ‘last\_version\_r’ function
 
@@ -278,39 +198,9 @@ Given the higher version, the function will return the latest stable
 version of the [**R**](https://www.r-project.org/) language. See the
 following example:
 
-```r
-> ropenblas::last_version_r()
-$last_version
-[1] "4.0.3"
+![](inst/asciicast/last_version_r.svg)<!-- -->
 
-$versions
-[1] "4.0.0" "4.0.1" "4.0.2" "4.0.3"
-
-$n
-[1] 4
-```
-
-or
-
-```r
-> ropenblas::last_version_r(major = 3L)
-$last_version
-[1] "3.6.3"
-
-$versions
- [1] "3.0.0"         "3.0.1"         "3.0.2"         "3.0.3"         "3.1.0"         "3.1.1"        
- [7] "3.1.2"         "3.1.3"         "3.2.0"         "3.2.1"         "3.2.2"         "3.2.3"        
-[13] "3.2.4-revised" "3.2.4"         "3.2.5"         "3.3.0"         "3.3.1"         "3.3.2"        
-[19] "3.3.3"         "3.4.0"         "3.4.1"         "3.4.2"         "3.4.3"         "3.4.4"        
-[25] "3.5.0"         "3.5.1"         "3.5.2"         "3.5.3"         "3.6.0"         "3.6.1"        
-[31] "3.6.2"         "3.6.3"        
-
-$n
-[1] 32
-```
-
-**Note**: If `major = NULL`, the function will consider the major
-release number.
+<!-- **Note**: If `major = NULL`, the function will consider the major release number. -->
 
 ## 5.3 ‘last\_version\_openblas’ function
 
@@ -318,23 +208,7 @@ The `last_version_openblas()` function automatically searches
 [**OpenBLAS**](https://www.openblas.net/) library versions in the
 official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
 
-```r
-> ropenblas::last_version_openblas()
-$last_version
-[1] "0.3.13"
-
-$versions
- [1] "0.1alpha1"   "0.1alpha2"   "0.1alpha2.1" "0.1alpha2.2" "0.1alpha2.3" "0.1alpha2.4" "0.1alpha2.5"
- [8] "0.1.0"       "0.1.1"       "0.2.0"       "0.2.1"       "0.2.2"       "0.2.3"       "0.2.4"      
-[15] "0.2.5"       "0.2.6"       "0.2.7"       "0.2.8"       "0.2.9"       "0.2.9.rc1"   "0.2.9.rc2"  
-[22] "0.2.10"      "0.2.10.rc1"  "0.2.10.rc2"  "0.2.11"      "0.2.12"      "0.2.13"      "0.2.14"     
-[29] "0.2.15"      "0.2.16"      "0.2.16.rc1"  "0.2.17"      "0.2.18"      "0.2.19"      "0.2.20"     
-[36] "0.3.0"       "0.3.1"       "0.3.2"       "0.3.3"       "0.3.4"       "0.3.5"       "0.3.6"      
-[43] "0.3.7"       "0.3.8"       "0.3.9"       "0.3.10"      "0.3.11"      "0.3.12"      "0.3.13"     
-
-$n
-[1] 49
-```
+![](inst/asciicast/last_version_openblas.svg)<!-- -->
 
 ## 5.4 ‘rcompiler’ function
 
@@ -349,14 +223,7 @@ compiled the latest stable version of the
 For example, to compile the latest stable version of the
 [**R**](https://www.r-project.org/) language, do:
 
-```r
-> ropenblas::rcompiler()
-● R version already compiled: (yes - changes without recompiling) and (no - compiles again) (yes/no): yes
-
-═══════════════ Procedure Completed ══════════════
-[✓] R version 4.0.3.
-෴ The roles are active after terminating the current R session ...
-```
+![](inst/asciicast/rcompiler.svg)<!-- -->
 
 Regardless of your GNU/Linux distribution and what version of
 [**R**](https://www.r-project.org/) is in your repositories, you can
@@ -374,40 +241,18 @@ of version 3.6.3 in the system and give you the option to use the
 binaries that were built in a previous compilation. This avoids
 unnecessarys compilations.
 
-In addition to the `x` argument, the`rcompiler()` function has two other
-arguments that will allow you to change and pass new compilation flags.
-Are they:
-
-1.  `with_blas`: This argument sets the `--with-blas` flag in the R
-    language compilation process and must be passed as a string. Details
-    on the use of this flag can be found
-    [**here**](https://cran.r-project.org/doc/manuals/r-devel/R-admin.html).
-    If `with_blas = NULL` (default), then it will be considered:
-
-        ./configure --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib --enable-threads=posix
-        --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -lpthread -lm"
-
-    Most likely, you will have little reason to change this argument.
-    Unless you know what you’re doing, consider `with_blas = NULL`. Do
-    not change the installation directory, that is, always consider
-    `--prefix = /opt/R/version_r`, where`version_r` is a valid version
-    of [**R**](https://www.r-project.org/). For a list of valid versions
-    of [**R**](https://www.r-project.org/), run the `last_version_r()`.
-    Installing [**R**](https://www.r-project.org/) in the
-    `/opt/R/version_r` directory is important because some functions in
-    the package require this. Both the
-    [**R**](https://www.r-project.org/) language and the
-    [**OpenBLAS**](https://www.openblas.net/) library will be installed
-    in the `/opt` directory. If this directory does not exist in your
-    GNU/Linux distribution, it will be created;
-
-2.  `complementary_flags`: String (`complementary_flags = NULL` by
-    default) for adding complementary flags in the
-    [**R**](https://www.r-project.org/) language compilation process.
-    Passing a string to `complementary_flags` will compile it in the
-    form:
-
-         ./configure --with-blas="..." complementary_flags
+<!-- In addition to the `x` argument, the` rcompiler()` function has two other arguments that will allow you to change and pass new compilation flags. Are they: -->
+<!-- 1. `with_blas`: This argument sets the `--with-blas` flag in the R language compilation process and must be passed as a string. Details on the use of this flag can be found [**here**](https://cran.r-project.org/doc/manuals/r-devel/R-admin.html). If `with_blas = NULL` (default), then it will be considered: -->
+<!--    ``` -->
+<!--    ./configure --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib --enable-threads=posix -->
+<!--    --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -lpthread -lm" -->
+<!--    ``` -->
+<!--    Most likely, you will have little reason to change this argument. Unless you know what you're doing, consider `with_blas = NULL`. Do not change the installation directory, that is, always consider `--prefix = /opt/R/version_r`, where` version_r` is a valid version of [**R**](https://www.r-project.org/). For a list of valid versions of [**R**](https://www.r-project.org/), run the `last_version_r()`. -->
+<!-- Installing [**R**](https://www.r-project.org/) in the `/opt/R/version_r` directory is important because some functions in the package require this. Both the [**R**](https://www.r-project.org/) language and the [**OpenBLAS**](https://www.openblas.net/) library will be installed in the `/opt` directory. If this directory does not exist in your GNU/Linux distribution, it will be created; -->
+<!-- 2. `complementary_flags`: String (`complementary_flags = NULL` by default) for adding complementary flags in the [**R**](https://www.r-project.org/) language compilation process. Passing a string to `complementary_flags` will compile it in the form: -->
+<!--    ``` -->
+<!--     ./configure --with-blas="..." complementary_flags -->
+<!--    ``` -->
 
 ## 5.5 ‘link\_again’ function
 
@@ -428,10 +273,7 @@ language with the [**OpenBLAS**](https://www.openblas.net/) library.
 For example, to relink the [**OpenBLAS**](https://www.openblas.net/)
 library with the [**R**](https://www.r-project.org/) language, do:
 
-```r
-> ropenblas::link_again()
-● Linking again is not necessary. R already uses the OpenBLAS library. You can stay calm.
-```
+![](inst/asciicast/link_again.svg)<!-- -->
 
 If `restart_r = TRUE` (default), a new section of
 [**R**](https://www.r-project.org/) is started after linking the
@@ -463,11 +305,9 @@ is analogous to the news function of the utils package. However, using
 the news command in a terminal style bash shell is possible to receive a
 message like:
 
-```r
-> news()
-starting httpd help server ... done
-Error in browseURL(url) : 'browser' must be a non-empty character string
-```
+    > news()
+    starting httpd help server ... done
+    Error in browseURL(url) : 'browser' must be a non-empty character string
 
 If `pdf = FALSE` (default), the
 [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html)
