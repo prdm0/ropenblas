@@ -175,7 +175,7 @@ Installing, compiling, and linking the
 [**OpenBLAS**](https://www.openblas.net/) version **0.3.13** library to
 the [**R**](https://www.r-project.org/) language:
 
-<img src="inst/asciicast/ropenblas.svg" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/prdm0/ropenblas/d63a2cebecac055ccb62314f119064eb418e1c4e/inst/asciicast/ropenblas.svg" style="display: block; margin: auto;" />
 
 <!-- **Notes**:  -->
 <!--    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections. -->
@@ -198,7 +198,7 @@ Given the higher version, the function will return the latest stable
 version of the [**R**](https://www.r-project.org/) language. See the
 following example:
 
-![](inst/asciicast/last_version_r.svg)<!-- -->
+<img src="https://raw.githubusercontent.com/prdm0/ropenblas/d63a2cebecac055ccb62314f119064eb418e1c4e/inst/asciicast/last_version_r.svg" style="display: block; margin: auto;" />
 
 <!-- **Note**: If `major = NULL`, the function will consider the major release number. -->
 
@@ -208,7 +208,7 @@ The `last_version_openblas()` function automatically searches
 [**OpenBLAS**](https://www.openblas.net/) library versions in the
 official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
 
-![](inst/asciicast/last_version_openblas.svg)<!-- -->
+<img src="https://raw.githubusercontent.com/prdm0/ropenblas/d63a2cebecac055ccb62314f119064eb418e1c4e/inst/asciicast/last_version_openblas.svg" style="display: block; margin: auto;" />
 
 ## 5.4 ‘rcompiler’ function
 
@@ -223,7 +223,7 @@ compiled the latest stable version of the
 For example, to compile the latest stable version of the
 [**R**](https://www.r-project.org/) language, do:
 
-![](inst/asciicast/rcompiler.svg)<!-- -->
+<img src="https://raw.githubusercontent.com/prdm0/ropenblas/d63a2cebecac055ccb62314f119064eb418e1c4e/inst/asciicast/rcompiler.svg" style="display: block; margin: auto;" />
 
 Regardless of your GNU/Linux distribution and what version of
 [**R**](https://www.r-project.org/) is in your repositories, you can
@@ -273,7 +273,7 @@ language with the [**OpenBLAS**](https://www.openblas.net/) library.
 For example, to relink the [**OpenBLAS**](https://www.openblas.net/)
 library with the [**R**](https://www.r-project.org/) language, do:
 
-![](inst/asciicast/link_again.svg)<!-- -->
+<img src="https://raw.githubusercontent.com/prdm0/ropenblas/d63a2cebecac055ccb62314f119064eb418e1c4e/inst/asciicast/link_again.svg" style="display: block; margin: auto;" />
 
 If `restart_r = TRUE` (default), a new section of
 [**R**](https://www.r-project.org/) is started after linking the
