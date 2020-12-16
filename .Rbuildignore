@@ -3,6 +3,7 @@
 ^CRAN-RELEASE$
 docs
 pkgdown
+paper
 logo.png
 ^docs$
 ^pkgdown$
