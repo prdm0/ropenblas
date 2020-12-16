@@ -15,7 +15,7 @@ toccolor: 'blue'
 ---
 
 
-**ropenblas** <a href='logo.png'><img src='logo.png' align="right" height="160" /></a>
+**ropenblas** <a href='logo.png'><img src='logo.png' align="right" height="165" /></a>
 
 
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
