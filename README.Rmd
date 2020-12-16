@@ -14,13 +14,18 @@ output:
 toccolor: 'blue'
 ---
 
+
+**ropenblas** <a href='logo.png'><img src='logo.png' align="right" height="139" /></a>
+
+
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![total](http://cranlogs.r-pkg.org/badges/grand-total/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![month](https://cranlogs.r-pkg.org/badges/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 
-<img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right" />
-
+</br>
+</br>
+<!-- <img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right" /> -->
 
 # General aspects
 
@@ -98,7 +103,7 @@ library(ropenblas)
 Installing, compiling, and linking the [**OpenBLAS**](https://www.openblas.net/) version **0.3.13** library to the [**R**](https://www.r-project.org/) language:
 
 ```{r, fig.align='center',  echo=FALSE}
-knitr::include_graphics(path = "inst/asciicast/ropenblas.svg")
+knitr::include_graphics(path = "img/asciicast/ropenblas.svg")
 ```
 
 
@@ -133,7 +138,7 @@ knitr::include_graphics(path = "inst/asciicast/ropenblas.svg")
 Given the higher version, the function will return the latest stable version of the [**R**](https://www.r-project.org/) language. See the following example:
 
 ```{r, echo=FALSE}
-knitr::include_graphics(path = "inst/asciicast/last_version_r.svg")
+knitr::include_graphics(path = "img/asciicast/last_version_r.svg")
 ```
 
 <!-- **Note**: If `major = NULL`, the function will consider the major release number. -->
@@ -143,7 +148,7 @@ knitr::include_graphics(path = "inst/asciicast/last_version_r.svg")
 The `last_version_openblas()` function automatically searches [**OpenBLAS**](https://www.openblas.net/) library versions in the official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
 
 ```{r, echo=FALSE}
-knitr::include_graphics(path = "inst/asciicast/last_version_openblas.svg")
+knitr::include_graphics(path = "img/asciicast/last_version_openblas.svg")
 ```
 
 ## 'rcompiler' function
@@ -153,7 +158,7 @@ This function is responsible for compiling a version of the [**R**](https://www.
 For example, to compile the latest stable version of the [**R**](https://www.r-project.org/) language, do:
 
 ```{r, echo=FALSE}
-knitr::include_graphics(path = "inst/asciicast/rcompiler.svg")
+knitr::include_graphics(path = "img/asciicast/rcompiler.svg")
 ```
 
 Regardless of your GNU/Linux distribution and what version of [**R**](https://www.r-project.org/) is in your repositories, you can have the latest stable version of the [**R**](https://www.r-project.org/) language compiled into your computer architecture.
@@ -190,7 +195,7 @@ The function `link_again` be able to link again the [**R**](https://www.r-projec
 For example, to relink the [**OpenBLAS**](https://www.openblas.net/) library with the [**R**](https://www.r-project.org/) language, do:
 
 ```{r, echo=FALSE}
-knitr::include_graphics(path = "inst/asciicast/link_again.svg")
+knitr::include_graphics(path = "img/asciicast/link_again.svg")
 ```
 
 If `restart_r = TRUE` (default), a new section of [**R**](https://www.r-project.org/) is started after linking the [**OpenBLAS**](https://www.openblas.net/) library.
