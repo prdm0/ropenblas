@@ -21,14 +21,13 @@ Download, Compile and Link OpenBLAS Library with R
     -   [5.6 ‘rnews’ function](#56-rnews-function)
 
 **ropenblas**
-<a href='logo.png'><img src='logo.png' align="right" height="200" /></a>
 
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![total](http://cranlogs.r-pkg.org/badges/grand-total/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![month](https://cranlogs.r-pkg.org/badges/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 
-<br/><br/><br/><br/><br/>
+<img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" width="219" style="display: block; margin: auto;" />
 
 <!-- <img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right" /> -->
 
