@@ -21,7 +21,7 @@ Download, Compile and Link OpenBLAS Library with R
     -   [5.6 ‘rnews’ function](#rnews-function)
 
 **ropenblas**
-<a href='logo.png'><img src='logo.png' align="right" height="200" /></a>
+<a href='logo.png'><img src='logo.png' align="right" height="160" /></a>
 
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
