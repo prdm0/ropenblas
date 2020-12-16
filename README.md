@@ -6,19 +6,19 @@ Download, Compile and Link OpenBLAS Library with R
   
 **Summary**
 
--   [1 General aspects](#general-aspects)
+-   [1 General aspects](#1-general-aspects)
 -   [2 Advantages of using ropenblas
-    package](#advantages-of-using-ropenblas-package)
--   [3 Dependencies](#dependencies)
--   [4 Installation](#installation)
--   [5 Use](#use)
-    -   [5.1 ‘ropenblas’ function](#ropenblas-function)
-    -   [5.2 ‘last\_version\_r’ function](#last_version_r-function)
+    package](#2-advantages-of-using-ropenblas-package)
+-   [3 Dependencies](#3-dependencies)
+-   [4 Installation](#4-installation)
+-   [5 Use](#5-use)
+    -   [5.1 ‘ropenblas’ function](#51-ropenblas-function)
+    -   [5.2 ‘last\_version\_r’ function](#52-last_version_r-function)
     -   [5.3 ‘last\_version\_openblas’
-        function](#last_version_openblas-function)
-    -   [5.4 ‘rcompiler’ function](#rcompiler-function)
-    -   [5.5 ‘link\_again’ function](#link_again-function)
-    -   [5.6 ‘rnews’ function](#rnews-function)
+        function](#53-last_version_openblas-function)
+    -   [5.4 ‘rcompiler’ function](#54-rcompiler-function)
+    -   [5.5 ‘link\_again’ function](#55-link_again-function)
+    -   [5.6 ‘rnews’ function](#56-rnews-function)
 
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
