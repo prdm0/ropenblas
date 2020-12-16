@@ -83,19 +83,19 @@
 <p><strong>Package website</strong>: <strong><a href="https://prdm0.github.io/ropenblas" class="uri">https://prdm0.github.io/ropenblas</a></strong></p>
 <p><strong>Summary</strong></p>
 <ul>
-<li><a href="#1-general-aspects">1 General aspects</a></li>
-<li><a href="#2-advantages-of-using-ropenblas-package">2 Advantages of using ropenblas package</a></li>
-<li><a href="#3-dependencies">3 Dependencies</a></li>
-<li><a href="#4-installation">4 Installation</a></li>
+<li><a href="#general-aspects">1 General aspects</a></li>
+<li><a href="#advantages-of-using-ropenblas-package">2 Advantages of using ropenblas package</a></li>
+<li><a href="#dependencies">3 Dependencies</a></li>
+<li><a href="#installation">4 Installation</a></li>
 <li>
-<a href="#5-use">5 Use</a>
+<a href="#use">5 Use</a>
 <ul>
-<li><a href="#51-ropenblas-function">5.1 ‘ropenblas’ function</a></li>
-<li><a href="#52-last_version_r-function">5.2 ‘last_version_r’ function</a></li>
-<li><a href="#53-last_version_openblas-function">5.3 ‘last_version_openblas’ function</a></li>
-<li><a href="#54-rcompiler-function">5.4 ‘rcompiler’ function</a></li>
-<li><a href="#55-link_again-function">5.5 ‘link_again’ function</a></li>
-<li><a href="#56-rnews-function">5.6 ‘rnews’ function</a></li>
+<li><a href="#ropenblas-function">5.1 ‘ropenblas’ function</a></li>
+<li><a href="#last_version_r-function">5.2 ‘last_version_r’ function</a></li>
+<li><a href="#last_version_openblas-function">5.3 ‘last_version_openblas’ function</a></li>
+<li><a href="#rcompiler-function">5.4 ‘rcompiler’ function</a></li>
+<li><a href="#link_again-function">5.5 ‘link_again’ function</a></li>
+<li><a href="#rnews-function">5.6 ‘rnews’ function</a></li>
 </ul>
 </li>
 </ul>
@@ -155,7 +155,7 @@
 <h2 class="hasAnchor">
 <a href="#51-ropenblas-function" class="anchor"></a>5.1 ‘ropenblas’ function</h2>
 <p>Installing, compiling, and linking the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> version <strong>0.3.13</strong> library to the <a href="https://www.r-project.org/"><strong>R</strong></a> language:</p>
-<p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/ropenblas.svg" style="display: block; margin: auto;"></p>
+<p><img src="inst/asciicast/ropenblas.svg" style="display: block; margin: auto;"></p>
 <!-- **Notes**:  -->
 <!--    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections. -->
 <!--    - [**OpenBLAS**](https://www.openblas.net/) versions tested: 0.3.0, 0.3.1, 0.3.2, 0.3.3, 0.3.4, 0.3.5, 0.3.6, 0.3.7, 0.3.8, 0.3.9, 0.3.10, 0.3.11, 0.3.12 and 0.3.13. These are the values that will be passed to `x` in `ropenblas(x)`;  -->
@@ -175,21 +175,21 @@
 <h2 class="hasAnchor">
 <a href="#52-last_version_r-function" class="anchor"></a>5.2 ‘last_version_r’ function</h2>
 <p>Given the higher version, the function will return the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. See the following example:</p>
-<p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/last_version_r.svg" style="display: block; margin: auto;"></p>
+<p><img src="inst/asciicast/last_version_r.svg"><!-- --></p>
 <!-- **Note**: If `major = NULL`, the function will consider the major release number. -->
 </div>
 <div id="53-last_version_openblas-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#53-last_version_openblas-function" class="anchor"></a>5.3 ‘last_version_openblas’ function</h2>
 <p>The <code><a href="reference/last_version_openblas.html">last_version_openblas()</a></code> function automatically searches <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library versions in the official <a href="https://github.com/xianyi/OpenBLAS"><strong>GitHub</strong></a> project.</p>
-<p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/last_version_openblas.svg" style="display: block; margin: auto;"></p>
+<p><img src="inst/asciicast/last_version_openblas.svg"><!-- --></p>
 </div>
 <div id="54-rcompiler-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#54-rcompiler-function" class="anchor"></a>5.4 ‘rcompiler’ function</h2>
 <p>This function is responsible for compiling a version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href="https://www.r-project.org/"><strong>R</strong></a> that you want to compile. For example, <code>x = "4.0.0"</code> will compile and link <strong>R-4.0.0</strong> version as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a>.</p>
 <p>For example, to compile the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language, do:</p>
-<p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/rcompiler.svg" style="display: block; margin: auto;"></p>
+<p><img src="inst/asciicast/rcompiler.svg"><!-- --></p>
 <p>Regardless of your GNU/Linux distribution and what version of <a href="https://www.r-project.org/"><strong>R</strong></a> is in your repositories, you can have the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language compiled into your computer architecture.</p>
 <p>You can use the <code><a href="reference/rcompiler.html">rcompiler()</a></code> function to compile different versions of <a href="https://www.r-project.org/"><strong>R</strong></a>. For example, running <code><a href="reference/rcompiler.html">rcompiler(x = "3.6.3")</a></code> and <code><a href="reference/rcompiler.html">rcompiler()</a></code> will install versions 3.6.3 and 4.0.0 on its GNU/Linux distribution, respectively. If you are in version 4.0.0 of <a href="https://www.r-project.org/"><strong>R</strong></a> and run the code <code><a href="reference/rcompiler.html">rcompiler(x = "3.6.3")</a></code> again, the function will identify the existence of version 3.6.3 in the system and give you the option to use the binaries that were built in a previous compilation. This avoids unnecessarys compilations.</p>
 <!-- In addition to the `x` argument, the` rcompiler()` function has two other arguments that will allow you to change and pass new compilation flags. Are they: -->
@@ -211,7 +211,7 @@
 <p>The <code>link_again</code> function links again the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library with the <a href="https://www.r-project.org/"><strong>R</strong></a> language, being useful to correct problems of untying the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library that is common when the operating system is updated.</p>
 <p>The function <code>link_again</code> be able to link again the <a href="https://www.r-project.org/"><strong>R</strong></a> language with the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library. Thus, link_again will only make the relinkagem when in some previous section of <a href="https://www.r-project.org/"><strong>R</strong></a> the ropenblas function has been used for the initial binding of the <a href="https://www.r-project.org/"><strong>R</strong></a> language with the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library.</p>
 <p>For example, to relink the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library with the <a href="https://www.r-project.org/"><strong>R</strong></a> language, do:</p>
-<p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/link_again.svg" style="display: block; margin: auto;"></p>
+<p><img src="inst/asciicast/link_again.svg"><!-- --></p>
 <p>If <code>restart_r = TRUE</code> (default), a new section of <a href="https://www.r-project.org/"><strong>R</strong></a> is started after linking the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library.</p>
 <p>In situations where there was a disconnection due to an update of the operating system, the <code>ropenblas</code> function can be used to relink the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library with the <a href="https://www.r-project.org/"><strong>R</strong></a> language, however, it will be necessary to compile the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library again. If you are interested in recompiling the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library and linking with <a href="https://www.r-project.org/"><strong>R</strong></a>, use the <code>ropenblas</code> function. If the interest is to take advantage of a previous compilation of the <a href="https://www.openblas.net/"><strong>OpenBLAS</strong></a> library, the function <code>link_again</code> may be useful.</p>
 </div>

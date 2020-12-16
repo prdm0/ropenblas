@@ -6,19 +6,19 @@ Download, Compile and Link OpenBLAS Library with R
   
 **Summary**
 
--   [1 General aspects](#1-general-aspects)
+-   [1 General aspects](#general-aspects)
 -   [2 Advantages of using ropenblas
-    package](#2-advantages-of-using-ropenblas-package)
--   [3 Dependencies](#3-dependencies)
--   [4 Installation](#4-installation)
--   [5 Use](#5-use)
-    -   [5.1 ‘ropenblas’ function](#51-ropenblas-function)
-    -   [5.2 ‘last\_version\_r’ function](#52-last_version_r-function)
+    package](#advantages-of-using-ropenblas-package)
+-   [3 Dependencies](#dependencies)
+-   [4 Installation](#installation)
+-   [5 Use](#use)
+    -   [5.1 ‘ropenblas’ function](#ropenblas-function)
+    -   [5.2 ‘last\_version\_r’ function](#last_version_r-function)
     -   [5.3 ‘last\_version\_openblas’
-        function](#53-last_version_openblas-function)
-    -   [5.4 ‘rcompiler’ function](#54-rcompiler-function)
-    -   [5.5 ‘link\_again’ function](#55-link_again-function)
-    -   [5.6 ‘rnews’ function](#56-rnews-function)
+        function](#last_version_openblas-function)
+    -   [5.4 ‘rcompiler’ function](#rcompiler-function)
+    -   [5.5 ‘link\_again’ function](#link_again-function)
+    -   [5.6 ‘rnews’ function](#rnews-function)
 
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
@@ -175,7 +175,7 @@ Installing, compiling, and linking the
 [**OpenBLAS**](https://www.openblas.net/) version **0.3.13** library to
 the [**R**](https://www.r-project.org/) language:
 
-<img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/ropenblas.svg" style="display: block; margin: auto;" />
+<img src="inst/asciicast/ropenblas.svg" style="display: block; margin: auto;" />
 
 <!-- **Notes**:  -->
 <!--    - You do not have to in every section of [**R**](https://www.r-project.org/) make use of the `ropenblas()` function. Once the function is used, [**R**](https://www.r-project.org/) will always consider using the [**OpenBLAS**](https://www.openblas.net/) library in future sections. -->
@@ -198,7 +198,7 @@ Given the higher version, the function will return the latest stable
 version of the [**R**](https://www.r-project.org/) language. See the
 following example:
 
-<img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/last_version_r.svg" style="display: block; margin: auto;" />
+![](inst/asciicast/last_version_r.svg)<!-- -->
 
 <!-- **Note**: If `major = NULL`, the function will consider the major release number. -->
 
@@ -208,7 +208,7 @@ The `last_version_openblas()` function automatically searches
 [**OpenBLAS**](https://www.openblas.net/) library versions in the
 official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
 
-<img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/last_version_openblas.svg" style="display: block; margin: auto;" />
+![](inst/asciicast/last_version_openblas.svg)<!-- -->
 
 ## 5.4 ‘rcompiler’ function
 
@@ -223,7 +223,7 @@ compiled the latest stable version of the
 For example, to compile the latest stable version of the
 [**R**](https://www.r-project.org/) language, do:
 
-<img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/rcompiler.svg" style="display: block; margin: auto;" />
+![](inst/asciicast/rcompiler.svg)<!-- -->
 
 Regardless of your GNU/Linux distribution and what version of
 [**R**](https://www.r-project.org/) is in your repositories, you can
@@ -273,7 +273,7 @@ language with the [**OpenBLAS**](https://www.openblas.net/) library.
 For example, to relink the [**OpenBLAS**](https://www.openblas.net/)
 library with the [**R**](https://www.r-project.org/) language, do:
 
-<img src="https://raw.githubusercontent.com/prdm0/ropenblas/43971f9d1b824735e28c2c6075e765b1199748cb/inst/asciicast/link_again.svg" style="display: block; margin: auto;" />
+![](inst/asciicast/link_again.svg)<!-- -->
 
 If `restart_r = TRUE` (default), a new section of
 [**R**](https://www.r-project.org/) is started after linking the
