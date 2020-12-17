@@ -3,8 +3,12 @@
 ^CRAN-RELEASE$
 docs
 pkgdown
+paper
 logo.png
+img
 ^docs$
+^paper$
+^img$
 ^pkgdown$
 ^logo\.png$
 ^ropenblas\.Rproj$

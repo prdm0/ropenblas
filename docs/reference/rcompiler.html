@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compile a version of <span style="R">R</span> on GNU/Linux systems — rcompiler • ropenblas</title>
+<title>Compile a version of R on GNU/Linux systems — rcompiler • ropenblas</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Compile a version of <span style="R">R</span> on GNU/Linux systems — rcompiler" />
+<meta property="og:title" content="Compile a version of R on GNU/Linux systems — rcompiler" />
 <meta property="og:description" content="This function is responsible for compiling a version of the R language." />
 <meta property="og:image" content="/logo.png" />
 
@@ -128,7 +128,7 @@
     <p>This function is responsible for compiling a version of the <span style="R">R</span> language.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rcompiler</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>with_blas</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>complementary_flags</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>rcompiler</span><span class='op'>(</span>x <span class='op'>=</span> <span class='cn'>NULL</span>, with_blas <span class='op'>=</span> <span class='cn'>NULL</span>, complementary_flags <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,7 +158,8 @@ missing dependencies.</p>
 
     <p>This function is responsible for compiling a version of the <a href='https://www.r-project.org/'><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href='https://www.r-project.org/'><strong>R</strong></a> that you want to compile.
 For example, <code>x = "4.0.0"</code> will compile and link <strong>R-4.0.0</strong> version  as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href='https://www.r-project.org/'><strong>R</strong></a>.</p>
-<p>For example, to compile the latest stable version of the <a href='https://www.r-project.org/'><strong>R</strong></a> language, do:</p><pre> <span class='fu'>rcompiler</span>()</pre>
+<p>For example, to compile the latest stable version of the <a href='https://www.r-project.org/'><strong>R</strong></a> language, do:</p><pre> <span class='fu'>rcompiler</span><span class='op'>(</span><span class='op'>)</span>
+</pre>
 
 <p>Regardless of your GNU/Linux distribution and what version of <a href='https://www.r-project.org/'><strong>R</strong></a> is in your repositories, you can have the latest stable version of the <a href='https://www.r-project.org/'><strong>R</strong></a> language compiled
 into your computer architecture.</p>
@@ -187,7 +188,7 @@ Passing a string to <code>complementary_flags</code> will compile it in the form
     <div class='dont-index'><p><code><a href='ropenblas.html'>ropenblas</a></code>, <code><a href='last_version_r.html'>last_version_r</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># rcompiler()
+    <pre class="examples"><div class='input'><span class='co'># rcompiler()</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -204,7 +205,7 @@ Passing a string to <code>complementary_flags</code> will compile it in the form
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
