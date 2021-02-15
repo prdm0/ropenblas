@@ -801,13 +801,15 @@ compiler_r <- function(r_version = NULL,
   if (is.null(complementary_flags))
     complementary_flags <- ""
   
+  
+  # Removing from configure: --with-blas=\"{with_blas}\" \\
+  
   configure <-
     "./configure \\
      --prefix=/opt/R/{r_version} \\
      --enable-memory-profiling \\
      --enable-R-shlib \\
      --enable-threads=posix \\
-     --with-blas=\"{with_blas}\" \\
      {complementary_flags}" %>%  
     glue
   
