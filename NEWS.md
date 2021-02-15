@@ -1,6 +1,12 @@
-# ropenblas 0.2.9 (development version)
+# ropenblas 0.3.0 (development version)
 
 * Code review;
+
+# ropenblas 0.2.9
+
+* Code review;
+
+* Removal of the `--with-blas="{with_blas}"` flag from the `rcompiler()` function. 
 
 # ropenblas 0.2.8
 
