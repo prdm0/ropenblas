@@ -809,7 +809,7 @@ compiler_r <- function(r_version = NULL,
      --enable-threads=posix \\
      --with-blas=\"{with_blas}\" \\
      {complementary_flags}" %>%
-    glue(.)
+    glue()
   
   if (dir.exists("/opt/OpenBLAS/lib/") && dir_blas()$use_openblas) {
     # configure ---------------------------------------------------------------
@@ -870,6 +870,16 @@ compiler_r <- function(r_version = NULL,
       new = download,
       code = run_command(x = "make install PREFIX=/opt/R/{r_version}", key_root = key_root)
     )
+    
+    # creating symbolic links -------------------------------------------------
+    
+    "ln -sf /opt/R/{r_version}/bin/R {dir_r}"  %>%
+      glue %>%
+      run_command(key_root = key_root)
+    
+    "ln -sf /opt/R/{r_version}/bin/Rscript {dir_rscript}" %>%
+      glue %>%
+      run_command(key_root = key_root)
     
     fix_openblas_link(restart_r = FALSE, key_root = key_root)
     

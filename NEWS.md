@@ -6,7 +6,7 @@
 
 * Code review;
 
-* Removal of the `--with-blas="{with_blas}"` flag from the `rcompiler()` function. 
+* Bug fix: adding missing symbolic links in the else statement of the `compiler_r` function. `compiler_r` is an internal function used by the `rcompiler` function.
 
 # ropenblas 0.2.8
 
