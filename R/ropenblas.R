@@ -774,7 +774,7 @@ compiler_r <- function(r_version = NULL,
     answer <-
       "{cli::col_blue(cli::symbol$bullet)} R version already compiled: (yes - changes without recompiling) and (no - compiles again)"  %>%
       glue %>%
-      answer_yes_no
+      answer_yes_no()
     
     validate_answer(answer)
     
@@ -791,18 +791,15 @@ compiler_r <- function(r_version = NULL,
   download <- download_r(x = r_version)
   
   if (is.null(with_blas)) {
-    with_blas <-  "-L/opt/OpenBLAS/lib \\
+    with_blas <-  "-L/opt/OpenBLAS/lib -lopenblas \\
      -I/opt/OpenBLAS/include \\
      -lpthread \\
      -lm" %>% 
-      glue
+      glue(.)
   }
   
   if (is.null(complementary_flags))
     complementary_flags <- ""
-  
-  
-  # Removing from configure: --with-blas=\"{with_blas}\" \\
   
   configure <-
     "./configure \\
@@ -810,8 +807,9 @@ compiler_r <- function(r_version = NULL,
      --enable-memory-profiling \\
      --enable-R-shlib \\
      --enable-threads=posix \\
-     {complementary_flags}" %>%  
-    glue
+     --with-blas=\"{with_blas}\" \\
+     {complementary_flags}" %>%
+    glue(.)
   
   if (dir.exists("/opt/OpenBLAS/lib/") && dir_blas()$use_openblas) {
     # configure ---------------------------------------------------------------
@@ -1018,7 +1016,7 @@ link_again <- function(restart_r = TRUE) {
   if (dir_blas()$use_openblas) {
     "{cli::col_blue(cli::symbol$bullet)} Linking again is not necessary. {style_underline(style_bold(\"R\"))} \\
       already uses the {style_underline(style_bold(\"OpenBLAS\"))} library. You can stay calm." %>%
-      glue
+      glue()
   } else {
     if (!dir.exists("/opt/OpenBLAS/lib"))
       "{cli::col_blue(cli::symbol$bullet)} Run the {style_underline(style_bold(\"ropenblas()\"))} function ..." %>%
