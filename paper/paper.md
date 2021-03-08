@@ -184,7 +184,7 @@ This function is responsible for compiling a version of the R language. The x ar
 -   `with_blas`: This argument sets the `--with-blas` flag in the R language compilation process and must be passed as a string. Details on the use of this flag can be found here;
 -   `complementary_flags`: String with complementary flags to be used in the R language compilation process.
 
-If the goal is to install the R language, switch between versions of R, and link the installed versions of the language with the OpenBLAS library, you shouldn't have to worry about the `with_blas` and `complementary_flags` arguments, respectively. These arguments are useful for a minority of programmers who feel very specific needs to pass complementary flags to be considered in the R language compilation process, inclusion of complementary library directories, among other arguments that can be found in the official language manuals. By default, if nothing is passed to the `with_blas` and `complementary_flags` arguments, the compilation will be performed as follows: 
+If the goal is to install the R language, switch between versions of R, and link the installed versions of the language with the OpenBLAS library, you shouldn't have to worry about the `with_blas` and `complementary_flags` arguments, respectively. These arguments are useful for a minority of programmers who feel very specific needs to pass complementary flags to be considered in the R language compilation process, inclusion of complementary library directories, among other arguments that can be found in the official language manuals. By default, if nothing is passed to the `with_blas` and `complementary_flags` arguments, the compilation will be performed as follows:
 
 
 ```bash
@@ -193,7 +193,7 @@ If the goal is to install the R language, switch between versions of R, and link
 --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -lpthread -lm"
 ```
 
-As a suggestion and if you want to use the complementary arguments, that is, use `with_blas` and `complementary_flags`, do not change the directory `include` and `lib` of the OpenBLAS library in argument `with_blas`, considering that the `rcompiler()` function will always install the OpenBLAS library in the `/opt/OpenBLAS` directory, thus avoiding problems with breaking important links on your system and in the configuration of the initial version of R. If you try to pass a different installation directory to the OpenBLAS library, the `rcompiler()` function will disregard this installation of OpenBLAS and perform a safe installation in the `/opt/OpenBLAS` directory. Everything is built in this directory and symbolic links are used so that the initial state of R configuration in the GNU/Linux distribution is not changed.  This allows no errors to be made and unforeseen bugs to occur. If there are reasons to consider complementary strings for the arguments `with_blas` and `complementary_flags`, the R language will be compiled as follows: 
+As a suggestion and if you want to use the complementary arguments, that is, use `with_blas` and `complementary_flags`, do not change the directory `include` and `lib` of the OpenBLAS library in argument `with_blas`, considering that the `rcompiler()` function will always install the OpenBLAS library in the `/opt/OpenBLAS` directory, thus avoiding problems with breaking important links on your system and in the configuration of the initial version of R. If you try to pass a different installation directory to the OpenBLAS library, the `rcompiler()` function will disregard this installation of OpenBLAS and perform a safe installation in the `/opt/OpenBLAS` directory. Everything is built in this directory and symbolic links are used so that the initial state of R configuration in the GNU/Linux distribution is not changed. This allows no errors to be made and unforeseen bugs to occur. If there are reasons to consider complementary strings for the arguments `with_blas` and `complementary_flags`, the R language will be compiled as follows:
 
 
 ```bash
@@ -379,7 +379,7 @@ Through a banchmark it is possible to better understand the performance gain tha
 
 The `link_again()` function links again the OpenBLAS library with the R language, being useful to correct problems of untying the OpenBLAS library that is common when the operating system is updated. The function be able to link again the R language with the OpenBLAS library.
 
-Thus, `link_again()` will only make the relinkagem when in some previous section of R the `ropenblas()` function has been used for the initial binding of the R language with the OpenBLAS library. 
+Thus, `link_again()` will only make the relinkagem when in some previous section of R the `ropenblas()` function has been used for the initial binding of the R language with the OpenBLAS library.
 
 The use of the function is quite simple, just by running the code `link_again()`, since the function has no arguments. It will automatically detect if there was a link break that will be rebuilt again without the need for any compilation. From time to time, after a major update of the operating system, it may be convenient to run the `link_again()` function. Link breakage rarely occurs, but if it does, it can be resolved quickly. The following code and image exemplify a possible reconstruction of symbolic links using the `link_again()` function:
 
