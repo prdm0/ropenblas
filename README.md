@@ -1,24 +1,24 @@
 Download, Compile and Link OpenBLAS Library with R
 ================
-**Package website**: **<https://prdm0.github.io/ropenblas>**  
   
   
   
-**Summary**
+**Summary**  
+**Package website**: **<https://prdm0.github.io/ropenblas>**
 
--   [1 General aspects](#1-general-aspects)
+-   [1 General aspects](#general-aspects)
 -   [2 Advantages of using ropenblas
-    package](#2-advantages-of-using-ropenblas-package)
--   [3 Dependencies](#3-dependencies)
--   [4 Installation](#4-installation)
--   [5 Use](#5-use)
-    -   [5.1 ‘ropenblas’ function](#51-ropenblas-function)
-    -   [5.2 ‘last\_version\_r’ function](#52-last_version_r-function)
+    package](#advantages-of-using-ropenblas-package)
+-   [3 Dependencies](#dependencies)
+-   [4 Installation](#installation)
+-   [5 Use](#use)
+    -   [5.1 ‘ropenblas’ function](#ropenblas-function)
+    -   [5.2 ‘last\_version\_r’ function](#last_version_r-function)
     -   [5.3 ‘last\_version\_openblas’
-        function](#53-last_version_openblas-function)
-    -   [5.4 ‘rcompiler’ function](#54-rcompiler-function)
-    -   [5.5 ‘link\_again’ function](#55-link_again-function)
-    -   [5.6 ‘rnews’ function](#56-rnews-function)
+        function](#last_version_openblas-function)
+    -   [5.4 ‘rcompiler’ function](#rcompiler-function)
+    -   [5.5 ‘link\_again’ function](#link_again-function)
+    -   [5.6 ‘rnews’ function](#rnews-function)
 
 **ropenblas**
 
@@ -168,8 +168,8 @@ or
 
 The [**ropenblas**](https://prdm0.github.io/ropenblas/) package
 currently provides five functions: `ropenblas()`, `rcompiler()`,
-`last_version_openblas()`, `last_version_r()` and `link_again()`. First
-of all, do:
+`last_version_openblas()`, `last_version_r()`, `link_again()` and
+`rnews()`. First of all, do:
 
     library(ropenblas)
 
@@ -204,7 +204,8 @@ following example:
 
 ![](https://raw.githubusercontent.com/prdm0/ropenblas/bce920c05f8daa13fc6568e6797d4b841e9d43ce/img/asciicast/last_version_r.svg)<!-- -->
 
-<!-- **Note**: If `major = NULL`, the function will consider the major release number. -->
+\*\*Note\*\*: If \`major = NULL\`, the function will consider the major
+release number.
 
 ## 5.3 ‘last\_version\_openblas’ function
 
@@ -219,7 +220,7 @@ official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
 This function is responsible for compiling a version of the
 [**R**](https://www.r-project.org/) language. The `x` argument is the
 version of [**R**](https://www.r-project.org/) that you want to compile.
-For example, `x = "4.0.0"` will compile and link **R-4.0.0** version as
+For example, `x = "4.0.4"` will compile and link **R-4.0.4** version as
 the major version on your system. By default (`x = NULL`) will be
 compiled the latest stable version of the
 [**R**](https://www.r-project.org/).
