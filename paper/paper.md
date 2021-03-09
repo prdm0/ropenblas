@@ -15,7 +15,7 @@ affiliations:
  - name: Department of Statistics, Federal University of Paraíba, João Pessoa, Paraíba - PB, Brazil
    index: 1
 citation_author: Marinho
-date: "2021-03-08"
+date: "2021-03-09"
 year: "2021"
 bibliography: paper.bib
 output: rticles::joss_article
@@ -29,13 +29,13 @@ journal: JOSS
 
 
 
-The `ropenblas` package aims to facilitate the day-to-day life of R programmers who want a little more performance on GNU/Linux systems, without removing the possibility that specific configurations are made, if they deem convenient. Through the package's `ropenblas()` and `rcompiler()` functions, the library user will be able to compile and link the R language in his GNU/Linux distribution with the OpenBLAS library, all within R and in a very simple. All functions work without being influenced by the GNU/Linux distribution and are independent of their repositories, that is, it does not matter which GNU/Linux distribution is being used. Linking the OpenBLAS library to R will bring better computational performance to the language in the most diverse algebraic operations commonly used in areas such as statistics, data science and machine learning.
+The `ropenblas` package aims to facilitate the day-to-day life of R programmers who want a little more performance on GNU/Linux systems, without removing the possibility that specific configurations are made, if they deem convenient. Through the package's `ropenblas()` and `rcompiler()` functions, the library user will be able to compile and link the R language in his GNU/Linux distribution with the OpenBLAS library, all within R and in a very simple. All functions work without being influenced by the GNU/Linux distribution and are independent of their repositories, that is, it does not matter which GNU/Linux distribution is being used. Linking the OpenBLAS library to R will bring better computational performance to the language in the most diverse algebraic operations commonly used in areas such as statistics, data science, and machine learning.
 
 # Statement of Need
 
-The `ropenblas` package aims to allow algebraic computing of R to be performed using the OpenBLAS library, that is, it allows easy linking of R to the OpenBLAS library on GNU/Linux systems without depending on the distribution repositories. This will allow several researches in the areas of statistics, data science and machine learning to take advantage of a more efficient performance in algebraic calculations, for example, multiplication, factorization and matrix inversion. The `ropenblas` library, version 0.2.9 will also allow the R programmer to have, in his GNU/Linux distribution, several compiled versions of the R language giving the possibility to easily switch between these versions, this being an Open Source functionality that is only possible in some commercial IDEs of R. All this is done within the R language, minimizing the chance of less experienced users to break their operating system by running several instructions that are not perfectly understood.
+The `ropenblas` package aims to allow algebraic computing of R to be performed using the OpenBLAS library, that is, it allows easy linking of R to the OpenBLAS library on GNU/Linux systems without depending on the distribution repositories. This will allow several researches in the areas of statistics, data science, and machine learning to take advantage of more efficient performance in algebraic calculations, for example, multiplication, factorization, and matrix inversion. The `ropenblas` library, version 0.2.9 will also allow the R programmer to have, in his GNU/Linux distribution, several compiled versions of the R language giving the possibility to easily switch between these versions, this being an Open Source functionality that is only possible in some commercial IDEs of R. All this is done within the R language, minimizing the chance of less experienced users to break their operating system by running several instructions that are not perfectly understood.
 
-The fact that the `ropenblas` package does not depend on the repositories of the GNU/Linux distribution will allow that in more stable distributions the R programmer will have at his disposal the most recent version of the OpenBLAS libraries and the R language. Everything is done in a safe way, a since the `ropenblas` package uses the stable versions of the official development repositories of the OpenBLAS library and the R programming language, respectively. Until the present version, the package has more than 1000 downloads, having an average of more than 1000 downloads in the month prior to the date of this submission, based on the official R language repositories.
+The fact that the `ropenblas` package does not depend on the repositories of the GNU/Linux distribution will allow that in more stable distributions the R programmer will have at his disposal the most recent version of the OpenBLAS libraries and the R language. Everything is done safely, since the `ropenblas` package uses the stable versions of the official development repositories of the OpenBLAS library and the R programming language, respectively. Until the present version, the package has more than 1000 downloads, having an average of more than 1000 downloads in the month before the date of this submission, based on the official R language repositories.
 
 # Introduction
 
@@ -55,7 +55,16 @@ Linking the R language to the OpenBLAS library can bring several benefits to alg
 
 The `ropenblas` is a package designed to facilitate the linking of the library OpenBLAS with the language R. The package, which works only for Linux systems, will automatically download the latest source code from the OpenBLAS library and compile the code. The package will automatically bind the language R, through the `ropenblas()` function, to use the OpenBLAS library. Everything will be done automatically regardless of the Linux distribution you are using. Enumerating some advantages of the package:
 
-The `ropenblas` package is already available on the Comprehensive R Archive Network - CRAN, currently in version 0.2.9 and the project is maintained on GitHub at <https://github.com/prdm0/ropenblas> where contributors can find others details of the code, information, as well as being able to contribute with the development of the project. Information can also be found on the project website. On the website it is also possible to read the `NEWS.md` file with details of the versions and the focus of the current development. The site is deposited at <https://prdm0.github.io/ropenblas/>. Suggestions for improvements and bug reports can be sent via the link <https://github.com/prdm0/ropenblas/issues>. You can find out how to contribute to the package by accessing the `CONTRIBUTING.md` file at <https://github.com/prdm0/ropenblas/blob/master/CONTRIBUTING.md>
+1.  Everything is done within the R language;
+2.  The procedure (use of functions) will be the same for any Linux distribution;
+3.  The OpenBLAS library will be compiled and you will choose which build version to bind to R, regardless of your Linux distribution;
+4.  The package allows you to install R $\geq 3.1.0$, also allowing you to install one more version, in addition to allowing you to easily switch between those versions;
+5.  The linked versions of R will continue to be recognized by their Integrated Development Environment - IDE and nothing will have to be adjusted in your GNU/Linux distribution after using any function of the package;
+6.  Unnecessary builds will be avoided. Therefore, if you need to switch between compiled versions of the R language, the use of binaries compiled in previous times will be suggested;
+7.  If any errors occur, the functions of the package will not damage the previous installation of the language;
+8.  If something better can be done or if a newer version of what you want to install (R or OpenBLAS) exists, the functions will automatically suggest that you consider installing newer versions.
+
+The `ropenblas` package is already available on the Comprehensive R Archive Network - CRAN, currently in version 0.2.9, and the project is maintained on GitHub at <https://github.com/prdm0/ropenblas> where contributors can find other details of the code, information, as well as being able to contribute with the development of the project. Information can also be found on the project website. On the website, it is also possible to read the `NEWS.md` file with details of the versions and the focus of the current development. The site is deposited at <https://prdm0.github.io/ropenblas/>. Suggestions for improvements and bug reports can be sent via the link <https://github.com/prdm0/ropenblas/issues>. You can find out how to contribute to the package by accessing the `CONTRIBUTING.md` file at <https://github.com/prdm0/ropenblas/blob/master/CONTRIBUTING.md>.
 
 \begin{figure}[H]
 
@@ -75,15 +84,6 @@ The `ropenblas` package is already available on the Comprehensive R Archive Netw
 <!-- The `ropenblas` package, by `rcompiler()` function is also useful if you want to install different versions of the R language. The different versions, specified by the user of the R language, will be compiled and will also be linked to the OpenBLAS library. If you want to switch between compiled versions of the R language, no compilation is needed anymore. This allows you to avoid having to get your hands dirty with tedious operating system settings, regardless of your GNU/Linux distribution. Another great use of the `rcompiler()` function is that you will not be dependent on updating your GNU/Linux distribution repositories and you can always have the latest version of the R language. -->
 
 <!-- The use of the `ropenblas` package will return warnings that help you proceed with the use of the functions. If your internet is not working or if any dependency on the operating system is not present, the package will let you know. -->
-
-1.  Everything is done within the R language;
-2.  The procedure (use of functions) will be the same for any Linux distribution;
-3.  The OpenBLAS library will be compiled and you will choose which build version to bind to R, regardless of your Linux distribution;
-4.  The package allows you to install R $\geq 3.1.0$, also allowing you to install one more version, in addition to allowing you to easily switch between those versions;
-5.  The linked versions of R will continue to be recognized by their Integrated Development Environment - IDE and nothing will have to be adjusted in your GNU/Linux distribution after using any function of the package;
-6.  Unnecessary builds will be avoided. Therefore, if you need to switch between compiled versions of the R language, the use of binaries compiled in previous times will be suggested;
-7.  If any errors occur, the functions of the package will not damage the previous installation of the language;
-8.  If something better can be done or if a newer version of what you want to install (R or OpenBLAS) exists, the functions will automatically suggest that you consider installing newer versions.
 
 <!-- # Dependencies -->
 
@@ -111,13 +111,13 @@ The `ropenblas` package can be installed in two ways. The first is using the `in
 
 <!-- # Exported functions and usage -->
 
-The `ropenblas` library exports six functions for use which are the `rcompiler()`, `ropenblas()`, `last_version_r()`, `last_version_openblas()`, `link_again()` and `rnews()`. All of them are very simple to use and have few arguments that are sufficient to maintain flexibility of use. Any example that follows will consider that the installation of the `ropenblas` package has been carried out and the package has been loaded (`library(ropenblas)`). In addition, functions like `rcompiler()` and `ropenblas()` do not return content or data structures that are of any practical use. What these functions do is configure the GNU/Linux system to use R, configure different versions of the language, switch between versions and link with the OpenBLAS library. It is also possible to obtain a summary of the versions of R and the OpenBLAS library that are available.
+The `ropenblas` library exports six functions for use which are the `rcompiler()`, `ropenblas()`, `last_version_r()`, `last_version_openblas()`, `link_again()` and `rnews()`. All of them are very simple to use and have few arguments that are sufficient to maintain the flexibility of use. Any example that follows will consider that the installation of the `ropenblas` package has been carried out and the package has been loaded (`library(ropenblas)`). Also, functions like `rcompiler()` and `ropenblas()` do not return content or data structures that are of any practical use. What these functions do is configure the GNU/Linux system to use R, configure different versions of the language, switch between versions, and link with the OpenBLAS library. It is also possible to obtain a summary of the versions of R and the OpenBLAS library that are available.
 
 <!-- The following subsections are intended to explain and exemplify the use of these functions focused on the main problems that can be solved using the `ropenblas` package. Some functions may take a few minutes to run, as they are responsible for compiling code that is considerably larges and complicateds. This is the case with the `rcompiler()` and  `ropenblas()` functions. -->
 
 ## 'last_version_r' function
 
-The function `last_version_r()` automatically searches, in the official repositories of language R, for information about versions of language R. Its general use is `last_version_r(major = NULL)` , where the argument `major` indicates which is the largest version of R that you want to search for the version list. Therefore, for the argument `major` a number must be passed, preferably an integer that indicates which is the largest version to be considered.
+The function `last_version_r()` automatically searches, in the official repositories of language R, for information about versions of language R. Its general use is `last_version_r(major = NULL)`, where the argument major indicates which is the largest version of R that you want to search for the version list. Therefore, for argument `major`, a number must be passed, preferably an integer that indicates which is the largest version to be considered.
 
 <!-- Consider the example: -->
 
@@ -147,7 +147,7 @@ The function `last_version_r()` automatically searches, in the official reposito
 
 ## 'last_version_openblas' function
 
-The `last_version_openblas()` function works similarly to the `last_version_r()` function, returning a list of three elements named in the same way with the information from the latest version, all the versions and the number of versions of the OpenBLAS library, respectively.
+The `last_version_openblas()` function works similarly to the `last_version_r()` function, returning a list of three elements named in the same way with the information from the latest version, all the versions, and the number of versions of the OpenBLAS library, respectively.
 
 <!-- Unlike the `last_version_r()` function that searches for the versions of R on the official language website, the `last_version_openblas()` function will search for information on the OpenBLAS library versions on official language development repository on GitHub. In addition, due to the way that the versions of the OpenBLAS library are numbered, the function will always consider the universe of all versions of the OpenBLAS library, therefore, being a function without arguments. The latest version of the OpenBLAS library can be returned by doing `last_version_openblas()$last_version`. Just like the `last_version_r()` function, the `last_version_openblas()` function does not depend on which version of OpenBLAS is available in the repositories of your GNU/Linux distribution. -->
 
@@ -159,7 +159,7 @@ The `last_version_openblas()` function works similarly to the `last_version_r()`
 
 ## 'rcompiler' function
 
-This function is responsible for compiling a version of the R language. The x argument is the version of R that you want to compile. For example, `x = "4.0.4"` will compile and link R-4.0.4 version as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the R. For example, to compile the latest stable version of the R language, run `rcompiler()`. The `rcompiler()` function can only be used if the user is an administrator of the GNU/Linux distribution. If the user is using programming IDE's, a screen similar to the image below will be displayed requesting the entry of the system administrator password.
+This function is responsible for compiling a version of the R language. The x argument is the version of R that you want to compile. For example, `x = "4.0.4"` will compile and link the R-4.0.4 version as the major version on your system. By default (`x = NULL`) will be compiled the latest stable version of the R. For example, to compile the latest stable version of the R language, run `rcompiler()`. The `rcompiler()` function can only be used if the user is an administrator of the GNU/Linux distribution. If the user is using programming IDE's, a screen similar to the image below will be displayed requesting the entry of the system administrator password.
 
 <!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.cap="Window for entering the system administration password.", out.width="55%"} -->
 
@@ -184,7 +184,7 @@ This function is responsible for compiling a version of the R language. The x ar
 -   `with_blas`: This argument sets the `--with-blas` flag in the R language compilation process and must be passed as a string. Details on the use of this flag can be found here;
 -   `complementary_flags`: String with complementary flags to be used in the R language compilation process.
 
-If the goal is to install the R language, switch between versions of R, and link the installed versions of the language with the OpenBLAS library, you shouldn't have to worry about the `with_blas` and `complementary_flags` arguments, respectively. These arguments are useful for a minority of programmers who feel very specific needs to pass complementary flags to be considered in the R language compilation process, inclusion of complementary library directories, among other arguments that can be found in the official language manuals. By default, if nothing is passed to the `with_blas` and `complementary_flags` arguments, the compilation will be performed as follows:
+If the goal is to install the R language, switch between versions of R, and link the installed versions of the language with the OpenBLAS library, you shouldn't have to worry about the `with_blas` and `complementary_flags` arguments, respectively. These arguments are useful for a minority of programmers who feel very specific needs to pass complementary flags to be considered in the R language compilation process, the inclusion of complementary library directories, among other arguments that can be found in the official language manuals. By default, if nothing is passed to the `with_blas` and `complementary_flags` arguments, the compilation will be performed as follows:
 
 
 ```bash
@@ -288,8 +288,8 @@ The `ropenblas()` function, a function of the same name in the package, links th
 
 The `ropenblas()` function is made up of two arguments. Are they:
 
--   `x`: String with the version of the OpenBLAS library to be compiled, installed and linked with the main R installation (by default it is considered the latest version);
--   `restart_r`: Logical value (default `restart_r = TRUE`) to update the R section after compiling, installing and linking the OpenBLAS library.
+-   `x`: String with the version of the OpenBLAS library to be compiled, installed, and linked with the main R installation (by default it is considered the latest version);
+-   `restart_r`: Logical value (default `restart_r = TRUE`) to update the R section after compiling, installing, and linking the OpenBLAS library.
 
 <!-- By default, if `x = NULL` the latest version of the OpenBLAS library will be considered. This is equivalent to passing `last_version_openblas()$last_version` to `x`. There are no great reasons to consider an older version of the OpenBLAS library, although the `ropenblas` package will allow this to be done in a simple way, as in the following example:  -->
 
@@ -321,7 +321,7 @@ The `ropenblas()` function is made up of two arguments. Are they:
 
 <!-- ``` -->
 
-The code below is a small example of the benefits of considering linking the R language to the OpenBLAS library, in which singular-value decomposition of a rectangular matrix is computed, codes that are executed on the same machine, version of R and section. The first part of the code was executed with R without being linked to a version of the OpenBLAS library and the second part was executed after using the `ropenblas()` function. Note that the code when executed in R linked to a version of the OpenBLAS library can be clearly more efficient:
+The code below is a small example of the benefits of considering linking the R language to the OpenBLAS library, in which singular-value decomposition of a rectangular matrix is computed, codes that are executed on the same machine, version of R, and section. The first part of the code was executed with R without being linked to a version of the OpenBLAS library and the second part was executed after using the `ropenblas()` function. Note that the code when executed in R linked to a version of the OpenBLAS library can be more efficient:
 
 
 ```r
@@ -364,7 +364,7 @@ system.time(svd(X))
 ## 3.024     2.004     0.677 
 ```
 
-Through a banchmark it is possible to better understand the performance gain that can be achieved by linking the R language to the OpenBLAS library. Figure 2 presents the banchmarks in the form of violin plot, in which 100 reproductions of the `svd(X)` expression were considered, in the form of the code above, with the R linked to the BLAS library and linked to the OpenBLAS library, respectively, on the same hardware. It was observed that the average time of execution of the routine `svd(X)` considering the OpenBLAS library was less than 10 times the time necessary to execute it in R linking to a non-optimized version of BLAS, being the average time of 0.64 and 6.52 seconds, respectively.
+Through a benchmark it is possible to better understand the performance gain that can be achieved by linking the R language to the OpenBLAS library. Figure 2 presents the benchmarks in the form of a violin plot, in which 100 reproductions of the `svd(X)` expression were considered, in the form of the code above, with the R linked to the BLAS library and linked to the OpenBLAS library, respectively, on the same hardware. It was observed that the average time of execution of the routine `svd(X)` considering the OpenBLAS library was less than 10 times the time necessary to execute it in R linking to a non-optimized version of BLAS, being the average time of 0.64 and 6.52 seconds, respectively.
 
 \begin{figure}[H]
 
@@ -377,11 +377,11 @@ Through a banchmark it is possible to better understand the performance gain tha
 
 ## 'link_again' function
 
-The `link_again()` function links again the OpenBLAS library with the R language, being useful to correct problems of untying the OpenBLAS library that is common when the operating system is updated. The function be able to link again the R language with the OpenBLAS library.
+The `link_again()` function links again the OpenBLAS library with the R language, being useful to correct problems of untying the OpenBLAS library that is common when the operating system is updated. The function can link again the R language with the OpenBLAS library.
 
-Thus, `link_again()` will only make the relinkagem when in some previous section of R the `ropenblas()` function has been used for the initial binding of the R language with the OpenBLAS library.
+Thus, `link_again()` will only make the linkage when in some previous section of R the `ropenblas()` function has been used for the initial binding of the R language with the OpenBLAS library.
 
-The use of the function is quite simple, just by running the code `link_again()`, since the function has no arguments. It will automatically detect if there was a link break that will be rebuilt again without the need for any compilation. From time to time, after a major update of the operating system, it may be convenient to run the `link_again()` function. Link breakage rarely occurs, but if it does, it can be resolved quickly. The following code and image exemplify a possible reconstruction of symbolic links using the `link_again()` function:
+The use of the function is quite simple, just by running the code `link_again()` since the function has no arguments. It will automatically detect if there was a link break that will be rebuilt again without the need for any compilation. From time to time, after a major update of the operating system, it may be convenient to run the `link_again()` function. Link breakage rarely occurs, but if it does, it can be resolved quickly. The following code and image exemplify a possible reconstruction of symbolic links using the `link_again()` function:
 
 
 ```r
