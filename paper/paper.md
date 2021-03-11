@@ -328,7 +328,7 @@ The `ropenblas()` function is made up of two arguments. Are they:
 
 <!-- ``` -->
 
-Table 1 below presents the benefit of considering an optimized version of BLAS. Computational costs are presented in the calculation of the singular decomposition in a rectangular matrix (function `svd()`) and in the calculation of the inverse of that same matrix (function `solve()`). Some repetitions (100 repetitions) of each of the respective functions were performed. The benchmark can be better observed through the violin plots shown in Figure 2.
+Table 1 below presents the benefit of considering an optimized version of BLAS. Computational costs are presented in the calculation of the singular decomposition in a rectangular matrix (`svd()`) and in the calculation of the inverse of that same matrix (`solve()` function). Some repetitions (100 repetitions) of each of the respective functions were performed. The benchmark can be better observed through the violin plots shown in Figure 2.
 
 \
 
@@ -338,7 +338,7 @@ Table 1 below presents the benefit of considering an optimized version of BLAS. 
 | `svd(x)`   | OpenBLAS | 0.641     |
 | `solve(x)` | BLAS     | 1.640      |
 | `solve(x)` | OpenBLAS | 0.640      |
-: Comparison of the computational costs of the `svd()` and `solve()` functions.
+: Comparison of the computational costs of the `svd()` and `solve()` functions (average of 100 repetitions).
 
 Through a benchmark it is possible to better understand the performance gain that can be achieved by linking the R language to the OpenBLAS library. Figure 2 presents the benchmarks in the form of a violin plot, in which 100 reproductions of the `svd(X)` expression were considered, in the form of the code above, with the R linked to the BLAS library and linked to the OpenBLAS library, respectively, on the same hardware. It was observed that the average time of execution of the routine `svd(X)` considering the OpenBLAS library was less than 10 times the time necessary to execute it in R linking to a non-optimized version of BLAS, being the average time of 0.64 and 6.52 seconds, respectively.
 
