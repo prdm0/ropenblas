@@ -328,7 +328,7 @@ The `ropenblas()` function is made up of two arguments. Are they:
 
 <!-- ``` -->
 
-Table 1 below presents the benefit of considering an optimized version of BLAS. Computational costs are presented in the calculation of the singular decomposition in a rectangular matrix (`svd()`) and in the calculation of the inverse of that same matrix (`solve()` function). Some repetitions (100 repetitions) of each of the respective functions were performed. The benchmark can be better observed through the violin plots shown in Figure 2.
+Table 1 below presents the benefit of considering an optimized version of BLAS. Computational costs are presented in the calculation of the singular decomposition in a rectangular matrix (`svd()` function) and in the calculation of the inverse of that same matrix (`solve()` function). Some repetitions (100 repetitions) of each of the respective functions were performed. The benchmark can be better observed through the violin plots shown in Figure 2.
 
 \
 
