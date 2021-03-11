@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Arch Linux) (preloaded format=xelatex 2021.3.8)  10 MAR 2021 21:37
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Arch Linux) (preloaded format=xelatex 2021.3.8)  10 MAR 2021 22:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1135,7 +1135,7 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
 [5]
-Underfull \hbox (badness 2818) in paragraph at lines 659--662
+Underfull \hbox (badness 2818) in paragraph at lines 672--675
 \TU/lmr/m/n/10 Retrieved from [][]$[][][][][] [] [] [] [][][] [] [][][][] [] []
 [][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][] [] [][][][][
 ][][][][][][][][][] []
@@ -1147,14 +1147,14 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 /resources/JOSS-logo.png>
 [6] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 20AA41C2232F087A47A2CF8CCA4CABF6;706.
+(rerunfilecheck)             Checksum: D1EEA62314BE92F524EB7A2A34D08CB4;753.
 Package logreq Info: Writing requests to 'paper.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 35481 strings out of 477299
- 699704 string characters out of 5838339
- 1507425 words of memory out of 5000000
- 54533 multiletter control sequences out of 15000+600000
+ 35482 strings out of 477299
+ 699718 string characters out of 5838339
+ 1507525 words of memory out of 5000000
+ 54534 multiletter control sequences out of 15000+600000
  410294 words of font info for 74 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  80i,13n,85p,1194b,800s stack positions out of 5000i,500n,10000p,200000b,80000s

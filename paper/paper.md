@@ -396,4 +396,8 @@ The `rnews()` function returns the contents of the `NEWS.html` file in the stand
 
 <!-- If `pdf = FALSE` (default), the `NEWS.html` file will open in the browser, otherwise `NEWS.pdf` will be opened. If `dev = FALSE` (default), it will not show changes made to the language development version. To see changes in the development version, do `dev = TRUE`. -->
 
+# Improvements
+
+The package will continue to evolve and code reviews will always be carried out. In addition, contributions to the development of the package are always welcome, especially those that aim to allow the `rcompiler()` and `ropenblas()` functions to work on Windows systems. There is also an interest that the `ropenblas` package will allow the linking of the Intel Math Kernel Library - MKL, just as it is done with the OpenBLAS library. All of these are improvements that we would like to see in future versions of the package.
+
 # References
