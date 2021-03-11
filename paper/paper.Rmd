@@ -31,13 +31,13 @@ journal: JOSS
 knitr::opts_chunk$set(fig.pos = 'H')
 ```
 
-The `ropenblas` package aims to facilitate the day-to-day life of R programmers who want a little more performance on GNU/Linux systems, without removing the possibility that specific configurations are made, if they deem convenient. Through the package's `ropenblas()` and `rcompiler()` functions, the library user will be able to compile and link the R language in his GNU/Linux distribution with the OpenBLAS library, all within R and in a very simple. All functions work without being influenced by the GNU/Linux distribution and are independent of their repositories, that is, it does not matter which GNU/Linux distribution is being used. Linking the OpenBLAS library to R will bring better computational performance to the language in the most diverse algebraic operations commonly used in areas such as statistics, data science, and machine learning.
+The `ropenblas` package aims to facilitate the day-to-day life of R programmers who want a little more performance on GNU/Linux systems, without removing the possibility that specific configurations are made, if they deem convenient. Through the package's `ropenblas()` and `rcompiler()` functions, the library user will be able to compile and link the R language in his GNU/Linux distribution with the OpenBLAS library, all within R and in a very simple fashion. All functions work without being influenced by the GNU/Linux distribution and are independent of their repositories, that is, it does not matter which GNU/Linux distribution is being used. Linking the OpenBLAS library to R will bring better computational performance to the language in the most diverse algebraic operations commonly used in areas such as statistics, data science, and machine learning.
 
 # Statement of Need
 
-The `ropenblas` package aims to allow algebraic computing of R to be performed using the OpenBLAS library, that is, it allows easy linking of R to the OpenBLAS library on GNU/Linux systems without depending on the distribution repositories. This will allow several researches in the areas of statistics, data science, and machine learning to take advantage of more efficient performance in algebraic calculations, for example, multiplication, factorization, and matrix inversion. The `ropenblas` library, version 0.2.9 will also allow the R programmer to have, in his GNU/Linux distribution, several compiled versions of the R language giving the possibility to easily switch between these versions, this being an Open Source functionality that is only possible in some commercial IDEs of R. All this is done within the R language, minimizing the chance of less experienced users to break their operating system by running several instructions that are not perfectly understood.
+The `ropenblas` package aims to allow algebraic computing of R to be performed using the OpenBLAS library, that is, it allows easy linking of R to the OpenBLAS library on GNU/Linux systems without depending on the distribution repositories. This will allow several researchers in the areas of statistics, data science, and machine learning to take advantage of more efficient performance in algebraic calculations, for example, multiplication, factorization, and matrix inversion. The `ropenblas` library, version 0.2.9 will also allow the R programmer to have, in his GNU/Linux distribution, several compiled versions of the R language giving the possibility to easily switch between these versions, this being an Open Source functionality that is only possible in some commercial IDEs of R. All this is done within the R language, minimizing the chance of less experienced users to break their operating system by running several instructions that are not perfectly understood.
 
-The fact that the `ropenblas` package does not depend on the repositories of the GNU/Linux distribution will allow that in more stable distributions the R programmer will have at his disposal the most recent version of the OpenBLAS libraries and the R language. Everything is done safely, since the `ropenblas` package uses the stable versions of the official development repositories of the OpenBLAS library and the R programming language, respectively. Until the present version, the package has more than 1000 downloads, having an average of more than 1000 downloads in the month before the date of this submission, based on the official R language repositories.
+The fact that the `ropenblas` package does not depend on the repositories of the GNU/Linux distribution will allow that in more stable distributions the R programmer will have at his disposal the most recent version of the OpenBLAS libraries and the R language. Everything is done safely, since the `ropenblas` package uses the stable versions of the official development repositories of the OpenBLAS library and the R programming language, respectively. Until the present version, the package has more than 11000 downloads, having an average of more than 1000 downloads in the month before the date of this submission, based on the official R language repositories.
 
 # Introduction
 
@@ -62,9 +62,9 @@ The `ropenblas` is a package designed to facilitate the linking of the library O
 3.  The OpenBLAS library will be compiled and you will choose which build version to bind to R, regardless of your Linux distribution;
 4.  The package allows you to install R $\geq 3.1.0$, also allowing you to install one more version, in addition to allowing you to easily switch between those versions;
 5.  The linked versions of R will continue to be recognized by their Integrated Development Environment - IDE and nothing will have to be adjusted in your GNU/Linux distribution after using any function of the package;
-6.  Unnecessary builds will be avoided. Therefore, if you need to switch between compiled versions of the R language, the use of binaries compiled in previous times will be suggested;
+6.  Unnecessary builds will be avoided. Therefore, if you need to switch between compiled versions of the R language, the use of binaries compiled compiled previously will be suggested;
 7.  If any errors occur, the functions of the package will not damage the previous installation of the language;
-8.  If something better can be done or if a newer version of what you want to install (R or OpenBLAS) exists, the functions will automatically suggest that you consider installing newer versions.
+8.  If something better can be done or if a newer version of what you want to install (R or OpenBLAS) exists, the functions will automatically suggest that you should consider installing newer versions.
 
 The `ropenblas` package is already available on the Comprehensive R Archive Network - CRAN, currently in version 0.2.9, and the project is maintained on GitHub at <https://github.com/prdm0/ropenblas> where contributors can find other details of the code, information, as well as being able to contribute with the development of the project. Information can also be found on the project website. On the website, it is also possible to read the `NEWS.md` file with details of the versions and the focus of the current development. The site is deposited at <https://prdm0.github.io/ropenblas/>. Suggestions for improvements and bug reports can be sent via the link <https://github.com/prdm0/ropenblas/issues>. You can find out how to contribute to the package by accessing the `CONTRIBUTING.md` file at <https://github.com/prdm0/ropenblas/blob/master/CONTRIBUTING.md>.
 
@@ -183,22 +183,31 @@ rcompiler(x = NULL, with_blas = NULL, complementary_flags = NULL)
 -   `with_blas`: This argument sets the `--with-blas` flag in the R language compilation process and must be passed as a string. Details on the use of this flag can be found here;
 -   `complementary_flags`: String with complementary flags to be used in the R language compilation process.
 
-If the goal is to install the R language, switch between versions of R, and link the installed versions of the language with the OpenBLAS library, you shouldn't have to worry about the `with_blas` and `complementary_flags` arguments, respectively. These arguments are useful for a minority of programmers who feel very specific needs to pass complementary flags to be considered in the R language compilation process, the inclusion of complementary library directories, among other arguments that can be found in the official language manuals. By default, if nothing is passed to the `with_blas` and `complementary_flags` arguments, the compilation will be performed as follows:
+If the goal is to install the R language, switch between versions of R, and link the installed versions of the language with the OpenBLAS library, you shouldn't have to worry about the `with_blas` and `complementary_flags` arguments, respectively. For more details, consult the `README.md` of the project or the official documentation of the package in [CRAN](https://cran.r-project.org/web/packages/ropenblas/ropenblas.pdf).
 
-```{bash, eval=FALSE}
-./configure --prefix=/opt/R/version_r --enable-memory-profiling
---enable-R-shlib --enable-threads=posix
---with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -lpthread -lm"
-```
+<!-- These arguments are useful for a minority of programmers who feel very specific needs to pass complementary flags to be considered in the R language compilation process, the inclusion of complementary library directories, among other arguments that can be found in the official language manuals. By default, if nothing is passed to the `with_blas` and `complementary_flags` arguments, the compilation will be performed as follows: -->
 
-As a suggestion and if you want to use the complementary arguments, that is, use `with_blas` and `complementary_flags`, do not change the directory `include` and `lib` of the OpenBLAS library in argument `with_blas`, considering that the `rcompiler()` function will always install the OpenBLAS library in the `/opt/OpenBLAS` directory, thus avoiding problems with breaking important links on your system and in the configuration of the initial version of R. If you try to pass a different installation directory to the OpenBLAS library, the `rcompiler()` function will disregard this installation of OpenBLAS and perform a safe installation in the `/opt/OpenBLAS` directory. Everything is built in this directory and symbolic links are used so that the initial state of R configuration in the GNU/Linux distribution is not changed. This allows no errors to be made and unforeseen bugs to occur. If there are reasons to consider complementary strings for the arguments `with_blas` and `complementary_flags`, the R language will be compiled as follows:
+<!-- ```{bash, eval=FALSE} -->
 
-```{bash, eval=FALSE}
---prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib
---enable-threads=posix --with-blas="..." complementary_flags
-```
+<!-- ./configure --prefix=/opt/R/version_r --enable-memory-profiling -->
 
-The `rcompiler()` function will also avoid unnecessary compilations. Therefore, if your initial version of R is already linked to some version of the OpenBLAS library, only the R language will be compiled, with no need to compile the OpenBLAS library. Although the initial description of the `rcompiler()` function may seem a little complicated, its use is very simple. Below I will exemplify some situations in which the use of the `rcompiler()` function may be convenient.
+<!-- --enable-R-shlib --enable-threads=posix -->
+
+<!-- --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include -lpthread -lm" -->
+
+<!-- ``` -->
+
+<!-- As a suggestion and if you want to use the complementary arguments, that is, use `with_blas` and `complementary_flags`, do not change the directory `include` and `lib` of the OpenBLAS library in argument `with_blas`, considering that the `rcompiler()` function will always install the OpenBLAS library in the `/opt/OpenBLAS` directory, thus avoiding problems with breaking important links on your system and in the configuration of the initial version of R. If you try to pass a different installation directory to the OpenBLAS library, the `rcompiler()` function will disregard this installation of OpenBLAS and perform a safe installation in the `/opt/OpenBLAS` directory. Everything is built in this directory and symbolic links are used so that the initial state of R configuration in the GNU/Linux distribution is not changed. This allows no errors to be made and unforeseen bugs to occur. If there are reasons to consider complementary strings for the arguments `with_blas` and `complementary_flags`, the R language will be compiled as follows: -->
+
+<!-- ```{bash, eval=FALSE} -->
+
+<!-- --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib -->
+
+<!-- --enable-threads=posix --with-blas="..." complementary_flags -->
+
+<!-- ``` -->
+
+<!-- Although the initial description of the `rcompiler()` function may seem a little complicated, its use is very simple. Below I will exemplify some situations in which the use of the `rcompiler()` function may be convenient. -->
 
 <!-- **Example**: In the hypothetical situation of an R user on any GNU/Linux distribution, if are interested in knowing the latest version of the R language, installing it and linking it to the OpenBLAS library, it should proceed as follows: -->
 
@@ -317,53 +326,21 @@ The `ropenblas()` function is made up of two arguments. Are they:
 
 <!-- ``` -->
 
-The code below is a small example of the benefits of considering linking the R language to the OpenBLAS library, in which singular-value decomposition of a rectangular matrix is computed, codes that are executed on the same machine, version of R, and section. The first part of the code was executed with R without being linked to a version of the OpenBLAS library and the second part was executed after using the `ropenblas()` function. Note that the code when executed in R linked to a version of the OpenBLAS library can be more efficient:
+Table 1 below presents the benefit of considering an optimized version of BLAS. Computational costs are presented in the calculation of the singular decomposition in a rectangular matrix (function `svd()`) and in the calculation of the inverse of that same matrix (function `solve()`). Some repetitions (100 repetitions) of each of the respective functions were performed. The benchmark can be better observed through the violin plots shown in Figure 2.
 
-```{r, eval = FALSE}
+\
 
-# Using the BLAS + Lapack library: 
-
-# Matrix products: default 
-
-# BLAS:   /usr/lib/libblas.so.3.9.0
-
-# LAPACK: /usr/lib/liblapack.so.3.9.0 
-
-n <- 1e3L
-
-X <- matrix(rnorm(n * n), n, n)
-
-system.time(svd(X))
-
-## user      system      elapsed 
-
-## 7.246     0.029       7.286  
-
-# ---- 
-
-# After linking the OpenBLAS library to R using the ropenblas() function:
-
-# Using the OpenBLAS version 0.3.13 library: 
-
-# Matrix products: default
-
-# BLAS/LAPACK: /opt/OpenBLAS/lib/libopenblas_haswellp-r0.3.13.so
-
-n <- 1e3L
-
-X <- matrix(rnorm(n * n), n, n) 
-
-system.time(svd(X)) 
-
-## user      system    elapsed
-
-## 3.024     2.004     0.677 
-
-```
+| Functions  | Library  | Time (seconds) |
+|----------- |----------|:---------------:|
+| `svd(x)`   | BLAS     | 6.520      |
+| `svd(x)`   | OpenBLAS | 0.641     |
+| `solve(x)` | BLAS     | 1.640      |
+| `solve(x)` | OpenBLAS | 0.640      |
+: Comparison of the computational costs of the `svd()` and `solve()` functions.
 
 Through a benchmark it is possible to better understand the performance gain that can be achieved by linking the R language to the OpenBLAS library. Figure 2 presents the benchmarks in the form of a violin plot, in which 100 reproductions of the `svd(X)` expression were considered, in the form of the code above, with the R linked to the BLAS library and linked to the OpenBLAS library, respectively, on the same hardware. It was observed that the average time of execution of the routine `svd(X)` considering the OpenBLAS library was less than 10 times the time necessary to execute it in R linking to a non-optimized version of BLAS, being the average time of 0.64 and 6.52 seconds, respectively.
 
-```{r bench, echo = FALSE, fig.cap = "Benchmarks of a Singular Value Decomposition of a Matrix.", fig.align = "center", out.width="60%"}
+```{r bench, echo = FALSE, fig.cap = "Benchmarks of a decomposition of singular and inverse value of a matrix of dimension 1000 x 1000.", fig.align = "center", out.width="90%"}
 knitr::include_graphics(path = "benchmark.png") 
 ```
 
