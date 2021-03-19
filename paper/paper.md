@@ -64,7 +64,13 @@ The `ropenblas` is a package designed to facilitate the linking of the library O
 7.  If any errors occur, the functions of the package will not damage the previous installation of the language;
 8.  If something better can be done or if a newer version of what you want to install (R or OpenBLAS) exists, the functions will automatically suggest that you should consider installing newer versions.
 
-The `ropenblas` package is already available on the Comprehensive R Archive Network - CRAN, currently in version 0.2.9, and the project is maintained on GitHub at <https://github.com/prdm0/ropenblas> where contributors can find other details of the code, information, as well as being able to contribute with the development of the project. Information can also be found on the project website. On the website, it is also possible to read the `NEWS.md` file with details of the versions and the focus of the current development. The site is deposited at <https://prdm0.github.io/ropenblas/>. Suggestions for improvements and bug reports can be sent via the link <https://github.com/prdm0/ropenblas/issues>. You can find out how to contribute to the package by accessing the `CONTRIBUTING.md` file at <https://github.com/prdm0/ropenblas/blob/master/CONTRIBUTING.md>.
+The `ropenblas` package is already available on the Comprehensive R Archive Network - CRAN, currently in version 0.2.9, and the project is maintained on GitHub at <https://github.com/prdm0/ropenblas> where contributors can find other details of the code, information, as well as being able to contribute with the development of the project. 
+
+<!-- Information can also be found on the project website.  -->
+
+<!-- On the website, it is also possible to read the `NEWS.md` file with details of the versions and the focus of the current development. The site is deposited at <https://prdm0.github.io/ropenblas/>. Suggestions for improvements and bug reports can be sent via the link <https://github.com/prdm0/ropenblas/issues>.  -->
+
+<!-- You can find out how to contribute to the package by accessing the `CONTRIBUTING.md` file at <https://github.com/prdm0/ropenblas/blob/master/CONTRIBUTING.md>. -->
 
 \begin{figure}[H]
 
@@ -357,12 +363,11 @@ The `link_again()` function links again the OpenBLAS library with the R language
 
 Thus, `link_again()` will only make the linkage when in some previous section of R the `ropenblas()` function has been used for the initial binding of the R language with the OpenBLAS library.
 
-The use of the function is quite simple, just by running the code `link_again()` since the function has no arguments. It will automatically detect if there was a link break that will be rebuilt again without the need for any compilation. From time to time, after a major update of the operating system, it may be convenient to run the `link_again()` function. Link breakage rarely occurs, but if it does, it can be resolved quickly. The following code and image exemplify a possible reconstruction of symbolic links using the `link_again()` function:
+<!-- The use of the function is quite simple, just by running the code `link_again()` since the function has no arguments. It will automatically detect if there was a link break that will be rebuilt again without the need for any compilation. From time to time, after a major update of the operating system, it may be convenient to run the `link_again()` function. Link breakage rarely occurs, but if it does, it can be resolved quickly. The following code and image exemplify a possible reconstruction of symbolic links using the `link_again()` function: -->
 
-
-```r
-> link_again()
-```
+<!-- ```{r, eval=FALSE, prompt=TRUE} -->
+<!-- link_again() -->
+<!-- ``` -->
 
 <!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.cap="If an unlinking of the OpenBLAS library occurs, the function will re-link the library.", out.width="100%"} -->
 

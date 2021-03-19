@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Arch Linux) (preloaded format=xelatex 2021.3.8)  19 MAR 2021 16:38
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Arch Linux) (preloaded format=xelatex 2021.3.8)  19 MAR 2021 16:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1097,7 +1097,7 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
 File: logo.png Graphic file (type bmp)
 <logo.png>
 
-Underfull \hbox (badness 2809) in paragraph at lines 400--414
+Underfull \hbox (badness 2809) in paragraph at lines 391--405
 \TU/lmtt/m/n/10 ropenblas()\TU/lmr/m/n/10 , \TU/lmtt/m/n/10 last_version_r()\TU
 /lmr/m/n/10 , \TU/lmtt/m/n/10 last_version_openblas()\TU/lmr/m/n/10 , \TU/lmtt/
 m/n/10 link_again() \TU/lmr/m/n/10 and
@@ -1113,7 +1113,7 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 523--524
+Underfull \hbox (badness 10000) in paragraph at lines 514--515
 
  []
 
@@ -1124,7 +1124,7 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
 [4]
-Underfull \hbox (badness 2818) in paragraph at lines 621--624
+Underfull \hbox (badness 2818) in paragraph at lines 596--599
 \TU/lmr/m/n/10 Retrieved from [][]$[][][][][] [] [] [] [][][] [] [][][][] [] []
 [][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][] [] [][][][][
 ][][][][][][][][][] []
@@ -1146,6 +1146,6 @@ Here is how much of TeX's memory you used:
  54533 multiletter control sequences out of 15000+600000
  410294 words of font info for 74 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 80i,12n,85p,1194b,800s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 80i,13n,85p,1194b,800s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on paper.pdf (5 pages).
