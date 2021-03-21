@@ -15,7 +15,7 @@ affiliations:
  - name: Department of Statistics, Federal University of Paraíba, João Pessoa, Paraíba - PB, Brazil
    index: 1
 citation_author: Marinho
-date: "2021-03-19"
+date: "2021-03-20"
 year: "2021"
 bibliography: paper.bib
 output: rticles::joss_article
@@ -74,7 +74,7 @@ The `ropenblas` package is already available on the Comprehensive R Archive Netw
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.3\linewidth]{logo} 
+{\centering \includegraphics[width=0.4\linewidth]{logo} 
 
 }
 

@@ -74,7 +74,7 @@ The `ropenblas` package is already available on the Comprehensive R Archive Netw
 
 <!-- You can find out how to contribute to the package by accessing the `CONTRIBUTING.md` file at <https://github.com/prdm0/ropenblas/blob/master/CONTRIBUTING.md>. -->
 
-```{r logo, echo = FALSE, message = FALSE, fig.cap = "Computer library logo.", fig.align = "center", out.width="30%"}
+```{r logo, echo = FALSE, message = FALSE, fig.cap = "Computer library logo.", fig.align = "center", out.width="40%"}
 
 knitr::include_graphics(path = "logo.png") 
 
