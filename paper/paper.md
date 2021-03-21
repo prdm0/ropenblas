@@ -15,7 +15,7 @@ affiliations:
  - name: Department of Statistics, Federal University of Paraíba, João Pessoa, Paraíba - PB, Brazil
    index: 1
 citation_author: Marinho
-date: "2021-03-20"
+date: "2021-03-21"
 year: "2021"
 bibliography: paper.bib
 output: rticles::joss_article
