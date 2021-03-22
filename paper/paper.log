@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Arch Linux) (preloaded format=xelatex 2021.3.8)  22 MAR 2021 11:01
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Arch Linux) (preloaded format=xelatex 2021.3.8)  22 MAR 2021 12:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -868,57 +868,42 @@ File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
 
 )
 Package hyperref Info: Option `breaklinks' set `true' on input line 151.
-(/usr/share/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count454
-\FV@InFile=\read5
-\FV@TabBox=\box71
-\c@FancyVerbLine=\count455
-\FV@StepNumber=\count456
-\FV@OutFile=\write7
-) (/usr/share/texmf-dist/tex/latex/framed/framed.sty
-Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip91
-\fb@frw=\dimen286
-\fb@frh=\dimen287
-\FrameRule=\dimen288
-\FrameSep=\dimen289
-) (/usr/share/texmf-dist/tex/latex/tools/longtable.sty
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip92
-\LTright=\skip93
-\LTpre=\skip94
-\LTpost=\skip95
-\LTchunksize=\count457
-\LTcapwidth=\dimen290
-\LT@head=\box72
-\LT@firsthead=\box73
-\LT@foot=\box74
-\LT@lastfoot=\box75
-\LT@cols=\count458
-\LT@rows=\count459
-\c@LT@tables=\count460
-\c@LT@chunks=\count461
+\LTleft=\skip91
+\LTright=\skip92
+\LTpre=\skip93
+\LTpost=\skip94
+\LTchunksize=\count454
+\LTcapwidth=\dimen286
+\LT@head=\box71
+\LT@firsthead=\box72
+\LT@foot=\box73
+\LT@lastfoot=\box74
+\LT@cols=\count455
+\LT@rows=\count456
+\c@LT@tables=\count457
+\c@LT@chunks=\count458
 \LT@p@ftn=\toks42
 ) (/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen291
-\lightrulewidth=\dimen292
-\cmidrulewidth=\dimen293
-\belowrulesep=\dimen294
-\belowbottomsep=\dimen295
-\aboverulesep=\dimen296
-\abovetopsep=\dimen297
-\cmidrulesep=\dimen298
-\cmidrulekern=\dimen299
-\defaultaddspace=\dimen300
-\@cmidla=\count462
-\@cmidlb=\count463
-\@aboverulesep=\dimen301
-\@belowrulesep=\dimen302
-\@thisruleclass=\count464
-\@lastruleclass=\count465
-\@thisrulewidth=\dimen303
+\heavyrulewidth=\dimen287
+\lightrulewidth=\dimen288
+\cmidrulewidth=\dimen289
+\belowrulesep=\dimen290
+\belowbottomsep=\dimen291
+\aboverulesep=\dimen292
+\abovetopsep=\dimen293
+\cmidrulesep=\dimen294
+\cmidrulekern=\dimen295
+\defaultaddspace=\dimen296
+\@cmidla=\count459
+\@cmidlb=\count460
+\@aboverulesep=\dimen297
+\@belowrulesep=\dimen298
+\@thisruleclass=\count461
+\@lastruleclass=\count462
+\@thisrulewidth=\dimen299
 ) (/usr/share/texmf-dist/tex/latex/grffile/grffile.sty
 Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
 y)
@@ -927,45 +912,45 @@ line 40.
 ) (/usr/share/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2020-06-15 v2.0f non-zero parskip adjustments
 )
-\csllabelwidth=\skip96
-\cslhangindent=\skip97
+\csllabelwidth=\skip95
+\cslhangindent=\skip96
 (/usr/share/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count466
+\c@float@type=\count463
 \float@exts=\toks43
-\float@box=\box76
+\float@box=\box75
 \@float@everytoks=\toks44
-\@floatcapt=\box77
+\@floatcapt=\box76
 )
-\@quotelevel=\count467
-\@quotereset=\count468
+\@quotelevel=\count464
+\@quotereset=\count465
 (./paper.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 260.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 220.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
-60.
+20.
 (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 260.
-LaTeX Font Info:    ... okay on input line 260.
-Package hyperref Info: Link coloring ON on input line 260.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 220.
+LaTeX Font Info:    ... okay on input line 220.
+Package hyperref Info: Link coloring ON on input line 220.
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/usr/share/texmf-dist/tex/latex/refcount/refcount.sty
@@ -973,13 +958,13 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count469
+\c@section@level=\count466
 )
-LaTeX Info: Redefining \ref on input line 260.
-LaTeX Info: Redefining \pageref on input line 260.
-LaTeX Info: Redefining \nameref on input line 260.
+LaTeX Info: Redefining \ref on input line 220.
+LaTeX Info: Redefining \pageref on input line 220.
+LaTeX Info: Redefining \nameref on input line 220.
 (./paper.out) (./paper.out)
-\@outlinefile=\write8
+\@outlinefile=\write7
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: longtable package is loaded.
@@ -999,8 +984,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'paper.bbl' not found.
 No file paper.bbl.
-Package biblatex Info: Reference section=0 on input line 260.
-Package biblatex Info: Reference segment=0 on input line 260.
+Package biblatex Info: Reference section=0 on input line 220.
+Package biblatex Info: Reference segment=0 on input line 220.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1035,7 +1020,7 @@ Package biblatex Info: Reference segment=0 on input line 260.
 * \@reversemargintrue
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 260.
+LaTeX Info: Redefining \microtypecontext on input line 220.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1053,14 +1038,14 @@ Package microtype Info: Loading generic protrusion settings for font family
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 261
+LaTeX Font Info:    Trying to load font information for U+msa on input line 221
 .
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 261
+LaTeX Font Info:    Trying to load font information for U+msb on input line 221
 .
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1068,15 +1053,15 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
-Package hyperref Warning: Suppressing link with empty target on input line 287.
+Package hyperref Warning: Suppressing link with empty target on input line 247.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 287.
+Package hyperref Warning: Suppressing link with empty target on input line 247.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 287.
+Package hyperref Warning: Suppressing link with empty target on input line 247.
 
 
 File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
@@ -1090,14 +1075,14 @@ We now make it that large for the rest of the document.
 This may cause the page layout to be inconsistent, however.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 352.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 314.
 [1
 
 ]
 File: logo.png Graphic file (type bmp)
 <logo.png>
 
-Underfull \hbox (badness 2809) in paragraph at lines 391--405
+Underfull \hbox (badness 2809) in paragraph at lines 374--388
 \TU/lmtt/m/n/10 ropenblas()\TU/lmr/m/n/10 , \TU/lmtt/m/n/10 last_version_r()\TU
 /lmr/m/n/10 , \TU/lmtt/m/n/10 last_version_openblas()\TU/lmr/m/n/10 , \TU/lmtt/
 m/n/10 link_again() \TU/lmr/m/n/10 and
@@ -1108,23 +1093,14 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
 [2]
-File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
-/joss/resources/JOSS-logo.png Graphic file (type bmp)
-</home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
-/resources/JOSS-logo.png>
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 514--515
-
- []
-
 File: benchmark.png Graphic file (type bmp)
 <benchmark.png>
 File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 /joss/resources/JOSS-logo.png Graphic file (type bmp)
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
-[4]
-Underfull \hbox (badness 2818) in paragraph at lines 596--599
+[3]
+Underfull \hbox (badness 2818) in paragraph at lines 456--459
 \TU/lmr/m/n/10 Retrieved from [][]$[][][][][] [] [] [] [][][] [] [][][][] [] []
 [][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][] [] [][][][][
 ][][][][][][][][][] []
@@ -1134,18 +1110,18 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 /joss/resources/JOSS-logo.png Graphic file (type bmp)
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
-[5] (./paper.aux)
+[4] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 3696A05EE453CDD1617873928F24CBE3;693.
+(rerunfilecheck)             Checksum: 5D6C7FF1739A44109257292297AA13D6;241.
 Package logreq Info: Writing requests to 'paper.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 35481 strings out of 477299
- 699699 string characters out of 5838339
- 1503404 words of memory out of 5000000
- 54533 multiletter control sequences out of 15000+600000
+ 35005 strings out of 477299
+ 692536 string characters out of 5838339
+ 1493466 words of memory out of 5000000
+ 54065 multiletter control sequences out of 15000+600000
  410294 words of font info for 74 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 80i,13n,85p,1194b,800s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 80i,12n,85p,1194b,800s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paper.pdf (5 pages).
+Output written on paper.pdf (4 pages).
