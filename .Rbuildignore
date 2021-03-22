@@ -8,6 +8,7 @@ README.md
 README.Rmd
 CONTRIBUTING.md
 CONTRIBUTING.Rmd
+_pkgdown.yml
 LICENSE
 ^docs$
 ^paper$
