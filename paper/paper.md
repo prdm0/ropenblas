@@ -128,7 +128,7 @@ Through a benchmark it is possible to better understand the performance gain tha
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.65\linewidth]{benchmark} 
+{\centering \includegraphics[width=0.6\linewidth]{benchmark} 
 
 }
 
