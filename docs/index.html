@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -80,22 +80,21 @@
 <div id="download-compile-and-link-openblas-library-with-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#download-compile-and-link-openblas-library-with-r" class="anchor"></a>Download, Compile and Link OpenBLAS Library with R</h1></div>
-<p><strong>Package website</strong>: <strong><a href="https://prdm0.github.io/ropenblas" class="uri">https://prdm0.github.io/ropenblas</a></strong></p>
-<p><strong>Summary</strong></p>
+<p><strong>Summary</strong><br><strong>Package website</strong>: <strong><a href="https://prdm0.github.io/ropenblas" class="uri">https://prdm0.github.io/ropenblas</a></strong></p>
 <ul>
-<li><a href="#1-general-aspects">1 General aspects</a></li>
-<li><a href="#2-advantages-of-using-ropenblas-package">2 Advantages of using ropenblas package</a></li>
-<li><a href="#3-dependencies">3 Dependencies</a></li>
-<li><a href="#4-installation">4 Installation</a></li>
+<li><a href="#general-aspects">1 General aspects</a></li>
+<li><a href="#advantages-of-using-ropenblas-package">2 Advantages of using ropenblas package</a></li>
+<li><a href="#dependencies">3 Dependencies</a></li>
+<li><a href="#installation">4 Installation</a></li>
 <li>
-<a href="#5-use">5 Use</a>
+<a href="#use">5 Use</a>
 <ul>
-<li><a href="#51-ropenblas-function">5.1 ‘ropenblas’ function</a></li>
-<li><a href="#52-last_version_r-function">5.2 ‘last_version_r’ function</a></li>
-<li><a href="#53-last_version_openblas-function">5.3 ‘last_version_openblas’ function</a></li>
-<li><a href="#54-rcompiler-function">5.4 ‘rcompiler’ function</a></li>
-<li><a href="#55-link_again-function">5.5 ‘link_again’ function</a></li>
-<li><a href="#56-rnews-function">5.6 ‘rnews’ function</a></li>
+<li><a href="#ropenblas-function">5.1 ‘ropenblas’ function</a></li>
+<li><a href="#last_version_r-function">5.2 ‘last_version_r’ function</a></li>
+<li><a href="#last_version_openblas-function">5.3 ‘last_version_openblas’ function</a></li>
+<li><a href="#rcompiler-function">5.4 ‘rcompiler’ function</a></li>
+<li><a href="#link_again-function">5.5 ‘link_again’ function</a></li>
+<li><a href="#rnews-function">5.6 ‘rnews’ function</a></li>
 </ul>
 </li>
 </ul>
@@ -151,7 +150,7 @@
 <div id="5-use" class="section level1">
 <h1 class="hasAnchor">
 <a href="#5-use" class="anchor"></a>5 Use</h1>
-<p>The <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package currently provides five functions: <code><a href="reference/ropenblas.html">ropenblas()</a></code>, <code><a href="reference/rcompiler.html">rcompiler()</a></code>, <code><a href="reference/last_version_openblas.html">last_version_openblas()</a></code>, <code><a href="reference/last_version_r.html">last_version_r()</a></code> and <code><a href="reference/link_again.html">link_again()</a></code>. First of all, do:</p>
+<p>The <a href="https://prdm0.github.io/ropenblas/"><strong>ropenblas</strong></a> package currently provides five functions: <code><a href="reference/ropenblas.html">ropenblas()</a></code>, <code><a href="reference/rcompiler.html">rcompiler()</a></code>, <code><a href="reference/last_version_openblas.html">last_version_openblas()</a></code>, <code><a href="reference/last_version_r.html">last_version_r()</a></code>, <code><a href="reference/link_again.html">link_again()</a></code> and <code><a href="reference/rnews.html">rnews()</a></code>. First of all, do:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ropenblas)</span></code></pre></div>
 <div id="51-ropenblas-function" class="section level2">
 <h2 class="hasAnchor">
@@ -178,7 +177,7 @@
 <a href="#52-last_version_r-function" class="anchor"></a>5.2 ‘last_version_r’ function</h2>
 <p>Given the higher version, the function will return the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. See the following example:</p>
 <p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/bce920c05f8daa13fc6568e6797d4b841e9d43ce/img/asciicast/last_version_r.svg"><!-- --></p>
-<!-- **Note**: If `major = NULL`, the function will consider the major release number. -->
+<p>**Note**: If `major = NULL`, the function will consider the major release number.</p>
 </div>
 <div id="53-last_version_openblas-function" class="section level2">
 <h2 class="hasAnchor">
@@ -189,7 +188,7 @@
 <div id="54-rcompiler-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#54-rcompiler-function" class="anchor"></a>5.4 ‘rcompiler’ function</h2>
-<p>This function is responsible for compiling a version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href="https://www.r-project.org/"><strong>R</strong></a> that you want to compile. For example, <code>x = "4.0.0"</code> will compile and link <strong>R-4.0.0</strong> version as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a>.</p>
+<p>This function is responsible for compiling a version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href="https://www.r-project.org/"><strong>R</strong></a> that you want to compile. For example, <code>x = "4.0.4"</code> will compile and link <strong>R-4.0.4</strong> version as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a>.</p>
 <p>For example, to compile the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language, do:</p>
 <p><img src="https://raw.githubusercontent.com/prdm0/ropenblas/bce920c05f8daa13fc6568e6797d4b841e9d43ce/img/asciicast/rcompiler.svg"><!-- --></p>
 <p>Regardless of your GNU/Linux distribution and what version of <a href="https://www.r-project.org/"><strong>R</strong></a> is in your repositories, you can have the latest stable version of the <a href="https://www.r-project.org/"><strong>R</strong></a> language compiled into your computer architecture.</p>
