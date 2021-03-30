@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Arch Linux) (preloaded format=xelatex 2021.3.8)  30 MAR 2021 16:05
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/Arch Linux) (preloaded format=xelatex 2021.3.8)  30 MAR 2021 16:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1082,7 +1082,7 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
 File: logo.png Graphic file (type bmp)
 <logo.png>
 
-Underfull \hbox (badness 2809) in paragraph at lines 366--380
+Underfull \hbox (badness 2809) in paragraph at lines 366--378
 \TU/lmtt/m/n/10 ropenblas()\TU/lmr/m/n/10 , \TU/lmtt/m/n/10 last_version_r()\TU
 /lmr/m/n/10 , \TU/lmtt/m/n/10 last_version_openblas()\TU/lmr/m/n/10 , \TU/lmtt/
 m/n/10 link_again() \TU/lmr/m/n/10 and
@@ -1100,7 +1100,7 @@ File: /home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates
 </home/prdm0/R/x86_64-pc-linux-gnu-library/4.0/rticles/rmarkdown/templates/joss
 /resources/JOSS-logo.png>
 [3]
-Underfull \hbox (badness 2818) in paragraph at lines 448--451
+Underfull \hbox (badness 2818) in paragraph at lines 446--449
 \TU/lmr/m/n/10 Retrieved from [][]$[][][][][] [] [] [] [][][] [] [][][][] [] []
 [][][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][][][] [] [][][][][
 ][][][][][][][][][] []
@@ -1118,7 +1118,7 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 Here is how much of TeX's memory you used:
  35005 strings out of 477299
  692536 string characters out of 5838339
- 1492466 words of memory out of 5000000
+ 1491466 words of memory out of 5000000
  54065 multiletter control sequences out of 15000+600000
  410294 words of font info for 74 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
