@@ -15,7 +15,7 @@ affiliations:
  - name: Department of Statistics, Federal University of Paraíba, João Pessoa, Paraíba - PB, Brazil
    index: 1
 citation_author: Marinho
-date: "2021-03-22"
+date: "2021-03-30"
 year: "2021"
 bibliography: paper.bib
 output: rticles::joss_article
@@ -29,7 +29,9 @@ journal: JOSS
 
 
 
-The `ropenblas` package aims to facilitate the day-to-day life of R programmers who want more performance on GNU/Linux systems, without removing the possibility that specific configurations are made, if they deem convenient, that is, more technical users will be able to pass other flags that will be considered in the compilation process. Through the package's `ropenblas()` and `rcompiler()` functions, the library user will be able to compile and link the R language in his GNU/Linux distribution with the OpenBLAS library, all within R and in a very simple fashion. All functions work without being influenced by the GNU/Linux distribution and are independent of their repositories, that is, it does not matter which GNU/Linux distribution is being used. Linking the OpenBLAS library to R will bring better computational performance to the language in the most diverse algebraic operations commonly used in areas such as statistics, data science, and machine learning.
+<!-- The `ropenblas` package aims to facilitate the day-to-day life of R programmers who want more performance on GNU/Linux systems, without removing the possibility that specific configurations are made, if they deem convenient, that is, more technical users will be able to pass other flags that will be considered in the compilation process. Through the package's `ropenblas()` and `rcompiler()` functions, the library user will be able to compile and link the R language in his GNU/Linux distribution with the OpenBLAS library, all within R and in a very simple fashion. All functions work without being influenced by the GNU/Linux distribution and are independent of their repositories, that is, it does not matter which GNU/Linux distribution is being used. Linking the OpenBLAS library to R will bring better computational performance to the language in the most diverse algebraic operations commonly used in areas such as statistics, data science, and machine learning. -->
+
+The `ropenblas` package provides improved performance on GNU/Linux systems and allows for passing additional compilation flags for more technical users. Through the `ropenblas()` and `rcompiler()` functions, the user will be able to compile and link the GNU/Linux distribution R language with the OpenBLAS library, all within R and in a very simple fashion. It works for all GNU/Linux distributions. Linking the OpenBLAS library to R brings better computational performance to the language in the most diverse algebraic operations commonly used in areas such as statistics, data science, and machine learning.
 
 <!-- # Statement of Need -->
 
@@ -39,11 +41,15 @@ The `ropenblas` package aims to facilitate the day-to-day life of R programmers 
 
 # Introduction
 
-The term "computational efficiency" is very common for those who program statistical methods, in which a large part of them involve algebraic operations that are often reproduced in computationally intensive simulations, such as Monte-Carlo simulations - MC and resampling methods, as is the case with bootstrap resampling. Statistics is just one example within so many other areas that need performance and uses the R language.
+<!-- The term "computational efficiency" is very common for those who program statistical methods, in which a large part of them involve algebraic operations that are often reproduced in computationally intensive simulations, such as Monte-Carlo simulations - MC and resampling methods, as is the case with bootstrap resampling. Statistics is just one example within so many other areas that need performance and uses the R language. -->
+
+Computational efficiency is important for those who program statistical methods since they often involve algebraic operations reproduced in computationally intensive simulations, such as Monte-Carlo simulations and resampling methods, as is the case with bootstrap resampling. Statistics is just one example within other areas that need good performance and use the R language.
 
 In addition to the adoption of good programming practices and the maximum, efficient and adequate use of available computational resources, such as code parallelization, through multicore parallelism procedures allowed by most current processors and operating systems, small adjustments and linkage of libraries can provide useful benefits.
 
-The `ropenblas` package aims to provide useful and simple experiences to R [@R] programmers who develop their activities on GNU/Linux operating systems. These experiences consist of being able to link any version of the OpenBLAS [@openblas] library to the R language, as well as allowing the programmer to install and link various versions of R and make them available on their operating system as well as switch between these versions as they see fit.
+<!-- The `ropenblas` package aims to provide useful and simple experiences to R [@R] programmers who develop their activities on GNU/Linux operating systems. These experiences consist of being able to link any version of the OpenBLAS [@openblas] library to the R language, as well as allowing the programmer to install and link various versions of R and make them available on their operating system as well as switch between these versions as they see fit. -->
+
+The `ropenblas` package aims to be easy to use for R [@R] programmers who work on GNU/Linux operating systems. For example, a user can link any version of the OpenBLAS [@openblas] library to the R language and install and link various versions of R to make them available on their operating system as well as switch between these versions.
 
 Linking the R language to the OpenBLAS library can bring several benefits to algebraic computing in R. OpenBLAS is an Open-Source implementation of the Basic Linear Algebra Subprograms - BLAS library that is often the first library option for algebraic computing to be linked in the installation of R on many GNU/Linux distributions. The OpenBLAS library is available at <https://github.com/xianyi/OpenBLAS> and adds optimized implementations of linear algebra kernels that can run optimized on various processor architectures. OpenBLAS is based on the GotoBLAS2 project code in version 1.13 [@gotoblas2], code available under the terms of the BSD license.
 
