@@ -15,7 +15,7 @@ affiliations:
  - name: Department of Statistics, Federal University of Paraíba, João Pessoa, Paraíba - PB, Brazil
    index: 1
 citation_author: Marinho
-date: "2021-03-22"
+date: "2021-03-30"
 year: "2021"
 bibliography: paper.bib
 output: rticles::joss_article
@@ -40,6 +40,7 @@ The `ropenblas` package provides improved performance on GNU/Linux systems and a
 Computational efficiency is important for those who program statistical methods since they often involve algebraic operations reproduced in computationally intensive simulations, such as Monte-Carlo simulations and resampling methods, as is the case with bootstrap resampling. Statistics is just one example within other areas that need good performance and use the R language.
 
 In addition to the adoption of good programming practices and the maximum, efficient and adequate use of available computational resources, such as code parallelization, through multicore parallelism procedures allowed by most current processors and operating systems, small adjustments and linkage of libraries can provide useful benefits.
+
 
 The `ropenblas` package aims to be easy to use for R [@R] programmers who work on GNU/Linux operating systems. For example, a user can link any version of the OpenBLAS [@openblas] library to the R language and install and link various versions of R to make them available on their operating system as well as switch between these versions.
 
