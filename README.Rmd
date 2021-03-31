@@ -4,11 +4,12 @@ author: |
   |
   |
   |
-  | **Summary**
   | **Package website**: **<https://prdm0.github.io/ropenblas>**
+  |
+  | **Summary**
 output: 
   bookdown::github_document2:
-    number_sections: true
+    number_sections: false
     toc: true
     toc_depth: 2
 toccolor: 'blue'
@@ -17,8 +18,9 @@ editor_options:
     wrap: 72
 ---
 
-**ropenblas**
+**ropenblas package**
 
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02769/status.svg)](https://doi.org/10.21105/joss.02769)
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![total](http://cranlogs.r-pkg.org/badges/grand-total/ropenblas)](https://CRAN.R-project.org/package=ropenblas)

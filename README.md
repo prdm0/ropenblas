@@ -3,25 +3,27 @@ Download, Compile and Link OpenBLAS Library with R
   
   
   
-**Summary**  
-**Package website**: **<https://prdm0.github.io/ropenblas>**
+**Package website**: **<https://prdm0.github.io/ropenblas>**  
+  
+**Summary**
 
--   [1 General aspects](#general-aspects)
--   [2 Advantages of using ropenblas
+-   [General aspects](#general-aspects)
+-   [Advantages of using ropenblas
     package](#advantages-of-using-ropenblas-package)
--   [3 Dependencies](#dependencies)
--   [4 Installation](#installation)
--   [5 Use](#use)
-    -   [5.1 ‘ropenblas’ function](#ropenblas-function)
-    -   [5.2 ‘last\_version\_r’ function](#last_version_r-function)
-    -   [5.3 ‘last\_version\_openblas’
+-   [Dependencies](#dependencies)
+-   [Installation](#installation)
+-   [Use](#use)
+    -   [‘ropenblas’ function](#ropenblas-function)
+    -   [‘last\_version\_r’ function](#last_version_r-function)
+    -   [‘last\_version\_openblas’
         function](#last_version_openblas-function)
-    -   [5.4 ‘rcompiler’ function](#rcompiler-function)
-    -   [5.5 ‘link\_again’ function](#link_again-function)
-    -   [5.6 ‘rnews’ function](#rnews-function)
+    -   [‘rcompiler’ function](#rcompiler-function)
+    -   [‘link\_again’ function](#link_again-function)
+    -   [‘rnews’ function](#rnews-function)
 
-**ropenblas**
+**ropenblas package**
 
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02769/status.svg)](https://doi.org/10.21105/joss.02769)
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![total](http://cranlogs.r-pkg.org/badges/grand-total/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
@@ -31,7 +33,7 @@ Download, Compile and Link OpenBLAS Library with R
 
 <!-- <img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right" /> -->
 
-# 1 General aspects
+# General aspects
 
 The [**ropenblas**](https://prdm0.github.io/ropenblas/) is a package
 designed to facilitate the linking of the library
@@ -86,7 +88,7 @@ proceed with the use of the functions. If your internet is not working
 or if any dependency on the operating system is not present, the package
 will let you know.
 
-# 2 Advantages of using ropenblas package
+# Advantages of using ropenblas package
 
 Some advantages of using the
 [**ropenblas**](https://prdm0.github.io/ropenblas/) library:
@@ -135,7 +137,7 @@ Some advantages of using the
     [**R**](https://www.r-project.org/) site? Run
     `ropenblas::last_version_r(major = NULL)`.
 
-# 3 Dependencies
+# Dependencies
 
 You must install the following dependencies on your operating system
 (Linux):
@@ -148,7 +150,7 @@ C and Fortran frontends.
 Do not worry that you will be notified if any of these dependencies are
 not installed.
 
-# 4 Installation
+# Installation
 
 Installing the [**ropenblas**](https://prdm0.github.io/ropenblas/)
 library is easy and will require you to have installed the **devtools**
@@ -164,7 +166,7 @@ or
 
 <!-- **Note**: If you want to access the latest features of the [**ropenblas**](https://prdm0.github.io/ropenblas/) package, install it using the first procedure. -->
 
-# 5 Use
+# Use
 
 The [**ropenblas**](https://prdm0.github.io/ropenblas/) package
 currently provides five functions: `ropenblas()`, `rcompiler()`,
@@ -173,7 +175,7 @@ currently provides five functions: `ropenblas()`, `rcompiler()`,
 
     library(ropenblas)
 
-## 5.1 ‘ropenblas’ function
+## ‘ropenblas’ function
 
 Installing, compiling, and linking the
 [**OpenBLAS**](https://www.openblas.net/) version **0.3.13** library to
@@ -196,7 +198,7 @@ the [**R**](https://www.r-project.org/) language:
 <!-- You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system. -->
 <!-- You will not necessarily have to run `ropenblas()` on every section of [**R**](https://www.r-project.org/). Almost always it will not be necessary. However, it may be that the [**R**](https://www.r-project.org/) is updated by the operating system (GNU/Linux). Thus, it may be that in this update the [**R**](https://www.r-project.org/) unlink with the [**OpenBLAS**](https://www.openblas.net/) library. Therefore, from time to time check using the command `extSoftVersion()["BLAS"]` if the link with [**OpenBLAS**](https://www.openblas.net/) is correct, otherwise run the command `ropenblas()` again. -->
 
-## 5.2 ‘last\_version\_r’ function
+## ‘last\_version\_r’ function
 
 Given the higher version, the function will return the latest stable
 version of the [**R**](https://www.r-project.org/) language. See the
@@ -204,10 +206,9 @@ following example:
 
 ![](https://raw.githubusercontent.com/prdm0/ropenblas/bce920c05f8daa13fc6568e6797d4b841e9d43ce/img/asciicast/last_version_r.svg)<!-- -->
 
-\*\*Note\*\*: If \`major = NULL\`, the function will consider the major
-release number.
+<!-- **Note**: If `major = NULL`, the function will consider the major release number. -->
 
-## 5.3 ‘last\_version\_openblas’ function
+## ‘last\_version\_openblas’ function
 
 The `last_version_openblas()` function automatically searches
 [**OpenBLAS**](https://www.openblas.net/) library versions in the
@@ -215,7 +216,7 @@ official [**GitHub**](https://github.com/xianyi/OpenBLAS) project.
 
 ![](https://raw.githubusercontent.com/prdm0/ropenblas/bce920c05f8daa13fc6568e6797d4b841e9d43ce/img/asciicast/last_version_openblas.svg)<!-- -->
 
-## 5.4 ‘rcompiler’ function
+## ‘rcompiler’ function
 
 This function is responsible for compiling a version of the
 [**R**](https://www.r-project.org/) language. The `x` argument is the
@@ -259,7 +260,7 @@ unnecessarys compilations.
 <!--     ./configure --with-blas="..." complementary_flags -->
 <!--    ``` -->
 
-## 5.5 ‘link\_again’ function
+## ‘link\_again’ function
 
 The `link_again` function links again the
 [**OpenBLAS**](https://www.openblas.net/) library with the
@@ -296,7 +297,7 @@ the interest is to take advantage of a previous compilation of the
 [**OpenBLAS**](https://www.openblas.net/) library, the function
 `link_again` may be useful.
 
-## 5.6 ‘rnews’ function
+## ‘rnews’ function
 
 Returns the contents of the
 [**NEWS.html**](https://cran.r-project.org/doc/manuals/r-release/NEWS.html)
