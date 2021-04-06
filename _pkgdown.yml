@@ -1,4 +1,3 @@
-destination: docs/
 template:
   params:
-    bootswatch: flatly # https://bootswatch.com/flatly/
+    bootswatch: flatly

@@ -17,7 +17,7 @@ s <- sticker(
   s_height = 1.3,
   s_x = 1.1,
   s_y = 0.84,
-  h_fill = "#FE5750",
+  h_fill =  "#FE5750",
   h_color = "#E8DF9C",
   p_color = "#0F2536",
   p_family = "Aller_Rg",
@@ -27,7 +27,7 @@ s <- sticker(
   url = "https://prdm0.github.io/ropenblas/",
   u_size = 4.5,
   spotlight = T,
-  l_alpha = 0.4,
+  l_alpha = 0.3,
   dpi = 300,
   u_color = "white"
 )
