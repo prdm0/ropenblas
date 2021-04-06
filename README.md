@@ -29,9 +29,11 @@ Download, Compile and Link OpenBLAS Library with R
 [![total](http://cranlogs.r-pkg.org/badges/grand-total/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![month](https://cranlogs.r-pkg.org/badges/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 
-<img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" width="219" style="display: block; margin: auto;" />
+<!-- ```{r, fig.align='center', echo=FALSE, out.width=219} -->
+<!-- knitr::include_graphics("https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png") -->
+<!-- ``` -->
 
-<!-- <img src="https://raw.githubusercontent.com/prdm0/ropenblas/master/logo.png" height="270" width="250" align="right" /> -->
+<img src="logo.png" height="230" width="200" align="right" />
 
 # General aspects
 

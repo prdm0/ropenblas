@@ -9,7 +9,7 @@ library(fs)
 img <- image_read(path(getwd(), "img", "logo", "img.png"))
 logo <- image_ggplot(img, interpolate = TRUE)
 
-s <- sticker(
+sticker(
   logo,
   package = "ropenblas",
   p_size = 20,
@@ -29,7 +29,7 @@ s <- sticker(
   spotlight = T,
   l_alpha = 0.3,
   dpi = 300,
-  u_color = "white"
+  u_color = "#85dfce"
 )
 
 fs::file_delete(fs::path(getwd(), "logo.png"))
