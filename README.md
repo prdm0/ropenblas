@@ -24,6 +24,8 @@ Download, Compile and Link OpenBLAS Library with R
 **ropenblas package**
 
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.02769/status.svg)](https://doi.org/10.21105/joss.02769)
+[![Travis build
+status](https://travis-ci.com/prdm0/ropenblas.svg?branch=master)](https://travis-ci.com/prdm0/ropenblas)
 [![last](https://www.r-pkg.org/badges/last-release/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
 [![total](http://cranlogs.r-pkg.org/badges/grand-total/ropenblas)](https://CRAN.R-project.org/package=ropenblas)
