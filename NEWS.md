@@ -1,6 +1,12 @@
-# ropenblas 0.3.0 (development version)
+# ropenblas (development version)
+
+* Code review.
+
+# ropenblas 0.2.10
 
 * Code review;
+
+* The **rvest** package is now a dependency.
 
 # ropenblas 0.2.9
 
