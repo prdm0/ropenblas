@@ -530,11 +530,12 @@ ropenblas <- function(x = NULL, restart_r = TRUE) {
   
 }
 
-#' @importFrom stringr str_remove
+#' @importFrom stringr str_remove str_extract
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%"
 #' @importFrom RCurl getURL
 #' @importFrom XML getHTMLLinks
+#' @importFrom rvest read_html html_nodes html_text
 #' @title \R language versions
 #' @param major Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
 #' will consider the major release number.
@@ -590,23 +591,16 @@ last_version_r <- function(major = NULL) {
     }
   }
   
-  trysearch <-
-    function(...)
-      tryCatch(
-        expr = search(...),
-        error = function(e)
-          return(0),
-        warning = function(w)
-          return(0)
-      )
-  
-  if (is.null(major))
-    major <-
-    vapply(X = 1L:6L,
-           FUN = trysearch,
-           FUN.VALUE = double(1L)) %>% which.min - 1L
-  
-  
+  if (is.null(major)) 
+    major <- 
+      read_html("https://cloud.r-project.org/src/base") %>% 
+      html_nodes("a") %>% 
+      html_text() %>% 
+      str_extract(pattern = "R-\\d") %>% 
+      str_extract(pattern = "\\d") %>% 
+      max(na.rm = TRUE) %>% 
+      as.integer()
+
   vec_versions <- search(x = major, number_version = FALSE) %>%
     str_remove(pattern = "^R-")
   
