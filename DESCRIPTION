@@ -16,7 +16,6 @@ URL: https://prdm0.github.io/ropenblas/, https://github.com/prdm0/ropenblas
 BugReports: https://github.com/prdm0/ropenblas/issues
 SystemRequirements: GNU Make, GCC Compiler Suite (C and Fortran)
 Encoding: UTF-8
-LazyData: true
 Imports:
     glue,
     magrittr,
