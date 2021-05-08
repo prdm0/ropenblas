@@ -1,3 +1,4 @@
 template:
+  package: preferably
   params:
-    bootswatch: cosmo
+    toggle: manual

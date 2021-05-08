@@ -2,3 +2,5 @@
 
 language: R
 cache: packages
+r_github_packages:
+  - amirmasoudabdol/preferably

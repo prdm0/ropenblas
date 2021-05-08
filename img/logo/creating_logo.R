@@ -17,19 +17,19 @@ sticker(
   s_height = 1.3,
   s_x = 1.1,
   s_y = 0.84,
-  h_fill =  "#FE5750",
-  h_color = "#E8DF9C",
-  p_color = "#0F2536",
+  h_fill =  "#f8d7a1",
+  h_color = "#2c3e50",
+  p_color = "#2c3e50",
   p_family = "Aller_Rg",
-  h_size = 2,
+  h_size = 2.4,
   white_around_sticker = T,
   filename = path(getwd(), "img", "logo", "logo.png"),
   url = "https://prdm0.github.io/ropenblas/",
   u_size = 4.5,
   spotlight = T,
-  l_alpha = 0.3,
+  l_alpha = 0.6,
   dpi = 300,
-  u_color = "#85dfce"
+  u_color = "#0F2536"
 )
 
 fs::file_delete(fs::path(getwd(), "logo.png"))
