@@ -2,6 +2,12 @@
 
 * Code review.
 
+# ropenblas 0.2.11
+
+* Code review;
+
+* Troubleshooting ROOT passwords with special characters ([issue #30](https://github.com/prdm0/ropenblas/issues/30)). 
+
 # ropenblas 0.2.10
 
 * Code review;
