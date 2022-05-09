@@ -2,6 +2,18 @@
 
 * Code review.
 
+# ropenblas 0.3.0
+
+* Now the approach of the **ropenblas** package will be to install and configure the R language and the OpenBLAS library locally. Following this new philosophy seems to be the most prudent, since it will minimize errors that are difficult to trace, in addition to allowing non-administrator users to enjoy an R installation with the OpenBLAS library;
+
+* Ao instalar uma nova versão de R com o a função `ropenblas()`, o usuário terá duas versões de R em seu sistema operacional. A versão original instalada pelo administrador do sistema e a versão de R otimizada com a biblioteca OpenBLAS instalada localmente pelo usuário da linguagem;
+
+* Para invocar a IDE RStudio com a versão compilada de R vincaulada à biblioteca OpenBLAs, o usuário deverá, no terminal da sua distribuição GNU/Linux rodar `export RSTUDIO_WHICH_R=/path/bin/R`, em que `/path/bin/R` é o caminho do binário R instalado localmente. Esse caminho poderá ser definido na função `rcompiler`, por meio do argumento `local_path`. O padrão é `local_path = "~".
+
+# ropenblas (development version)
+
+* Code review.
+
 # ropenblas 0.2.10
 
 * Code review;
