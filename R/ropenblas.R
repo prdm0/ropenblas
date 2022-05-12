@@ -745,9 +745,8 @@ change_r <- function (x, change = TRUE, key_root) {
 
   cat("\n")
 
-  "{cli::symbol$mustache} The roles are active after terminating the current {style_underline(style_bold(\"R\"))} session ..." %>%
+  "In the Linux terminal outside RStudio run: {cli::col_cyan(style_underline(style_bold(\". ~/r_openblas/R/.rstudio_exec.sh && rstudio &\")))}" %>%
     glue %>%
-    style_bold %>%
     cat
 }
 
@@ -939,14 +938,14 @@ compiler_r <- function(r_version = NULL,
   
   cat("\n")
   
-  "No terminal Linux fora do RStudio rode: {cli::col_cyan(style_underline(style_bold(\". ~/r_openblas/R/.rstudio_exec.sh && rstudio &\")))}" %>%
+  "In the Linux terminal outside RStudio run: {cli::col_cyan(style_underline(style_bold(\". ~/r_openblas/R/.rstudio_exec.sh && rstudio &\")))}" %>%
     glue %>%
     cat
   
-  "{cli::symbol$mustache} The roles are active after terminating the current {style_underline(style_bold(\"R\"))} session ...\n\n" %>%
-    glue %>%
-    style_bold %>%
-    cat
+  # "{cli::symbol$mustache} The roles are active after terminating the current {style_underline(style_bold(\"R\"))} session ...\n\n" %>%
+  #   glue %>%
+  #   style_bold %>%
+  #   cat
 }
 
 #' @importFrom glue glue
