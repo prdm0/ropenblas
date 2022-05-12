@@ -2,7 +2,7 @@
 % Please edit documentation in R/ropenblas.R
 \name{rnews}
 \alias{rnews}
-\title{R News file}
+\title{Linking the OpenBLAS library with \R again}
 \usage{
 rnews(pdf = FALSE, dev = FALSE)
 }
@@ -12,11 +12,25 @@ rnews(pdf = FALSE, dev = FALSE)
 
 \item{dev}{If \code{FALSE} (default), it will not show changes made to the language development version.
 To see changes in the development version, do \code{dev = TRUE}.}
+
+\item{restart_r}{If \code{TRUE} (default), a new section of \R is started after linking the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.}
 }
 \description{
+The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
+of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
+
 Returns the contents of the \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file in the standard browser installed on the operating system.
 }
 \details{
+The function \code{link_again} be able to link again the \R language with the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Thus, link_again will only make the
+relinkagem when in some previous section of \R the ropenblas function has been used for the initial binding of the \R language with the
+\href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
+
+Relinking is useful in situations of updating the operating system. In some update, it is possible that the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library compiled
+in the \code{/opt} directory is unlinked. In this scenario, when the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library has already been compiled using the ropenblas
+function, the \code{link_again} function performs a new link without the need to recompile, thus making the process less time
+consuming.
+
 The \href{https://cran.r-project.org/doc/manuals/r-release/NEWS.html}{NEWS.html} file contains the main changes from the recently released versions of the \R language.
 The goal is to facilitate the query by invoking it directly from the \R command prompt. The \link{rnews} function is
 analogous to the \link{news} function of the \strong{utils} package. However, using the \link{news} command in a terminal style
@@ -27,4 +41,18 @@ Error in browseURL(url) : 'browser' must be a non-empty character string
 
 This is an error that may occur depending on the installation of \R. Always prefer the use of the news
 function but if you need to, use the \link{rnews} function.
+}
+\note{
+In situations where there was a disconnection due to an update of the operating system, the \code{ropenblas} function can be used to
+re-link the OpenBLAS library with the \R language, however, it will be necessary to compile the
+\href{https://www.openblas.net/}{\strong{OpenBLAS}} library again. If you are interested in recompiling the
+\href{https://www.openblas.net/}{\strong{OpenBLAS}} library and linking with \R, use the \code{\link{ropenblas}} function. If the
+interest is to take advantage of a previous compilation of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library, the
+function \code{link_again} may be useful.
+}
+\examples{
+# link_again()
+}
+\seealso{
+\code{\link{ropenblas}}
 }
