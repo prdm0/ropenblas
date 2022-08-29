@@ -145,8 +145,9 @@ modern_openblas <- function(x) {
 
 sudo_key <- function(attempt = 3L) {
   test <- function(key_root) {
+    key_root <- gsub('"', '\\"', key_root, fixed = T)
     system(
-      command = glue("echo {key_root} |sudo -S -k id -u"),
+      command = glue('echo "{key_root}" | sudo -S -k id -u'),
       ignore.stderr = TRUE,
       intern = TRUE
     ) %>%
