@@ -1,13 +1,15 @@
 Package: ropenblas
 Type: Package
 Title: Download, Compile and Link 'OpenBLAS' Library with R
-Version: 0.2.10
-Authors@R: 
+Version: 0.3.0
+Authors@R: c(
     person(given = "Pedro Rafael",
            family = "D. Marinho",
            role = c("aut", "cre"),
            email = "pedro.rafael.marinho@gmail.com",
-           comment = c(ORCID = "0000-0003-1591-8300"))
+           comment = c(ORCID = "0000-0003-1591-8300")),
+    person(given = "Enes", family = "Ahmeti", role = c("ctb"), email = "eness.188@live.de")
+    )
 Maintainer: Pedro Rafael D. Marinho <pedro.rafael.marinho@gmail.com>
 Description: The 'ropenblas' package (<https://prdm0.github.io/ropenblas/>) is useful for users of any 'GNU/Linux' distribution. It will be possible to download, compile and link the 'OpenBLAS' library (<https://www.openblas.net/>) with the R language, always by the same procedure, regardless of the 'GNU/Linux' distribution used. With the 'ropenblas' package it is possible to download, compile and link the latest version of the 'OpenBLAS' library even the repositories of the 'GNU/Linux' distribution used do not include the latest versions of 'OpenBLAS'. If of interest, older versions of the 'OpenBLAS' library may be considered. Linking R with an optimized version of 'BLAS' (<http://www.netlib.org/blas/>) may improve the computational performance of R code. The 'OpenBLAS' library is an optimized implementation of 'BLAS' that can be easily linked to R with the 'ropenblas' package.    
 Depends: R (>= 3.1.0)

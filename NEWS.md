@@ -2,6 +2,10 @@
 
 * Code review.
 
+# ropenblas 0.3.0
+
+* Added escape to quotes for password. Thanks [@KryeKuzhinieri](https://github.com/KryeKuzhinieri).
+
 # ropenblas 0.2.10
 
 * Code review;

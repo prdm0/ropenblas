@@ -19,3 +19,4 @@ LICENSE
 ^CRAN-RELEASE$
 ^cran-comments\.md$
 ^\.travis\.yml$
+^CRAN-SUBMISSION$
