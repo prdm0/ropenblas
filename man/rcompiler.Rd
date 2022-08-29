@@ -27,8 +27,10 @@ This function is responsible for compiling a version of the \R language.
 This function is responsible for compiling a version of the \href{https://www.r-project.org/}{\strong{R}} language. The \code{x} argument is the version of \href{https://www.r-project.org/}{\strong{R}} that you want to compile.
 For example, \code{x = "4.0.0"} will compile and link \strong{R-4.0.0} version  as the major version on your system. By default (\code{x = NULL}) will be compiled the latest stable version of the \href{https://www.r-project.org/}{\strong{R}}.
 
-For example, to compile the latest stable version of the \href{https://www.r-project.org/}{\strong{R}} language, do:\preformatted{ rcompiler()
-}
+For example, to compile the latest stable version of the \href{https://www.r-project.org/}{\strong{R}} language, do:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ rcompiler()
+}\if{html}{\out{</div>}}
 
 Regardless of your GNU/Linux distribution and what version of \href{https://www.r-project.org/}{\strong{R}} is in your repositories, you can have the latest stable version of the \href{https://www.r-project.org/}{\strong{R}} language compiled
 into your computer architecture.
@@ -40,10 +42,12 @@ that were built in a previous compilation. This avoids unnecessarys compilations
 In addition to the \code{x} argument, the\code{ rcompiler()} function has two other arguments that will allow you to change and pass new compilation flags. Are they:
 \enumerate{
 \item \code{with_blas}: This argument sets the \code{--with-blas} flag in the R language compilation process and must be passed as a string. Details on the use of this flag
-can be found \href{https://cran.r-project.org/doc/manuals/r-devel/R-admin.html}{\strong{here}}. If \code{with_blas = NULL} (default), then it will be considered:\preformatted{./configure --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib
+can be found \href{https://cran.r-project.org/doc/manuals/r-devel/R-admin.html}{\strong{here}}. If \code{with_blas = NULL} (default), then it will be considered:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{./configure --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib
  --enable-threads=posix --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include
  -lpthread -lm"
-}
+}\if{html}{\out{</div>}}
 
 Most likely, you will have little reason to change this aprgument. Unless you know what you're doing, consider \code{with_blas = NULL}. Do not change the installation directory,
 that is, always consider \verb{--prefix = /opt/R/version_r}, where\code{ version_r} is a valid version of \href{https://www.r-project.org/}{\strong{R}}. For a list of valid versions of
@@ -51,8 +55,10 @@ that is, always consider \verb{--prefix = /opt/R/version_r}, where\code{ version
 functions in the package require this. Both the \href{https://www.r-project.org/}{\strong{R}} language and the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library will be installed in the \verb{/opt} directory.
 If this directory does not exist in your GNU/Linux distribution, it will be created;
 \item \code{complementary_flags}: String (\code{complementary_flags = NULL} by default) for adding complementary flags in the \href{https://www.r-project.org/}{\strong{R}} language compilation process.
-Passing a string to \code{complementary_flags} will compile it in the form:\preformatted{./configure --with-blas="..." complementary_flags
-}
+Passing a string to \code{complementary_flags} will compile it in the form:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{./configure --with-blas="..." complementary_flags
+}\if{html}{\out{</div>}}
 }
 }
 \examples{

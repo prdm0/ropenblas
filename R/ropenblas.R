@@ -266,7 +266,7 @@ error_r <- function() {
 
 #' @title Download, Compile and Link OpenBLAS Library with \R
 #' @author Pedro Rafael D. Marinho (e-mail: \email{pedro.rafael.marinho@gmail.com})
-#' @description Link \R with an optimized version of the \href{http://www.netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
+#' @description Link \R with an optimized version of the \href{https://netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
 #' @details The \code{ropenblas()} function will only work on Linux systems. When calling the \code{ropenblas()}
 #' function on Windows, no settings will be made. Only a warning message will be issued informing you that the
 #' configuration can only be performed on Linux systems.
@@ -276,8 +276,8 @@ error_r <- function() {
 #' compiles and link \R to use of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Everything is done very simply, just loading the library and
 #' invok the function \code{ropenblas()}.
 #'
-#' Considering using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library rather than the \href{http://www.netlib.org/blas/}{\strong{BLAS}} may bring extra optimizations for your code and improved
-#' computational performance for your simulations, since \href{https://www.openblas.net/}{\strong{OpenBLAS}} is an optimized implementation of the library \href{http://www.netlib.org/blas/}{\strong{BLAS}}.
+#' Considering using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library rather than the \href{https://netlib.org/blas/}{\strong{BLAS}} may bring extra optimizations for your code and improved
+#' computational performance for your simulations, since \href{https://www.openblas.net/}{\strong{OpenBLAS}} is an optimized implementation of the library \href{https://netlib.org/blas/}{\strong{BLAS}}.
 #' @note You do not have to in every section of \R make use of the \code{ropenblas()} function. Once the function is used, \R
 #' will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sections.
 #' @param x \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = NULL}.
@@ -298,7 +298,7 @@ error_r <- function() {
 #'  configuration again.
 #'
 #' The \code{ropenblas()} function will download the desired version of the library \href{https://www.openblas.net/}{\strong{OpenBLAS}}, compile and install the library in the \code{/opt} directory of your operational system. If the directory does not exist, it will
-#'  be created so that the installation can be completed. Subsequently, files from the version of \href{http://www.netlib.org/blas/}{\strong{BLAS}} used in \R will be symbolically linked to the shared object files of the library version \href{https://www.openblas.net/}{\strong{OpenBLAS}} compiled and installed in \code{/opt}.
+#'  be created so that the installation can be completed. Subsequently, files from the version of \href{https://netlib.org/blas/}{\strong{BLAS}} used in \R will be symbolically linked to the shared object files of the library version \href{https://www.openblas.net/}{\strong{OpenBLAS}} compiled and installed in \code{/opt}.
 #'
 #' You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system. Other details you may also find \href{https://prdm0.github.io/ropenblas/index.html}{\strong{here}}.
 #' @return Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
