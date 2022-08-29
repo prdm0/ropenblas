@@ -71,7 +71,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Link <span style="R">R</span> with an optimized version of the <a href="http://www.netlib.org/blas/" class="external-link"><strong>BLAS</strong></a> library (<a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a>).</p>
+    <p>Link <span style="R">R</span> with an optimized version of the <a href="https://netlib.org/blas/" class="external-link"><strong>BLAS</strong></a> library (<a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a>).</p>
     </div>
 
     <div id="ref-usage">
@@ -104,8 +104,8 @@ configuration can only be performed on Linux systems.</p>
 inform olds versions to the single argument of <code>ropenblas()</code>. The <code>ropenblas()</code> function downloads,
 compiles and link <span style="R">R</span> to use of the <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> library. Everything is done very simply, just loading the library and
 invok the function <code>ropenblas()</code>.</p>
-<p>Considering using the <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> library rather than the <a href="http://www.netlib.org/blas/" class="external-link"><strong>BLAS</strong></a> may bring extra optimizations for your code and improved
-computational performance for your simulations, since <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> is an optimized implementation of the library <a href="http://www.netlib.org/blas/" class="external-link"><strong>BLAS</strong></a>.</p>
+<p>Considering using the <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> library rather than the <a href="https://netlib.org/blas/" class="external-link"><strong>BLAS</strong></a> may bring extra optimizations for your code and improved
+computational performance for your simulations, since <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> is an optimized implementation of the library <a href="https://netlib.org/blas/" class="external-link"><strong>BLAS</strong></a>.</p>
 <p>You must install the following dependencies on your operating system (Linux):</p><ol><li><p><strong>GNU Make</strong>;</p></li>
 <li><p><strong>GNU GCC Compiler (C and Fortran)</strong>.</p></li>
 </ol><p>Your linux operating system may already be configured to use the <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> library. Therefore, most likely <span style="R">R</span> will already be linked to this library. To find out if the <span style="R">R</span> language is using the <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> library,
@@ -115,7 +115,7 @@ at <span style="R">R</span>, do:</p>
 <p>If the <code>ropenblas()</code> function can identify that the <span style="R">R</span> language is using the version of <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> you wish to configure, a warning message will be returned asking if you really would like to proceed with the
 configuration again.</p>
 <p>The <code>ropenblas()</code> function will download the desired version of the library <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a>, compile and install the library in the <code>/opt</code> directory of your operational system. If the directory does not exist, it will
-be created so that the installation can be completed. Subsequently, files from the version of <a href="http://www.netlib.org/blas/" class="external-link"><strong>BLAS</strong></a> used in <span style="R">R</span> will be symbolically linked to the shared object files of the library version <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> compiled and installed in <code>/opt</code>.</p>
+be created so that the installation can be completed. Subsequently, files from the version of <a href="https://netlib.org/blas/" class="external-link"><strong>BLAS</strong></a> used in <span style="R">R</span> will be symbolically linked to the shared object files of the library version <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> compiled and installed in <code>/opt</code>.</p>
 <p>You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system. Other details you may also find <a href="https://prdm0.github.io/ropenblas/index.html" class="external-link"><strong>here</strong></a>.</p>
     </div>
     <div id="note">

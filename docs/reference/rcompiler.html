@@ -106,27 +106,26 @@ missing dependencies.</p>
     <h2>Details</h2>
     <p>This function is responsible for compiling a version of the <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> language. The <code>x</code> argument is the version of <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> that you want to compile.
 For example, <code>x = "4.0.0"</code> will compile and link <strong>R-4.0.0</strong> version  as the major version on your system. By default (<code>x = NULL</code>) will be compiled the latest stable version of the <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a>.</p>
-<p>For example, to compile the latest stable version of the <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> language, do:</p><div class="sourceCode"><pre><code><span> <span class="fu"><a href="../reference/rcompiler.html">rcompiler</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-
+<p>For example, to compile the latest stable version of the <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> language, do:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">rcompiler</span>()</span></code></pre><p></p></div>
 <p>Regardless of your GNU/Linux distribution and what version of <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> is in your repositories, you can have the latest stable version of the <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> language compiled
 into your computer architecture.</p>
 <p>You can use the <code>rcompiler()</code> function to compile different versions of <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a>. For example, running <code>rcompiler(x = "3.6.3")</code> and <code>rcompiler()</code> will install versions 3.6.3 and 4.0.0 on its GNU/Linux distribution,
 respectively. If you are in version 4.0.0 of <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> and run the code <code>rcompiler(x = "3.6.3")</code> again, the function will identify the existence of version 3.6.3 in the system and give you the option to use the binaries
 that were built in a previous compilation. This avoids unnecessarys compilations.</p>
 <p>In addition to the <code>x</code> argument, the<code> rcompiler()</code> function has two other arguments that will allow you to change and pass new compilation flags. Are they:</p><ol><li><p><code>with_blas</code>: This argument sets the <code>--with-blas</code> flag in the R language compilation process and must be passed as a string. Details on the use of this flag
-can be found <a href="https://cran.r-project.org/doc/manuals/r-devel/R-admin.html" class="external-link"><strong>here</strong></a>. If <code>with_blas = NULL</code> (default), then it will be considered:</p><div class="sourceCode"><pre><code>./configure --prefix=/opt/R/version_r --enable-memory-profiling --enable-R-shlib
- --enable-threads=posix --with-blas="-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include
- -lpthread -lm"
-</code></pre></div>
-
+can be found <a href="https://cran.r-project.org/doc/manuals/r-devel/R-admin.html" class="external-link"><strong>here</strong></a>. If <code>with_blas = NULL</code> (default), then it will be considered:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>.<span class="sc">/</span>configure <span class="sc">--</span>prefix<span class="ot">=</span><span class="er">/</span>opt<span class="sc">/</span>R<span class="sc">/</span>version_r <span class="sc">--</span>enable<span class="sc">-</span>memory<span class="sc">-</span>profiling <span class="sc">--</span>enable<span class="sc">-</span>R<span class="sc">-</span>shlib</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="sc">--</span>enable<span class="sc">-</span>threads<span class="ot">=</span>posix <span class="sc">--</span>with<span class="sc">-</span>blas<span class="ot">=</span><span class="st">"-L/opt/OpenBLAS/lib -I/opt/OpenBLAS/include</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st"> -lpthread -lm"</span></span></code></pre><p></p></div>
 <p>Most likely, you will have little reason to change this aprgument. Unless you know what you're doing, consider <code>with_blas = NULL</code>. Do not change the installation directory,
 that is, always consider <code>--prefix = /opt/R/version_r</code>, where<code> version_r</code> is a valid version of <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a>. For a list of valid versions of
 <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a>, run the <code><a href="last_version_r.html">last_version_r()</a></code>. Installing <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> in the <code>/opt/R/version_r</code> directory is important because some
 functions in the package require this. Both the <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> language and the <a href="https://www.openblas.net/" class="external-link"><strong>OpenBLAS</strong></a> library will be installed in the <code>/opt</code> directory.
 If this directory does not exist in your GNU/Linux distribution, it will be created;</p></li>
 <li><p><code>complementary_flags</code>: String (<code>complementary_flags = NULL</code> by default) for adding complementary flags in the <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> language compilation process.
-Passing a string to <code>complementary_flags</code> will compile it in the form:</p><div class="sourceCode"><pre><code>./configure --with-blas="..." complementary_flags
-</code></pre></div></li>
+Passing a string to <code>complementary_flags</code> will compile it in the form:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>.<span class="sc">/</span>configure <span class="sc">--</span>with<span class="sc">-</span>blas<span class="ot">=</span><span class="st">"..."</span> complementary_flags</span></code></pre><p></p></div></li>
 </ol></div>
     <div id="see-also">
     <h2>See also</h2>

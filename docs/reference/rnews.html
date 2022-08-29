@@ -95,11 +95,10 @@ To see changes in the development version, do <code>dev = TRUE</code>.</p></dd>
     <p>The <a href="https://cran.r-project.org/doc/manuals/r-release/NEWS.html" class="external-link">NEWS.html</a> file contains the main changes from the recently released versions of the <span style="R">R</span> language.
 The goal is to facilitate the query by invoking it directly from the <span style="R">R</span> command prompt. The rnews function is
 analogous to the <a href="https://rdrr.io/r/utils/news.html" class="external-link">news</a> function of the <strong>utils</strong> package. However, using the <a href="https://rdrr.io/r/utils/news.html" class="external-link">news</a> command in a terminal style
-bash shell is possible to receive a message like:</p><div class="sourceCode"><pre><code>news()
-starting httpd help server ... done
-Error in browseURL(url) : 'browser' must be a non-empty character string
-</code></pre></div>
-
+bash shell is possible to receive a message like:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">news</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>starting httpd help server ... done</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">browseURL</span>(url) <span class="sc">:</span> <span class="st">'browser'</span> must be a non<span class="sc">-</span>empty character string</span></code></pre><p></p></div>
 <p>This is an error that may occur depending on the installation of <span style="R">R</span>. Always prefer the use of the news
 function but if you need to, use the rnews function.</p>
     </div>
