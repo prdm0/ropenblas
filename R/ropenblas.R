@@ -562,55 +562,38 @@ last_version_r <- function(major = NULL) {
     stop("")
   
   search <- function(x, number_version = TRUE) {
-    test <- function(index, vector_versions)
-      grepl(pattern = "^R-", vector_versions[index])
-    
-    if (number_version) {
-      vector_versions <-
-        glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
-        getURL %>%
-        getHTMLLinks
-      index <-
-        sapply(X = 1L:length(vector_versions),
-               FUN = test,
-               vector_versions)
-      vector_versions[index] %>%
-        unique %>%
-        length
-    } else {
-      vector_versions <-
-        glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
-        getURL %>%
-        getHTMLLinks
-      index <-
-        sapply(X = 1L:length(vector_versions),
-               FUN = test,
-               vector_versions)
-      vector_versions[index] %>%
-        unique %>%
-        str_remove(pattern = "(.tar.gz$|.tgz$)")
+    # x <- 4  
+    vector_versions <-
+      glue::glue("https://cloud.r-project.org/src/base/R-{x}/") %>%
+      RCurl::getURL() %>%
+      XML::getHTMLLinks() %>% 
+      grep(pattern = "^R-[0-9\\.]+.t.+z$", ., value = TRUE)  %>%
+      str_remove(pattern = ".tar.gz$|.tgz$|.tar.xz$")  %>%
+      unique
     }
+    
+    if (is.null(major)) {
+      major <- 
+        xml2::read_html("https://cloud.r-project.org/src/base") %>% 
+        rvest::html_nodes("a") %>% 
+        rvest::html_text() %>% 
+        str_extract(pattern = "R-(\\d)", group = 1) %>% 
+        # str_extract(pattern = "\\d") %>% 
+        as.integer() %>% 
+        max(na.rm = TRUE) 
+    } 
+      
+    
+    
+    vec_versions <- search(x = major, number_version = FALSE) %>%
+      str_remove(pattern = "^R-")
+    
+    list(
+      last_version = vec_versions[length(vec_versions)],
+      versions = vec_versions,
+      n = length(vec_versions)
+    )
   }
-  
-  if (is.null(major)) 
-    major <- 
-      read_html("https://cloud.r-project.org/src/base") %>% 
-      html_nodes("a") %>% 
-      html_text() %>% 
-      str_extract(pattern = "R-\\d") %>% 
-      str_extract(pattern = "\\d") %>% 
-      max(na.rm = TRUE) %>% 
-      as.integer()
-
-  vec_versions <- search(x = major, number_version = FALSE) %>%
-    str_remove(pattern = "^R-")
-  
-  list(
-    last_version = vec_versions[length(vec_versions)],
-    versions = vec_versions,
-    n = length(vec_versions)
-  )
-}
 
 #' @importFrom utils untar
 #' @importFrom glue glue
