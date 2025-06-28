@@ -1,7 +1,7 @@
 Package: ropenblas
 Type: Package
 Title: Download, Compile and Link 'OpenBLAS' Library with R
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: c(
     person(given = "Pedro Rafael",
            family = "D. Marinho",

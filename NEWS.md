@@ -2,6 +2,12 @@
 
 * Code review.
 
+# ropenblas 0.4.0
+
+* Bug fix.
+
+* The `rcompiler` function only compiles different versions of R. Linking with OpenBLAS is solely the responsibility of the `ropenblas` function.
+
 # ropenblas 0.3.0
 
 * Added escape to quotes for password. Thanks [@KryeKuzhinieri](https://github.com/KryeKuzhinieri).
@@ -32,7 +38,7 @@
 
 * Add `rnews` function. This function will allow the user to view the changes in the recent release versions of the R language. It is also possible to check the changes in the development version of R. It is an alternative to the `news` function.
 
-# ropenblas 0.2.6 
+# ropenblas 0.2.6
 
 * Code review;
 
@@ -50,7 +56,7 @@
 
 * The `version_openblas` argument of the `rcompiler()` function has been removed. The `rcompiler()` function now keeps the pre-configured version of OpenBLAS or links the newest version of the OpenBLAS library to R;
 
-* The fs package was removed as a dependency. 
+* The fs package was removed as a dependency.
 
 # ropenblas 0.2.4
 
@@ -66,7 +72,7 @@
 
 * Improve code efficiency.
 
-# ropenblas 0.2.2 
+# ropenblas 0.2.2
 
 * The `last_version_openblas()` function will be added.
 
