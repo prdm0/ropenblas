@@ -22,7 +22,7 @@ connection <- function() {
 #' @importFrom stats na.omit
 #' @importFrom git2r remote_ls
 #' @title OpenBLAS library versions
-#' @details This function automatically searches \href{https://www.openblas.net/}{\strong{OpenBLAS}} library versions in the official \href{https://github.com/xianyi/OpenBLAS}{\strong{GitHub}} project.
+#' @details This function automatically searches \href{https://www.openblas.net/}{\strong{OpenBLAS}} library versions in the official \href{https://github.com/OpenMathLib/OpenBLAS}{\strong{GitHub}} project.
 #' \enumerate{
 #'    \item \code{last_version}: Returns the latest stable version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
 #'    \item \code{versions}: All stable versions of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
@@ -39,7 +39,7 @@ last_version_openblas <- function() {
 
   all <-
     system(
-      command = "git ls-remote --tags https://github.com/xianyi/OpenBLAS.git | sort -t '/' -k 3 -V",
+      command = "git ls-remote --tags https://github.com/OpenMathLib/OpenBLAS.git | sort -t '/' -k 3 -V",
       intern = TRUE
     ) %>%
     stringr::str_extract(pattern = "v[:digit:][:punct:][:graph:]+") %>%
@@ -75,7 +75,7 @@ download_openblas <- function(x = NULL) {
 
   repo_openblas <-
     git2r::clone(
-      url = "https://github.com/xianyi/OpenBLAS.git",
+      url = "https://github.com/OpenMathLib/OpenBLAS.git",
       local_path = path_openblas,
       branch = "develop"
     )
