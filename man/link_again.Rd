@@ -2,34 +2,34 @@
 % Please edit documentation in R/ropenblas.R
 \name{link_again}
 \alias{link_again}
-\title{Linking the OpenBLAS library with \R again}
+\title{Relink the OpenBLAS library with R}
 \usage{
 link_again(restart_r = TRUE)
 }
 \arguments{
-\item{restart_r}{If \code{TRUE} (default), a new section of \R is started after linking the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.}
+\item{restart_r}{If \code{TRUE} (default), a new R session is started after linking the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.}
 }
 \description{
-The \code{link_again} function links again the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the \R language, being useful to correct problems
-of untying the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library that is common when the operating system is updated.
+The \code{link_again} function relinks the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library with the R language, which is useful for correcting
+unlinking problems that are common when the operating system is updated.
 }
 \details{
-The function \code{link_again} be able to link again the \R language with the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Thus, link_again will only make the
-relinkagem when in some previous section of \R the ropenblas function has been used for the initial binding of the \R language with the
+The \code{link_again} function can relink the R language with the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Thus, link_again will only perform the
+relinking when the ropenblas function has been used in a previous R session for the initial binding of the R language with the
 \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.
 
-Relinking is useful in situations of updating the operating system. In some update, it is possible that the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library compiled
-in the \code{/opt} directory is unlinked. In this scenario, when the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library has already been compiled using the ropenblas
+Relinking is useful in situations of operating system updates. In some updates, it is possible that the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library compiled
+in the \code{/opt} directory gets unlinked. In this scenario, when the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library has already been compiled using the ropenblas
 function, the \code{link_again} function performs a new link without the need to recompile, thus making the process less time
 consuming.
 }
 \note{
-In situations where there was a disconnection due to an update of the operating system, the \code{ropenblas} function can be used to
-re-link the OpenBLAS library with the \R language, however, it will be necessary to compile the
+In situations where there was a disconnection due to an operating system update, the \code{ropenblas} function can be used to
+re-link the OpenBLAS library with the R language, however, it will be necessary to compile the
 \href{https://www.openblas.net/}{\strong{OpenBLAS}} library again. If you are interested in recompiling the
-\href{https://www.openblas.net/}{\strong{OpenBLAS}} library and linking with \R, use the \code{\link{ropenblas}} function. If the
+\href{https://www.openblas.net/}{\strong{OpenBLAS}} library and linking with R, use the \code{\link{ropenblas}} function. If the
 interest is to take advantage of a previous compilation of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library, the
-function \code{link_again} may be useful.
+\code{link_again} function may be useful.
 }
 \examples{
 # link_again()

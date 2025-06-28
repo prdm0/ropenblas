@@ -2,36 +2,15 @@
 % Please edit documentation in R/ropenblas.R
 \name{last_version_r}
 \alias{last_version_r}
-\title{\R language versions}
+\title{R language versions}
 \usage{
-last_version_r(major = NULL)
-}
-\arguments{
-\item{major}{Major release number of \R language (e.g. \code{1L}, \code{2L}, \code{3L}, ...). If \code{major = NULL}, the function
-will consider the major release number.}
-}
-\value{
-A list of two named elements will be returned. Are they:
-\enumerate{
-\item \code{last_version}: Returns the latest stable version of the language given a major version (major version).
-If \code{major = NULL}, the latest stable version of the language will be returned based on the set of all language versions.
-\item \code{versions}: Character vector with all language versions based on a major version (higher version).
-If \code{major = NULL}, \code{versions} will be a vector with the latest language versions.
-\item \code{n}: Total number of versions of \R based on major version. If \code{major = NULL}, \code{versions}
-will be a vector with the latest language versions.
-}
+last_version_r()
 }
 \description{
-\R language versions
-}
-\details{
-This function automatically searches \R language versions in the official language repositories. That way,
-doing \code{last_version_r(major = NULL)} you will always be well informed about which latest stable version the
-\R language is in. You can also set the higher version and do a search on the versions of the \R language whose major
-version was \code{1L} or \code{2L}, for example.
+R language versions
 }
 \examples{
-# last_version_r(major = NULL)
+# last_version_r()
 }
 \seealso{
 \code{\link{ropenblas}}, \code{\link{rcompiler}}

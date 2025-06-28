@@ -2,21 +2,21 @@
 % Please edit documentation in R/ropenblas.R
 \name{ropenblas}
 \alias{ropenblas}
-\title{Download, Compile and Link OpenBLAS Library with \R}
+\title{Download, Compile and Link OpenBLAS Library with R}
 \usage{
 ropenblas(x = NULL, restart_r = TRUE)
 }
 \arguments{
 \item{x}{\href{https://www.openblas.net/}{\strong{OpenBLAS}} library version to be considered. By default, \code{x = NULL}.}
 
-\item{restart_r}{If \code{TRUE}, a new section of \R is started after compiling and linking the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.}
+\item{restart_r}{If \code{TRUE}, a new R session is started after compiling and linking the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library.}
 }
 \value{
-Returns a warning message informing you if the procedure occurred correctly. You will also be able to receive information about
+Returns a message informing you if the procedure occurred correctly. You will also be able to receive information about
 missing dependencies.
 }
 \description{
-Link \R with an optimized version of the \href{https://netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
+Links R with an optimized version of the \href{https://netlib.org/blas/}{\strong{BLAS}} library (\href{https://www.openblas.net/}{\strong{OpenBLAS}}).
 }
 \details{
 The \code{ropenblas()} function will only work on Linux systems. When calling the \code{ropenblas()}
@@ -24,36 +24,36 @@ function on Windows, no settings will be made. Only a warning message will be is
 configuration can only be performed on Linux systems.
 
 The function will automatically download the latest version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. However, it is possible to
-inform olds versions to the single argument of \code{ropenblas()}. The \code{ropenblas()} function downloads,
-compiles and link \R to use of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Everything is done very simply, just loading the library and
-invok the function \code{ropenblas()}.
+inform old versions to the single argument of \code{ropenblas()}. The \code{ropenblas()} function downloads,
+compiles and links R to use the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Everything is done very simply, just by loading the library and
+invoking the function \code{ropenblas()}.
 
-Considering using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library rather than the \href{https://netlib.org/blas/}{\strong{BLAS}} may bring extra optimizations for your code and improved
-computational performance for your simulations, since \href{https://www.openblas.net/}{\strong{OpenBLAS}} is an optimized implementation of the library \href{https://netlib.org/blas/}{\strong{BLAS}}.
+Considering using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library rather than \href{https://netlib.org/blas/}{\strong{BLAS}} may bring extra optimizations for your code and improved
+computational performance for your simulations, since \href{https://www.openblas.net/}{\strong{OpenBLAS}} is an optimized implementation of the \href{https://netlib.org/blas/}{\strong{BLAS}} library.
 
 You must install the following dependencies on your operating system (Linux):
 \enumerate{
 \item \strong{GNU Make};
 \item \strong{GNU GCC Compiler (C and Fortran)}.
 }
-Your linux operating system may already be configured to use the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Therefore, most likely \R will already be linked to this library. To find out if the \R language is using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library,
-at \R, do:
+Your Linux operating system may already be configured to use the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library. Therefore, R will most likely already be linked to this library. To find out if R is using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library,
+in R, do:
 
 \code{extSoftVersion()["BLAS"]}
 
-If \R is using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library, something like \code{/any_directory/libopenblas.so} should be returned. Therefore, there should be the name openblas in the \strong{s}hared \strong{o}bject returned (file extension \strong{.so}).
+If R is using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library, something like \code{/any_directory/libopenblas.so} should be returned. Therefore, the name 'openblas' should be in the returned \strong{s}hared \strong{o}bject (file with a \strong{.so} extension).
 
-If the \code{ropenblas()} function can identify that the \R language is using the version of \href{https://www.openblas.net/}{\strong{OpenBLAS}} you wish to configure, a warning message will be returned asking if you really would like to proceed with the
+If the \code{ropenblas()} function can identify that R is using the version of \href{https://www.openblas.net/}{\strong{OpenBLAS}} you wish to configure, a warning message will be returned asking if you would really like to proceed with the
 configuration again.
 
-The \code{ropenblas()} function will download the desired version of the library \href{https://www.openblas.net/}{\strong{OpenBLAS}}, compile and install the library in the \code{/opt} directory of your operational system. If the directory does not exist, it will
-be created so that the installation can be completed. Subsequently, files from the version of \href{https://netlib.org/blas/}{\strong{BLAS}} used in \R will be symbolically linked to the shared object files of the library version \href{https://www.openblas.net/}{\strong{OpenBLAS}} compiled and installed in \code{/opt}.
+The \code{ropenblas()} function will download the desired version of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library, compile and install it in the \code{/opt} directory of your operating system. If the directory does not exist, it will
+be created so that the installation can be completed. Subsequently, files from the version of \href{https://netlib.org/blas/}{\strong{BLAS}} used in R will be symbolically linked to the shared object files of the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library version compiled and installed in \code{/opt}.
 
-You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system. Other details you may also find \href{https://prdm0.github.io/ropenblas/index.html}{\strong{here}}.
+You must be the operating system administrator to use this library. Therefore, do not attempt to use it without telling your system administrator. If you have the ROOT password, you will be responsible for everything you do on your operating system. Other details can also be found \href{https://prdm0.github.io/ropenblas/index.html}{\strong{here}}.
 }
 \note{
-You do not have to in every section of \R make use of the \code{ropenblas()} function. Once the function is used, \R
-will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sections.
+You do not have to use the \code{ropenblas()} function in every R session. Once the function is used, R
+will always consider using the \href{https://www.openblas.net/}{\strong{OpenBLAS}} library in future sessions.
 }
 \examples{
 # ropenblas()
